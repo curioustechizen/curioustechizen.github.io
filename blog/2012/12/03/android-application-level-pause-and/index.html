@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js" prefix="og: http://ogp.me/ns#"> <!--<![endif]-->
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta http-equiv="content-language" content="en" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+      
+        
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Android: "Application level" Pause and Resume">
+<meta property="og:description" content="UpdateI have created an open source library using the concepts presented in this post. You can directly use the library to create your apps. Get it...">
+<meta property="og:url" content="/blog/2012/12/03/android-application-level-pause-and/">
+
+<meta property="og:site_name" content="Curious Techizen">
+
+<meta property="og:locale" content="en">
+
+
+<meta name="description" content="UpdateI have created an open source library using the concepts presented in this post. You can directly use the library to create your apps. Get it...">
+
+      
+
+      <title> Android: "Application level" Pause and Resume | Curious Techizen</title>
+      
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300,700italic|Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+
+      <link rel="stylesheet" type="text/css" href="/blog/css/main.css" />
+      <link href="/blog/feed.xml" type="application/rss+xml" rel="alternate" title="RSS2.0">
+      <link rel="shortcut icon" href="/blog/favicon.ico">
+
+      
+        
+<link ref="prev" href="/blog/2012/09/29/google-play-services-and-why-we-still/" />
+
+
+<link ref="next" href="/blog/2012/12/18/code-smells-calling-life-cycle-methods/" />
+
+
+      
+
+  </head>
+
+  <body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="off-canvas">
+      <figure class="avatar">
+        <img src="/blog/assets/img/avatar.jpg" alt="Picture" title="That's me, Kiran Rao.">
+      </figure>
+      <div class="bio">
+          <h1>Hi, I'm Kiran Rao.</h1>
+          <p>Android Developer. Tech enthusiast. Serial dabbler.</p>
+      </div>
+      <nav>
+        <h6>Follow me on</h6>
+        <ul>
+          
+          
+          <li><a target="_blank" href="https://github.com/curioustechizen">Github</a></li>
+          
+          
+          
+          
+          <li><a target="_blank" href="https://plus.google.com/116652261752707476836">Google+</a></li>
+          
+        </ul>
+      </nav>
+      <nav>
+        <h6>Link</h6>
+        <ul>
+          <li><a href="/blog/">Home</a></li>
+          <li><a href="/blog/tags/">Tags</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-wrapper">
+
+      <header>
+        <div class="h-wrap">
+          <h1 class="title"><a href="/blog/" title="Back to Homepage">Curious Techizen</a></h1>
+          <a class="menu-icon" title="Open Bio"><span class="lines"></span></a>
+        </div>
+      </header>
+
+      <main>
+        <section class="single-wrap">
+  <article class="single-content" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="feat">
+      <h5 class="page-date">
+        <time datetime="2012-12-03T23:13:00+05:30" itemprop="datePublished">
+          03 December 2012
+        </time>
+      </h5>
+    </div>
+    <h1 class="page-title" itemprop="name headline">Android: "Application level" Pause and Resume</h1>
+    <div itemprop="articleBody">
+      <h3>Update</h3><p>I have created an open source library using the concepts presented in this post. You can directly use the library to create your apps. Get it at <a href="https://github.com/curioustechizen/android-app-pause">android-app-pause</a> on github</p><h3>Introduction</h3><p>I have often come across questions on StackOverflow and the android-developers google group about an <code>Application</code>-level <code>onPause()</code> and <code>onResume()</code>. In this post, I present one of the ways of achieving such functionality. But before that, what exactly do I mean by an app-level <code>onPause()</code>?</p><p>After all, an Android app consists of multiple components, several of which might be in the background. There could be <code>Service</code>s, <code>Thread</code>s, <code>BroadcastReceiver</code>s, scheduled <code>Alarm</code>s. How do these figure in a "paused" app? Well, here's my definition of an app being paused for the purposes of this post:</p><blockquote><p>An app is considered to be paused when the app is no longer visible to the user. By definition, this means that when an app is paused, <em>none of the Activities that belong to the app</em> are visible to the user.</p></blockquote><p>In my opinion, this is a fair definition since this would typically be the point when the app wishes to "pause" any background work it does. For example, an app might wish to cancel all scheduled alarms, or stop making HTTP calls when it knows that the user is no longer interacting with the app.</p><blockquote><p>Similarly, an app is considered to be resumed when at least one <code>Activity</code> from the app is visible to the user.</p></blockquote><p>This is the point at which the app can re-establish HTTP communication, re-schedule alarms and the like.</p><h3>TL;DR</h3><p>I got this idea from <a href="http://stackoverflow.com/a/7924855/570930">this answer</a> that I gave on stackoverflow. The basis of this approach is that when an Activity starts another, both of them <a href="http://developer.android.com/guide/components/activities.html#CoordinatingActivities">undergo lifecycle changes</a> <strong>in a predictable fashion</strong>. The series of steps to follow to achieve the app-level pause and resume functionality is as follows:</p><blockquote><ol><li>Create a bound <code>Service</code> (let's call this <code>AppActiveService</code>).</li><li>In the <code>onStart()</code> of every <code>Activity</code> of your app, bind to <code>AppActiveService</code>.</li><li>In the <code>onStop()</code> of every <code>Activity</code> of your app, unbind from <code>AppActiveService</code>.</li><li>The <code>onDestroy()</code> method of <code>AppActiveService</code> represents the point when your app is "pausing"; while the <code>onBind()</code> method represents the point when your app is "resuming". Put the code you want to be run when your app "goes to the background" in <code>AppActiveService</code>'s <code>onDestroy()</code> method.</li></ol></blockquote><p>To make things even simpler, you can put all the code above in a <code>BaseActivity</code> for your application and have all your other Activities inherit from this <code>BaseActivity</code>.</p><p>If you follow the steps above, the <code>AppActiveService</code> will have at least one <code>Activity</code> bound to it as long as your app is visible to the user. When this condition is false, no <code>Activity</code> is bound to the <code>Service</code>, at which point its <code>onDestroy()</code> is called.</p><p>Do note that we are using <code>onStop()</code> and not <code>onPause()</code> to un-bind from the <code>Service</code>. If you were to use <code>onPause()</code>, then there would be zero components bound to <code>AppActiveService</code> even as you are switching from one <code>Activity</code> to the other within your own app.</p><h3>Gotchas</h3><p>One gotcha in this approach is: What happens if your app "starts another app" using an <code>Intent</code>? No <code>Activity</code> from your app will be visible to the user - thus triggering an app-pause. Whether this is acceptable or not depends on your use case.</p><h3>Conclusion</h3><p>I plan to publish the code for this procedure as a library or at least as a gist on GitHub. Before that, I'm looking for feedback on how the code can be improved and made more robust. Have you come across the need to know when your app as a whole is "going away"? How have you solved the problem?</p>
+    </div>
+    
+    <div class="page-tags">
+      <ul>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">Application</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">onResume</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">development</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">android</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">onPause</a>
+          
+        </li>
+        
+      </ul>
+    </div>
+    
+    <h6 class="back-to-top"><a href="#top">Back to Top</a></h6>
+    
+      <a rel="next" href="/blog/2012/12/18/code-smells-calling-life-cycle-methods/" id="next">
+        <span class="nav-title nav-title-next">newer</span> &rarr;
+      </a>
+    
+    
+      <a rel="prev" href="/blog/2012/09/29/google-play-services-and-why-we-still/" id="prev">
+        &larr; <span class="nav-title nav-title-prev">older</span>
+      </a>
+    
+  </article>
+</section>
+
+      </main>
+
+      <footer>
+        <small>Powered by Jekyll - Theme: <a href="https://github.com/ogaclejapan/materi-for-jekyll">materi</a> - &copy; ogaclejapan</small>
+      </footer>
+
+    </div>
+    
+
+    <script src="/blog/js/main.js"></script>
+    
+    
+
+  </body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js" prefix="og: http://ogp.me/ns#"> <!--<![endif]-->
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta http-equiv="content-language" content="en" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+      
+        
+<meta property="og:type" content="blog">
+<meta property="og:title" content="That's NOT Fragmentation; But then What Is?">
+<meta property="og:description" content="Of late, much has been said and debated regarding the fragmentation &quot;problem&quot; in Android. People who know me know that I&#39;m a BIG fan of Android - a...">
+<meta property="og:url" content="/blog/2012/07/26/thats-not-fragmentation-but-then-what-is/">
+
+<meta property="og:site_name" content="Curious Techizen">
+
+<meta property="og:locale" content="en">
+
+
+<meta name="description" content="Of late, much has been said and debated regarding the fragmentation &quot;problem&quot; in Android. People who know me know that I&#39;m a BIG fan of Android - a...">
+
+      
+
+      <title> That's NOT Fragmentation; But then What Is? | Curious Techizen</title>
+      
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300,700italic|Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+
+      <link rel="stylesheet" type="text/css" href="/blog/css/main.css" />
+      <link href="/blog/feed.xml" type="application/rss+xml" rel="alternate" title="RSS2.0">
+      <link rel="shortcut icon" href="/blog/favicon.ico">
+
+      
+        
+<link ref="prev" href="/blog/2012/06/13/internationalization-in-spirit-part-3/" />
+
+
+<link ref="next" href="/blog/2012/09/29/google-play-services-and-why-we-still/" />
+
+
+      
+
+  </head>
+
+  <body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="off-canvas">
+      <figure class="avatar">
+        <img src="/blog/assets/img/avatar.jpg" alt="Picture" title="That's me, Kiran Rao.">
+      </figure>
+      <div class="bio">
+          <h1>Hi, I'm Kiran Rao.</h1>
+          <p>Android Developer. Tech enthusiast. Serial dabbler.</p>
+      </div>
+      <nav>
+        <h6>Follow me on</h6>
+        <ul>
+          
+          
+          <li><a target="_blank" href="https://github.com/curioustechizen">Github</a></li>
+          
+          
+          
+          
+          <li><a target="_blank" href="https://plus.google.com/116652261752707476836">Google+</a></li>
+          
+        </ul>
+      </nav>
+      <nav>
+        <h6>Link</h6>
+        <ul>
+          <li><a href="/blog/">Home</a></li>
+          <li><a href="/blog/tags/">Tags</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-wrapper">
+
+      <header>
+        <div class="h-wrap">
+          <h1 class="title"><a href="/blog/" title="Back to Homepage">Curious Techizen</a></h1>
+          <a class="menu-icon" title="Open Bio"><span class="lines"></span></a>
+        </div>
+      </header>
+
+      <main>
+        <section class="single-wrap">
+  <article class="single-content" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="feat">
+      <h5 class="page-date">
+        <time datetime="2012-07-26T20:59:00+05:30" itemprop="datePublished">
+          26 July 2012
+        </time>
+      </h5>
+    </div>
+    <h1 class="page-title" itemprop="name headline">That's NOT Fragmentation; But then What Is?</h1>
+    <div itemprop="articleBody">
+      <div dir="ltr" style="text-align: left;" trbidi="on"><br /><p>Of late, much has been said and debated regarding the fragmentation "problem" in Android. People who know me know that I'm a BIG fan of Android - as a user and as a developer. However, I do admit that Android is fragmented. That, in itself is <a href="http://www.vogella.com/blog/2012/07/17/why-the-missing-device-fragmentation-is-hurting-the-iphone/">not such a bad thing</a>. But, this fragmentation is making my life as a developer that much more difficult. That's the bad thing.</p><p>Having said that, I get to read and here things like this a lot. These all belong to a category I like to call "What Fragmentation is <strong>NOT</strong>".</p><blockquote><p>Oh! There's 4-inch phones, 7-inch tabs and 10-inch tabs? <strong>Damn! Fragmentation!</strong></p></blockquote><p>OR</p><blockquote><p>Urghh! So many different device manufacturers? So many thousands of device models? They won't all have the same hardware and capabilities :-( <strong>Damn! Fragmentation!</strong></p></blockquote><p>Try This</p><blockquote><p>What? Every release of Android has its own theme and look&amp;feel? <strong>Damn! Fragmentation!</strong></p></blockquote><p>All of this makes me go "Oh No! Not again!" I wonder how developers don't realize that these factors are not limitations - they are an opportunity: to get your app to audiences you wouldn't have thought possible. Android platform has armed developers with great tools to address these factors.</p><ul><li>The amazing <a href="http://developer.android.com/guide/topics/resources/overview.html">resources framework </a> allows you to adapt to a wide variety of configurations with little or no code. You can optimize your app for phone, tablet, portrait, layout, night mode, keyboard mode, dock mode, different languages and what not by simply providing alternate resources.</li><li>Then, there's the theme inheritance with which you can customize the look and feel of your app without looking out of place on the particular platform version.</li><li>If your app requires a particular capability to work; or if it cannot function in certain configurations, you can use manifest filtering to prevent it from being available to devices that don't match your criteria.</li></ul><p>All the above rants, can then be attributed to developers <strong>not knowing the framework</strong> and the tools properly. These have <em>nothing to do with fragmentation</em>.</p><hr /><p>There are some problems, though, that have the potential of requiring developers to spend considerably more effort if they want their apps to target a large percentage of Android devices in the wild. A sampling of such problems follows.<br /></p><h3>RTSP Streaming:</h3><p>Getting a simple RTSP video stream to play on even the more popular devices using Android's <a href="http://developer.android.com/guide/topics/media/mediaplayer.html">MediaPlayer</a> framework is an uphill task (I've tried and basically given up). As per the specs it should "just work", but implementations haven't adhered strictly to the specs. </p><p>Now, <strong> <strong><em>That's</em></strong> fragmentation</strong>.<br /></p><h3>Rapid Deprecations:</h3><p>UI and design patterns that were previously <em>suggested by the Android team</em> have suddenly fallen out of favor  and are now deprecated, only to be replaced with new patterns (yes, Android Design Guide, I'm looking at you). Examples include <a href="http://developer.android.com/guide/topics/ui/actionbar.html">ActionBar</a>, and <a href="https://groups.google.com/d/topic/android-developers/8M0RTFfO7-M/discussion">the AsyncTask punishment</a>.</p><p>The fact that device manufacturers haven't exactly kept up with the pace of Android platform version releases doesn't help. For example, as of July 2, 2012, the percentage of devices that support ActionBar functionality <em>natively</em> <a href="http://developer.android.com/about/dashboards/index.html">is just 13%</a>.</p><p>The Android team, and the community have tried to bridge the gap by coming up with libraries that allow you to use the new features on the old versions (via <a href="http://developer.android.com/tools/extras/support-library.html">Android Compatibility Library</a>, <a href="http://actionbarsherlock.com/">ActionBar Sherlock</a> etc), but these don't completely solve the problem. There are still gaps, and if you want to develop an app that both follows the new patterns <em>and</em> is truly well-behaved on even 75% of the installed base, you have to roll your sleeves and get your hands dirty.</p><p>Now, <strong> <strong><em>That's</em></strong> fragmentation</strong>.<br /></p><h3>Very Basic Changes in the Framework:</h3><p>Since HoneyComb (Android 3.0), the dedicated hardware <a href="http://android-developers.blogspot.in/2012/01/say-goodbye-to-menu-button.html">"Menu" key has been dumped</a> in Android, to be replaced with an overflow menu in the ActionBar. This seems like a simple problem, until you come across problems like <a href="http://commonsware.com/blog/2012/06/08/removing-rogue-menus.html">this one</a>.</p><p>You can't even be confident that your erstwhile awesome app will display that menu properly across all devices.</p><p>Now, <strong> <strong><em>That's</em></strong> fragmentation</strong>.</p><p>The way you are supposed to use the Back Button has been changed and made <a href="http://www.androiduipatterns.com/2012/07/i-was-watching-navigation-in-android.html">all the more confusing</a> to both developers and end users. There was even a talk at the recent Google IO conference in which half an hour was spent explaining the reasoning behind the back button.</p><p>To balance the way the back button is supposed to work in various versions of the platform, with the way <em>you</em> want it to work might take quite a lot of effort (especially since the compatibility API's <a href="http://developer.android.com/reference/android/support/v4/app/TaskStackBuilder.html">don't really do the job</a> here).</p><p>Now, <strong> <strong><em>That's</em></strong> fragmentation</strong>.<br /></p><h3>Patent-induced inconsistencies:</h3><p>We've all got used to the "Chooser" displayed by Android whenever you click on, say, a link in an e-mail. This chooser allows you to select the app that you would use to display the link (probably a list of browsers installed on your device).</p><p>Pretty basic stuff, right? Well, this may no longer be the case. As a result of a patent issues, at least one manufacturer <a href="http://commonsware.com/blog/2012/07/24/linkify-problem-detection-mitigation.html">has modified this behavior</a>. This is bad news for app developers that depend on this feature for their app to be even discovered. Work-arounds exist but are very very round-about. Also, what if another manufacturer follows some other approach to get past the patent problem?</p><p>Now, <strong> <strong><em>That's</em></strong> fragmentation</strong>.</p><hr /><p>There are other issues I can point out, but I guess I've made my point (at least to all two of you who've made it this far). Luckily, most of these problems are likely to be contained in the near future. This makes sense if you look at the fact that Android is still a maturing platform. The team behind it is bound to realize how some of the earlier decisions were wrong and it is good for the platform and ecosystem if they take steps to correct the mistakes. For example:</p><ul><li>The AsyncTask, ActionBar and Menu key problems I mentioned will probably not be a problem once we have more devices running ICS and above.</li><li>The Back Button and other issues surrounding navigation guidelines are also likely to be eliminated once we have more developers developing apps that follow the <em>new</em> guidelines <strong><em>consistently</em></strong>. I also don't expect Google to make any more drastic changes in these areas in the near future.</li><li>Even the MediaPlayer framework inconsistencies are bound to shrink with more adoption of the newer platform releases.</li><li>At Google IO 2012, Google announced the PDK (Platform Developers' Kit) aimed at shortening the gap between the announcement of a new platform release; and device manufacturers rolling out phones or updates with the new release. Believe me  - this is <strong>GOOD!</strong></li></ul><p>That leaves the issues related to patent and other legal stuff. There's not much Google or any device manufacturer can do in that space, when evil and jealous competitors are deciding to abandon innovation and instead pick up cheap means to combat competition, is there?</p><hr /><h3>Conclusion:</h3><p>Yes, Android is fragmented. Today, the effort it takes to make your app play well on various versions, and implement all the new guidelines is disproportionate to the gains (that's purely my own opinion). But this won't last.</p><p>Once <a href="http://developer.android.com/about/dashboards/index.html">this pie-chart</a> shows a growth in ICS and newer devices, lot of our problems as developers will be minimized. As for fragmentation caused by reasons outside Google's control - well we'll just have to live with it.</p></div>
+    </div>
+    
+    <div class="page-tags">
+      <ul>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">development</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">fragmentation</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">android</a>
+          
+        </li>
+        
+      </ul>
+    </div>
+    
+    <h6 class="back-to-top"><a href="#top">Back to Top</a></h6>
+    
+      <a rel="next" href="/blog/2012/09/29/google-play-services-and-why-we-still/" id="next">
+        <span class="nav-title nav-title-next">newer</span> &rarr;
+      </a>
+    
+    
+      <a rel="prev" href="/blog/2012/06/13/internationalization-in-spirit-part-3/" id="prev">
+        &larr; <span class="nav-title nav-title-prev">older</span>
+      </a>
+    
+  </article>
+</section>
+
+      </main>
+
+      <footer>
+        <small>Powered by Jekyll - Theme: <a href="https://github.com/ogaclejapan/materi-for-jekyll">materi</a> - &copy; ogaclejapan</small>
+      </footer>
+
+    </div>
+    
+
+    <script src="/blog/js/main.js"></script>
+    
+    
+
+  </body>
+</html>

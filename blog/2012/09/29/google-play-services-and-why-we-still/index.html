@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js" prefix="og: http://ogp.me/ns#"> <!--<![endif]-->
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta http-equiv="content-language" content="en" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+      
+        
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Google Play Services, and Why We Still Need AccountManager">
+<meta property="og:description" content="IntroductionRecently, Google has started rolling out the widely awaited Google Play Services, announced during Google I/O 2012. One of the major pi...">
+<meta property="og:url" content="/blog/2012/09/29/google-play-services-and-why-we-still/">
+
+<meta property="og:site_name" content="Curious Techizen">
+
+<meta property="og:locale" content="en">
+
+
+<meta name="description" content="IntroductionRecently, Google has started rolling out the widely awaited Google Play Services, announced during Google I/O 2012. One of the major pi...">
+
+      
+
+      <title> Google Play Services, and Why We Still Need AccountManager | Curious Techizen</title>
+      
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300,700italic|Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+
+      <link rel="stylesheet" type="text/css" href="/blog/css/main.css" />
+      <link href="/blog/feed.xml" type="application/rss+xml" rel="alternate" title="RSS2.0">
+      <link rel="shortcut icon" href="/blog/favicon.ico">
+
+      
+        
+<link ref="prev" href="/blog/2012/07/26/thats-not-fragmentation-but-then-what-is/" />
+
+
+<link ref="next" href="/blog/2012/12/03/android-application-level-pause-and/" />
+
+
+      
+
+  </head>
+
+  <body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="off-canvas">
+      <figure class="avatar">
+        <img src="/blog/assets/img/avatar.jpg" alt="Picture" title="That's me, Kiran Rao.">
+      </figure>
+      <div class="bio">
+          <h1>Hi, I'm Kiran Rao.</h1>
+          <p>Android Developer. Tech enthusiast. Serial dabbler.</p>
+      </div>
+      <nav>
+        <h6>Follow me on</h6>
+        <ul>
+          
+          
+          <li><a target="_blank" href="https://github.com/curioustechizen">Github</a></li>
+          
+          
+          
+          
+          <li><a target="_blank" href="https://plus.google.com/116652261752707476836">Google+</a></li>
+          
+        </ul>
+      </nav>
+      <nav>
+        <h6>Link</h6>
+        <ul>
+          <li><a href="/blog/">Home</a></li>
+          <li><a href="/blog/tags/">Tags</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-wrapper">
+
+      <header>
+        <div class="h-wrap">
+          <h1 class="title"><a href="/blog/" title="Back to Homepage">Curious Techizen</a></h1>
+          <a class="menu-icon" title="Open Bio"><span class="lines"></span></a>
+        </div>
+      </header>
+
+      <main>
+        <section class="single-wrap">
+  <article class="single-content" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="feat">
+      <h5 class="page-date">
+        <time datetime="2012-09-29T12:19:00+05:30" itemprop="datePublished">
+          29 September 2012
+        </time>
+      </h5>
+    </div>
+    <h1 class="page-title" itemprop="name headline">Google Play Services, and Why We Still Need AccountManager</h1>
+    <div itemprop="articleBody">
+      <h3>Introduction</h3><p>Recently, Google has <a href="http://android-developers.blogspot.ca/2012/09/google-play-services-and-oauth-identity.html">started rolling out</a> the widely awaited <a href="https://developers.google.com/android/google-play-services/">Google Play Services</a>, announced during Google I/O 2012. One of the major pieces of Google Play Services is the <code>GoogleAuthUtil</code>. The principal problem that this component solves is OAuth. Up until now, writing an Android app that requires OAuth has been <strong>complex</strong> and <strong>non-standard</strong>. </p><ul><li>Complex, because you need perform the whole OAuth dance behind the scenes (not specific to Android, mind you). </li><li>Non-standard because the app developers ended up displaying their own custom screens for choosing the account to be used for OAuth. Also, the OAuth scopes are specific to the identity provider; and this led to displaying the <em>raw oauth scope strings</em> in some OAuth confirmation screens rather than a user-friendly description of the scope. </li></ul><p>The <a href="https://developer.android.com/reference/android/accounts/AccountManager.html"><code>AccountManager</code> framework</a> did some of the heavy lifting and attempted to address both the problems. However, it met with limited success on both counts. Which is why, when the <code>GoogleAuthUtil</code>, and the <code>AccountPicker</code> were previewed at IO2012, I was jumping in excitement. If you want your app to use OAuth with Google, then <code>GoogleAuthUtil</code> makes life a whole lot simpler.</p><h3>Caveat</h3><p>But, therein lies the caveat. <strong><em>It only applies to Google Accounts</em></strong>. One could argue that any Android device that has Google Play Services also has at least one Google account - so this is not a big deal. However, remember that many Android apps are actually just one of the ways of accessing a (possibly OAuth-protected) web service. The web service itself might offer several identity providers for the user to sign up, log in or authorize. Restricting that to just the Google account on the Android version of the app doesn't make sense.</p><p>What is really required is for more identity providers to leverage the <code>AccountManager</code> framework in Android. Admittedly, that is not so straightforward. Not only does it involve writing an <code>AccountAuthenticator</code>, there are some pieces specific to identity provider and <strong>there is no go-to place to publish the documentation for these provider-specific pieces</strong>. </p><p>Suppose I wanted to write an app that allows users to sign in with their Google, Facebook or Twitter accounts. Google is easy (it has been easy even before Play Services!). But what about the rest? How do I know what the <code>accountType</code> for Twitter is? How do I know the valid values for <code>features</code> parameter for Twitter? </p><p>But the problem doesn't stop there. Apparently, some third-party services <strong>require you to use their OAuth API to sign the user in</strong>. This is stated explicitly, as part of the terms of services. I noticed this when I was trying out a third party twitter client. I already had Twitter's official client installed, and hence my twitter account was available in the "Accounts" settings. Still, I had to enter my twitter credentials in a WebView. The third-party twitter client did not use AccountManager to log me in. I wrote to the developer about it and I was informed that Twitter required this as part of their terms of service.</p><h3>Solution (?)</h3><p>I really think third party identity providers (at least the big ones) should make an effort to leverage <code>AccountManager</code> framework of Android. This may be additional work - but just look at the size of the customer base they are targetting. With the new <code>AccountPicker</code>, the end user experience for using OAuth with Google is a breeze. It makes the traditional "log in using a web page" seem like a stone-age UX. The driving principle should be:</p><blockquote><p><strong>An end user should never be forced to enter the credentials for an account that is already present in the "Accounts" settings screen</strong></p></blockquote><p>Furthermore, it may project Google in a bad light since it may give the impression that Google is trying to make the UX good for its own services while leaving others in the lurch - which is not true.</p><h3>Conclusion</h3><p>In a nutshell: </p><ul><li>Google Play Services (in particular <code>AccountPicker</code>) = <strong>Good</strong> - for Google Accounts.</li><li>Third party identity providers and OAuth providers: WebView = <strong>Bad</strong>. Please use <code>AccountManager</code> and <code>AbstractAccountAuthenticator</code>.</li></ul>
+    </div>
+    
+    <div class="page-tags">
+      <ul>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">google-play-services</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">development</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">AccountManager</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">oauth</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">android</a>
+          
+        </li>
+        
+      </ul>
+    </div>
+    
+    <h6 class="back-to-top"><a href="#top">Back to Top</a></h6>
+    
+      <a rel="next" href="/blog/2012/12/03/android-application-level-pause-and/" id="next">
+        <span class="nav-title nav-title-next">newer</span> &rarr;
+      </a>
+    
+    
+      <a rel="prev" href="/blog/2012/07/26/thats-not-fragmentation-but-then-what-is/" id="prev">
+        &larr; <span class="nav-title nav-title-prev">older</span>
+      </a>
+    
+  </article>
+</section>
+
+      </main>
+
+      <footer>
+        <small>Powered by Jekyll - Theme: <a href="https://github.com/ogaclejapan/materi-for-jekyll">materi</a> - &copy; ogaclejapan</small>
+      </footer>
+
+    </div>
+    
+
+    <script src="/blog/js/main.js"></script>
+    
+    
+
+  </body>
+</html>

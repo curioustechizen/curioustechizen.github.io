@@ -1,0 +1,3 @@
+User-agent: *
+Sitemap: /blog/sitemap.xml
+Disallow:
