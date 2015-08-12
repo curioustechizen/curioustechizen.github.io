@@ -1,0 +1,51 @@
+# Title of your blog; shows in the header
+name: "Curious Techizen"
+
+# Description of your content (will only be used on Google Search)
+description: "A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively."
+
+# Your name. Will show in your footer + sidebar
+author: "Kiran Rao"
+lang: en
+
+#url: "http://kiranrao.in"
+baseurl: "/blog"
+
+# A short presentation of yourself. Will show in the sidebar, under your name. Best usage would be between 30 to 50 words.
+author-bio: "Android Developer. Tech enthusiast. Serial dabbler."
+
+# Social Accounts 
+
+github: curioustechizen
+googleplus: 116652261752707476836
+stackoverflow: curioustechizen
+
+# Google Analytics (you may want to changes these with yours or even delete :)
+
+ga_domain: kiranrao.in
+ga_tracking_id: UA-66125769-1
+
+# Other (refer to http://jekyllrb.com/docs/home/ for further details on the below)
+
+markdown: redcarpet
+permalink: pretty
+highlighter: pygments
+
+paginate: 5
+paginate_path: "/page/:num"
+
+# SCSS
+
+sass:
+  sass_dir: _scss
+  style: :compressed
+
+# Redcarpet
+redcarpet:
+  extensions: ["strikethrough", "tables", "fenced_code_blocks", "autolink"]
+
+# Exclude Files
+exclude: ["README.md", ".gitignore", "Gemfile", "Gemfile.lock", "art"]
+
+source: _src
+destination: _src/_site

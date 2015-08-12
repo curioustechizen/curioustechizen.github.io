@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js" prefix="og: http://ogp.me/ns#"> <!--<![endif]-->
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta http-equiv="content-language" content="en" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+      
+        
+<meta property="og:type" content="blog">
+<meta property="og:title" content="AO(sp)y Part 1">
+<meta property="og:description" content="This post is the first in a series (hopefully) in which I spy on AOSP (hence the title - yes, I know I&amp;#39;m not winning any prizes for creative bl...">
+<meta property="og:url" content="/blog/2015/08/12/ao-spy-1/">
+
+<meta property="og:site_name" content="Curious Techizen">
+
+<meta property="og:locale" content="en">
+
+
+<meta name="description" content="This post is the first in a series (hopefully) in which I spy on AOSP (hence the title - yes, I know I&amp;#39;m not winning any prizes for creative bl...">
+
+      
+
+      <title> AO(sp)y Part 1 | Curious Techizen</title>
+      
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300,700italic|Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+
+      <link rel="stylesheet" type="text/css" href="/blog/css/main.css" />
+      <link href="/blog/feed.xml" type="application/rss+xml" rel="alternate" title="RSS2.0">
+      <link rel="shortcut icon" href="/blog/favicon.ico">
+
+      
+        
+<link ref="prev" href="/blog/2014/02/09/nested-fragments-and-backstack-part-3/" />
+
+
+
+      
+
+  </head>
+
+  <body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="off-canvas">
+      <figure class="avatar">
+        <img src="/blog/assets/img/avatar.jpg" alt="Picture" title="That's me, Kiran Rao.">
+      </figure>
+      <div class="bio">
+          <h1>Hi, I'm Kiran Rao.</h1>
+          <p>Android Developer. Tech enthusiast. Serial dabbler.</p>
+      </div>
+      <nav>
+        <h6>Follow me on</h6>
+        <ul>
+          
+          
+          <li><a target="_blank" href="https://github.com/curioustechizen">Github</a></li>
+          
+          
+          
+          
+          <li><a target="_blank" href="https://plus.google.com/116652261752707476836">Google+</a></li>
+          
+        </ul>
+      </nav>
+      <nav>
+        <h6>Link</h6>
+        <ul>
+          <li><a href="/blog/">Home</a></li>
+          <li><a href="/blog/tags/">Tags</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-wrapper">
+
+      <header>
+        <div class="h-wrap">
+          <h1 class="title"><a href="/blog/" title="Back to Homepage">Curious Techizen</a></h1>
+          <a class="menu-icon" title="Open Bio"><span class="lines"></span></a>
+        </div>
+      </header>
+
+      <main>
+        <section class="single-wrap">
+  <article class="single-content" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="feat">
+      <h5 class="page-date">
+        <time datetime="2015-08-12T00:00:00+05:30" itemprop="datePublished">
+          12 August 2015
+        </time>
+      </h5>
+    </div>
+    <h1 class="page-title" itemprop="name headline">AO(sp)y Part 1</h1>
+    <div itemprop="articleBody">
+      <p>This post is the first in a series (hopefully) in which I spy on AOSP (hence the title - yes, I know I&#39;m not winning any prizes for creative blog post titles!) and try to gather glimpses of what&#39;s coming to the world of Android.</p>
+
+<blockquote>
+<p><strong>Disclaimer:</strong> Most of this is guess work. In many cases I&#39;m not even looking at any code - the commit messages and review comments are as far I go. Do not make any decisions based on this post!</p>
+</blockquote>
+
+<p>In this first episode, we will look at improvements coming to Android Studio (most probably in 1.4)</p>
+
+<h3>Material Icon Picker</h3>
+
+<p>There <a href="https://plugins.jetbrains.com/plugin/7647?pr=androidstudio">already exist</a> plugins for Android Studio that make it easy for you to include Material Design icons in your project. Google is <a href="https://android-review.googlesource.com/#/c/155698/">working on</a> bringing something similar into the Android Studio.</p>
+
+<p>Now, I haven&#39;t actually checked out this code and built it so I don&#39;t know what the picker actually looks like, but it would be a safe bet to assume that it&#39;ll be integrated into the existing &quot;Asset Studio&quot; (which itself started as a web app, then found its way into Eclipse and in its current avatar, it is part of AS).</p>
+
+<h3>Material Color Suggestor</h3>
+
+<p>If I want to change the color palette of my app today, I need to go to <a href="http://www.materialpalette.com/">http://www.materialpalette.com/</a> and choose my colors there and finally download the styles.xml file. <a href="https://android-review.googlesource.com/#/c/156624/">This feature</a> will make it easy for you to set your material color palette from within Android Studio. Moreover, the tool is a color suggestor - you choose a primary color and AS will suggest a primaryDark and an accent color that goes with it according to the material design specs.</p>
+
+<h3>Import SVG as Vector Drawable</h3>
+
+<p>Again, there <a href="http://inloop.github.io/svg2android/">already exist</a> tools to convert an SVG file into an Android-compatibe Vector Drawable, but it would be nice to have <a href="https://android-review.googlesource.com/#/c/163309/">this functionality</a> right in Studio.</p>
+
+<h3>VectorDrawable to PNG</h3>
+
+<p>This is not an Android Studio feature - rather it is a <a href="https://android-review.googlesource.com/#/c/162815/">Gradle feature</a>. It will convert vector drawables into PNGs for use with pre-Lollipop. This will be done at build time. I&#39;m not sure if this means that we can do away with creating those <code>drawable-*hdpi</code> PNGs altogether though.</p>
+
+<h3>New Layout Editor</h3>
+
+<p>There is a <a href="https://android-review.googlesource.com/#/c/159435/">large list of commits</a> mentioning the &quot;Nele&quot; which seems to be an internal acronym for New Layout Editor. A cursory glance at it did not reveal much about what exactly is new in this layout editor. However, it is possible that this info is there buried somewhere in one of the 49 related commits and that I have missed it. One thing is for sure - this is a pretty big change and Google wouldn&#39;t have embarked on it if it wouldn&#39;t bring significant advantages to developers.</p>
+
+<h3>AppBar creation in AS</h3>
+
+<p>Android Studio is <a href="https://android-review.googlesource.com/#/c/162681/">gaining the capability</a> to include an AppBar when you use the templates to create a new Activity. According to the commit message, this will be optional. Also, a dependency on the design support library will be included by default for new projects. This is a very welcome change.</p>
+
+<p>Stay tuned for Part 2 where we go beyond the IDE and dig a little deeper into the toolchain.</p>
+
+    </div>
+    
+    <div class="page-tags">
+      <ul>
+        
+        <li>
+          
+          <a href="/blog/tags/aosp">AOSP</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/blog/tags/studio">AndroidStudio</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/blog/tags/android">Android</a>
+          
+        </li>
+        
+      </ul>
+    </div>
+    
+    <h6 class="back-to-top"><a href="#top">Back to Top</a></h6>
+    
+    
+      <a rel="prev" href="/blog/2014/02/09/nested-fragments-and-backstack-part-3/" id="prev">
+        &larr; <span class="nav-title nav-title-prev">older</span>
+      </a>
+    
+  </article>
+   
+       <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES * * */
+            var disqus_shortname = 'kiranrao';
+            
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+       
+</section>
+
+      </main>
+
+      <footer>
+        <small>Powered by Jekyll - Theme: <a href="https://github.com/ogaclejapan/materi-for-jekyll">materi</a> - &copy; ogaclejapan</small>
+      </footer>
+
+    </div>
+    
+
+    <script src="/blog/js/main.js"></script>
+    
+    
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-66125769-1', 'kiranrao.in');
+        ga('send', 'pageview');
+      </script>
+    
+
+  </body>
+</html>
