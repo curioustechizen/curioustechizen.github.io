@@ -5,9 +5,60 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>/blog/</link>
     <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 13 Jun 2015 21:24:15 +0530</pubDate>
-    <lastBuildDate>Sat, 13 Jun 2015 21:24:15 +0530</lastBuildDate>
+    <pubDate>Wed, 12 Aug 2015 23:34:27 +0530</pubDate>
+    <lastBuildDate>Wed, 12 Aug 2015 23:34:27 +0530</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>AO(sp)y Part 1</title>
+        <description>&lt;p&gt;This post is the first in a series (hopefully) in which I spy on AOSP (hence the title - yes, I know I&amp;#39;m not winning any prizes for creative blog post titles!) and try to gather glimpses of what&amp;#39;s coming to the world of Android.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; Most of this is guess work. In many cases I&amp;#39;m not even looking at any code - the commit messages and review comments are as far I go. Do not make any decisions based on this post!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In this first episode, we will look at improvements coming to Android Studio (most probably in 1.4)&lt;/p&gt;
+
+&lt;h3&gt;Material Icon Picker&lt;/h3&gt;
+
+&lt;p&gt;There &lt;a href=&quot;https://plugins.jetbrains.com/plugin/7647?pr=androidstudio&quot;&gt;already exist&lt;/a&gt; plugins for Android Studio that make it easy for you to include Material Design icons in your project. Google is &lt;a href=&quot;https://android-review.googlesource.com/#/c/155698/&quot;&gt;working on&lt;/a&gt; bringing something similar into the Android Studio.&lt;/p&gt;
+
+&lt;p&gt;Now, I haven&amp;#39;t actually checked out this code and built it so I don&amp;#39;t know what the picker actually looks like, but it would be a safe bet to assume that it&amp;#39;ll be integrated into the existing &amp;quot;Asset Studio&amp;quot; (which itself started as a web app, then found its way into Eclipse and in its current avatar, it is part of AS).&lt;/p&gt;
+
+&lt;h3&gt;Material Color Suggestor&lt;/h3&gt;
+
+&lt;p&gt;If I want to change the color palette of my app today, I need to go to &lt;a href=&quot;http://www.materialpalette.com/&quot;&gt;http://www.materialpalette.com/&lt;/a&gt; and choose my colors there and finally download the styles.xml file. &lt;a href=&quot;https://android-review.googlesource.com/#/c/156624/&quot;&gt;This feature&lt;/a&gt; will make it easy for you to set your material color palette from within Android Studio. Moreover, the tool is a color suggestor - you choose a primary color and AS will suggest a primaryDark and an accent color that goes with it according to the material design specs.&lt;/p&gt;
+
+&lt;h3&gt;Import SVG as Vector Drawable&lt;/h3&gt;
+
+&lt;p&gt;Again, there &lt;a href=&quot;http://inloop.github.io/svg2android/&quot;&gt;already exist&lt;/a&gt; tools to convert an SVG file into an Android-compatibe Vector Drawable, but it would be nice to have &lt;a href=&quot;https://android-review.googlesource.com/#/c/163309/&quot;&gt;this functionality&lt;/a&gt; right in Studio.&lt;/p&gt;
+
+&lt;h3&gt;VectorDrawable to PNG&lt;/h3&gt;
+
+&lt;p&gt;This is not an Android Studio feature - rather it is a &lt;a href=&quot;https://android-review.googlesource.com/#/c/162815/&quot;&gt;Gradle feature&lt;/a&gt;. It will convert vector drawables into PNGs for use with pre-Lollipop. This will be done at build time. I&amp;#39;m not sure if this means that we can do away with creating those &lt;code&gt;drawable-*hdpi&lt;/code&gt; PNGs altogether though.&lt;/p&gt;
+
+&lt;h3&gt;New Layout Editor&lt;/h3&gt;
+
+&lt;p&gt;There is a &lt;a href=&quot;https://android-review.googlesource.com/#/c/159435/&quot;&gt;large list of commits&lt;/a&gt; mentioning the &amp;quot;Nele&amp;quot; which seems to be an internal acronym for New Layout Editor. A cursory glance at it did not reveal much about what exactly is new in this layout editor. However, it is possible that this info is there buried somewhere in one of the 49 related commits and that I have missed it. One thing is for sure - this is a pretty big change and Google wouldn&amp;#39;t have embarked on it if it wouldn&amp;#39;t bring significant advantages to developers.&lt;/p&gt;
+
+&lt;h3&gt;AppBar creation in AS&lt;/h3&gt;
+
+&lt;p&gt;Android Studio is &lt;a href=&quot;https://android-review.googlesource.com/#/c/162681/&quot;&gt;gaining the capability&lt;/a&gt; to include an AppBar when you use the templates to create a new Activity. According to the commit message, this will be optional. Also, a dependency on the design support library will be included by default for new projects. This is a very welcome change.&lt;/p&gt;
+
+&lt;p&gt;Stay tuned for Part 2 where we go beyond the IDE and dig a little deeper into the toolchain.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 12 Aug 2015 00:00:00 +0530</pubDate>
+        <link>/blog/2015/08/12/ao-spy-1/</link>
+        <guid isPermaLink="true">/blog/2015/08/12/ao-spy-1/</guid>
+        
+        <category>aosp</category>
+        
+        <category>studio</category>
+        
+        <category>android</category>
+        
+        
+      </item>
     
       <item>
         <title>Nested Fragments and the Backstack - Part 3</title>
@@ -173,26 +224,6 @@
         <category>programming</category>
         
         <category>extensibility</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Code Smells: Calling Life-Cycle Methods of Program Components Explicitly</title>
-        <description>&lt;p&gt;Here is some code I see that sets off alarm bells clanging in my head: &lt;/p&gt;&lt;blockquote&gt;&lt;p&gt;Explicitly calling life-cycle methods of components &lt;strong&gt;that are outside your control&lt;/strong&gt;. &lt;/p&gt;&lt;/blockquote&gt;&lt;p&gt;Since that sounds oh-so-generic, let me illustrate by way of example.&lt;/p&gt;&lt;p&gt;Assume you are writing a &lt;code&gt;Servlet&lt;/code&gt; and your implementation doesn&#39;t care whether the request was a POST or a GET (in the current RESTful world, this should never be the case, but let&#39;s keep that aside for the purposes of this post). So, the following would appear to be a reasonable implementation:&lt;/p&gt;&lt;pre class=&quot;prettyprint lang-java prettyprinted&quot; style=&quot;&quot;&gt;&lt;code&gt;public class MyServlet extends HttpServlet {&lt;br /&gt;    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {&lt;br /&gt;        //Handle the request &lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {&lt;br /&gt;        doGet(req, resp); //Just call doGet&lt;br /&gt;    }&lt;br /&gt;}&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I would never do this though. This is because &lt;code&gt;doGet&lt;/code&gt;, &lt;code&gt;doPost&lt;/code&gt; and the other &lt;code&gt;doXXX&lt;/code&gt; methods are life-cycle methods of the &lt;code&gt;Servlet&lt;/code&gt;. I have no control over when and how the servlet engine calls them. I also have no control over what the engine does once these methods return. It is possible that the engine performs some house-keeping tasks once a &lt;code&gt;doGet&lt;/code&gt; returns, and that action could be different from what is done once a &lt;code&gt;doPost&lt;/code&gt; returns.&lt;/p&gt;&lt;p&gt;It is really a simple matter of extracting the &quot;common functionality&quot; between such life cycle methods into a method and calling that method.&lt;/p&gt;&lt;pre class=&quot;prettyprint lang-java prettyprinted&quot; style=&quot;&quot;&gt;&lt;code&gt;public class MyServlet extends HttpServlet {&lt;br /&gt;    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {&lt;br /&gt;        handleRequest(req, resp);&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {&lt;br /&gt;        handleRequest(req, resp);&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    /**&lt;br /&gt;     * Method that extracts out the common functionality between GET and POST requests&lt;br /&gt;     */&lt;br /&gt;    private void handleRequest(HttpServletRequest req, HttpServletResponse resp){&lt;br /&gt;        //Handle the request&lt;br /&gt;    }&lt;br /&gt;}&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;&lt;h4&gt;What if the life cycle methods are in an Interface?&lt;/h4&gt;&lt;p&gt;One opinion that came up in a discussion was that it is safe to call other life-cycle methods if they are in an &lt;code&gt;interface&lt;/code&gt; as opposed to a &lt;code&gt;class&lt;/code&gt;. Note that the above code sample extends &lt;code&gt;javax.servlet.http.HttpServlet&lt;/code&gt; which is an &lt;code&gt;abstract class&lt;/code&gt; as opposed to the base &lt;code&gt;javax.servlet.Servlet&lt;/code&gt; which is an &lt;code&gt;interface&lt;/code&gt;. This has come up specially while discussing callbacks. &lt;/p&gt;&lt;p&gt;I disagree with this opinion since it assumes that any book-keeping has to be performed by the same  (possibly &lt;code&gt;abstract&lt;/code&gt;) class that denotes the life-cycle component. This is not true. Take an imaginary UI toolkit for example, which has a &lt;code&gt;Pane&lt;/code&gt; as a UI element. Now, assume an interface for handling interaction callbacks:&lt;/p&gt;&lt;pre class=&quot;prettyprint lang-java prettyprinted&quot; style=&quot;&quot;&gt;&lt;code&gt;interface InteractionListener{&lt;br /&gt;    public void onClick();&lt;br /&gt;    public void onRightClick();&lt;br /&gt;    public void onLongClick();&lt;br /&gt;    public void onDoubleClick();&lt;br /&gt;}&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In this case again, assume that you want the same action to be performed on long-click and right-click. So, you might be tempted to do this:&lt;/p&gt;&lt;pre class=&quot;prettyprint lang-java prettyprinted&quot; style=&quot;&quot;&gt;&lt;code&gt;Pane pane = // ...&lt;br /&gt;&lt;br /&gt;pane.setInteractionListener(new InteractionListener(){&lt;br /&gt;        public void onClick(){&lt;br /&gt;            //Handle single-click&lt;br /&gt;        }&lt;br /&gt;&lt;br /&gt;        public void onRightClick(){&lt;br /&gt;            //Handle right-click&lt;br /&gt;        }&lt;br /&gt;&lt;br /&gt;        public void onLongClick(){&lt;br /&gt;            onRightClick();&lt;br /&gt;        }&lt;br /&gt;&lt;br /&gt;        public void onDoubleClick(){&lt;br /&gt;            //Handle double-click&lt;br /&gt;        }&lt;br /&gt;});&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This is &lt;em&gt;still&lt;/em&gt; wrong. Yes- &lt;code&gt;InteractionListener&lt;/code&gt; is an interface and there is no way it can have a concrete method that might perform house-keeping tasks. However, you have no control over how the UI toolkit engine invokes the call-backs. You also have no control over what action the engine takes &lt;em&gt;after&lt;/em&gt; your &lt;code&gt;onXXXClick()&lt;/code&gt; methods return. The solution, again is exactly the same as before: extract the common code into a method which you then invoke from both &lt;code&gt;onLongClick()&lt;/code&gt; and &lt;code&gt;onRightClick()&lt;/code&gt;.&lt;br /&gt;&lt;/p&gt;&lt;h4&gt;Conclusion&lt;/h4&gt;&lt;p&gt;Avoid calling one component life-cycle method from another, when the component in question is outside your control. This could lead to unpredictable behavior. Simply refactor the common behavior into a method and call that method from both life-cycle call-backs.&lt;/p&gt;&lt;p&gt;A few other instances where I have seen this sort of code:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;Android&#39;s &lt;a href=&quot;http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html&quot;&gt;&lt;code&gt;SqliteOpenHelper&lt;/code&gt;&lt;/a&gt;. In the &lt;code&gt;onUpgrade()&lt;/code&gt; method, you probably want to take a backup of data, drop the tables, add new columns, and then re-create the tables. The implementation often looks like this:&lt;/p&gt;&lt;pre class=&quot;prettyprint lang-java prettyprinted&quot; style=&quot;&quot;&gt;&lt;code&gt;public class MySqliteOpenHelper extends SqliteOpenHelper{&lt;br /&gt;    public void onCreate(SQLiteDatabase db){&lt;br /&gt;        //Use SQL CREATE TABLE statements to create the tables.&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){&lt;br /&gt;        /*&lt;br /&gt;         * 1. Take backup of data&lt;br /&gt;         * 2. Drop tables&lt;br /&gt;         * 3. Add columns&lt;br /&gt;         *&lt;br /&gt;         * And finally:&lt;br /&gt;         */&lt;br /&gt;        onCreate(db); //This is not right.&lt;br /&gt;    }&lt;br /&gt;}&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The right way to do this would be:&lt;/p&gt;&lt;pre class=&quot;prettyprint lang-java prettyprinted&quot; style=&quot;&quot;&gt;&lt;code&gt;public class CorrectSqliteOpenHelper extends SqliteOpenHelper{&lt;br /&gt;    public void onCreate(SQLiteDatabase db){&lt;br /&gt;        createDatabase(db);&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){&lt;br /&gt;        /*&lt;br /&gt;         * 1. Take backup of data&lt;br /&gt;         * 2. Drop tables&lt;br /&gt;         * 3. Add columns&lt;br /&gt;         *&lt;br /&gt;         * And finally:&lt;br /&gt;         */&lt;br /&gt;        createDatabase(db);&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    private void createDatabase(SQLiteDatabase db){&lt;br /&gt;         //Use SQL CREATE TABLE statements to create the tables.&lt;br /&gt;    }&lt;br /&gt;}&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;I will re-visit this post and add more instances as and when I come across them.&lt;/p&gt;&lt;script&gt;prettyPrint()&lt;/script&gt;</description>
-        <pubDate>Tue, 18 Dec 2012 11:00:00 +0530</pubDate>
-        <link>/blog/2012/12/18/code-smells-calling-life-cycle-methods/</link>
-        <guid isPermaLink="true">/blog/2012/12/18/code-smells-calling-life-cycle-methods/</guid>
-        
-        <category>java</category>
-        
-        <category>life-cycle</category>
-        
-        <category>callbacks</category>
-        
-        <category>software-design</category>
-        
-        <category>programming</category>
         
         
       </item>
