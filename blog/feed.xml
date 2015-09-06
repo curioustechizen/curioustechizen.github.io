@@ -5,9 +5,95 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>/blog/</link>
     <atom:link href="/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 12 Aug 2015 23:34:27 +0530</pubDate>
-    <lastBuildDate>Wed, 12 Aug 2015 23:34:27 +0530</lastBuildDate>
+    <pubDate>Sun, 06 Sep 2015 22:45:59 +0530</pubDate>
+    <lastBuildDate>Sun, 06 Sep 2015 22:45:59 +0530</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>AO(sp)y Episode 2 - Lambdas</title>
+        <description>&lt;p&gt;This post is the second episode in a series where I peek into random commits on AOSP and try to predict what&amp;#39;s coming to the world of Android development.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Disclaimer: These tidbits have been gleaned primarily from the commit messages on AOSP. I very rarely even read (let alone understand) the code. As such expect inaccuracies or downright mistakes here. Do not make decisions based on what you read in this post.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;That out of the way, let’s dig in. This episode was supposed to be about toolchain improvements, but the headline feature is what the title says - lambdas! Lest I am accused of clickbait, let me clarify that all of this is still experimental. Several commits are not even merged. There is no saying when (and if) any of these features will actually find their way into production.&lt;/p&gt;
+
+&lt;p&gt;Ever since Java8 was released, the clamor for using lambdas in Android development has been growing, with good reason too. Android is full of anonymous inner classes for all kinds of things and several of these use cases would benefit from the use of lambdas.&lt;/p&gt;
+
+&lt;p&gt;Java 8 brought about two types of enhancements to the Java programming language:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Features and syntax in the language itself&lt;/li&gt;
+&lt;li&gt;Additions to the standard libraries to take advantage of the new features&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This article concentrates purely on the first type of enhancements, i.e.,&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html&quot;&gt;Lambdas&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html&quot;&gt;Method references&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html&quot;&gt;Default methods in interfaces&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Static methods in interfaces&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It does not look like there is any move to bring the enhancements to the runtime libraries in the form of new collections and &lt;code&gt;java.util.function&lt;/code&gt; package to Android.&lt;/p&gt;
+
+&lt;p&gt;So, what’s cooking?&lt;/p&gt;
+
+&lt;h3&gt;Runtime support&lt;/h3&gt;
+
+&lt;p&gt;Opcodes for creating and invoking lambdas are &lt;a href=&quot;https://android-review.googlesource.com/#/c/147957/&quot;&gt;being added&lt;/a&gt; to the Dalvik bytecode (dex) format. The ART interpreter is &lt;a href=&quot;https://android-review.googlesource.com/#/c/155661/&quot;&gt;being updated&lt;/a&gt; to be able to use these opcodes.&lt;/p&gt;
+
+&lt;p&gt;The first of these commits also points to the &lt;code&gt;dex2oat&lt;/code&gt; compiler being taught how to compile lambdas from your dex bytecode into the corresponding opcodes for OAT.&lt;/p&gt;
+
+&lt;p&gt;What does all this mean? It means that &lt;em&gt;lambdas might be supported natively&lt;/em&gt; in a future version of Android.&lt;/p&gt;
+
+&lt;h3&gt;Toolchain enhancements&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://android-review.googlesource.com/#/c/158285/&quot;&gt;This commit&lt;/a&gt; and related ones point to the possibility of Jack compiler doing basically what is achieved with &lt;a href=&quot;https://github.com/evant/gradle-retrolambda&quot;&gt;gradle-retrolambda&lt;/a&gt; today. In other words, Jack compiler will be able to compile lambdas into bytecode that works even on runtimes that don’t support lambda opcodes. Similarly, Jill will likely do to lambdas in .class/.jar libraries what Jack does to them in source code.&lt;/p&gt;
+
+&lt;h3&gt;Other Java8 features&lt;/h3&gt;
+
+&lt;p&gt;There&amp;#39;s more to Java8 than just the lambda syntax. AOSP also has commits that hint at support for &lt;a href=&quot;https://android-review.googlesource.com/#/c/169003/&quot;&gt;default methods&lt;/a&gt; and &lt;a href=&quot;https://android-review.googlesource.com/#/c/158165/&quot;&gt;Single Abstract Methods&lt;/a&gt;. I did not find any obvious mention of method references, but that might be because I&amp;#39;m not looking hard enough. In any case, method references are just syntax sugar for lambdas so if lambda expressions are supported, so should method references.&lt;/p&gt;
+
+&lt;h3&gt;Compatibility&lt;/h3&gt;
+
+&lt;p&gt;At first glance, one might conclude that lambdas will be used only if &lt;code&gt;minSdkVersion &amp;gt;=&lt;/code&gt; the version of Android in which they are introduced, and that Jack&amp;#39;s feature of down-compiling lambdas into Java7-compatible bytecode will be used in all other cases. This means that the runtime lambdas will not be used &lt;em&gt;even on the runtimes that support them unless &lt;code&gt;minSdkVersion&lt;/code&gt; is set to the latest&lt;/em&gt;. However, this is (more than) likely to negatively impact the adoption of lambdas.&lt;/p&gt;
+
+&lt;p&gt;So, what might be strategies to work around this? What follows is a &lt;strong&gt;wild guess&lt;/strong&gt; as to how this might pan out. I haven&amp;#39;t dug in the source code into much (or ... &lt;em&gt;any&lt;/em&gt;) detail (not that I&amp;#39;d understand much of it even if I had, but that&amp;#39;s beside the point).&lt;/p&gt;
+
+&lt;p&gt;Remember that &lt;code&gt;dex2oat&lt;/code&gt; runs on the Android device. The APK file only has dex bytecode, and it is converted into OAT at installation time. Could this be used to enhance the compatibility story?&lt;/p&gt;
+
+&lt;p&gt;Jack might use &lt;code&gt;targetSdkVersion&lt;/code&gt; to decide whether to include lambdas in the compiled dex bytecode. If &lt;code&gt;targetSdkVersion &amp;gt;=&lt;/code&gt; the version in which lambda support is introduced, then the generated dex might &lt;em&gt;include&lt;/em&gt; the Java8 bytecode. But wait, aren&amp;#39;t we back at square one? &lt;code&gt;dex2oat&lt;/code&gt; is part of the Android OS and cannot (yet) be updated independently of the OS. This means that &lt;code&gt;dex2oat&lt;/code&gt; that is running on an older version of the OS will not understand the new dex bytecode.&lt;/p&gt;
+
+&lt;p&gt;This is why I say &lt;em&gt;include&lt;/em&gt; Java8 opcodes instead of &lt;em&gt;generate&lt;/em&gt; - that is to say, Jack might generate both the Java7-compatible byte code as well as new Java8 opcodes. Hopefully, &lt;code&gt;dex2oat&lt;/code&gt; running on older versions of Android simply ignore the Java8 opcodes. But, what about the size implications of this arrangement? In lambda-heavy apps, will this result in bloated &lt;code&gt;.dex&lt;/code&gt; files?&lt;/p&gt;
+
+&lt;p&gt;The other option is that Jack might always generate Java7 compatible bytecode (compiles lambda expressions into anonymous inner classes), but it might include some sort of flag to indicate to &lt;code&gt;dex2oat&lt;/code&gt; that these constructs be compiled into the corresponding Java8 OAT format. But this begs the question - what, then, is the point of the new opcodes in &lt;code&gt;.dex&lt;/code&gt; format at all?&lt;/p&gt;
+
+&lt;p&gt;I do not have the answers to these questions yet (nor does AOSP). But I&amp;#39;m sure the answers will reveal themselves in the days to come. If you are interested in this topic, you can follow the progress yourself at the following locations on AOSP:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://android-review.googlesource.com/#/q/project:platform/art&quot;&gt;platform/art&lt;/a&gt; project ...&lt;/li&gt;
+&lt;li&gt;... particularly, the &lt;a href=&quot;https://android-review.googlesource.com/#/q/status:merged+project:platform/art+branch:master+topic:lambda_experimental&quot;&gt;lambda_experimental&lt;/a&gt; topic&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://android-review.googlesource.com/#/q/project:toolchain/jack&quot;&gt;toolchain/jack&lt;/a&gt; project &lt;/li&gt;
+&lt;li&gt;Pay special attention to &lt;a href=&quot;https://android-review.googlesource.com/#/q/status:open+project:toolchain/jack+branch:ub-jack-lang-dev&quot;&gt;ub-jack-lang-dev&lt;/a&gt; branch&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 06 Sep 2015 00:00:00 +0530</pubDate>
+        <link>/blog/2015/09/06/ao-spy-2/</link>
+        <guid isPermaLink="true">/blog/2015/09/06/ao-spy-2/</guid>
+        
+        <category>aosp</category>
+        
+        <category>android</category>
+        
+        <category>java8</category>
+        
+        <category>lambda</category>
+        
+        
+      </item>
     
       <item>
         <title>AO(sp)y Part 1</title>
@@ -204,26 +290,6 @@
         <category>android</category>
         
         <category>onDestroy</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Extensibility and Immutability in Java</title>
-        <description>&lt;h3&gt;Objective:&lt;/h3&gt;&lt;blockquote&gt;&lt;p&gt;&lt;strong&gt;To devise a way to make thread-safe, a Java class designed to be extensible.&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;&lt;h3&gt;Introduction:&lt;/h3&gt;&lt;p&gt;&lt;em&gt;Effective Java, Second Edition: Item 15&lt;/em&gt; says &lt;strong&gt;&quot;Minimize Mutability&quot;&lt;/strong&gt;. One should always try to make a class immutable. This has several advantages that I will not go over here (Since &lt;em&gt;Effective Java&lt;/em&gt; explains it all). I will however point out one of those advantages since it is central to this discussion: &lt;/p&gt;&lt;blockquote&gt;&lt;p&gt;&lt;strong&gt;Making a class immutable is the easiest way to ensure that the class is thread-safe.&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;&lt;p&gt;There is however a problem: to make a class &lt;em&gt;truly immutable&lt;/em&gt;, you must prevent it from being sub-classed. Either the class must be declared &lt;code&gt;final&lt;/code&gt;, or it should have a &lt;code&gt;private&lt;/code&gt; constructor and provide &lt;code&gt;static&lt;/code&gt; factory methods instead of constructors. The reasons for this are outlined in &lt;em&gt;Effective Java&lt;/em&gt;. The basic premise is that a sub-class can violate the immutability guarantees. &lt;/p&gt;&lt;p&gt;This must-not-be-subclassed restriction may be fine if you are applying immutability to some &lt;em&gt;value object&lt;/em&gt; like &lt;code&gt;User&lt;/code&gt;, &lt;code&gt;Point&lt;/code&gt;, &lt;code&gt;Account&lt;/code&gt; etc. However, the same requirement turns out to be overly restrictive if you are applying the concept to &lt;em&gt;logic classes&lt;/em&gt;. This is because logic classes are often meant to be customized by extension. &lt;/p&gt;&lt;h3&gt;A strongly-immutable logic class:&lt;/h3&gt;&lt;p&gt;As an example of a logic class, consider the following ReportGenerator:&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot;&gt;&lt;code&gt;public final class ReportGenerator{&lt;br /&gt;    private final DatabaseLayer mDatabaseLayer;&lt;br /&gt;    private final PresentationLayer mPresentationLayer;&lt;br /&gt;&lt;br /&gt;    public ReportGenerator(DatabaseLayer db, PresentationLayer pres){&lt;br /&gt;        this.mDatabaseLayer = db;&lt;br /&gt;        this.mPresentationLayer = pres;&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    public void generateMonthlyReport(User user){&lt;br /&gt;        Report report = mDatabaseLayer.getReport(user);&lt;br /&gt;        mPresentationLayer.present(report);&lt;br /&gt;    }&lt;br /&gt;}&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The other classes have been ommitted for brevity. Assume that &lt;code&gt;DatabaseLayer&lt;/code&gt; and &lt;code&gt;PresentationLayer&lt;/code&gt; classes are themselves immutable. This makes &lt;code&gt;ReportGenerator&lt;/code&gt; &lt;strong&gt;strongly immutable&lt;/strong&gt; and hence, thread-safe.&lt;/p&gt;&lt;p&gt;Now, suppose in the next phase of the project, you need to add a way to generate a historical report.  The easiest way that comes to mind is to inherit from &lt;code&gt;ReportGenerator&lt;/code&gt;. Unfortunately, we cannot do this since in order to make &lt;code&gt;ReportGenerator&lt;/code&gt; immutable, we have declared it &lt;code&gt;final&lt;/code&gt;. One possible approach to solving this issue is making &lt;code&gt;ReportGenerator&lt;/code&gt; &lt;strong&gt;weakly immutable&lt;/strong&gt;. This is discussed in the next section.&lt;/p&gt;&lt;h3&gt;A weakly-immutable logic class:&lt;/h3&gt;&lt;p&gt;One can relax the restriction that an immutable class must not be extensible, while still maintaining the guarantees, &lt;strong&gt;provided the sub-class adheres to the established contract&lt;/strong&gt;. This is done by removing the &lt;code&gt;final&lt;/code&gt; modifier from the class declaration, and making all fields &lt;code&gt;protected final&lt;/code&gt;, or keep them &lt;code&gt;private final&lt;/code&gt; and provide getters which we then use in the sub-classes. Both these approaches are shown in the code below.&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot;&gt;&lt;code&gt;public class ReportGenerator{&lt;br /&gt;    protected final DatabaseLayer mDatabaseLayer; //protected field approach&lt;br /&gt;    private final PresentationLayer mPresentationLayer; //private field with accessor approach&lt;br /&gt;&lt;br /&gt;    public ReportGenerator(DatabaseLayer db, PresentationLayer pres){&lt;br /&gt;        this.mDatabaseLayer = db;&lt;br /&gt;        this.mPresentationLayer = pres;&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    public PresentationLayer getPresentationLayer(){&lt;br /&gt;        return this.mPresentationLayer;&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    public void generateMonthlyReport(User user){&lt;br /&gt;        Report report = mDatabaseLayer.getReport(user);&lt;br /&gt;        mPresentationLayer.present(report);&lt;br /&gt;    }&lt;br /&gt;}&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We can now sub-class this as follows:&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot;&gt;&lt;code&gt;public class HistoricalReportGenerator extends ReportGenerator{&lt;br /&gt;&lt;br /&gt;    public HistoricalReportGenerator(DatabaseLayer db, PresentationLayer pres){&lt;br /&gt;        super(db, pres);&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    public void generateHistoricalReport(User user, Duration duration){&lt;br /&gt;        Report historicalReport = mDatabaseLayer.getReport(user, duration);&lt;br /&gt;        getPresentationLayer().present(historicalReport);&lt;br /&gt;    }&lt;br /&gt;}&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We could also have added more &lt;code&gt;protected final&lt;/code&gt; fields to the sub-class if needed. &lt;/p&gt;&lt;p&gt;What we now have is a weakly immutable class. &lt;strong&gt;This class is immutable as long as sub-classes adhere to the contract&lt;/strong&gt;. It is a good idea to establish in the class javadoc, the expectation that sub-classes &lt;strong&gt;MUST&lt;/strong&gt; preserve the same weak immutability restrictions that this class adheres to. If a sub-class willfully violates the contract, then the logic class cannot be depended upon to work correctly.&lt;/p&gt;&lt;p&gt;Here&#39;s an example to how to establish this contract:&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot;&gt;&lt;code&gt;/**&lt;br /&gt; * The logic class that generates the report.&lt;br /&gt; * ... ...&lt;br /&gt; * &amp;lt;br/&amp;gt;&amp;lt;br/&amp;gt;&lt;br /&gt; * This class is &amp;lt;em&amp;gt;weakly immutable&amp;lt;/em&amp;gt;. It has been kept open for &lt;br /&gt; * extensibility. Sub-classes &amp;lt;strong&amp;gt;MUST&amp;lt;/strong&amp;gt; preserve the immutability &lt;br /&gt; * guarantees of this class. In particular, they must have only immutable &lt;br /&gt; * fields; and must not override any of the methods defined in this class to&lt;br /&gt; * return a mutable reference.&lt;br /&gt; *&lt;br /&gt; */&lt;br /&gt;&lt;br /&gt;public class ReportGenerator{&lt;br /&gt;    //Class body omitted.&lt;br /&gt;}&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Since immutability is enforced by documentation rather than by the compiler, this is an acceptable compromise. It allows us to easily create thread-safe classes that are also extensible. This makes writing API&#39;s and frameworks that much easier.&lt;/p&gt;&lt;h3&gt;Thread-safety is more than Immutability:&lt;/h3&gt;&lt;p&gt;Of course, making a class immutable is not the only way to make a class thread-safe. A mutable class can be written such that it is thread-safe too. It is often desirable for an object to change its state during the execution of a program. How that is done is beyond the scope of this article. I suggest looking at &lt;em&gt;Java Concurrency In Practice&lt;/em&gt; for details on this topic.&lt;/p&gt;&lt;h3&gt;Extending the logic class by Composition:&lt;/h3&gt;&lt;p&gt;There exists an alternative way to extend the functionality of &lt;code&gt;ReportGenerator&lt;/code&gt; that does not involve inheriting from it: &lt;strong&gt;&quot;Favor Composition over Inheritance&quot;&lt;/strong&gt; (&lt;em&gt;Effective Java, Second Edition, Item 16&lt;/em&gt;). For completeness, I present the code for this approach here. Do note that this example uses the strongly immutable form of &lt;code&gt;ReportGenerator&lt;/code&gt;.&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot;&gt;&lt;code&gt;public final class ReportGenerator{&lt;br /&gt;    private final DatabaseLayer mDatabaseLayer;&lt;br /&gt;    private final PresentationLayer mPresentationLayer;&lt;br /&gt;&lt;br /&gt;    public ReportGenerator(DatabaseLayer db, PresentationLayer pres){&lt;br /&gt;        this.mDatabaseLayer = db;&lt;br /&gt;        this.mPresentationLayer = pres;&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    public PresentationLayer getPresentationLayer(){&lt;br /&gt;        return this.mPresentationLayer;&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    public DatabaseLayer getDatabaseLayer(){&lt;br /&gt;        return this.mDatabaseLayer;&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    public void generateMonthlyReport(User user){&lt;br /&gt;        Report report = mDatabaseLayer.getReport(user);&lt;br /&gt;        mPresentationLayer.present(report);&lt;br /&gt;    }&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;public final class HistoricalReportGenerator{&lt;br /&gt;    private final ReportGenerator mReportGenerator;&lt;br /&gt;&lt;br /&gt;    public HistoricalReportGenerator(ReportGenerator reportgen){&lt;br /&gt;        this.mReportGenerator = reportgen;&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    public ReportGenerator getReportGenerator(){&lt;br /&gt;        return this.mReportGenerator;&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    public void generateHistoricalReport(User user, Duration duration){&lt;br /&gt;        Report historicalReport = mReportGenerator.getDatabaseLayer().getReport(user, duration);&lt;br /&gt;        mReportGenerator.getPresentationLayer().present(report);&lt;br /&gt;    }&lt;br /&gt;}&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This approach works fine when the class hierarchy is only a couple of levels deep. If it gets deeper than that, then getting a handle to the members of the base class becomes unwieldy. For example, suppose we have the following:&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot;&gt;&lt;code&gt;public class AnnualReportGenerator extends HistoricalReportGenerator&lt;br /&gt;public class LeapYearReportGenerator extends AnnualReportGenerator&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now imagine a method in &lt;code&gt;LeapYearReportGenerator&lt;/code&gt; needs access to the &lt;code&gt;DatabaseLayer&lt;/code&gt; object. The code for this would look lik:&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot;&gt;&lt;code&gt;mAnnualReportGenerator().getHistoricalReportGenerator().getReportGenerator().getDatabaseLayer();&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This is clearly something you want to avoid. With the composition approach, you also lose the runtime polymorphism advantage.&lt;/p&gt;&lt;h3&gt;Conclusion&lt;/h3&gt;&lt;p&gt;To summarize what this article discussed:&lt;/p&gt;&lt;blockquote&gt;&lt;ul&gt;&lt;li&gt;The easiest way to make a class thread-safe is to make it immutable.&lt;/li&gt;&lt;li&gt;Strong immutability closes the door on extensibility.&lt;/li&gt;&lt;li&gt;It is often convenient to make a class weakly immutable. This allows it to be sub-classed.&lt;/li&gt;&lt;li&gt;If you make an immutable class extensible, clearly establish in the javadoc, the contract that sub-classes must preserve the immutability guarantees.&lt;/li&gt;&lt;/ul&gt;&lt;/blockquote&gt;&lt;p&gt;Other than these observations, we also saw that:&lt;/p&gt;&lt;blockquote&gt;&lt;ul&gt;&lt;li&gt;Immutability is not the only way to achieve thread-safety, and in fact immutability is not always desirable.&lt;/li&gt;&lt;li&gt;Instead of inheriting from a weakly immutable class, one can also extend the functionality by composing a class with a strongly immutable object as its member. This has its own pros and cons - and both approaches must be evaluated before deciding on one.&lt;/li&gt;&lt;/ul&gt;&lt;/blockquote&gt;&lt;script&gt;prettyPrint()&lt;/script&gt;</description>
-        <pubDate>Sat, 05 Jan 2013 21:40:00 +0530</pubDate>
-        <link>/blog/2013/01/05/extensibility-and-immutability-in-java/</link>
-        <guid isPermaLink="true">/blog/2013/01/05/extensibility-and-immutability-in-java/</guid>
-        
-        <category>java</category>
-        
-        <category>thread-safety</category>
-        
-        <category>immutability</category>
-        
-        <category>programming</category>
-        
-        <category>extensibility</category>
         
         
       </item>
