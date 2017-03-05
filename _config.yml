@@ -19,6 +19,7 @@ author-bio: "Android Developer. Tech enthusiast. Serial dabbler."
 github: curioustechizen
 googleplus: 116652261752707476836
 stackoverflow: curioustechizen
+twitter: ki_run
 
 # Google Analytics (you may want to changes these with yours or even delete :)
 
@@ -33,6 +34,8 @@ highlighter: pygments
 
 paginate: 5
 paginate_path: "/page/:num"
+
+gems: [jekyll-paginate]
 
 # SCSS
 

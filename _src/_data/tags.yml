@@ -1,0 +1,14 @@
+# To generate the tag page will need to be defined here
+
+android:
+  name: Android
+aosp:
+  name: AOSP
+studio:
+  name: AndroidStudio
+java8:
+  name: Java 8
+lambda:
+  name: Lambda    
+kotlin:
+  name: Kotlin 
