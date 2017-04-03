@@ -11,4 +11,6 @@ java8:
 lambda:
   name: Lambda    
 kotlin:
-  name: Kotlin 
+  name: Kotlin
+effectivejava:
+  name: Effective Java 
