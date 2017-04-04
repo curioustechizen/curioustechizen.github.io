@@ -30,7 +30,7 @@ ga_tracking_id: UA-66125769-1
 
 markdown: redcarpet
 permalink: pretty
-highlighter: pygments
+highlighter: rouge
 
 paginate: 5
 paginate_path: "/page/:num"
