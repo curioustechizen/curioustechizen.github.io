@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js" prefix="og: http://ogp.me/ns#"> <!--<![endif]-->
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta http-equiv="content-language" content="en" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+      
+        <meta name="description" content="A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.">
+
+      
+
+      <title> Java: Value classes and the equals() method | Curious Techizen</title>
+      
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300,700italic|Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+
+      <link rel="stylesheet" type="text/css" href="/blog/css/main.css" />
+      <link href="http://localhost:4000/blog/feed.xml" type="application/rss+xml" rel="alternate" title="RSS2.0">
+      <link rel="shortcut icon" href="/blog/favicon.ico">
+
+      
+        
+
+
+      
+
+  </head>
+
+  <body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="off-canvas">
+      <figure class="avatar">
+        <img src="/blog/assets/img/avatar.jpg" alt="Picture" title="That's me, Kiran Rao.">
+      </figure>
+      <div class="bio">
+          <h1>Hi, I'm Kiran Rao.</h1>
+          <p>Android Developer. Tech enthusiast. Serial dabbler.</p>
+      </div>
+      <nav>
+        <h6>Follow me on</h6>
+        <ul>
+          
+          <li><a target="_blank" href="http://twitter.com/ki_run">Twitter</a></li>
+          
+          
+          <li><a target="_blank" href="https://github.com/curioustechizen">Github</a></li>
+          
+          
+          
+          
+          <li><a target="_blank" href="https://plus.google.com/116652261752707476836">Google+</a></li>
+          
+        </ul>
+      </nav>
+      <nav>
+        <h6>Link</h6>
+        <ul>
+          <li><a href="/blog/">Home</a></li>
+          <li><a href="/blog/tags/">Tags</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-wrapper">
+
+      <header>
+        <div class="h-wrap">
+          <h1 class="title"><a href="/blog/" title="Back to Homepage">Curious Techizen</a></h1>
+          <a class="menu-icon" title="Open Bio"><span class="lines"></span></a>
+        </div>
+      </header>
+
+      <main>
+        <section class="single-wrap">
+  <article class="single-content" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="feat">
+      <h5 class="page-date">
+        <time datetime="2017-04-03T22:00:00+02:00" itemprop="datePublished">
+          03 April 2017
+        </time>
+      </h5>
+    </div>
+    <h1 class="page-title" itemprop="name headline">Java: Value classes and the equals() method</h1>
+    <div itemprop="articleBody">
+      <h2>TL;DR</h2>
+
+<blockquote>
+<p><strong>Rule 1:</strong> When overriding <code>equals()</code> method for a <em>value class</em> in java, it is preferable to reject instances of sub-classes of this class. In other words, use <code>getClass()</code> instead of <code>instanceof</code> for ensuring that the other object is of the correct type.</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span>  <span class="k">if</span><span class="o">(!</span><span class="k">this</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">other</span><span class="o">.</span><span class="na">getClass</span><span class="o">())</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</code></pre></div>
+<p>instead of</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span>  <span class="k">if</span><span class="o">(!(</span><span class="n">other</span> <span class="k">instanceof</span> <span class="n">MyClass</span><span class="o">))</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</code></pre></div>
+<blockquote>
+<p><strong>Rule 2:</strong> Exception to Rule 1: If it is likely that the object that will be passed around is an instance of <strong><em>a proxy of your class</em></strong>, then use <code>instanceof</code>.</p>
+</blockquote>
+
+<h2>Deep-dive</h2>
+
+<p>A lot has been written about <code>equals()</code> in Java. For me the definitive source has been from &quot;Effective Java 2nd Edition&quot;. Item 8 says &quot;Obey the general contract when overriding equals&quot;.</p>
+
+<p>However, as a programmer I do not need to remember the recipe provided by Joshua Bloch (well, most of the time). This is because IDEs offer options to auto-generate the <code>equals()</code> (and a corresponding <code>hashCode()</code>) methods for me. Mechanisms for creating value classes (like <a href="https://github.com/google/auto/tree/master/value">AutoValue</a> or Kotlin&#39;s <a href="https://kotlinlang.org/docs/reference/data-classes.html">data classes</a>) go one step further by not even requiring you to maintain the equals() method in source code format. </p>
+
+<p>That said, there are some gotchas to be aware of that crop up from time to time. The point relevant to this post is (I might be para-phrasing it)</p>
+
+<blockquote>
+<p>It is not possible to extend an instantiable class and add a field without violating the contract of the equals method.</p>
+</blockquote>
+
+<p>I encourage you to read Joshua Bloch&#39;s explanation of this along with the excellent examples to understand what the contract is and why extending a class might break this contract. Once you understand this concept, Rule 1 is a logical conclusion. If you are comparing an instance of this class with an instance of a sub-class, you want to return <code>false</code>.</p>
+
+<p>However, this is not always feasible. There are cases where the value class is just a crutch for a framework to do its work. The value class that you define serves as the interface between you and the framework, while the framework generates sub-classes of your class to use as a proxy.</p>
+
+<h4>Example</h4>
+
+<p>That&#39;s a lot of hand-waving! Let&#39;s get to a concrete example, in this case the example which led me to write this blog post in the first place - <a href="https://realm.io/docs/java/latest/">Realm</a>. Realm is an object database for Android. You declare your models as POJOs and you can then use Realm to persist/query them.</p>
+
+<p>Here&#39;s how you would define a User model in Realm:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="kd">extends</span> <span class="n">RealmObject</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+    <span class="c1">// Rest of the class left out for brevity</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>Now, let&#39;s see what happens when we use the strict interpretation of the <code>equals()</code> method:</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="k">this</span> <span class="o">==</span> <span class="n">o</span><span class="o">)</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">getClass</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">o</span><span class="o">.</span><span class="na">getClass</span><span class="o">())</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span> <span class="c1">//Strict type comparison</span>
+    <span class="n">User</span> <span class="n">other</span> <span class="o">=</span> <span class="o">(</span><span class="n">User</span><span class="o">)</span><span class="n">other</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">age</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="na">age</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="k">return</span> <span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">other</span><span class="o">.</span><span class="na">name</span><span class="o">);</span> 
+<span class="o">}</span>
+</code></pre></div>
+<p>Now, assume you are writing a test to check whether a <code>User</code> instance retrieved from Realm is what you expect it to be.</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">givenADatabase_whenRetrieveByName_thenReturnsCorrectUser</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">Realm</span> <span class="n">realm</span> <span class="o">=</span> <span class="n">getRealm</span><span class="o">();</span>
+    <span class="kd">final</span> <span class="n">User</span> <span class="n">ACTUAL</span> <span class="o">=</span> <span class="n">getUser</span><span class="o">(</span><span class="s">&quot;Android&quot;</span><span class="o">);</span>
+
+    <span class="kd">final</span> <span class="n">User</span> <span class="n">EXPECTED</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">(</span><span class="s">&quot;Android&quot;</span><span class="o">,</span> <span class="mi">9</span><span class="o">);</span>
+    <span class="n">assertEquals</span><span class="o">(</span><span class="n">EXPECTED</span><span class="o">,</span> <span class="n">ACTUAL</span><span class="o">);</span> 
+<span class="o">}</span>
+</code></pre></div>
+<p>You will find that this test fails, even though the instance returned from Realm has the correct <code>name</code> and <code>age</code>. Why is this so?</p>
+
+<h4>Proxy classes</h4>
+
+<p>This is because the object that Realm returns is an instance of <code>UserRealmProxy</code> that extends your <code>User</code> class. Even though the fields that matter for this comparison are the same, the <code>if (!getClass().equals(o.getClass()) return false;</code> line leads our equals implementation to report that the instances are not equal.</p>
+
+<p>The fix is of course to be more lenient in checking the types in equals(), with the trade-off that you potentially break the contract of <code>equals()</code></p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="k">this</span> <span class="o">==</span> <span class="n">o</span><span class="o">)</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(!(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="n">User</span><span class="o">))</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span> <span class="c1">//lenient type comparison</span>
+    <span class="n">User</span> <span class="n">other</span> <span class="o">=</span> <span class="o">(</span><span class="n">User</span><span class="o">)</span><span class="n">other</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">age</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="na">age</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="k">return</span> <span class="n">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">other</span><span class="o">.</span><span class="na">name</span><span class="o">);</span> 
+<span class="o">}</span>
+</code></pre></div>
+<p>Realm is just one example of where a proxy class is used. There is a host of libraries/frameworks that proxy your value classes under the covers. Although the intent is for you as a user of the framework to be largely unaware of the use of these proxies, the peculiar case of <code>equals()</code> and sub-classes means that at times you need to be aware of these implementation details.</p>
+
+<h4>Aside: Order of Expected and Actual in tests</h4>
+
+<p>When I got started with unit testing, I often did not care about the order in which I passed the <code>expected</code> and <code>actual</code> in tests. I did not differentiate between <code>assertEquals(expected, actual)</code> and <code>assertEquals(actual, expected)</code>. The worst that could happen was that I would be slightly confused by the JUnit error message sometimes, but my tests that should pass would still pass, and those that should fail would still fail.</p>
+
+<p>However, in the example above, you will notice that if you switch the positions of <code>expected</code> and <code>actual</code>, the result of the test will be different. </p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="n">assertEquals</span><span class="o">(</span><span class="n">ACTUAL</span><span class="o">,</span> <span class="n">EXPECTED</span><span class="o">);</span> 
+</code></pre></div>
+<p>This test fails. This is because the <code>UserRealmProxy</code> class has extended <code>User</code> and overridden <code>equals()</code> in a way that breaks symmetry.</p>
+
+<p>This is one of the reasons why the contract of <code>equals</code> says that it should be symmetric, i.e., <code>x.equals(y)</code> should return <code>true</code> <strong>if and only if</strong> <code>y.equals(x)</code> returns <code>true</code>.</p>
+
+<h2>A survey of equals-generators</h2>
+
+<p>We will now survey existing tools that generate <code>equals()</code> for you and see how they handle type-checks.</p>
+
+<h4>Eclipse</h4>
+
+<p>At the time of this writing, Eclipse Neon, in the wizard to &quot;Generate hashCode() and equals()&quot; has a checkbox &quot;Use &#39;instanceof&#39; to compare types&quot;. If you check this checkbox that Eclipse generates a strict type comparison, else it generates the more lenient one.</p>
+
+<h4>IntelliJ IDEs</h4>
+
+<p>IntelliJ IDEA, Android Studio and other similar IDEs have a checkbox &quot;Accept subclasses as parameters to equals() method&quot;. Checking this checkbox will generate the <em>lenient</em> type comparison, while the default (un-checking it) will generate the strict type comparison</p>
+
+<h4>Kotlin data classes</h4>
+<div class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span></span><span class="k">data</span> <span class="k">class</span> <span class="nc">UserKt</span><span class="p">(</span><span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="k">var</span> <span class="py">age</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span>
+</code></pre></div>
+<p>This generates bytecode equivalent to the following Java code</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">var1</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span><span class="o">(</span><span class="k">this</span> <span class="o">!=</span> <span class="n">var1</span><span class="o">)</span> <span class="o">{</span>
+     <span class="k">if</span><span class="o">(</span><span class="n">var1</span> <span class="k">instanceof</span> <span class="n">UserKt</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">UserKt</span> <span class="n">var2</span> <span class="o">=</span> <span class="o">(</span><span class="n">UserKt</span><span class="o">)</span><span class="n">var1</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">Intrinsics</span><span class="o">.</span><span class="na">areEqual</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">,</span> <span class="n">var2</span><span class="o">.</span><span class="na">name</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">==</span> <span class="n">var2</span><span class="o">.</span><span class="na">age</span><span class="o">)</span> <span class="o">{</span>
+           <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+     <span class="o">}</span>
+
+     <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+     <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>As you can see, it generates an <code>instanceof</code> check but this <strong>does not violate the contract of equals()</strong>. This is because in Kotlin (as of v1.1.0), data classes cannot be sub-classed.</p>
+
+<h4>Auto-Value</h4>
+
+<p>With this declaration using AutoValue</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="nd">@AutoValue</span>
+<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">UserAV</span> <span class="o">{</span>
+    <span class="kd">abstract</span> <span class="n">String</span> <span class="nf">name</span><span class="o">();</span>
+    <span class="kd">abstract</span> <span class="kt">int</span> <span class="nf">age</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">UserAV</span> <span class="nf">create</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">AutoValue_UserAV</span><span class="o">(</span><span class="n">name</span><span class="o">,</span> <span class="n">age</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>The generated code (snipped to show only relevant portions) is</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">final</span> <span class="kd">class</span> <span class="nc">AutoValue_UserAV</span> <span class="kd">extends</span> <span class="n">UserAV</span> <span class="o">{</span>
+
+  <span class="kd">private</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+
+  <span class="c1">// ...snip...</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="k">this</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="n">UserAV</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">UserAV</span> <span class="n">that</span> <span class="o">=</span> <span class="o">(</span><span class="n">UserAV</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
+      <span class="k">return</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">that</span><span class="o">.</span><span class="na">name</span><span class="o">()))</span>
+           <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">==</span> <span class="n">that</span><span class="o">.</span><span class="na">age</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>The two points to observe:</p>
+
+<ol>
+<li>The generated <code>equals()</code> uses the lenient <code>instanceof</code> for type comparison</li>
+<li>The generated class is declared <code>final</code>, hence it is guaranteed that there are no sub-classes which means the contract of <code>equals()</code> is not violated.</li>
+</ol>
+
+<h2>Conclusion</h2>
+
+<p>In a majority of the cases, tools that generate <code>equals()</code> method are good enough. There is no reason to customize the code that they generate for you. However, there are cases where it is advantageous to be aware of what is going on under the hood.</p>
+
+<p>For value classes, prefer to do a strict type comparison in the <code>equals()</code> method, unless it is likely that the value class might be proxied.</p>
+
+    </div>
+    
+    <div class="page-tags">
+      <ul>
+        
+        <li>
+          
+          <a href="/blog/tags/effectivejava">Effective Java</a>
+          
+        </li>
+        
+      </ul>
+    </div>
+    
+    <h6 class="back-to-top"><a href="#top">Back to Top</a></h6>
+    
+    
+      <a rel="prev" href="/blog/2017/03/05/kotlin-coi/" id="prev">
+        &larr; <span class="nav-title nav-title-prev">older</span>
+      </a>
+    
+  </article>
+  
+</section>
+
+      </main>
+
+      <footer>
+        <small>Powered by Jekyll - Theme: <a href="https://github.com/ogaclejapan/materi-for-jekyll">materi</a> - &copy; ogaclejapan</small>
+      </footer>
+
+    </div>
+    
+
+    <script src="/blog/js/main.js"></script>
+    
+    
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-66125769-1', 'kiranrao.in');
+        ga('send', 'pageview');
+      </script>
+    
+
+  </body>
+</html>

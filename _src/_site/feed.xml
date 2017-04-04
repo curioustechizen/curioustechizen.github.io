@@ -5,9 +5,191 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>http://localhost:4000/blog/</link>
     <atom:link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 05 Mar 2017 18:37:32 +0100</pubDate>
-    <lastBuildDate>Sun, 05 Mar 2017 18:37:32 +0100</lastBuildDate>
+    <pubDate>Mon, 03 Apr 2017 22:37:25 +0200</pubDate>
+    <lastBuildDate>Mon, 03 Apr 2017 22:37:25 +0200</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Java: Value classes and the equals() method</title>
+        <description>&lt;h2&gt;TL;DR&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Rule 1:&lt;/strong&gt; When overriding &lt;code&gt;equals()&lt;/code&gt; method for a &lt;em&gt;value class&lt;/em&gt; in java, it is preferable to reject instances of sub-classes of this class. In other words, use &lt;code&gt;getClass()&lt;/code&gt; instead of &lt;code&gt;instanceof&lt;/code&gt; for ensuring that the other object is of the correct type.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;instead of&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(!(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MyClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Rule 2:&lt;/strong&gt; Exception to Rule 1: If it is likely that the object that will be passed around is an instance of &lt;strong&gt;&lt;em&gt;a proxy of your class&lt;/em&gt;&lt;/strong&gt;, then use &lt;code&gt;instanceof&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2&gt;Deep-dive&lt;/h2&gt;
+
+&lt;p&gt;A lot has been written about &lt;code&gt;equals()&lt;/code&gt; in Java. For me the definitive source has been from &amp;quot;Effective Java 2nd Edition&amp;quot;. Item 8 says &amp;quot;Obey the general contract when overriding equals&amp;quot;.&lt;/p&gt;
+
+&lt;p&gt;However, as a programmer I do not need to remember the recipe provided by Joshua Bloch (well, most of the time). This is because IDEs offer options to auto-generate the &lt;code&gt;equals()&lt;/code&gt; (and a corresponding &lt;code&gt;hashCode()&lt;/code&gt;) methods for me. Mechanisms for creating value classes (like &lt;a href=&quot;https://github.com/google/auto/tree/master/value&quot;&gt;AutoValue&lt;/a&gt; or Kotlin&amp;#39;s &lt;a href=&quot;https://kotlinlang.org/docs/reference/data-classes.html&quot;&gt;data classes&lt;/a&gt;) go one step further by not even requiring you to maintain the equals() method in source code format. &lt;/p&gt;
+
+&lt;p&gt;That said, there are some gotchas to be aware of that crop up from time to time. The point relevant to this post is (I might be para-phrasing it)&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;It is not possible to extend an instantiable class and add a field without violating the contract of the equals method.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I encourage you to read Joshua Bloch&amp;#39;s explanation of this along with the excellent examples to understand what the contract is and why extending a class might break this contract. Once you understand this concept, Rule 1 is a logical conclusion. If you are comparing an instance of this class with an instance of a sub-class, you want to return &lt;code&gt;false&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;However, this is not always feasible. There are cases where the value class is just a crutch for a framework to do its work. The value class that you define serves as the interface between you and the framework, while the framework generates sub-classes of your class to use as a proxy.&lt;/p&gt;
+
+&lt;h4&gt;Example&lt;/h4&gt;
+
+&lt;p&gt;That&amp;#39;s a lot of hand-waving! Let&amp;#39;s get to a concrete example, in this case the example which led me to write this blog post in the first place - &lt;a href=&quot;https://realm.io/docs/java/latest/&quot;&gt;Realm&lt;/a&gt;. Realm is an object database for Android. You declare your models as POJOs and you can then use Realm to persist/query them.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;#39;s how you would define a User model in Realm:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RealmObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// Rest of the class left out for brevity&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, let&amp;#39;s see what happens when we use the strict interpretation of the &lt;code&gt;equals()&lt;/code&gt; method:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//Strict type comparison&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, assume you are writing a test to check whether a &lt;code&gt;User&lt;/code&gt; instance retrieved from Realm is what you expect it to be.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;givenADatabase_whenRetrieveByName_thenReturnsCorrectUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Realm&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;realm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getRealm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ACTUAL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Android&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EXPECTED&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Android&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EXPECTED&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ACTUAL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You will find that this test fails, even though the instance returned from Realm has the correct &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;age&lt;/code&gt;. Why is this so?&lt;/p&gt;
+
+&lt;h4&gt;Proxy classes&lt;/h4&gt;
+
+&lt;p&gt;This is because the object that Realm returns is an instance of &lt;code&gt;UserRealmProxy&lt;/code&gt; that extends your &lt;code&gt;User&lt;/code&gt; class. Even though the fields that matter for this comparison are the same, the &lt;code&gt;if (!getClass().equals(o.getClass()) return false;&lt;/code&gt; line leads our equals implementation to report that the instances are not equal.&lt;/p&gt;
+
+&lt;p&gt;The fix is of course to be more lenient in checking the types in equals(), with the trade-off that you potentially break the contract of &lt;code&gt;equals()&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//lenient type comparison&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Realm is just one example of where a proxy class is used. There is a host of libraries/frameworks that proxy your value classes under the covers. Although the intent is for you as a user of the framework to be largely unaware of the use of these proxies, the peculiar case of &lt;code&gt;equals()&lt;/code&gt; and sub-classes means that at times you need to be aware of these implementation details.&lt;/p&gt;
+
+&lt;h4&gt;Aside: Order of Expected and Actual in tests&lt;/h4&gt;
+
+&lt;p&gt;When I got started with unit testing, I often did not care about the order in which I passed the &lt;code&gt;expected&lt;/code&gt; and &lt;code&gt;actual&lt;/code&gt; in tests. I did not differentiate between &lt;code&gt;assertEquals(expected, actual)&lt;/code&gt; and &lt;code&gt;assertEquals(actual, expected)&lt;/code&gt;. The worst that could happen was that I would be slightly confused by the JUnit error message sometimes, but my tests that should pass would still pass, and those that should fail would still fail.&lt;/p&gt;
+
+&lt;p&gt;However, in the example above, you will notice that if you switch the positions of &lt;code&gt;expected&lt;/code&gt; and &lt;code&gt;actual&lt;/code&gt;, the result of the test will be different. &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ACTUAL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EXPECTED&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This test fails. This is because the &lt;code&gt;UserRealmProxy&lt;/code&gt; class has extended &lt;code&gt;User&lt;/code&gt; and overridden &lt;code&gt;equals()&lt;/code&gt; in a way that breaks symmetry.&lt;/p&gt;
+
+&lt;p&gt;This is one of the reasons why the contract of &lt;code&gt;equals&lt;/code&gt; says that it should be symmetric, i.e., &lt;code&gt;x.equals(y)&lt;/code&gt; should return &lt;code&gt;true&lt;/code&gt; &lt;strong&gt;if and only if&lt;/strong&gt; &lt;code&gt;y.equals(x)&lt;/code&gt; returns &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2&gt;A survey of equals-generators&lt;/h2&gt;
+
+&lt;p&gt;We will now survey existing tools that generate &lt;code&gt;equals()&lt;/code&gt; for you and see how they handle type-checks.&lt;/p&gt;
+
+&lt;h4&gt;Eclipse&lt;/h4&gt;
+
+&lt;p&gt;At the time of this writing, Eclipse Neon, in the wizard to &amp;quot;Generate hashCode() and equals()&amp;quot; has a checkbox &amp;quot;Use &amp;#39;instanceof&amp;#39; to compare types&amp;quot;. If you check this checkbox that Eclipse generates a strict type comparison, else it generates the more lenient one.&lt;/p&gt;
+
+&lt;h4&gt;IntelliJ IDEs&lt;/h4&gt;
+
+&lt;p&gt;IntelliJ IDEA, Android Studio and other similar IDEs have a checkbox &amp;quot;Accept subclasses as parameters to equals() method&amp;quot;. Checking this checkbox will generate the &lt;em&gt;lenient&lt;/em&gt; type comparison, while the default (un-checking it) will generate the strict type comparison&lt;/p&gt;
+
+&lt;h4&gt;Kotlin data classes&lt;/h4&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserKt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This generates bytecode equivalent to the following Java code&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserKt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;UserKt&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserKt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Intrinsics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;areEqual&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+           &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As you can see, it generates an &lt;code&gt;instanceof&lt;/code&gt; check but this &lt;strong&gt;does not violate the contract of equals()&lt;/strong&gt;. This is because in Kotlin (as of v1.1.0), data classes cannot be sub-classed.&lt;/p&gt;
+
+&lt;h4&gt;Auto-Value&lt;/h4&gt;
+
+&lt;p&gt;With this declaration using AutoValue&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@AutoValue&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserAV&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserAV&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AutoValue_UserAV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The generated code (snipped to show only relevant portions) is&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AutoValue_UserAV&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserAV&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// ...snip...&lt;/span&gt;
+
+  &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserAV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;UserAV&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;that&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserAV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;that&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()))&lt;/span&gt;
+           &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;that&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The two points to observe:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;The generated &lt;code&gt;equals()&lt;/code&gt; uses the lenient &lt;code&gt;instanceof&lt;/code&gt; for type comparison&lt;/li&gt;
+&lt;li&gt;The generated class is declared &lt;code&gt;final&lt;/code&gt;, hence it is guaranteed that there are no sub-classes which means the contract of &lt;code&gt;equals()&lt;/code&gt; is not violated.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;In a majority of the cases, tools that generate &lt;code&gt;equals()&lt;/code&gt; method are good enough. There is no reason to customize the code that they generate for you. However, there are cases where it is advantageous to be aware of what is going on under the hood.&lt;/p&gt;
+
+&lt;p&gt;For value classes, prefer to do a strict type comparison in the &lt;code&gt;equals()&lt;/code&gt; method, unless it is likely that the value class might be proxied.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 03 Apr 2017 22:00:00 +0200</pubDate>
+        <link>http://localhost:4000/blog/2017/04/03/java-value-classes-equals/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2017/04/03/java-value-classes-equals/</guid>
+        
+        <category>effectivejava</category>
+        
+        
+      </item>
     
       <item>
         <title>Delegates - Composition over Inheritance in Kotlin</title>
@@ -370,20 +552,6 @@
         <category>programming</category>
         
         <category>constants</category>
-        
-        <category>android</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Android: Passing an arbitrary object to a custom View</title>
-        <description>&lt;p&gt;So, I came across a situation where I wanted to create a custom &lt;code&gt;View&lt;/code&gt; in Android (let's call it &lt;code&gt;MyAwesomeView&lt;/code&gt;). I had to work with a couple of constraints:&lt;/p&gt;&lt;ol&gt;&lt;li&gt;I have to be able to pass in an additional object to &lt;code&gt;MyAwesomeView&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;The &lt;code&gt;MyAwesomeView&lt;/code&gt; should also be usable from XML.&lt;/li&gt;&lt;li&gt;The &lt;code&gt;MyAwesomeView&lt;/code&gt; should be distinct from the application itself - i.e., it should be possible to distribute the &lt;code&gt;MyAwesomeView&lt;/code&gt; as a library.&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;To elaborate a bit on the &quot;pass in an additional object&quot; part: &lt;code&gt;View&lt;/code&gt; provides three standard constructors using which you can pass in &lt;/p&gt;&lt;ul&gt;&lt;li&gt;a &lt;code&gt;Context&lt;/code&gt;, &lt;/li&gt;&lt;li&gt;an &lt;code&gt;AttributeSet&lt;/code&gt; and &lt;/li&gt;&lt;li&gt;an &lt;code&gt;int&lt;/code&gt; representing the style.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;I want to also pass in a &lt;a href=&quot;https://github.com/chrisbanes/Android-BitmapCache&quot;&gt;&lt;code&gt;BitmapCache&lt;/code&gt;&lt;/a&gt; object since &lt;code&gt;MyAwesomeView&lt;/code&gt; uses lots of &lt;code&gt;Bitmap&lt;/code&gt;s and I don't want to encounter the dreaded &lt;code&gt;OutOfMemoryError&lt;/code&gt; that goes hand in hand with decoding large bitmaps in an Android app. &lt;code&gt;MyAwesomeView&lt;/code&gt; decodes a bitmap only if it is not already present in the cache.&lt;/p&gt;&lt;p&gt;The second constraint makes things really difficult. It is possible to pass in additional &quot;configuration&quot; information to a &lt;code&gt;View&lt;/code&gt; by &lt;a href=&quot;http://developer.android.com/training/custom-views/create-view.html#customattr&quot;&gt;creating custom attributes&lt;/a&gt;.  However, this obviously cannot be used to pass in an object like a &lt;code&gt;BitmapCache&lt;/code&gt;.&lt;/p&gt;&lt;h3&gt;Augmenting the &lt;code&gt;Context&lt;/code&gt; object with additional information&lt;/h3&gt;&lt;p&gt;This solution I came across is as follows:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Define an interface &lt;code&gt;BitmapCacheProvider&lt;/code&gt; with a single method &lt;code&gt;provideBitmapCache()&lt;/code&gt;;&lt;/li&gt;&lt;li&gt;Make your &lt;code&gt;Activity&lt;/code&gt; class implement the interface defined in step 1. Override the interface method to return an appropriate &lt;code&gt;BitmapCache&lt;/code&gt; object.&lt;/li&gt;&lt;li&gt;In the constructor of &lt;code&gt;MyAwesomeView&lt;/code&gt;, check to see if the context object passed in to implements the &lt;code&gt;BitmapCacheProvider&lt;/code&gt; interface. If it does - we're good. If not, then fail fast (or disable cacheing - whatever works for you).&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;In code, here's what this would look like:&lt;/p&gt;&lt;pre class=&quot;prettyprint&quot;&gt;&lt;code&gt;/**&lt;br /&gt; * Interface to be implemented by the Context (Activity etc) in which `MyAwesomeView` runs&lt;br /&gt; */&lt;br /&gt;public interface BitmapCacheProvider{&lt;br /&gt;    BitmapCache provideBitmapCache();&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;/**&lt;br /&gt; * An example of an Activity that implements BitmapCacheProvider&lt;br /&gt; */&lt;br /&gt;&lt;br /&gt;public class MyActivity extends Activity implements BitmapCacheProvider{&lt;br /&gt;    //... Life-cycle methods of the Activity here&lt;br /&gt;&lt;br /&gt;    @Override&lt;br /&gt;    public BitmapCache provideBitmapCache(){&lt;br /&gt;        //Get your instance of bitmapcache here - probably from your Application&lt;br /&gt;        BitmapCache bitmapCache = ...;&lt;br /&gt;        return bitmapCache;&lt;br /&gt;    }&lt;br /&gt;}&lt;br /&gt;&lt;br /&gt;/**&lt;br /&gt; * Custom View that uses an additional object (BitmapCache) for its configuration.&lt;br /&gt; */&lt;br /&gt;public class MyAwesomeView extends View{&lt;br /&gt;    private BitmapCache mBitmapCache;&lt;br /&gt;&lt;br /&gt;    public MyAwesomeView(Context context){&lt;br /&gt;        init(context, null, 0);&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    public MyAwesomeView(Context context, AttributeSet attrs){&lt;br /&gt;        init(context, attrs, 0);&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    public MyAwesomeView(Context context, AttributeSet attrs, int style){&lt;br /&gt;        init(context, attrs, style);&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    private void init(Context context, AttributeSet attrs, int style){&lt;br /&gt;        try{&lt;br /&gt;            /*&lt;br /&gt;             * Try casting the contex to BitmapCacheProvider. &lt;br /&gt;             * &lt;br /&gt;             * If the required interface is not implemented, &lt;br /&gt;             * it'll throw a ClassCastException&lt;br /&gt;             */&lt;br /&gt;            mBitmapCache = ((BitmapCacheProvider) context).provideBitmapCache();&lt;br /&gt;        } catch(ClassCastException e){&lt;br /&gt;             throw new ClassCastException(context.toString()&lt;br /&gt;                    + &quot; must implement BitmapCacheProvider&quot;);&lt;br /&gt;        }&lt;br /&gt;&lt;br /&gt;        //At this point, we have the BitmapCacheObject which we can use for further processing.&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;}&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;Conclusion:&lt;/h3&gt;&lt;p&gt;What we saw in this post was how it is possible to create a custom &lt;code&gt;View&lt;/code&gt; in Android, that can take in an arbitrary object in its constructor - and still be usable from XML. Admittedly, it is a bit round-about, but it has its benefits. Here are a few other points worth considering if you are following this approach:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;In this example, I just augmented the main &lt;code&gt;Activity&lt;/code&gt; with the desired &lt;code&gt;interface&lt;/code&gt;, but you might need to do this for other classes. Basically, the &lt;code&gt;Context&lt;/code&gt; that is passed in to the custom &lt;code&gt;View&lt;/code&gt; constructor must be enhanced to implement the interface. What this context is depends on how you are including the custom &lt;code&gt;View&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;You might argue that the BitmapCache should be part of the custom &lt;code&gt;View&lt;/code&gt; and not passed in to it by the application. This depends on the use case. If you have multiple custom Views that require Bitmap cacheing (as is the case with my app), it probably makes sense for the app to maintain the cache. We might not want too maintain too many caches lest the cache overhead cancels out any benefits we derive from having the cache in the first place!&lt;/li&gt;&lt;/ul&gt;</description>
-        <pubDate>Fri, 01 Feb 2013 05:04:00 +0100</pubDate>
-        <link>http://localhost:4000/blog/2013/02/01/android-passing-arbitrary-object-to/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2013/02/01/android-passing-arbitrary-object-to/</guid>
-        
-        <category>custom-view</category>
         
         <category>android</category>
         
