@@ -95,15 +95,15 @@
 
 <p>An example of this is seen in the book: The <code>InstrumentedSet</code> - first a broken implementation that uses <a href="https://github.com/marhan/effective-java-examples/blob/master/src/main/java/org/effectivejava/examples/chapter04/item16/InstrumentedHashSet.java">Inheritance</a>, and then corrects it <a href="https://github.com/marhan/effective-java-examples/blob/master/src/main/java/org/effectivejava/examples/chapter04/item16/ForwardingSet.java">using</a> <a href="https://github.com/marhan/effective-java-examples/blob/master/src/main/java/org/effectivejava/examples/chapter04/item16/InstrumentedSet.java">Composition</a>. When you use the composition pattern, the <strong>wrapper</strong> class simply forwards all method calls to an instance of the <strong>wrapped</strong> class.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ForwardingSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ForwardingSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
     
-    <span class="cm">/*</span>
-<span class="cm">    * ForwardingSet is the wrapper class and it wraps the Set.</span>
-<span class="cm">    *</span>
-<span class="cm">    * In this example ForwardingSet also implements Set interface but that is just </span>
-<span class="cm">    * in order to adhere to the interface and not for inheritance. Set, being an interface, there is</span>
-<span class="cm">    * no implementations in {@code super}!</span>
-<span class="cm">    */</span>
+    <span class="cm">/*
+     * ForwardingSet is the wrapper class and it wraps the Set.
+     *
+     * In this example ForwardingSet also implements Set interface but that is just 
+     * in order to adhere to the interface and not for inheritance. Set, being an interface, there is
+     * no implementations in {@code super}!
+     */</span>
     <span class="kd">private</span> <span class="kd">final</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">;</span> 
 
     <span class="kd">public</span> <span class="nf">ForwardingSet</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
@@ -186,7 +186,7 @@
 
 <p>Enter Kotlin&#39;s delegates. Here is the same example using Kotlin delegates.</p>
 
-<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span></span> <span class="k">open</span> <span class="k">class</span> <span class="nc">ForwardingMutableSet</span><span class="p">&lt;</span><span class="n">E</span><span class="p">&gt;(</span><span class="n">s</span><span class="p">:</span> <span class="n">MutableSet</span><span class="p">&lt;</span><span class="n">E</span><span class="p">&gt;):</span> <span class="n">MutableSet</span><span class="p">&lt;</span><span class="n">E</span><span class="p">&gt;</span> <span class="k">by</span> <span class="n">s</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"> <span class="k">open</span> <span class="kd">class</span> <span class="nc">ForwardingMutableSet</span><span class="p">&lt;</span><span class="n">E</span><span class="p">&gt;(</span><span class="n">s</span><span class="p">:</span> <span class="n">MutableSet</span><span class="p">&lt;</span><span class="n">E</span><span class="p">&gt;):</span> <span class="n">MutableSet</span><span class="p">&lt;</span><span class="n">E</span><span class="p">&gt;</span> <span class="k">by</span> <span class="n">s</span></code></pre></figure>
 
 <p>It really is as simple as that. The <code>by s</code> clause basically tells Kotlin to maintain an object of <code>MutableSet</code> and forward any applicable calls to that instance instead. And remember all this is done at compile time.</p>
 

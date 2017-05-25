@@ -3,10 +3,16 @@
 
 	<url>
 	 	<loc>http://localhost:4000/blog/</loc>
-	 	<lastmod>2017-04-03</lastmod>
+	 	<lastmod>2017-05-25</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
+	
+	<url>
+	 	<loc>http://localhost:4000/blog/2017/05/25/one-size-doesnt-fit-all/</loc>
+	 	<lastmod>2017-05-25</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
 	
 	<url>
 	 	<loc>http://localhost:4000/blog/2017/04/03/java-value-classes-equals/</loc>
@@ -155,7 +161,7 @@
 
 	<url>
 		<loc>http://localhost:4000/blog/tags/</loc>
-		<lastmod>2017-04-03</lastmod>
+		<lastmod>2017-05-25</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 
@@ -203,7 +209,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/android/</loc>
-		<lastmod>2017-04-03</lastmod>
+		<lastmod>2017-05-25</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -296,7 +302,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/aosp/</loc>
-		<lastmod>2017-04-03</lastmod>
+		<lastmod>2017-05-25</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -305,7 +311,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/studio/</loc>
-		<lastmod>2017-04-03</lastmod>
+		<lastmod>2017-05-25</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -314,7 +320,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/java8/</loc>
-		<lastmod>2017-04-03</lastmod>
+		<lastmod>2017-05-25</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -323,7 +329,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/lambda/</loc>
-		<lastmod>2017-04-03</lastmod>
+		<lastmod>2017-05-25</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -332,7 +338,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/kotlin/</loc>
-		<lastmod>2017-04-03</lastmod>
+		<lastmod>2017-05-25</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -341,7 +347,25 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/effectivejava/</loc>
-		<lastmod>2017-04-03</lastmod>
+		<lastmod>2017-05-25</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	
+	
+	
+	
+	<url>
+		<loc>http://localhost:4000/blog/tags/next-billion/</loc>
+		<lastmod>2017-05-25</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	
+	
+	
+	
+	<url>
+		<loc>http://localhost:4000/blog/tags/android-go/</loc>
+		<lastmod>2017-05-25</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
