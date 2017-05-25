@@ -13,4 +13,9 @@ lambda:
 kotlin:
   name: Kotlin
 effectivejava:
-  name: Effective Java 
+  name: Effective Java
+next-billion:
+  name: Next Billion
+android-go:
+  name: Android Go
+
