@@ -14,7 +14,18 @@
 code {
   font-family: $code-family;
   font-size: 100%;
+  background-color: $accent-lightest;
+  color: $text-primary;
   line-height: 1.5;
+  padding-left: $spacing-xs;
+  padding-right: $spacing-xs;
+}
+
+pre code {
+  background-color: white;
+  color: $text-secondary;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .highlight .c { color: #586E75 } /* Comment */
