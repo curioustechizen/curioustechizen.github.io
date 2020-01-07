@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js" prefix="og: http://ogp.me/ns#"> <!--<![endif]-->
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta http-equiv="content-language" content="en" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+      
+        <meta name="description" content="A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.">
+
+      
+
+      <title> Android DiffUtil Part 2: List Diffs on other platforms | Curious Techizen</title>
+      
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300,700italic|Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="/blog/css/main.css" />
+      <link href="http://localhost:4000/blog/feed.xml" type="application/rss+xml" rel="alternate" title="RSS2.0">
+      <link rel="shortcut icon" href="/blog/favicon.ico">
+
+      
+        
+
+
+      
+
+  </head>
+
+  <body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="off-canvas">
+      <figure class="avatar">
+        <img src="/blog/assets/img/avatar.jpg" alt="Picture" title="That's me, Kiran Rao.">
+      </figure>
+      <div class="bio">
+          <h1>Hi, I'm Kiran Rao.</h1>
+          <p>Android Developer. Tech enthusiast. Serial dabbler.</p>
+      </div>
+      <nav>
+        <h6>Follow me on</h6>
+        <ul>
+          
+          <li><a target="_blank" href="http://twitter.com/ki_run">Twitter</a></li>
+          
+          
+          <li><a target="_blank" href="https://github.com/curioustechizen">Github</a></li>
+          
+          
+          
+          
+          <li><a target="_blank" href="https://plus.google.com/116652261752707476836">Google+</a></li>
+          
+        </ul>
+      </nav>
+      <nav>
+        <h6>Link</h6>
+        <ul>
+          <li><a href="/blog/">Home</a></li>
+          <li><a href="/blog/tags/">Tags</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-wrapper">
+
+      <header>
+        <div class="h-wrap">
+          <h1 class="title"><a href="/blog/" title="Back to Homepage">Curious Techizen</a></h1>
+          <a class="menu-icon" title="Open Bio"><span class="lines"></span></a>
+        </div>
+      </header>
+
+      <main>
+        <section class="single-wrap">
+  <article class="single-content" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="feat">
+      <h5 class="page-date">
+        <time datetime="2020-01-07T10:00:00+01:00" itemprop="datePublished">
+          07 January 2020
+        </time>
+      </h5>
+    </div>
+    <h1 class="page-title" itemprop="name headline">Android DiffUtil Part 2: List Diffs on other platforms</h1>
+    <div itemprop="articleBody">
+      <p>This is the second post in a series that looks into calculating diffs between two lists on Android. You can read <a href="/blog/2020/01/06/diff-util-part1/">Part 1 here</a>. In this post, we will look at how other platforms handle list diffing.</p>
+
+<h2>Swift Standard Library</h2>
+
+<p>The Swift standard library has a <a href="https://developer.apple.com/documentation/swift/bidirectionalcollection/3200721-difference"><code>difference(from:)</code></a> method on <code>BidirectionalCollection</code> protocol that returns a <code>CollectionDifference</code> result. <a href="https://www.fivestars.blog/code/swift-5-1-collection-diffing.html">This blog post</a> does a deep dive into this API in Swift.</p>
+
+<p>It looks like this facility is intended as a general purpose list diff API, not specific to UI programming. Remember, it is in the <em>standard library</em> so it can be used in backend server programming, for example.</p>
+
+<p>Some notable features of this API</p>
+
+<ul>
+<li>The most interesting feature is the return type: <code>CollectionDifference</code>. This API provides you a way to iterate through all the diff operations, or even to only pick the insertions (or removals). This is different from how Android does it. More on this in a minute.</li>
+<li>By default, it does not detect moves, but there&#39;s an <code>inferringMoves()</code> method on <code>CollectionDifference</code> that you can use if you want to do this</li>
+<li>It uses equality by default for the comparison, but you can customize how the comparison occurs using <a href="https://developer.apple.com/documentation/swift/bidirectionalcollection/3200722-difference"><code>difference(from: by:)</code></a> variant. Here you pass in a closure that returns a <code>Bool</code> so you can use whatever logic you wish to compare the elements.</li>
+</ul>
+
+<h4>CollectionDifference</h4>
+
+<p>The <code>CollectionDifference</code> provides in itself a Collection of <code>CollectionDifference.Change</code> - which is an enum with 2 values: <code>.insert</code> and <code>.remove</code>.</p>
+
+<ul>
+<li><code>.insert</code> provides you with an <code>element</code> and its offset in the <em>final list</em></li>
+<li><code>.remove</code> provides you with an <code>element</code> and its offset in the <em>original list</em></li>
+<li>The <code>associatedWith</code> parameter of the enums inform you about moves</li>
+</ul>
+
+<p>There&#39;s no concept of &quot;changes&quot; in this API - i.e., it does not tell you if an item retained its identity but did not retain equality.</p>
+
+<p>I could not find a way to convert positions between old and new lists, but I&#39;m not sure if it is ever required when using this API in practice.</p>
+
+<h2>Swift Apple platforms</h2>
+
+<p>We started this series with an example of how Android&#39;s RecyclerView animates between 2 lists using DiffUtil. It should come as no surprise that Apple&#39;s UI frameworks have similar capabilities too.</p>
+
+<p>It has always been possible to achieve this on Apple platforms but it has been verbose and error-prone (frequently giving rise to the Swift equivalent of <code>ArrayIndexOutOfBoundsException</code>). Recent API improvements have greatly enhanced the developer ergonomics here.</p>
+
+<p>The headline API is <code>UITableViewDiffableDataSource</code> and friends (quite a mouthful!). This is completely out of my comfort zone so I&#39;ll point you to <a href="https://developer.apple.com/videos/play/wwdc2019/215">these</a> <a href="https://developer.apple.com/videos/play/wwdc2019/220">talks</a> from WWDC (there are also PDF slides available) if you want to learn more. I will point out though, that the items participating in this API need to be <code>Hashable</code>. This is how the framework decides that items have &quot;changed&quot;. It fulfils the role of <code>areContentsTheSame()</code> from Android&#39;s DiffUtil.</p>
+
+<h2>Flutter</h2>
+
+<p>I could not find any official API for List Diffs in Flutter. However, there&#39;s a third party library that is inspired by Android&#39;s DiffUtils. It is called <a href="https://github.com/adithyaxx/animated-stream-list">AnimatedStreamList</a>. The relevant files in this repo are <a href="https://github.com/adithyaxx/animated-stream-list/blob/c5b3b17e8dd0b723e2b3777521924c272580c4bf/lib/src/myers_diff.dart"><code>myers_diff.dart</code></a> and <a href="https://github.com/adithyaxx/animated-stream-list/blob/c5b3b17e8dd0b723e2b3777521924c272580c4bf/lib/src/diff_payload.dart"><code>diff_payload.dart</code></a>.</p>
+
+<p>Of note in this library:</p>
+
+<ul>
+<li>It returns a <code>List&lt;Diff&gt;</code>. In this sense it is similar to the Swift implementation</li>
+<li><code>Diff</code> can be one of <code>InsertDiff</code>, <code>DeleteDiff</code> or <code>ChangeDiff</code>. This library does not implement moves.</li>
+<li>Each instance of <code>Diff</code> includes an <code>index</code> and a <code>size</code>. In this respect, it is similar to the Android DiffUtil implementation.</li>
+<li>It uses an <a href="https://github.com/adithyaxx/animated-stream-list/blob/c5b3b17e8dd0b723e2b3777521924c272580c4bf/lib/src/myers_diff.dart#L5"><code>Equalizer</code></a> to customize the comparison.</li>
+</ul>
+
+<h2>Angular</h2>
+
+<p>Angular has an <code>IterableDiffer</code> API that can be used to compute the diff between 2 Iterables. From what I can tell, it is not intended to be used directly by applications, instead it is used internally by the framework (for example, by the <code>NgForOf</code> directive). <a href="https://blog.mgechev.com/2017/11/14/angular-iterablediffer-keyvaluediffer-custom-differ-track-by-fn-performance/">This article</a> goes into the nuts and bolts of this API.</p>
+
+<p>The interesting classes are</p>
+
+<ul>
+<li><a href="https://angular.io/api/core/IterableDiffer"><code>IterableDiffer</code></a>: The entry point of the API. Offers the <code>diff</code> function</li>
+<li><a href="https://angular.io/api/core/IterableChanges"><code>IterableChanges</code></a>: The diff result, which in itself is an Iterable</li>
+<li><a href="https://angular.io/api/core/IterableChangeRecord"><code>IterableChangeRecord</code></a>: Each individual update operation</li>
+</ul>
+
+<p>The <code>IterableChanges</code> interface is pretty interesting: it exposes functions to iterate over the changes in a variety of ways (all updates, only additions, only removals etc). The <code>DefaultIterableDiffer</code> accepts a <code>TrackByFn</code> argument, which fulfils the role of Android&#39;s <code>DiffUtil.Callback</code>.</p>
+
+<p><code>IterableChangeRecord</code> is also interesting: It does not directly state the diff operation. Instead, it contains <code>currentIndex</code> and <code>previousIndex</code>. Together, these can be used to decide if an item was added, removed etc. It also fulfils the role of position conversion APIs in Android. </p>
+
+<p>In practice, you&#39;d probably use the <code>IterableChanges</code> API to figure out the additions and removals.</p>
+
+<h2>At a glance</h2>
+
+<p>Here&#39;s a table summarizing all the diff APIs across these platforms.</p>
+
+<table><thead>
+<tr>
+<th></th>
+<th>Android</th>
+<th>Swift</th>
+<th>Flutter (3rd party)</th>
+<th>Angular</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Detect Moves</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Change payloads</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Custom comparison</td>
+<td><code>DiffUtil.Callback</code></td>
+<td><code>difference(from:by:)</code>, <code>Hashable</code></td>
+<td><code>Equalizer</code></td>
+<td><code>TrackByFn</code></td>
+</tr>
+<tr>
+<td>Position conversion</td>
+<td>Methods on <code>DiffResult</code></td>
+<td>NA</td>
+<td>NA</td>
+<td><code>IterableChangeRecord</code></td>
+</tr>
+</tbody></table>
+
+<h3>A note about declarative UI frameworks</h3>
+
+<p>This series of blog posts actually started when I was trying to implement custom animations for a list view on Android. When I started this research, the question I wanted to answer was</p>
+
+<blockquote>
+<p>How do declarative UI frameworks deal with allowing custom animations for changes in lists?</p>
+</blockquote>
+
+<p>Note that declarative UI frameworks in general receive a UI state and render that state. They don&#39;t have a concept of &quot;previous state&quot; so &quot;this item was removed&quot; animation does not fit into this paradigm.</p>
+
+<p>So far, I haven&#39;t found an answer to this question!</p>
+
+<ul>
+<li>SwiftUI provides some default animations, but I did not find a way to customize them.</li>
+<li>Flutter has no official APIs for this use case.</li>
+<li>Angular has some APIs that look like they are used internally. I&#39;m way out of my depth about Angular to form any practical opinion about it.</li>
+</ul>
+
+<p>It will be really interesting to see how Jetpack Compose is going to solve this problem!</p>
+
+<h2>Conclusion</h2>
+
+<p>After my research for this post, I came to the conclusion that Android&#39;s DiffUtil API is the most flexible of all. It is the lowest level API for exposing the diff operations (the <code>ListUpdateCallback</code>). All other platforms expose collection-style APIs for this purpose.</p>
+
+<p>I reckon Android has this low-level API because it plays well together with RecyclerView Adapter API. One can write a wrapper to expose it as a collection-style API.</p>
+
+<p>That is exactly what we will do in the next post in this series: Look at an example situation where RecyclerView might not be best fit, and instead wrap the <code>ListUpdateCallback</code> to implement some custom UI.</p>
+
+    </div>
+    
+    <div class="page-tags">
+      <ul>
+        
+        <li>
+          
+          <a href="/blog/tags/android">Android</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="/blog/tags/diff">List Diff</a>
+          
+        </li>
+        
+      </ul>
+    </div>
+    
+    <h6 class="back-to-top"><a href="#top">Back to Top</a></h6>
+    
+    
+      <a rel="prev" href="/blog/2020/01/06/diff-util-part1/" id="prev">
+        &larr; <span class="nav-title nav-title-prev">older</span>
+      </a>
+    
+  </article>
+   
+       <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES * * */
+            var disqus_shortname = 'kiranrao';
+            
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+       
+</section>
+
+      </main>
+
+      <footer>
+        <small>Powered by Jekyll - Theme: <a href="https://github.com/ogaclejapan/materi-for-jekyll">materi</a> - &copy; ogaclejapan</small>
+      </footer>
+
+    </div>
+    
+
+    <script src="/blog/js/main.js"></script>
+    
+    
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-66125769-1', 'kiranrao.in');
+        ga('send', 'pageview');
+      </script>
+    
+
+  </body>
+</html>

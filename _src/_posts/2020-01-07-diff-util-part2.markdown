@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "What's the big difference? List Diffs on other platforms"
+title:  "Android DiffUtil Part 2: List Diffs on other platforms"
 date: 2020-01-07 10:00
 comments: true
 tags: [android, diff]
@@ -16,13 +16,19 @@ It looks like this facility is intended as a general purpose list diff API, not 
 
 Some notable features of this API
 
-- The most interesting feature is the return type: `CollectionDifference`. This API provides you a way to iterate through all the diff operations, or even to only pick the insertions (or removals). This is different from how Android does it.
+- The most interesting feature is the return type: `CollectionDifference`. This API provides you a way to iterate through all the diff operations, or even to only pick the insertions (or removals). This is different from how Android does it. More on this in a minute.
 - By default, it does not detect moves, but there's an `inferringMoves()` method on `CollectionDifference` that you can use if you want to do this
-- There's no concept of "changes" in this API. The `CollectionDifference` provides in itself a Collection of `CollectionDifference.Change` - which is an enum with 2 values: `.insert` and `.remove`.
-- `.insert` provides you with an `element` and its offset in the _final list_
-- `.remove` provides you with an `element` and its offset in the _original list_. This is somewhat different from how Android's DiffUtil works (although both APIs can be used to achieve the same end-result)
-- This API uses `associatedWith` parameter of the enums to inform you about moves
 - It uses equality by default for the comparison, but you can customize how the comparison occurs using [`difference(from: by:)`](https://developer.apple.com/documentation/swift/bidirectionalcollection/3200722-difference) variant. Here you pass in a closure that returns a `Bool` so you can use whatever logic you wish to compare the elements.
+
+#### CollectionDifference
+
+The `CollectionDifference` provides in itself a Collection of `CollectionDifference.Change` - which is an enum with 2 values: `.insert` and `.remove`.
+
+- `.insert` provides you with an `element` and its offset in the _final list_
+- `.remove` provides you with an `element` and its offset in the _original list_
+- The `associatedWith` parameter of the enums inform you about moves
+
+There's no concept of "changes" in this API - i.e., it does not tell you if an item retained its identity but did not retain equality.
 
 I could not find a way to convert positions between old and new lists, but I'm not sure if it is ever required when using this API in practice.
 
@@ -57,18 +63,36 @@ The interesting classes are
 
 The `IterableChanges` interface is pretty interesting: it exposes functions to iterate over the changes in a variety of ways (all updates, only additions, only removals etc). The `DefaultIterableDiffer` accepts a `TrackByFn` argument, which fulfils the role of Android's `DiffUtil.Callback`.
 
-`IterableChangeRecord` is also interesting: It does not directly state the diff operation. Instead, it contains `currentIndex` and `previousIndex`. Together, these can be used to decide if an item was added, removed etc. It also fulfils the role of position conversion APIs in Android. Of course, you'd probably use the `IterableChanges` API to achieve the same result instead.
+`IterableChangeRecord` is also interesting: It does not directly state the diff operation. Instead, it contains `currentIndex` and `previousIndex`. Together, these can be used to decide if an item was added, removed etc. It also fulfils the role of position conversion APIs in Android. 
+
+In practice, you'd probably use the `IterableChanges` API to figure out the additions and removals.
 
 ## At a glance
 
 Here's a table summarizing all the diff APIs across these platforms.
 
-|                     | Android               | Swift                          | Flutter   | Angular              |
+|                     | Android               | Swift                          | Flutter (3rd party)   | Angular              |
 |---------------------|-----------------------|--------------------------------|-----------|----------------------|
 | Detect Moves        | Yes                   | Yes                            | No        | Yes                  |
 | Change payloads     | Yes                   | No                             | Yes       | Yes                  |
 | Custom comparison   | `DiffUtil.Callback`     | `difference(from:by:)`, `Hashable` | `Equalizer` | `TrackByFn`            |
 | Position conversion | Methods on `DiffResult` | NA                             | NA        | `IterableChangeRecord` |
+
+### A note about declarative UI frameworks 
+
+This series of blog posts actually started when I was trying to implement custom animations for a list view on Android. When I started this research, the question I wanted to answer was
+
+> How do declarative UI frameworks deal with allowing custom animations for changes in lists?
+
+Note that declarative UI frameworks in general receive a UI state and render that state. They don't have a concept of "previous state" so "this item was removed" animation does not fit into this paradigm.
+
+So far, I haven't found an answer to this question!
+
+- SwiftUI provides some default animations, but I did not find a way to customize them.
+- Flutter has no official APIs for this use case.
+- Angular has some APIs that look like they are used internally. I'm way out of my depth about Angular to form any practical opinion about it.
+
+It will be really interesting to see how Jetpack Compose is going to solve this problem!
 
 ## Conclusion
 

@@ -9,6 +9,12 @@
 
 	
 	<url>
+	 	<loc>http://localhost:4000/blog/2020/01/07/diff-util-part2/</loc>
+	 	<lastmod>2020-01-07</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
 	 	<loc>http://localhost:4000/blog/2020/01/06/diff-util-part1/</loc>
 	 	<lastmod>2020-01-06</lastmod>
 	 	<changefreq>never</changefreq>
