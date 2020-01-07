@@ -2,6 +2,7 @@
 layout: post
 title:  "What's the big difference? A deep dive into Android DiffUtil"
 date: 2020-01-06 16:00
+comments: true
 tags: [android, diff]
 ---
 

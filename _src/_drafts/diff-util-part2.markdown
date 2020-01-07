@@ -2,14 +2,15 @@
 layout: post
 title:  "What's the big difference? List Diffs on other platforms"
 date: 2020-01-07 10:00
+comments: true
 tags: [android, diff]
 ---
 
-This is the second post in a series that looks into calculating diffs between two lists on Android. In this post, we will look at how other platforms handle list diffing.
+This is the second post in a series that looks into calculating diffs between two lists on Android. You can read [Part 1 here](/blog/2020/01/06/diff-util-part1/). In this post, we will look at how other platforms handle list diffing.
 
 ## Swift Standard Library
 
-The Swift standard library has a [`difference(from:)`](https://developer.apple.com/documentation/swift/bidirectionalcollection/3200721-difference) method on `BidirectionalCollection` protocol that returns a `CollectionDifference` result. [This blog post](https://developer.apple.com/documentation/swift/bidirectionalcollection/3200721-difference) does a deep dive into this API in Swift.
+The Swift standard library has a [`difference(from:)`](https://developer.apple.com/documentation/swift/bidirectionalcollection/3200721-difference) method on `BidirectionalCollection` protocol that returns a `CollectionDifference` result. [This blog post](https://www.fivestars.blog/code/swift-5-1-collection-diffing.html) does a deep dive into this API in Swift.
 
 It looks like this facility is intended as a general purpose list diff API, not specific to UI programming. Remember, it is in the *standard library* so it can be used in backend server programming, for example.
 

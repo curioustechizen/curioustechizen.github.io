@@ -2,6 +2,7 @@
 layout: post
 title:  "Delegates - Composition over Inheritance in Kotlin"
 date:   2017-03-05 15:21:22
+comments: true
 tags: [kotlin]
 ---
 
