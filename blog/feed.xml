@@ -5,9 +5,149 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>http://localhost:4000/blog/</link>
     <atom:link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 25 May 2017 11:40:10 +0200</pubDate>
-    <lastBuildDate>Thu, 25 May 2017 11:40:10 +0200</lastBuildDate>
+    <pubDate>Tue, 07 Jan 2020 18:23:22 +0100</pubDate>
+    <lastBuildDate>Tue, 07 Jan 2020 18:23:22 +0100</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>What's the big difference? A deep dive into Android DiffUtil</title>
+        <description>&lt;p&gt;This is a series of posts that looks into calculating the diffs between two lists on Android. This first post in the series looks at the basics of what the DiffUtil is.&lt;/p&gt;
+
+&lt;h2&gt;What&amp;#39;s DiffUtil?&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://developer.android.com/reference/androidx/recyclerview/widget/DiffUtil&quot;&gt;docs for DiffUtil&lt;/a&gt; describe it as&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;DiffUtil is a utility class that calculates the difference between two lists and outputs a list of update operations that converts the first list into the second one.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The selling point of this utility is it is nicely integrated with RecyclerView such that the following simple series of steps is sufficient to display nice animations for newly added items and disappearing items in the list.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;oldList&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;adapter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;
+ &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;diffResult&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DiffUtil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;calculateDiff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MyCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oldList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;adapter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newList&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;diffResult&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dispatchUpdatesTo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;adapter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Given the following data&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;oldList&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;C&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;D&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;newList&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;D&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;E&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;While switching back and forth between these 2 lists, this code produces this animation:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/video/diff_basic.gif&quot; alt=&quot;Basic diff animation&quot; style=&quot;max-height: 512px; max-width: 288px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You could also achieve this effect using the &lt;code&gt;notifyItemXYZ&lt;/code&gt; family of methods on &lt;code&gt;RecyclerView.Adapter&lt;/code&gt;, if you maintain the list of items yourself and mutate it. However, in unidirectional data flow architectures, it is likely that you have an immutable list in your state. In those situations, &lt;code&gt;DiffUtil&lt;/code&gt; is more suitable.&lt;/p&gt;
+
+&lt;h2&gt;DiffUtil API usage in detail&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;#39;s dig into how to use the API. Using DiffUtil consists of the following high-level steps&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;You tell the API how to compare items in the list (what constitutes a &amp;quot;removal&amp;quot;? What does a &amp;quot;change&amp;quot; mean?)&lt;/li&gt;
+&lt;li&gt;You ask the API to calculate the diff and give you a result&lt;/li&gt;
+&lt;li&gt;You use the DiffResult object to get called back for each update operation.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Let&amp;#39;s go through each step in more detail. We&amp;#39;ll use a &lt;code&gt;Player&lt;/code&gt; class like this for this example&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Player&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;score&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3&gt;Step 1: Comparing list items&lt;/h3&gt;
+
+&lt;p&gt;DiffUtil tells you what items were removed, added and changed between 2 lists, but how does it know? Android chose to not use &lt;code&gt;equals&lt;/code&gt; and &lt;code&gt;hashCode&lt;/code&gt; for this purpose - instead having you extend a &lt;code&gt;DiffUtil.Callback&lt;/code&gt; class. The relevant methods that you need to override are&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;areItemsTheSame()&lt;/code&gt; - This method is used for &lt;strong&gt;identity comparison&lt;/strong&gt;. In the case of the Player class above, 2 items have the same identity if they have the same name. We don&amp;#39;t care about the score for this comparison&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;areContentsTheSame()&lt;/code&gt; - This method is used for &lt;strong&gt;equality comparison&lt;/strong&gt;. In the case of the Player class, 2 items have the same contents if they have the same name and score.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The latter is used to tell you if an item retained the same identity but its contents changed. This can be useful for item change animations (for example, if a user liked a tweet you can animate the heart icon using this feature)&lt;/p&gt;
+
+&lt;p&gt;The entire code for the callback would be&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PlayerDiffCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;oldList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Player&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;newList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Player&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;DiffUtil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;areItemsTheSame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oldItemPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newItemPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;oldList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oldItemPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newItemPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getOldListSize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getNewListSize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;areContentsTheSame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oldItemPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newItemPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;oldList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oldItemPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newItemPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3&gt;Step 2: Calculating the diff&lt;/h3&gt;
+
+&lt;p&gt;This step is a one-liner&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;diffResult&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DiffUtil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;calculateDiff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PlayerDiffCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oldList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;However, there&amp;#39;s a lot going on behind the scenes. &lt;code&gt;calculateDiff&lt;/code&gt; implements the standard algorithm used for diffing: Eugene Myers diff algorithm. This is also the algorithm used by diff tools like &lt;code&gt;git diff&lt;/code&gt; and text editors. It is not necessary to know the implementation details of this algorithm, but if you are interested, you can go through &lt;a href=&quot;https://blog.jcoglan.com/2017/02/12/the-myers-diff-algorithm-part-1/&quot;&gt;this article&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;DiffUtil can also detect moves. If the position of an item in the list changes, then instead of reporting it as a removal followed by an insertion, DiffUtil can report it as a move from position A to position B. You do this by passing &lt;code&gt;true&lt;/code&gt; to the second argument (&lt;code&gt;detectMoves&lt;/code&gt;)&lt;/p&gt;
+
+&lt;p&gt;We will ignore moves for the rest of this series.&lt;/p&gt;
+
+&lt;h3&gt;Step 3: Using the DiffResult&lt;/h3&gt;
+
+&lt;p&gt;This is the step where I found the API to be a bit ... unexpected. I would expect the DiffResult to give me a collection of update operations in the order that they need to be performed (something like a &lt;code&gt;List&amp;lt;DiffOperation&amp;gt;&lt;/code&gt;). Instead, you need to call one of the &lt;code&gt;dispatchUpdatesTo&lt;/code&gt; overloads:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;dispatchUpdatesTo(adapter: Adapter)&lt;/code&gt;: This is the one that you&amp;#39;ll probably use 99% of the time. You pass on the results to your existing RecyclerView adapter and you get all those animations automagically.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dispatchUpdatesTo(updateCallback: ListUpdateCallback)&lt;/code&gt;: You use this if you want custom animations. In a later post in this series, we&amp;#39;ll look at an example where you might need this.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3&gt;&lt;code&gt;ListUpdateCallback&lt;/code&gt; in detail&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.android.com/reference/androidx/recyclerview/widget/ListUpdateCallback.html&quot;&gt;This interface&lt;/a&gt; has the following methods:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;onChanged(position: Int, count: Int, payload: Any?)&lt;/code&gt;: This is called when DiffUtil detects that &lt;code&gt;count&lt;/code&gt; items have changed starting at &lt;code&gt;position&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;onInserted(position: Int, count: Int)&lt;/code&gt;: This is called when DiffUtil determines that &lt;code&gt;count&lt;/code&gt; elements have been inserted into the old list starting at &lt;code&gt;position&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;onRemoved(position: Int, count: Int)&lt;/code&gt;: This is called when DiffUtil determines that &lt;code&gt;count&lt;/code&gt; elements have been removed from the old list starting at &lt;code&gt;position&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Some important points to note here:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;These methods &lt;strong&gt;atomic&lt;/strong&gt;: the &lt;code&gt;position&lt;/code&gt; argument reported in every method is with reference to the &lt;em&gt;list as it was after the previous step&lt;/em&gt;, not as it was at the beginning of the diff operation.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;count&lt;/code&gt; parameter in these methods makes it so that only consecutive similar changes are grouped together, not disjoint ones. &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Point 2 above merits more discussion. To put it another way, if items at position 0 and 2 are deleted, DiffUtil reports it as &amp;quot;Hey item 2 was removed&amp;quot; and &amp;quot;Hey item 0 was removed&amp;quot; as separate callbacks instead of telling you &amp;quot;Hey items 0 and 2 were removed&amp;quot; in a single callback. This follows as a consequence of point 1 because each disjoint operation might have altered the structure of the list.&lt;/p&gt;
+
+&lt;p&gt;The API designed this way allows you to basically endlessly &amp;quot;stream&amp;quot; diff operations from DiffResult to your UI component. This is powerful, but can also have downsides (as we will see in a future post).&lt;/p&gt;
+
+&lt;h4&gt;Position conversions&lt;/h4&gt;
+
+&lt;p&gt;In addition to &lt;code&gt;ListUpdateCallback&lt;/code&gt;, there are 2 additional API&amp;#39;s offered by &lt;code&gt;DiffResult&lt;/code&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;convertOldPositionToNew(oldListPosition: Int)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;convertNewPositionToOld(newListPosition: Int)&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;They do what their names suggest. When would you use these? Remember that when one of the ListUpdate callbacks has been dispatched, the number of items in the list might have changed. An item at index &lt;code&gt;i&lt;/code&gt; in the new list might not represent the same item at index &lt;code&gt;i&lt;/code&gt; in the old list (it might not even exist in the old list). This pair of conversion methods is useful in such situations. One example is for animations, where you need to access the same view in both the old and new layouts.&lt;/p&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;In this post, we got an introduction to DiffUtil and how to use it. We also peeked under the hood into &lt;code&gt;ListUpdateCallback&lt;/code&gt;, but we haven&amp;#39;t used it in an example yet.&lt;/p&gt;
+
+&lt;p&gt;In the next post in this series, we will conduct a brief survey of how other platforms handle list diffs.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 06 Jan 2020 16:00:00 +0100</pubDate>
+        <link>http://localhost:4000/blog/2020/01/06/diff-util-part1/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2020/01/06/diff-util-part1/</guid>
+        
+        <category>android</category>
+        
+        <category>diff</category>
+        
+        
+      </item>
     
       <item>
         <title>The Limits of One-size-fits-all</title>
@@ -545,24 +685,6 @@
         <category>listview</category>
         
         <category>android</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Shift to Octopress Postponed</title>
-        <description>&lt;div dir=&quot;ltr&quot; style=&quot;text-align: left;&quot; trbidi=&quot;on&quot;&gt;&lt;p&gt;For some time now, I have been toying with the idea of migrating this blog to &lt;a href=&quot;http://octopress.org/&quot;&gt;octopress&lt;/a&gt;. I'm already using Markdown to compose my posts, so this is a logical step for me. Also, the idea of a static site that I can take with me wherever I choose to host it appeals to me. Finally, there's the geek factor what with git-based publish workflows and SCSS/liquid customizations and what not. I had even chosen a theme - &lt;a href=&quot;http://panks.me/blog/2013/01/new-octopress-theme-fabric/&quot;&gt;Fabric&lt;/a&gt; - to use as my base theme.&lt;/p&gt;&lt;p&gt;However, it looks like I'm going to have to postpone migration to Octopress. Here are some of the reasons:&lt;/p&gt;&lt;h3&gt;Redirection&lt;/h3&gt;&lt;p&gt;I'm not sure how to deal with links to my existing posts. I have seen examples of how to do this if you are self-hosting your current blog, or if you are using your own domain name. Neither of these apply to me - my current blog is hosted on blogger, with a &lt;code&gt;.blogspot&lt;/code&gt; domain. &lt;/p&gt;&lt;h3&gt;Comments&lt;/h3&gt;&lt;p&gt;I'm already using Disqus for comments on my blog. I gather that it should be possible to migrate Disqus comments even if your domain changes. I just haven't figured out how.&lt;/p&gt;&lt;h3&gt;Importing&lt;/h3&gt;&lt;p&gt;I tried using some custom Ruby scripts to import my existing posts into Octopress. While it works, there are two problems I need to deal with:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;p&gt;&lt;strong&gt;Syntax Highlighting:&lt;/strong&gt; In blogger, syntax highlighting is done dynamically by Javascript (I use google's prettify.js). While this can be used with static site generators, it is best to stick to introducing syntax highlighting at the &lt;em&gt;post generation time&lt;/em&gt;. This is all fine for new posts, but for posts that I import from blogger, this needs additional tweaking. Basically the imported sources are just HTML with some YAML front-matter. I will need to convert it to markdown, add the syntax highlighting annotations and then generate the posts from it.&lt;/p&gt;&lt;/li&gt;&lt;li&gt;&lt;p&gt;&lt;strong&gt;Permalinks:&lt;/strong&gt; This goes back to the redirection I already mentioned. I also need to customize the permalinks of imported posts to make sure they play nice with redirection. Again, this is not a problem for newer posts. Only the imported posts need to be tweaked.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Looking Forward&lt;/h3&gt;&lt;p&gt;I'm not saying that any of the above impossible (or even very difficult) to achieve. It is just that some amount of experimentation is involved. I feel that it would take up more time than I am willing to invest at this point to get things up and running.&lt;/p&gt;&lt;p&gt;This is not to say that I have shelved the idea of shifting to a static site generator altogether. On the contrary. This shift is surely happening. It has just been deferred.&lt;/p&gt;&lt;p&gt;The easiest approach would be to maintain my current blog at http://curioustechizen.blogspot.com/ and start the octopress blog afresh. No imports from blogger. No redirection. Only new posts at the new blog. This approach is not without its downsides though.&lt;/p&gt;&lt;p&gt;So, in a nutshell:&lt;/p&gt;&lt;blockquote&gt;&lt;p&gt;I will surely be migrating to a static site generator like octopress in the near future. But for now, I'm sticking with blogger.&lt;/p&gt;&lt;/blockquote&gt;&lt;br /&gt;&lt;/div&gt;</description>
-        <pubDate>Sat, 09 Mar 2013 06:34:00 +0100</pubDate>
-        <link>http://localhost:4000/blog/2013/03/09/shift-to-octopress-postponed/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2013/03/09/shift-to-octopress-postponed/</guid>
-        
-        <category>migration</category>
-        
-        <category>platform</category>
-        
-        <category>octopress</category>
-        
-        <category>publishing</category>
         
         
       </item>
