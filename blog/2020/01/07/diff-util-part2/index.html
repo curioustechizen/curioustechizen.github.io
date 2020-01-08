@@ -91,11 +91,26 @@
     <div itemprop="articleBody">
       <p>This is the second post in a series that looks into calculating diffs between two lists on Android. You can read <a href="/blog/2020/01/06/diff-util-part1/">Part 1 here</a>. In this post, we will look at how other platforms handle list diffing.</p>
 
+<p><strong>Edit:</strong> Edited to add code snippets for each platform.</p>
+
 <h2>Swift Standard Library</h2>
 
 <p>The Swift standard library has a <a href="https://developer.apple.com/documentation/swift/bidirectionalcollection/3200721-difference"><code>difference(from:)</code></a> method on <code>BidirectionalCollection</code> protocol that returns a <code>CollectionDifference</code> result. <a href="https://www.fivestars.blog/code/swift-5-1-collection-diffing.html">This blog post</a> does a deep dive into this API in Swift.</p>
 
 <p>It looks like this facility is intended as a general purpose list diff API, not specific to UI programming. Remember, it is in the <em>standard library</em> so it can be used in backend server programming, for example.</p>
+
+<h4>Example</h4>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">let</span> <span class="nv">oldList</span> <span class="o">=</span> <span class="p">[</span><span class="s">"A"</span><span class="p">,</span> <span class="s">"B"</span><span class="p">,</span> <span class="s">"C"</span><span class="p">,</span> <span class="s">"D"</span><span class="p">]</span>
+<span class="k">let</span> <span class="nv">newList</span> <span class="o">=</span> <span class="p">[</span><span class="s">"A"</span><span class="p">,</span> <span class="s">"B"</span><span class="p">,</span> <span class="s">"D"</span><span class="p">,</span> <span class="s">"E"</span><span class="p">]</span>
+
+<span class="k">let</span> <span class="nv">diffResult</span> <span class="o">=</span> <span class="n">newList</span><span class="o">.</span><span class="nf">difference</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="n">oldList</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">diffResult</span><span class="p">)</span>
+
+<span class="c1">//CollectionDifference&lt;String&gt;(</span>
+<span class="c1">//    insertions: [.insert(offset: 3, element: "E", associatedWith: nil)], </span>
+<span class="c1">//    removals: [.remove(offset: 2, element: "C", associatedWith: nil)]</span>
+<span class="c1">//)</span></code></pre></figure>
 
 <p>Some notable features of this API</p>
 
@@ -131,6 +146,15 @@
 
 <p>I could not find any official API for List Diffs in Flutter. However, there&#39;s a third party library that is inspired by Android&#39;s DiffUtils. It is called <a href="https://github.com/adithyaxx/animated-stream-list">AnimatedStreamList</a>. The relevant files in this repo are <a href="https://github.com/adithyaxx/animated-stream-list/blob/c5b3b17e8dd0b723e2b3777521924c272580c4bf/lib/src/myers_diff.dart"><code>myers_diff.dart</code></a> and <a href="https://github.com/adithyaxx/animated-stream-list/blob/c5b3b17e8dd0b723e2b3777521924c272580c4bf/lib/src/diff_payload.dart"><code>diff_payload.dart</code></a>.</p>
 
+<h4>Example</h4>
+
+<figure class="highlight"><pre><code class="language-dart" data-lang="dart"><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span> <span class="n">oldList</span> <span class="o">=</span> <span class="o">[</span><span class="s">"A"</span><span class="o">,</span> <span class="s">"B"</span> <span class="o">,</span><span class="s">"C"</span><span class="o">,</span> <span class="s">"D"</span><span class="o">];</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span> <span class="n">newList</span> <span class="o">=</span> <span class="o">[</span><span class="s">"A"</span><span class="o">,</span> <span class="s">"B"</span> <span class="o">,</span><span class="s">"D"</span><span class="o">,</span> <span class="s">"E"</span><span class="o">];</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Diff</span><span class="o">&gt;</span> <span class="n">diffs</span> <span class="o">=</span> <span class="n">diffUtil</span><span class="o">.</span><span class="na">calculateDiff</span><span class="o">(</span><span class="n">oldList</span><span class="o">,</span> <span class="n">newList</span><span class="o">);</span>
+<span class="c1">//diffs[0] = DeleteDiff(2, 1)</span>
+<span class="c1">//diffs[1] = InsertDiff(3, 1)</span></code></pre></figure>
+
 <p>Of note in this library:</p>
 
 <ul>
@@ -143,6 +167,17 @@
 <h2>Angular</h2>
 
 <p>Angular has an <code>IterableDiffer</code> API that can be used to compute the diff between 2 Iterables. From what I can tell, it is not intended to be used directly by applications, instead it is used internally by the framework (for example, by the <code>NgForOf</code> directive). <a href="https://blog.mgechev.com/2017/11/14/angular-iterablediffer-keyvaluediffer-custom-differ-track-by-fn-performance/">This article</a> goes into the nuts and bolts of this API.</p>
+
+<h4>Example</h4>
+
+<figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">const</span> <span class="nx">oldList</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">newList</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">];</span>
+
+<span class="kd">const</span> <span class="nx">diffResult</span> <span class="o">=</span> <span class="nx">differ</span><span class="p">.</span><span class="nx">diff</span><span class="p">(</span><span class="nx">ngForOf</span><span class="p">);</span>
+<span class="c1">//diffResult consists of following IterableChangeRecords</span>
+<span class="c1">//(item = "C", currentIndex = null, previousIndex = 2)</span>
+<span class="c1">//(item = "E", currentIndex = 3, previousIndex = null)</span>
+<span class="c1">//(item = "D", currentIndex = 2, previousIndex = 3)</span></code></pre></figure>
 
 <p>The interesting classes are</p>
 

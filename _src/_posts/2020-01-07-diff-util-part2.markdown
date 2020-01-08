@@ -8,11 +8,29 @@ tags: [android, diff]
 
 This is the second post in a series that looks into calculating diffs between two lists on Android. You can read [Part 1 here](/blog/2020/01/06/diff-util-part1/). In this post, we will look at how other platforms handle list diffing.
 
+**Edit:** Edited to add code snippets for each platform.
+
 ## Swift Standard Library
 
 The Swift standard library has a [`difference(from:)`](https://developer.apple.com/documentation/swift/bidirectionalcollection/3200721-difference) method on `BidirectionalCollection` protocol that returns a `CollectionDifference` result. [This blog post](https://www.fivestars.blog/code/swift-5-1-collection-diffing.html) does a deep dive into this API in Swift.
 
 It looks like this facility is intended as a general purpose list diff API, not specific to UI programming. Remember, it is in the *standard library* so it can be used in backend server programming, for example.
+
+#### Example
+
+{% highlight swift %}
+let oldList = ["A", "B", "C", "D"]
+let newList = ["A", "B", "D", "E"]
+
+let diffResult = newList.difference(from: oldList)
+print(diffResult)
+
+//CollectionDifference<String>(
+//    insertions: [.insert(offset: 3, element: "E", associatedWith: nil)], 
+//    removals: [.remove(offset: 2, element: "C", associatedWith: nil)]
+//)
+
+{% endhighlight %}
 
 Some notable features of this API
 
@@ -44,6 +62,17 @@ The headline API is `UITableViewDiffableDataSource` and friends (quite a mouthfu
 
 I could not find any official API for List Diffs in Flutter. However, there's a third party library that is inspired by Android's DiffUtils. It is called [AnimatedStreamList](https://github.com/adithyaxx/animated-stream-list). The relevant files in this repo are [`myers_diff.dart`](https://github.com/adithyaxx/animated-stream-list/blob/c5b3b17e8dd0b723e2b3777521924c272580c4bf/lib/src/myers_diff.dart) and [`diff_payload.dart`](https://github.com/adithyaxx/animated-stream-list/blob/c5b3b17e8dd0b723e2b3777521924c272580c4bf/lib/src/diff_payload.dart).
 
+#### Example
+
+{% highlight dart %}
+List<String> oldList = ["A", "B" ,"C", "D"];
+List<String> newList = ["A", "B" ,"D", "E"];
+
+List<Diff> diffs = diffUtil.calculateDiff(oldList, newList);
+//diffs[0] = DeleteDiff(2, 1)
+//diffs[1] = InsertDiff(3, 1)
+{% endhighlight %}
+
 Of note in this library:
 
 - It returns a `List<Diff>`. In this sense it is similar to the Swift implementation
@@ -54,6 +83,20 @@ Of note in this library:
 ## Angular
 
 Angular has an `IterableDiffer` API that can be used to compute the diff between 2 Iterables. From what I can tell, it is not intended to be used directly by applications, instead it is used internally by the framework (for example, by the `NgForOf` directive). [This article](https://blog.mgechev.com/2017/11/14/angular-iterablediffer-keyvaluediffer-custom-differ-track-by-fn-performance/) goes into the nuts and bolts of this API.
+
+#### Example
+
+{% highlight typescript %}
+const oldList = ["A", "B", "C", "D"];
+const newList = ["A", "B", "D", "E"];
+
+const diffResult = differ.diff(ngForOf);
+//diffResult consists of following IterableChangeRecords
+//(item = "C", currentIndex = null, previousIndex = 2)
+//(item = "E", currentIndex = 3, previousIndex = null)
+//(item = "D", currentIndex = 2, previousIndex = 3)
+
+{% endhighlight %}
 
 The interesting classes are
 
