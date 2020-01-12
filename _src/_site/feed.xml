@@ -5,9 +5,185 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>http://localhost:4000/blog/</link>
     <atom:link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 08 Jan 2020 10:07:54 +0100</pubDate>
-    <lastBuildDate>Wed, 08 Jan 2020 10:07:54 +0100</lastBuildDate>
+    <pubDate>Sun, 12 Jan 2020 23:08:33 +0100</pubDate>
+    <lastBuildDate>Sun, 12 Jan 2020 23:08:33 +0100</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Android DiffUtil Part 3: Custom animations</title>
+        <description>&lt;p&gt;This is part 3 in a series of posts that looks into DiffUtil on Android. The previous posts in this series are:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;/blog/2020/01/06/diff-util-part1/&quot;&gt;Part 1&lt;/a&gt; where we take a deep dive into the DiffUtil API&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/blog/2020/01/07/diff-util-part2/&quot;&gt;Part 2&lt;/a&gt; where we compare this API with similar APIs on other platforms.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In this post, we&amp;#39;ll look at an example of when to use custom animations. &lt;/p&gt;
+
+&lt;h2&gt;The sample app&lt;/h2&gt;
+
+&lt;p&gt;Here&amp;#39;s an example of the animations that we will achieve. The code for this sampe is available &lt;a href=&quot;https://github.com/curioustechizen/diffutil-custom-animations&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/video/diff_custom.gif&quot; alt=&quot;Custom diff animation&quot; style=&quot;max-height: 512px; max-width: 288px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is admittedly a goofy example, but it serves a purpose. I originally wanted to demonstrate this using visualization of RingBuffer data structure as an example, but I settled for this Color Circles example because it prevents us from getting distracted learning ring buffer!&lt;/p&gt;
+
+&lt;p&gt;Here is how the sample works:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;There are 7 slots, arranged in a circle&lt;/li&gt;
+&lt;li&gt;Each slot can be empty, or occupied by a colored view (I chose the colors of the rainbow, hence the number 7)&lt;/li&gt;
+&lt;li&gt;Each view can be &amp;quot;expanded&amp;quot; or not&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The data for the view is a &lt;code&gt;List&amp;lt;CircleInfo&amp;gt;&lt;/code&gt; where &lt;code&gt;CircleInfo&lt;/code&gt; is defined as follows:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CircleInfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;expanded&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The &amp;quot;Toggle&amp;quot; button switches between two hard-coded lists. It submits the entire list to the &lt;code&gt;ColorCirclesView&lt;/code&gt;, which in turn &lt;a href=&quot;https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/app/src/main/java/in/kiranrao/diffutilsamples/ColorCirclesView.kt#L107&quot;&gt;applies a diff&lt;/a&gt; and runs some animations:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;If an item&amp;#39;s &lt;code&gt;expanded&lt;/code&gt; property changed, then we animate the change in width and height of that view&lt;/li&gt;
+&lt;li&gt;If an item was removed, then we shrink the view until it disappears, while simultaneously moving it to the center of the circle&lt;/li&gt;
+&lt;li&gt;If an item was added, then we expand it from size 0 to its final size, while simultaneously moving it from the center of the circle to its final position along the circumference.&lt;/li&gt;
+&lt;li&gt;For items that were present in both lists, but their positions in the list changed, we move the views along the circumference of the circle to arrive at the new positions. This animation &amp;quot;makes room&amp;quot; for items being inserted, and &amp;quot;fills the gap&amp;quot; created by disappearing items.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Finally, we run all these animations in a pre-determined order:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;All removals first&lt;/li&gt;
+&lt;li&gt;Then, change animations together with move along circumference animations&lt;/li&gt;
+&lt;li&gt;Finally the insertion animations are run&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;As you might have guessed, this example was carefully chosen to demonstrate the use of custom diffs. This example is not suitable for &lt;code&gt;RecyclerView&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;For one, there&amp;#39;s no straightforward way of arranging RV items along a circle&lt;/li&gt;
+&lt;li&gt;Even if you do find a circular &lt;code&gt;LayoutManager&lt;/code&gt; for RV, you are unlikely to get it to work well with RV&amp;#39;s &lt;code&gt;ItemAnimator&lt;/code&gt; framework (this framework, although very powerful and flexible, requires you to understand way too much of the RV internal workings)&lt;/li&gt;
+&lt;li&gt;In this specific example, there&amp;#39;s no recycling happening, so you don&amp;#39;t really need RV. There&amp;#39;s a fixed limit to the number of items (7) and they all fit on screen at once.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here&amp;#39;s another example with more operations happening: There&amp;#39;s 2 removals, 2 changes and one insertion (I recommend to run the app on an emulator to see the real animations, the fidelity of GIF is not good enough)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/video/diff_custom_2.gif&quot; alt=&quot;Custom diff animation 2&quot; style=&quot;max-height: 512px; max-width: 288px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; There are some situations that this sample does not handle. For example if you submit a list while animations for the previous diff are already in progress, it could crash. However, this is not related to the DiffUtil wrapper that we are discussing in this post, so I&amp;#39;ll leave it as is.&lt;/p&gt;
+
+&lt;h2&gt;A wrapper for DiffUtil&lt;/h2&gt;
+
+&lt;p&gt;In the previous posts, we discussed about wrapping Android&amp;#39;s DiffUtil in a collection-style API. It is necessary to do this for our sample. This is because of the order in which we want to run our animations: We want to run all removals together. The standard &lt;code&gt;ListUpdateCallback&lt;/code&gt; has no way of telling us &amp;quot;here are all the items that were removed&amp;quot;.&lt;/p&gt;
+
+&lt;p&gt;So, we can start off by doing the obvious: maintain our own list of diff operations (change, remove etc) and keep adding to this list when our &lt;code&gt;ListUpdateCallback&lt;/code&gt; is called. This is implemented &lt;a href=&quot;https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/atomic-diff-util/src/main/java/in/kiranrao/atomicdiffutil/AtomicDiffCalculator.kt#L49-L67&quot;&gt;here&lt;/a&gt; and a snippet is like this&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;k&quot;&gt;internal&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;diffOps&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mutableListOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RawDiffOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onChanged&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;diffOps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RawDiffOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Change&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Other&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;overrides&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;follow&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;And &lt;code&gt;RawDiffOperation&lt;/code&gt; is &lt;a href=&quot;https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/atomic-diff-util/src/main/java/in/kiranrao/atomicdiffutil/AtomicDiffResult.kt#L105-L109&quot;&gt;defined as&lt;/a&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;k&quot;&gt;sealed&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RawDiffOperation&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Insert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RawDiffOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Change&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;payload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RawDiffOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RawDiffOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;But we can do better. In our sample, we don&amp;#39;t actually care about the exact order in which the diff operations need to be applied. All we care about is the final set of changes, removals and additions. In other words, instead of &lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Item at index 3 was deleted, then item at index 1 was deleted, then an item was inserted at index 0&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;we want to say&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Items at index 1 and 3 were deleted; and an item was inserted at index 0&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2&gt;AtomicDiffResult&lt;/h2&gt;
+
+&lt;p&gt;So, we use a combination of the RawDiffOperations and DiffUtil&amp;#39;s position conversion methods (&lt;code&gt;convertNewPositionToOld()&lt;/code&gt; and &lt;code&gt;convertOldPositionToNew()&lt;/code&gt;) to expose an API like this: &lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;k&quot;&gt;sealed&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ItemDiffRecord&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Inserted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;newPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ItemDiffRecord&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Removed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;oldPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ItemDiffRecord&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Changed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;oldItem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;newItem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;oldPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;newPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;payload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ItemDiffRecord&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PositionChanged&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;oldPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;newPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ItemDiffRecord&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AtomicDiffResult&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;insertionRecords&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Inserted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;removalRecords&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Removed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;changeRecords&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Changed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;positionChangeRecords&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PositionChanged&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Note that this API gives us everything we need to perform our animations. It gives us the item itself in addition to positions. In case of item changes, it gives us both the old and new items. You can see the implementation of &lt;a href=&quot;https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/atomic-diff-util/src/main/java/in/kiranrao/atomicdiffutil/AtomicDiffResult.kt#L8&quot;&gt;AtomicDiffResult here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Implementation note:&lt;/strong&gt; This implementation of AtomicDiffResult is leaves some room for optimization since it performs 2 extra iterations over the lists (once over the new list and once over the old one). In this example it is negligible.&lt;/p&gt;
+
+&lt;h2&gt;Entry point into the API&lt;/h2&gt;
+
+&lt;p&gt;Now that we know what we want the result to look like, let&amp;#39;s consider how we want to calculate the diff. We want to provide the following pieces of information&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Old list&lt;/li&gt;
+&lt;li&gt;New list&lt;/li&gt;
+&lt;li&gt;How to compare items in the list&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This leads us to the following signature&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calculateAtomicDiff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;oldList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;,&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;newList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;,&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;itemCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ItemCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AtomicDiffResult&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The implementation of this function is &lt;a href=&quot;https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/atomic-diff-util/src/main/java/in/kiranrao/atomicdiffutil/AtomicDiffCalculator.kt#L7-L18&quot;&gt;here&lt;/a&gt;. You can find the tests for this implementation &lt;a href=&quot;https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/atomic-diff-util/src/test/java/in/kiranrao/atomicdiffutil/AtomicDiffUtilTest.kt&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Wrapping up&lt;/h2&gt;
+
+&lt;p&gt;In this post, I explored one way to wrap DiffUtil&amp;#39;s &lt;code&gt;ListUpdateCallback&lt;/code&gt; into a more ergonomic API. This is by no means the most generic way:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;It does not handle moves&lt;/li&gt;
+&lt;li&gt;It ignores the change payloads&lt;/li&gt;
+&lt;li&gt;In some cases you do really want access to the raw diff operations in the order they were performed (note that &lt;code&gt;AtomicDiffresult&lt;/code&gt; does expose the underlying &lt;code&gt;List&amp;lt;RawDiffOperation&amp;gt;&lt;/code&gt; for this purpose)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;However, it does handle a lot of use cases where you might want to use &lt;code&gt;ListUpdateCallback&lt;/code&gt;. The API style I proposed here is closest to Angular&amp;#39;s style.&lt;/p&gt;
+
+&lt;p&gt;The most practical applications of wrapping DiffUtil are in situations where you have lists of data but you don&amp;#39;t want to use RecyclerView to display them. Examples include&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Situations where you have limited number of items and no recycling happening&lt;/li&gt;
+&lt;li&gt;Lists shown in bottom sheets&lt;/li&gt;
+&lt;li&gt;Custom UI like the one shown in the sample, or visualizing a ring buffer data structure&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You might also apply this technique when you want to display custom animations and RV&amp;#39;s ItemAnimator does not suffice for your use case.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 12 Jan 2020 10:00:00 +0100</pubDate>
+        <link>http://localhost:4000/blog/2020/01/12/diff-util-part3/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2020/01/12/diff-util-part3/</guid>
+        
+        <category>android</category>
+        
+        <category>diff</category>
+        
+        
+      </item>
     
       <item>
         <title>Android DiffUtil Part 2: List Diffs on other platforms</title>
@@ -827,26 +1003,6 @@
         <pubDate>Sun, 02 Feb 2014 10:35:00 +0100</pubDate>
         <link>http://localhost:4000/blog/2014/02/02/nested-fragment-and-backstack-part-2/</link>
         <guid isPermaLink="true">http://localhost:4000/blog/2014/02/02/nested-fragment-and-backstack-part-2/</guid>
-        
-        <category>nested</category>
-        
-        <category>fragments</category>
-        
-        <category>programming</category>
-        
-        <category>backstack</category>
-        
-        <category>android</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Nested Fragments and the Back Stack</title>
-        <description>&lt;p&gt;This article is not about the back stack of &lt;em&gt;activities&lt;/em&gt; that Android maintains for every task. That stuff has been written about adequately elsewhere. This post is about the back stack of &lt;em&gt;fragment transactions&lt;/em&gt; maintained by the &lt;a href=&quot;http://developer.android.com/reference/android/support/v4/app/FragmentManager.html&quot;&gt;&lt;code&gt;FragmentManager&lt;/code&gt;&lt;/a&gt; and how they relate to nested fragments.&lt;/p&gt; &lt;p&gt;&lt;strong&gt;Edit: Other posts in this series at&lt;/strong&gt;&lt;/p&gt;&lt;ol&gt;&lt;li&gt;&lt;a href=&quot;http://curioustechizen.blogspot.com/2014/02/nested-fragment-and-backstack-part-2.html&quot;&gt;Part 2&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;http://curioustechizen.blogspot.com/2014/02/nested-fragments-and-backstack-part-3.html&quot;&gt;Part 3&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt; &lt;p&gt;&lt;strong&gt;Heads-up:&lt;/strong&gt; If you are using nested fragments, you need to use the support library, even if your app only targets API level 14 and above. This is because nested fragment support was &lt;a href=&quot;http://developer.android.com/about/versions/android-4.2.html#NestedFragments&quot;&gt;added in API 17&lt;/a&gt;, and the feature was back-ported to the support library (revision 11 and later).&lt;/p&gt; &lt;h3 id=&quot;tldr&quot;&gt;TL;DR&lt;/h3&gt; &lt;p&gt;The gist of this post can be stated as follows:&lt;/p&gt; &lt;blockquote&gt;  &lt;p&gt;There are many situations where a fragment may be mostly torn down (such as when placed on the back stack with no UI showing), but its &lt;strong&gt;state will not be saved until its owning activity actually needs to save its state&lt;/strong&gt;.&lt;/p&gt;&lt;/blockquote&gt; &lt;p&gt;This is from the &lt;a href=&quot;http://developer.android.com/reference/android/support/v4/app/Fragment.html#onSaveInstanceState%28android.os.Bundle%29&quot;&gt;docs&lt;/a&gt; (emphasis mine). Overlooking this can lead to bugs especially when you use nested fragments since the back stack of a child fragment manager could be reset when you least expect it. Remember - if the state of a &lt;code&gt;Fragment&lt;/code&gt; is not saved, then by definition, the back stack of fragment transactions managed by that fragment’s child &lt;code&gt;FragmentManager&lt;/code&gt; is not saved either.&lt;/p&gt; &lt;h3 id=&quot;the-problem&quot;&gt;The Problem&lt;/h3&gt; &lt;p&gt;With the advent of fragments, more so nested fragments, the general advice one gets from the developer community is this:&lt;/p&gt; &lt;blockquote&gt;  &lt;p&gt;Fragmentize all the everythings!&lt;/p&gt;&lt;/blockquote&gt; &lt;p&gt;And with good reason too. Consider the following:&lt;/p&gt; &lt;ul&gt;&lt;li&gt;If you use ActionBar tabs, the content of each tab is implemented as a &lt;code&gt;Fragment&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Each “page” in a &lt;code&gt;ViewPager&lt;/code&gt; is often implemented as a &lt;code&gt;Fragment&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;In navigation drawers, the “content” of each navigation item is expected to be a &lt;code&gt;Fragment&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt; &lt;p&gt;What this translates to is that what would once be implemented as an &lt;code&gt;Activity&lt;/code&gt; now needs to be implemented as a &lt;code&gt;Fragment&lt;/code&gt;. This also means that a &lt;em&gt;flow within that &lt;code&gt;Activity&lt;/code&gt;&lt;/em&gt;, that might have been implemented using &lt;code&gt;Fragment&lt;/code&gt;s, now needs to be implemented using &lt;strong&gt;nested &lt;code&gt;Fragment&lt;/code&gt;s&lt;/strong&gt;. Note that by “flow” I simply mean a sequence of screens to establish a particular task.&lt;/p&gt; &lt;p&gt;Now here’s the thing with flows: If a user “goes away” from a flow and later returns to it, it is expected that the user continues from the screen where they left off. Translated into &lt;code&gt;Fragment&lt;/code&gt; terminology, this means that if a user navigates away and returns to a flow that is implemented using &lt;code&gt;Fragment&lt;/code&gt;s, its is expected that the user’s position in the backstack of fragment transactions is retained. However, this isn’t always the case.&lt;/p&gt; &lt;p&gt;Here is a video demonstrating the problem:&lt;/p&gt; &lt;iframe src=&quot;//www.youtube.com/embed/3gRq3hG9tS4&quot; allowfullscreen=&quot;&quot; frameborder=&quot;0&quot; height=&quot;315&quot; width=&quot;420&quot;&gt;&lt;/iframe&gt; &lt;p&gt;The video shows an &lt;code&gt;Activity&lt;/code&gt; with three tabs. It is a modified version of an &lt;code&gt;Activity&lt;/code&gt; created using the “New Activity” wizard in ADT or Android Studio and specifying “Fixed Tabs + Swipe” navigation. The modification is as follows:&lt;/p&gt; &lt;ul&gt;&lt;li&gt;The content of the first tab has been modified to make it a “Container” &lt;code&gt;Fragment&lt;/code&gt; that in turn contains two nested fragments.&lt;/li&gt;&lt;li&gt;When the container fragment is first created, it shows a nested fragment asking you to enter your name.&lt;/li&gt;&lt;li&gt;On entering the name and Clicking “Next”, you are presented with another nested fragment asking you to enter your GitHub username.&lt;/li&gt;&lt;li&gt;The other two tabs are just simple &lt;code&gt;Fragment&lt;/code&gt;s - no nesting business there.&lt;/li&gt;&lt;/ul&gt; &lt;p&gt;Now, notice what happens when I follow this sequence:&lt;/p&gt; &lt;ol&gt;&lt;li&gt;Enter name, press Next. Then, enter a github username.&lt;/li&gt;&lt;li&gt;Navigate to the tab titled “Section 2” and then back to “Section 1”.&lt;/li&gt;&lt;li&gt;Navigate to the tab titled “Section 3” and then back to “Section 1”.&lt;/li&gt;&lt;/ol&gt; &lt;p&gt;Uh! In step 3 above, the back stack was nuked. But hey, it didn’t happen in Step 2. Why so?&lt;/p&gt; &lt;h3 id=&quot;explanation&quot;&gt;Explanation&lt;/h3&gt; &lt;p&gt;This example uses a &lt;code&gt;ViewPager&lt;/code&gt;. By default, a &lt;code&gt;ViewPager&lt;/code&gt; has an “off screen limit” of 1. This means that in addition to the page being displayed, one adjacent page in each direction is kept in memory. So, when you navigate to “Section 2”, everything in “Section 1” is still intact in memory.&lt;/p&gt; &lt;p&gt;When you navigate to “Section 3”, the page corresponding to “Section 1” is torn down. More importantly, since at this point the &lt;code&gt;Activity&lt;/code&gt; instance state is not being saved, the &lt;code&gt;Fragment&lt;/code&gt; state isn’t saved either. This ties in with what we saw in the “TL;DR” section above. As a result, when you navigate back to “Section 1”, the nested fragment back stack is reset.&lt;/p&gt; &lt;h3 id=&quot;rotation-task-switching&quot;&gt;Rotation? Task Switching?&lt;/h3&gt; &lt;p&gt;Try following this sequence of steps:&lt;/p&gt; &lt;ol&gt;&lt;li&gt;Enter name, press Next. Then, enter a github username.&lt;/li&gt;&lt;li&gt;Rotate the device; or switch to another app and return back to this app&lt;/li&gt;&lt;/ol&gt; &lt;p&gt;Now you’ll see that the back stack is retained. This is because when you rotate the device or switch to another task, the Activity saves its instance state. As a consequence the container fragment does too.&lt;/p&gt; &lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt; &lt;p&gt;Re-iterating what we started off this post with, &lt;strong&gt;keep in mind when you are using nested fragments that a &lt;code&gt;Fragment&lt;/code&gt; is guaranteed to save state only when the containing &lt;code&gt;Activity&lt;/code&gt; saves its instance state. At other times, the &lt;code&gt;Fragment&lt;/code&gt; might simply be torn down&lt;/strong&gt;.&lt;/p&gt; &lt;p&gt;The code for a sample app illustrating the problem is available &lt;a href=&quot;https://github.com/curioustechizen/blog-nested-fragments-backstack&quot;&gt;at github&lt;/a&gt;. The next part of this series will explore ways to overcome this problem.&lt;/p&gt;</description>
-        <pubDate>Sat, 25 Jan 2014 18:39:00 +0100</pubDate>
-        <link>http://localhost:4000/blog/2014/01/25/nested-fragments-and-back-stack/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2014/01/25/nested-fragments-and-back-stack/</guid>
         
         <category>nested</category>
         
