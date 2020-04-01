@@ -20,4 +20,6 @@ android-go:
   name: Android Go
 diff:
   name: List Diff
+gradle:
+  name: Gradle
 
