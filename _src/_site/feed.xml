@@ -5,9 +5,170 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>http://localhost:4000/blog/</link>
     <atom:link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 12 Jan 2020 23:08:33 +0100</pubDate>
-    <lastBuildDate>Sun, 12 Jan 2020 23:08:33 +0100</lastBuildDate>
+    <pubDate>Wed, 01 Apr 2020 21:34:52 +0200</pubDate>
+    <lastBuildDate>Wed, 01 Apr 2020 21:34:52 +0200</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Android Gradle: Lessons learnt using missingDimensionStrategy</title>
+        <description>&lt;h2&gt;TL;DR:&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;If a &lt;em&gt;library module&lt;/em&gt; includes a flavor dimension that the &lt;em&gt;app flavor&lt;/em&gt; does not, then use &lt;code&gt;missingDimensionStrategy&lt;/code&gt; to specify default flavors from the missing dimension&lt;/li&gt;
+&lt;li&gt;More generally, you can use this any time a &lt;em&gt;consumed module&lt;/em&gt; includes a flavor that the &lt;em&gt;consumer module&lt;/em&gt; does not. Remember, &lt;code&gt;missingDimensionStrategy&lt;/code&gt; DSL should be used in the &lt;code&gt;build.gradle&lt;/code&gt; of the &lt;em&gt;consumer module&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;However, point 2 might not always do what you think it is doing. In particular, when the &lt;em&gt;consumer module&lt;/em&gt; which is missing the flavor dimension is in &lt;strong&gt;itself a dependency for another module&lt;/strong&gt;, you are probably better off introducing this flavor dimension in this module, mirroring that of the consumed module.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;The Android Gradle Plugin introduces the concept of product flavors. When you have a project that contains multiple modules, it is possible that your modules do not agree on the number of flavors or flavor dimensions. The DSL offers ways to handle such situations.&lt;/p&gt;
+
+&lt;p&gt;The important portions of the DSL are &lt;code&gt;matchingFallbacks&lt;/code&gt; and &lt;code&gt;missingDimensionStrategy&lt;/code&gt;. Which one you choose depends on &lt;strong&gt;which module declares more flavors&lt;/strong&gt;: the &lt;em&gt;consuming module&lt;/em&gt;, or the &lt;em&gt;consumed module&lt;/em&gt;. &lt;a href=&quot;https://developer.android.com/studio/build/dependencies#resolve_matching_errors&quot;&gt;This table&lt;/a&gt; in the Android Gradle documentation explains this in more detail.&lt;/p&gt;
+
+&lt;p&gt;I had a slightly more complex project structure where I thought &lt;code&gt;missingDimensionStrategy&lt;/code&gt; would be my tool of choice, but it turns out I was wrong. This post describes my situation and why I was wrong.&lt;/p&gt;
+
+&lt;h2&gt;Project structure&lt;/h2&gt;
+
+&lt;p&gt;The project that I use for this blog post is &lt;a href=&quot;https://github.com/curioustechizen/android-gradle-missing-flavors-demo&quot;&gt;here&lt;/a&gt;. The app itself is a shell. It has no activities, no functionality and almost no Android code. It has the following modules:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;app&lt;/code&gt; module. 
+
+&lt;ul&gt;
+&lt;li&gt;Includes a flavor dimension &lt;code&gt;&amp;quot;target&amp;quot;&lt;/code&gt;, with values &lt;code&gt;&amp;quot;emulator&amp;quot;&lt;/code&gt; and &lt;code&gt;&amp;quot;realdevice&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Depends on &lt;code&gt;intermediate-1&lt;/code&gt;, &lt;code&gt;intermediate-2&lt;/code&gt; and &lt;code&gt;leaf&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;intermediate-1&lt;/code&gt; module. 
+
+&lt;ul&gt;
+&lt;li&gt;Does not know about flavors&lt;/li&gt;
+&lt;li&gt;Depends on &lt;code&gt;leaf&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;intermediate-2&lt;/code&gt; module. 
+
+&lt;ul&gt;
+&lt;li&gt;Does not know about flavors&lt;/li&gt;
+&lt;li&gt;Depends on &lt;code&gt;leaf&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;leaf&lt;/code&gt; module. 
+
+&lt;ul&gt;
+&lt;li&gt;Includes the same flavor dimension and flavors as &lt;code&gt;app&lt;/code&gt; module&lt;/li&gt;
+&lt;li&gt;Has no dependencies&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3&gt;String resources&lt;/h3&gt;
+
+&lt;p&gt;To demonstrate how flavors work, I&amp;#39;ve created some string resources (using gradle&amp;#39;s &lt;code&gt;resValue&lt;/code&gt; feature) in every flavor, in every module that does care about the flavor. When I build an APK for a particular flavor, I can inspect the string resources in APK analyzer to figure out which variant was used.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;// app/build.gradle
+
+flavorDimensions &quot;target&quot;
+productFlavors {
+    emulator {
+        dimension &quot;target&quot;
+        resValue(&quot;string&quot;, &quot;name_app_module&quot;, &quot;App Emulator&quot;)
+    }
+    realdevice {
+        dimension &quot;target&quot;
+        resValue(&quot;string&quot;, &quot;name_app_module&quot;, &quot;App Real Device&quot;)
+    }
+}
+
+// leaf/build.gradle
+
+flavorDimensions &quot;target&quot;
+productFlavors {
+    emulator {
+        dimension &quot;target&quot;
+        resValue(&quot;string&quot;, &quot;name_leaf_module&quot;, &quot;Leaf module Emulator&quot;)
+    }
+    realdevice {
+        dimension &quot;target&quot;
+        resValue(&quot;string&quot;, &quot;name_leaf_module&quot;, &quot;Leaf module Real Device&quot;)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;The build error&lt;/h2&gt;
+
+&lt;p&gt;This is the starting point of my experiment, and it fails to build. You can &lt;code&gt;git checkout checkpoint-2&lt;/code&gt; if you want to &lt;a href=&quot;https://github.com/curioustechizen/android-gradle-missing-flavors-demo/tree/checkpoint-2&quot;&gt;see it in action&lt;/a&gt;. The build error you see looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/img/build_error.png&quot; alt=&quot;Build Error&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;The reason for this build error is that both the &lt;code&gt;intermediate&lt;/code&gt; modules know nothing flavors but they depend on &lt;code&gt;leaf&lt;/code&gt; which does.&lt;/p&gt;
+
+&lt;h2&gt;Configuring &lt;code&gt;missingDimensionStrategy&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;My first attempt at fixing this was to configure the &lt;code&gt;intermediate&lt;/code&gt; modules to specify &lt;code&gt;missingDimensionStrategy&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;//intermediate-1/build.gradle and intermediate-2/build.gradle
+//this goes inside android { defaultConfig block
+
+missingDimensionStrategy 'target', 'emulator'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Here we&amp;#39;re saying that when trying to build the intermediate modules, choose the &lt;code&gt;emulator&lt;/code&gt; variant of the &lt;code&gt;leaf&lt;/code&gt; module. This works, &lt;em&gt;kind of&lt;/em&gt;. We can build the APKs for both flavors and we can see the correct strings get included in the built APKs.&lt;/p&gt;
+
+&lt;p&gt;This is what the &lt;code&gt;emulatorDebug&lt;/code&gt; flavor looks like. Note that it has included the strings &lt;code&gt;&amp;quot;App Emulator&amp;quot;&lt;/code&gt; and &lt;code&gt;&amp;quot;Leaf module Emulator&amp;quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/img/app-emulator-debug-apk-missing-dimension-strategy.png&quot; alt=&quot;app-emulator-debug-apk-missingDimensionStrategy&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;And here&amp;#39;s the &lt;code&gt;realdeviceDebug&lt;/code&gt; APK. Note that it has included the strings &lt;code&gt;&amp;quot;App Real Device&amp;quot;&lt;/code&gt; and &lt;code&gt;&amp;quot;Leaf module Real Device&amp;quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/img/app-realdevice-debug-apk-missing-dimension-strategy.png&quot; alt=&quot;app-realdevice-debug-apk-missingDimensionStrategy&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;You can &lt;code&gt;git checkout checkpoint-3&lt;/code&gt; if you want to &lt;a href=&quot;https://github.com/curioustechizen/android-gradle-missing-flavors-demo/tree/checkpoint-3&quot;&gt;see it in action&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4&gt;The problem&lt;/h4&gt;
+
+&lt;p&gt;The problem with this solution becomes obvious when you see the build output window. It contains this warning&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Module &amp;#39;leaf&amp;#39; has variant &amp;#39;realdeviceDebug&amp;#39; selected, but the modules [&amp;#39;intermediate-1&amp;#39;, &amp;#39;intermediate-2&amp;#39;] depend on variant &amp;#39;emulatorDebug&amp;#39;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The problem is this: When you chose &lt;code&gt;realdeviceDebug&lt;/code&gt; variant for &lt;code&gt;app&lt;/code&gt; module, the same variant is selected for &lt;code&gt;leaf&lt;/code&gt;module. However, for the &lt;code&gt;intermediate&lt;/code&gt; modules, we specified we want to use &lt;code&gt;emulator&lt;/code&gt; flavor.&lt;/p&gt;
+
+&lt;p&gt;This is not a problem for us because we explicitly stated that the intermediate flavors don&amp;#39;t know or care about flavors. But, how do you fix those warnings?&lt;/p&gt;
+
+&lt;h2&gt;Making intermediate module flavor-aware&lt;/h2&gt;
+
+&lt;p&gt;Unfortunately, the only &lt;strong&gt;correct&lt;/strong&gt; way to achieve this was to make the intermediate module flavor-aware. This might seem tedious and against the original intent, but I would argue that for this situation, it is a future-proof approach compared to &lt;code&gt;missingDimensionStrategy&lt;/code&gt;. Because with &lt;code&gt;missingDimensionStrategy&lt;/code&gt; if for some reason an intermediate module had to become flavor-aware, it could end up silently choosing the wrong flavor of the leaf module.&lt;/p&gt;
+
+&lt;p&gt;So, the fix is to actually introduce the same flavor dimensions and flavors in the intermediate modules as in the leaf modules. You can &lt;code&gt;git checkout checkpoint-4&lt;/code&gt; to &lt;a href=&quot;https://github.com/curioustechizen/android-gradle-missing-flavors-demo/tree/checkpoint-4&quot;&gt;see it in action&lt;/a&gt;. If you are worried about the repetitive flavor configuration code in the intermdiate modules, you can extract it into a &lt;code&gt;flavors.gradle&lt;/code&gt; and then use it in the build.gradle files.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;// root flavors.gradle
+
+android {
+    flavorDimensions &quot;target&quot;
+    productFlavors {
+        emulator {
+            dimension &quot;target&quot;
+        }
+        realdevice {
+            dimension &quot;target&quot;
+        }
+    }
+}
+
+// build.gradle of intermediate modules
+apply from: '../flavors.gradle'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Use &lt;code&gt;missingDimensionStrategy&lt;/code&gt; mainly if your &lt;strong&gt;app&lt;/strong&gt; module is missing flavor dimensions compared to library modules. Think twice before using it in a module that is itself a dependency for another module. It might look like it works, but it might be doing the wrong thing.&lt;/p&gt;
+
+&lt;h2&gt;Credits&lt;/h2&gt;
+
+&lt;p&gt;Thanks to &lt;a href=&quot;https://twitter.com/droidxav&quot;&gt;Xavier Ducrohet (@droidxav)&lt;/a&gt; for pointing out the potential pitfalls of using &lt;code&gt;missingDimensionStrategy&lt;/code&gt; for my use case.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 31 Mar 2020 21:00:00 +0200</pubDate>
+        <link>http://localhost:4000/blog/2020/03/31/gradle-missing-flavors/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2020/03/31/gradle-missing-flavors/</guid>
+        
+        <category>android</category>
+        
+        <category>gradle</category>
+        
+        
+      </item>
     
       <item>
         <title>Android DiffUtil Part 3: Custom animations</title>
@@ -983,26 +1144,6 @@
         <pubDate>Sun, 09 Feb 2014 07:56:00 +0100</pubDate>
         <link>http://localhost:4000/blog/2014/02/09/nested-fragments-and-backstack-part-3/</link>
         <guid isPermaLink="true">http://localhost:4000/blog/2014/02/09/nested-fragments-and-backstack-part-3/</guid>
-        
-        <category>nested</category>
-        
-        <category>fragments</category>
-        
-        <category>programming</category>
-        
-        <category>backstack</category>
-        
-        <category>android</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Nested Fragment and the BackStack - Part 2</title>
-        <description>&lt;p&gt;This article is the second in this series about Nested Fragments and the Back Stack in Android. You can read Part 1 &lt;a href=&quot;http://curioustechizen.blogspot.com/2014/01/nested-fragments-and-back-stack.html&quot;&gt;here&lt;/a&gt;. To get this post into context, take a look at the video embedded in the previous post, if nothing else.&lt;/p&gt; &lt;p&gt;&lt;strong&gt;Edit: Later posts in this series at&lt;/strong&gt;&lt;/p&gt;&lt;ol&gt;&lt;li&gt;&lt;a href=&quot;http://curioustechizen.blogspot.com/2014/02/nested-fragments-and-backstack-part-3.html&quot;&gt;Part 3&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt; &lt;hr&gt;&lt;p&gt;&lt;strong&gt;EDIT: Some Google engineers, including the creators of the Android framework have expressed their reservations regarding this article. Read &lt;a href=&quot;https://plus.google.com/100961288997176421259/posts/BLLi6srFtwT&quot;&gt;this G+ thread&lt;/a&gt; for more details. They point out that using an &lt;code&gt;Application&lt;/code&gt; sub-class to save state is not a good idea, but also that saving &lt;code&gt;Fragment&lt;/code&gt; instance state explicitly might in itself needs to be considered carefully. I hope to gather their thoughts and write a follow-up post in the coming weeks. Stay Tuned.&lt;/strong&gt;&lt;/p&gt;&lt;hr&gt; &lt;p&gt;At the risk of sounding repetitive, I’ll start off this post by once again stating the gist of the previous post:&lt;/p&gt; &lt;blockquote&gt;  &lt;p&gt;A Fragment’s &lt;code&gt;onSaveInstanceState&lt;/code&gt; method is not guaranteed to be called when it is “removed”. The &lt;code&gt;Fragment&lt;/code&gt; might simply be torn down. The only time its state might be saved is when the hosting &lt;code&gt;Activity&lt;/code&gt; saves its state.&lt;/p&gt;&lt;/blockquote&gt; &lt;p&gt;We also saw how this could be a problem when you use nested fragments and a &lt;code&gt;FragmentManager&lt;/code&gt; doesn’t save its backstack of fragment transactions. In this part, we’ll look at one possible solution to this problem.&lt;/p&gt;&lt;div class=&quot;se-section-delimiter&quot;&gt;&lt;/div&gt; &lt;h3 id=&quot;save-state-in-onpause&quot;&gt;Save state in onPause&lt;/h3&gt; &lt;p&gt;This is the obvious solution to the problem. The Android docs also state this time and again: it is a best practice to proactively save state. Also, since &lt;code&gt;onPause&lt;/code&gt; is the only callback that is guaranteed to be called, it makes sense to save your instance state here.&lt;/p&gt; &lt;p&gt;Having said that, it is easy to save view states, scroll positions and even entire arbitrary objects in &lt;code&gt;onPause.&lt;/code&gt; But, how does one save a back stack of fragment transactions?&lt;/p&gt; &lt;p&gt;Enter &lt;a href=&quot;http://developer.android.com/reference/android/support/v4/app/Fragment.SavedState.html&quot;&gt;&lt;code&gt;Fragment.SavedState&lt;/code&gt;&lt;/a&gt;.  You can ask the &lt;code&gt;FragmentManager&lt;/code&gt; to save the state of a &lt;code&gt;Fragment&lt;/code&gt; using &lt;a href=&quot;http://developer.android.com/reference/android/support/v4/app/FragmentManager.html#saveFragmentInstanceState%28android.support.v4.app.Fragment%29&quot;&gt;&lt;code&gt;saveFragmentInstanceState&lt;/code&gt;&lt;/a&gt;. The back stack being managed by a Fragment’s nested &lt;code&gt;FragmentManager&lt;/code&gt; is included in the state saved by this method.&lt;/p&gt; &lt;h4 id=&quot;the-application-sub-class&quot;&gt;The &lt;code&gt;Application&lt;/code&gt; sub-class&lt;/h4&gt; &lt;p&gt;This post shows how you could use a sub-class of the &lt;code&gt;Application&lt;/code&gt; class to save the state, but you might choose another mechanism to do so. The important thing is that the state has to be saved. We use a &lt;code&gt;Map&lt;/code&gt; of strings as keys and the saved state as values in this example.&lt;/p&gt; &lt;pre class=&quot;prettyprint&quot;&gt;&lt;code&gt;public class NestedFragApp extends Application {&lt;br /&gt;&lt;br /&gt;    Map&amp;lt;String, Fragment.SavedState&amp;gt; savedStateMap;&lt;br /&gt;&lt;br /&gt;    @Override&lt;br /&gt;    public void onCreate() {&lt;br /&gt;        savedStateMap = new HashMap&amp;lt;String, Fragment.SavedState&amp;gt;();&lt;br /&gt;        super.onCreate();&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    public void setFragmentSavedState(String key, Fragment.SavedState state){&lt;br /&gt;        savedStateMap.put(key, state);&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;    public Fragment.SavedState getFragmentSavedState(String key){&lt;br /&gt;        return savedStateMap.get(key);&lt;br /&gt;    }&lt;br /&gt;&lt;br /&gt;}&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt; &lt;h4 id=&quot;explicitly-saving-fragment-state&quot;&gt;Explicitly saving Fragment state&lt;/h4&gt; &lt;p&gt;Then, you save the state of the container fragment when it pauses as follows:&lt;/p&gt; &lt;pre class=&quot;prettyprint&quot;&gt;&lt;code&gt;@Override&lt;br /&gt;public void onPause() {&lt;br /&gt;    super.onPause();&lt;br /&gt;    ((NestedFragApp) getActivity().getApplication()).setFragmentSavedState(&lt;br /&gt;            SAVED_STATE_KEY, getFragmentManager().saveFragmentInstanceState(this));&lt;br /&gt;}&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt; &lt;h4 id=&quot;initializing-the-fragment-transaction&quot;&gt;Initializing the fragment transaction&lt;/h4&gt; &lt;p&gt;Finally, remember to check whether there is a saved state for this fragment before “initializing” the fragment transaction:&lt;/p&gt; &lt;pre class=&quot;prettyprint&quot;&gt;&lt;code&gt;SavedState fragmentSavedState = ((NestedFragApp)getActivity().getApplication())&lt;br /&gt;        .getFragmentSavedState(SAVED_STATE_KEY);&lt;br /&gt;if(fragmentSavedState == null){&lt;br /&gt;    if (savedInstanceState == null) {&lt;br /&gt;        getChildFragmentManager().beginTransaction().replace(R.id.nested_fragment_container, &lt;br /&gt;                NestedFragmentOne.newInstance()).commit();&lt;br /&gt;    } else {&lt;br /&gt;        // use savedInstanceState here to restore state saved in onSaveInstance&lt;br /&gt;    }&lt;br /&gt;}&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt; &lt;p&gt;Note that there are two “saved states” here:&lt;/p&gt; &lt;ol&gt;&lt;li&gt;The instance state saved in &lt;code&gt;onSaveInstanceState&lt;/code&gt;, which is provided to you by the system via &lt;code&gt;savedInstanceState&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;The state you explicitly saved in &lt;code&gt;onPause&lt;/code&gt;, which you retrieve from the &lt;code&gt;Application&lt;/code&gt; object as &lt;code&gt;fragmentSavedState&lt;/code&gt;.&lt;/li&gt;&lt;/ol&gt; &lt;p&gt;The flow you follow for initializing the fragment is as follows:&lt;/p&gt; &lt;ul&gt;&lt;li&gt;You first check to see if you had previously explicitly saved state. If true, then you don’t need to do anything.&lt;/li&gt;&lt;li&gt;If not, then you proceed to check if the system had saved state for you. If true, then you use the &lt;code&gt;savedInstanceState&lt;/code&gt; to restore system-saved state.&lt;/li&gt;&lt;li&gt;Only if neither is true, then you initiate the fragment transaction.&lt;/li&gt;&lt;/ul&gt; &lt;h4 id=&quot;letting-go-of-the-saved-state&quot;&gt;Letting go of the saved state&lt;/h4&gt; &lt;p&gt;One thing you need to be careful of is to not hold on to the saved fragment state any longer than necessary. For example, when the &lt;strong&gt;container &lt;code&gt;Fragment&lt;/code&gt;&lt;/strong&gt; is destroyed, you want to invalidate the back-stack associated with it as well. This sounds obvious but I overlooked it and ended up with strange behaviors.&lt;/p&gt; &lt;p&gt;The best way I found was to “forget” the saved state of a container fragment in its &lt;code&gt;onDestroy&lt;/code&gt;:&lt;/p&gt; &lt;pre class=&quot;prettyprint&quot;&gt;&lt;code&gt;@Override&lt;br /&gt;public void onDestroy() {&lt;br /&gt;    super.onDestroy();&lt;br /&gt;    ((NestedFragApp) getActivity().getApplication()).setFragmentSavedState(&lt;br /&gt;            SAVED_STATE_KEY, null);&lt;br /&gt;}&lt;br /&gt;&lt;/code&gt;&lt;/pre&gt; &lt;p&gt;With all these steps in place, the app now behaves as one would expect it to. Your position within a back-stack, even within a nested fragment, is remembered even when you navigate away and return to the top level fragment.&lt;/p&gt; &lt;p&gt;Here’s a video showing how the app now behaves:&lt;/p&gt; &lt;iframe src=&quot;//www.youtube.com/embed/7RpzkXGJqNo&quot; allowfullscreen=&quot;&quot; frameborder=&quot;0&quot; height=&quot;315&quot; width=&quot;420&quot;&gt;&lt;/iframe&gt; &lt;p&gt;The source code for the entire series is at &lt;a href=&quot;https://github.com/curioustechizen/blog-nested-fragments-backstack&quot;&gt;github&lt;/a&gt;.&lt;/p&gt;&lt;div class=&quot;se-section-delimiter&quot;&gt;&lt;/div&gt; &lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt; &lt;ul&gt;&lt;li&gt;Consider pro-actively saving your &lt;code&gt;Fragment&lt;/code&gt; states in &lt;code&gt;onPause&lt;/code&gt;, particularly is the &lt;code&gt;Fragment&lt;/code&gt; happens to nest other fragments inside of it. &lt;/li&gt;&lt;li&gt;Do not rely solely on the system saving state for you in &lt;code&gt;onSaveInstanceState&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Use &lt;code&gt;FragmentManager#saveFragmentInstanceState&lt;/code&gt; to save the Fragment state including the back-stack of nested fragment transactions for you.&lt;/li&gt;&lt;li&gt;Do not hold on to the saved state any longer than necessary.&lt;/li&gt;&lt;/ul&gt; &lt;p&gt;This article looked at ActionBar tabs with a ViewPager, but this concept applies to other situations where one would use nested Fragments (Navigation Drawers for example).&lt;/p&gt;</description>
-        <pubDate>Sun, 02 Feb 2014 10:35:00 +0100</pubDate>
-        <link>http://localhost:4000/blog/2014/02/02/nested-fragment-and-backstack-part-2/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2014/02/02/nested-fragment-and-backstack-part-2/</guid>
         
         <category>nested</category>
         
