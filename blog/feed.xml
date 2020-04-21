@@ -5,9 +5,166 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>http://localhost:4000/blog/</link>
     <atom:link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 01 Apr 2020 21:40:13 +0200</pubDate>
-    <lastBuildDate>Wed, 01 Apr 2020 21:40:13 +0200</lastBuildDate>
+    <pubDate>Tue, 21 Apr 2020 22:59:38 +0200</pubDate>
+    <lastBuildDate>Tue, 21 Apr 2020 22:59:38 +0200</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Diff animations with SwiftUI</title>
+        <description>&lt;p&gt;A few months back, I wrote &lt;a href=&quot;https://kiranrao.in/blog/2020/01/12/diff-util-part3/&quot;&gt;a post&lt;/a&gt; about implementing custom animations in Android using DiffUtil. In this post, we&amp;#39;ll explore how similar animations can be achieved with Apple&amp;#39;s &lt;a href=&quot;https://developer.apple.com/documentation/swiftui&quot;&gt;SwiftUI&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Spoiler Alert:&lt;/strong&gt; It was a breeze to implement this with SwiftUI. It was an enjoyable experience with the Preview canvas in XCode, and the framework itself is very well suited for stuff like implementing animations.&lt;/p&gt;
+
+&lt;p&gt;This post uses GIFs to show off videos of the animations I achieved, but GIFs don&amp;#39;t convey really how smooth the animations are. I encourage you to check out the code and run it on a simulator or iOS device. The code for everything in this post is &lt;a href=&quot;https://github.com/curioustechizen/diff-animations-declarative-ui-frameworks&quot;&gt;here&lt;/a&gt;. You&amp;#39;ll need XCode 11 and Mac OSX Catalina to run it.&lt;/p&gt;
+
+&lt;h2&gt;The sample app&lt;/h2&gt;
+
+&lt;p&gt;Here&amp;#39;s an example of what we will achieve&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/video/diff-circle-swiftui-custom.gif&quot; alt=&quot;Custom animation&quot; style=&quot;max-height: 448px; max-width: 207px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is not exactly the same as the one we ended up in the Android example, but it is close enough.&lt;/p&gt;
+
+&lt;p&gt;To recap, this is how it works:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;There are up to 7 colored circle views, arranged in a circle&lt;/li&gt;
+&lt;li&gt;Some circles are &amp;quot;expanded&amp;quot;&lt;/li&gt;
+&lt;li&gt;When you click on &amp;quot;Toggle&amp;quot;, some colored circles get removed, while others are added, and some get resized (their expansion state changes)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The model consists of 2 pre-defined lists of circle data. Clicking the toggle button simple toggles the state between these 2 lists.&lt;/p&gt;
+
+&lt;h2&gt;Baseline: Toggling state without animations&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://github.com/curioustechizen/diff-animations-declarative-ui-frameworks/tree/swift_ui_no_animations/CircleDiffAnimationsSwiftUI&quot;&gt;starting point&lt;/a&gt; of this experiment is toggling between 2 states, &lt;em&gt;without&lt;/em&gt; any animation. For this, I took inspiration from &lt;a href=&quot;https://github.com/christophedellac/CDCircularMenu&quot;&gt;this library&lt;/a&gt; to arrange the views in a circle. Then, all I had to do was set the color and size property of each view from the model.&lt;/p&gt;
+
+&lt;p&gt;On clicking the Toggle button, I update a &lt;code&gt;@State var&lt;/code&gt; property. All this is pretty standard.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ColorView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;circleInfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CircleInfo&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;some&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;Circle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;foregroundColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;circleInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;nv&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;circleInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getSize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+                &lt;span class=&quot;nv&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;circleInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getSize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;some&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    
+    &lt;span class=&quot;kt&quot;&gt;ZStack&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;ForEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;circleInfoModel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;activeCircles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;circleInfo&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;ColorView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;circleInfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;circleInfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/*calculate offset */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                        &lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/*calculate offset */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        
+        &lt;span class=&quot;kt&quot;&gt;Button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;circleInfoModel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;Text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Toggle&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;font&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The relevant code is in &lt;a href=&quot;https://github.com/curioustechizen/diff-animations-declarative-ui-frameworks/blob/swift_ui_no_animations/CircleDiffAnimationsSwiftUI/CircleDiffAnimations/CircularArrangementView.swift&quot;&gt;this file&lt;/a&gt; and here&amp;#39;s how this looks&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/video/diff-circle-swiftui-no-anims.gif&quot; alt=&quot;No animation&quot; style=&quot;max-height: 448px; max-width: 207px;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Adding animations&lt;/h2&gt;
+
+&lt;p&gt;This is where SwiftUI impresses. All I had to do was add one line to get nice default animations. Yes, you read that right. It was &lt;strong&gt;a one-line change&lt;/strong&gt; to get animations out of the box.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//Replace this&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;circleInfoModel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//With this&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;withAnimation&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;circleInfoModel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This change is &lt;a href=&quot;https://github.com/curioustechizen/diff-animations-declarative-ui-frameworks/blob/swiftui_withAnimation_default/CircleDiffAnimationsSwiftUI/CircleDiffAnimations/CircularArrangementView.swift&quot;&gt;tagged here&lt;/a&gt; and this is what it looks like&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/video/diff-circle-swiftui-withAnimation.gif&quot; alt=&quot;Default animation&quot; style=&quot;max-height: 448px; max-width: 207px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I cannot get over how easy this was. Did you notice that we wrote zero code to find out what the diff was, zero code to tell what to insert, what to delete? Nothing. Compare this with what I had to do in the previous article on Android!&lt;/p&gt;
+
+&lt;p&gt;But wait, it gets better.&lt;/p&gt;
+
+&lt;h2&gt;Custom animations&lt;/h2&gt;
+
+&lt;p&gt;This default animation is okay, but it is not what we want. You can see that item appearance animation doesn&amp;#39;t look all that good. The item just fades in behind whatever was there previously.&lt;/p&gt;
+
+&lt;p&gt;How can we improve this? Well, again, just a handful of lines of code. First, create a transition to describe what the animation should look like&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyTransition&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;custom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyTransition&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;insertion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyTransition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;combined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;removal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyTransition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scale&lt;/span&gt;
+        
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;asymmetric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;insertion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;insertion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;removal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;removal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Then, just apply an animation to each circle view specifying the transition and the curve.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kt&quot;&gt;ForEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;circleInfoModel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;activeCircles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;circleInfo&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;ColorView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;circleInfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;circleInfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/*calculate offset */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/*calculate offset */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;easeInOut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;transition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;custom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;And that&amp;#39;s it. With these changes, you get the nice animations that you saw at the top of this post. The code is &lt;a href=&quot;https://github.com/curioustechizen/diff-animations-declarative-ui-frameworks/blob/swiftui_custom_animation/CircleDiffAnimationsSwiftUI/CircleDiffAnimations/CircularArrangementView.swift&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; There seems to be a problem with the Preview Canvas in XCode. It did not show the custom animation when I tried this code. Instead, it kept showing the default animation. Don&amp;#39;t rely too much on the LivePreview feature, especially for animations.&lt;/p&gt;
+
+&lt;h3&gt;Icing on the cake&lt;/h3&gt;
+
+&lt;p&gt;If you see the post on the Android implementation, you see this disclaimer:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;if you submit a list while animations for the previous diff are already in progress, it could crash&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;What do we need to make our SwiftUI version handle this case? What happens if an animation is in progress and you click the Toggle button again?&lt;/p&gt;
+
+&lt;p&gt;Well, the answer is - you guessed it - &lt;strong&gt;We need to do nothing&lt;/strong&gt;. The animations are interruptible by default. If we click on the toggle button while an animation is in progress, then the next animation starts. Like this&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/video/diff-circle-swiftui-interruptible.gif&quot; alt=&quot;Default animation&quot; style=&quot;max-height: 448px; max-width: 207px;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;What&amp;#39;s the catch?&lt;/h2&gt;
+
+&lt;p&gt;This automagical animation feature is fine for a lot of situations, but there are still a lot of them that it might not be able to handle. For example&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Choreographing the animations: If you look at the Android example, we wanted to perform the animations in a certain order (removals first, followed by moves and finally inserts). The SwiftUI version just animates everything simultaneously. You could probably play with &lt;code&gt;asymmetric(insertion:removal:)&lt;/code&gt; to impose some ordering but it would be rather limited.&lt;/li&gt;
+&lt;li&gt;Animations occur on individual items: What if you wanted the animation to occur in relation to the containing view? For example, what if you wanted to animate scrolling to a different row in a list when the currently &amp;quot;selected&amp;quot; one gets deleted? These are possible but would probably require a lot of code.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;There are probably others that I&amp;#39;m missing.&lt;/p&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;SwiftUI is great for implementing animations. I had to barely write any code to achieve this pretty cool animation (it took me days to achieve the same on Android, and I&amp;#39;ve several years of Android experience!). However, all of this magic does come with its own limitations and it is good to be aware of them before going all-in.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 21 Apr 2020 21:00:00 +0200</pubDate>
+        <link>http://localhost:4000/blog/2020/04/21/diff-animations-swiftui/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2020/04/21/diff-animations-swiftui/</guid>
+        
+        <category>swiftui</category>
+        
+        <category>animations</category>
+        
+        
+      </item>
     
       <item>
         <title>Android Gradle: Lessons learnt using missingDimensionStrategy</title>
@@ -1132,26 +1289,6 @@ apply from: '../flavors.gradle'
         <category>aosp</category>
         
         <category>studio</category>
-        
-        <category>android</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Nested Fragments and the Backstack - Part 3</title>
-        <description>&lt;p&gt;This is the third post in the series about Nested Fragments and the Back Stack in Android. Read the previous posts here:&lt;/p&gt; &lt;ol&gt;&lt;li&gt;&lt;a href=&quot;http://curioustechizen.blogspot.com/2014/01/nested-fragments-and-back-stack.html&quot;&gt;Part 1&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;http://curioustechizen.blogspot.com/2014/02/nested-fragment-and-backstack-part-2.html&quot;&gt;Part 2&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt; &lt;p&gt;The first two posts have looked at the topic taking &lt;code&gt;ViewPager&lt;/code&gt; as an example. I have also mentioned repeatedly that this is not the only use case for having to maintain the back-stack of nested fragments. One use case that I threw up often in comments was about &lt;strong&gt;Navigation Drawers&lt;/strong&gt;. That is exactly what this post will look into.&lt;/p&gt; &lt;hr&gt;&lt;p&gt;&lt;strong&gt;EDIT: Some Google engineers, including the creators of the Android framework have expressed their reservations regarding this article. Read &lt;a href=&quot;https://plus.google.com/100961288997176421259/posts/BLLi6srFtwT&quot;&gt;this G+ thread&lt;/a&gt; for more details. They point out that using an &lt;code&gt;Application&lt;/code&gt; sub-class to save state is not a good idea, but also that saving &lt;code&gt;Fragment&lt;/code&gt; instance state explicitly might in itself needs to be considered carefully. I hope to gather their thoughts and write a follow-up post in the coming weeks. Stay Tuned.&lt;/strong&gt;&lt;/p&gt;&lt;hr&gt; &lt;h3 id=&quot;re-cap&quot;&gt;Re-cap&lt;/h3&gt; &lt;p&gt;Just to re-cap the conclusion from the previous article:&lt;/p&gt; &lt;ul&gt;&lt;li&gt;Consider pro-actively saving your &lt;code&gt;Fragment&lt;/code&gt; states in &lt;code&gt;onPause&lt;/code&gt;, particularly is the &lt;code&gt;Fragment&lt;/code&gt; happens to nest other fragments inside of it. &lt;/li&gt;&lt;li&gt;Do not rely solely on the system saving state for you in &lt;code&gt;onSaveInstanceState&lt;/code&gt;.&lt;/li&gt;&lt;li&gt;Use &lt;code&gt;FragmentManager#saveFragmentInstanceState&lt;/code&gt; to save the Fragment state including the back-stack of nested fragment transactions for you.&lt;/li&gt;&lt;li&gt;Do not hold on to the saved state any longer than necessary.&lt;/li&gt;&lt;/ul&gt; &lt;h3 id=&quot;adapting-to-navigation-drawer&quot;&gt;Adapting to Navigation Drawer&lt;/h3&gt; &lt;p&gt;If you take the &lt;a href=&quot;https://github.com/curioustechizen/blog-nested-fragments-backstack/tree/master/nested-fragments-backstack-part2&quot;&gt;source code for Part 2&lt;/a&gt; of the series, and adapt it as-is to a Navigation Drawer example, you’ll find that things don’t quite work as you’d expect. In particular, you’ll find that &lt;em&gt;even though you have saved the state of the &lt;code&gt;ContainerFragment&lt;/code&gt; in &lt;code&gt;onPause&lt;/code&gt;&lt;/em&gt;, the next time you return to this fragment, its state is cleared. &lt;/p&gt; &lt;p&gt;Why is this? The alert reader might have spotted the reason.&lt;/p&gt; &lt;p&gt;In the case of the &lt;code&gt;ViewPager&lt;/code&gt; example, we clear the saved fragment state in &lt;code&gt;onDestroy()&lt;/code&gt;. This is because of the way ViewPager works (or rather, &lt;code&gt;FragmentPagerAdapter&lt;/code&gt; or &lt;code&gt;FragmentStatePagerAdapter&lt;/code&gt; works): When you navigate away from a tab, the Fragment’s &lt;code&gt;`onPause&lt;/code&gt; is called but none of the other life-cycle methods are called. This means &lt;code&gt;onDestroy&lt;/code&gt; is skipped and the Fragment is simply torn down. &lt;code&gt;onDestroy&lt;/code&gt; is only called when the hosting &lt;code&gt;Activity&lt;/code&gt; is destroyed.&lt;/p&gt; &lt;pre style=&quot;&quot; class=&quot;prettyprint prettyprinted&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;@Override&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;    &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;public&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; onPause&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;        &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;onPause&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;();&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;        &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;NestedFragApp&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;getActivity&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;getApplication&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;()).&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;setFragmentSavedState&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;SAVED_STATE_KEY&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; getFragmentManager&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;saveFragmentInstanceState&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;));&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;&lt;br /&gt;    &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;@Override&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;    &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;public&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; onDestroy&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;        &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;onDestroy&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;();&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;        &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;NestedFragApp&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;getActivity&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;getApplication&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;()).&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;setFragmentSavedState&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;SAVED_STATE_KEY&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt; &lt;p&gt;However, when you use a Navigation Drawer, the case is different. In this situation, there is no &lt;code&gt;PagerAdapter&lt;/code&gt; to deal with. When you navigate from one item in the navigation drawer to another, the “old” Fragment undergoes the complete life-cycle - &lt;code&gt;onPause&lt;/code&gt; all the way to &lt;code&gt;onDestroy&lt;/code&gt; and &lt;code&gt;onDetach&lt;/code&gt;. As a consequence, since you’re clearing the saved Fragment state in &lt;code&gt;onDestroy&lt;/code&gt; of the &lt;code&gt;ContainerFragment&lt;/code&gt;, &lt;strong&gt;you end up clearing the state that you had just saved in &lt;code&gt;onPause&lt;/code&gt;&lt;/strong&gt;.&lt;/p&gt; &lt;h3 id=&quot;solution&quot;&gt;Solution?&lt;/h3&gt; &lt;p&gt;Well, the solution is rather simple - just don’t clear the state in &lt;code&gt;onDestroy&lt;/code&gt; of the parent Fragment! In addition, there are a few other minor changes - like the way you set the initial state of the ContainerFragment (instead of retrieving the saved state in one of the life cycle methods of the Fragment, you use &lt;code&gt;setInitialSavedState&lt;/code&gt; in the static creator method). The source code for this is available at the &lt;a href=&quot;https://github.com/curioustechizen/blog-nested-fragments-backstack&quot;&gt;github repo&lt;/a&gt; for this series.&lt;/p&gt; &lt;pre style=&quot;&quot; class=&quot;prettyprint prettyprinted&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;pln&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;public&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;static&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;ContainerFragment&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; newInstance&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;SavedState&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; savedState&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;        &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;ContainerFragment&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; frag &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;ContainerFragment&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;();&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;        frag&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;setInitialSavedState&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;savedState&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;        &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; frag&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;    &lt;/span&gt;&lt;span class=&quot;lit&quot;&gt;@Override&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;    &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;public&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; onPause&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;        &lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;onPause&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;();&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;        &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;typ&quot;&gt;NestedFragApp&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;getActivity&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;getApplication&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;()).&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;setFragmentSavedState&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;SAVED_STATE_KEY&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt; getFragmentManager&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;saveFragmentInstanceState&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kwd&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;));&lt;/span&gt;&lt;span class=&quot;pln&quot;&gt;&lt;br /&gt;    &lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt; &lt;p&gt;Here’s a video showing this in action (Unfortunately the Android screenrecord tool doesn’t like it if you rotate the device during the recording, but I think the video demnostrates the point sufficiently):&lt;/p&gt; &lt;iframe src=&quot;//www.youtube.com/embed/JEzerV4Ee_g&quot; allowfullscreen=&quot;&quot; height=&quot;315&quot; width=&quot;420&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;&lt;div class=&quot;se-section-delimiter&quot;&gt;&lt;/div&gt; &lt;h3 id=&quot;forgetting-the-saved-state&quot;&gt;Forgetting the saved state?&lt;/h3&gt; &lt;p&gt;The bullet points that we established in the previous post (re-capped at the beginning of this post) say that you should not hold on to the saved state any longer than necessary. However, we had to violate that rule in this solution because - well - it is pointless to save the state only to immediately clear it!&lt;/p&gt; &lt;p&gt;However, depending on your use case you might approach this in a different manner. For example, you might only clear the fragment saved state when the hosting &lt;code&gt;Activity&lt;/code&gt; is destroyed. This is &lt;em&gt;not&lt;/em&gt; demonstrated in the sample code on github but should be straightforward to implement.&lt;/p&gt;</description>
-        <pubDate>Sun, 09 Feb 2014 07:56:00 +0100</pubDate>
-        <link>http://localhost:4000/blog/2014/02/09/nested-fragments-and-backstack-part-3/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2014/02/09/nested-fragments-and-backstack-part-3/</guid>
-        
-        <category>nested</category>
-        
-        <category>fragments</category>
-        
-        <category>programming</category>
-        
-        <category>backstack</category>
         
         <category>android</category>
         

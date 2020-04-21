@@ -22,4 +22,7 @@ diff:
   name: List Diff
 gradle:
   name: Gradle
-
+swiftui:
+  name: SwiftUI
+animations:
+  name: Animations
