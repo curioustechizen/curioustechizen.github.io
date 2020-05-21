@@ -8,7 +8,7 @@ description: "A place for discussing anything tech. Old and new. Experiences and
 author: "Kiran Rao"
 lang: en
 
-#url: "http://kiranrao.in"
+url: "https://kiranrao.in"
 baseurl: "/blog"
 
 # A short presentation of yourself. Will show in the sidebar, under your name. Best usage would be between 30 to 50 words.
@@ -23,10 +23,19 @@ twitter:
   username: ki_run
   card: summary
 
+social:
+  name: Kiran Rao
+  links:
+    - https://github.com/curioustechizen
+    - https://www.linkedin.com/in/raokiran/
+    - https://twitter.com/ki_run
+
+
 # Google Analytics (you may want to changes these with yours or even delete :)
 
 ga_domain: kiranrao.in
 ga_tracking_id: UA-66125769-1
+google_site_verification: "H8RGMD_f_siP2w-pSgSovLpeKIMac--hZGy47rZWoUM"
 
 # Other (refer to http://jekyllrb.com/docs/home/ for further details on the below)
 
