@@ -28,6 +28,29 @@
 
       
 
+      <!-- Begin Jekyll SEO tag v2.1.0 -->
+<title>Android Gradle: Lessons learnt using missingDimensionStrategy - Curious Techizen</title>
+<meta property="og:title" content="Android Gradle: Lessons learnt using missingDimensionStrategy" />
+<meta name="description" content="Advanced flavor configuration in Android Gradle, and the missingDimensionStrategy DSL" />
+<meta property="og:description" content="Advanced flavor configuration in Android Gradle, and the missingDimensionStrategy DSL" />
+<link rel="canonical" href="http://localhost:4000/blog/2020/03/31/gradle-missing-flavors/" />
+<meta property="og:url" content="http://localhost:4000/blog/2020/03/31/gradle-missing-flavors/" />
+<meta property="og:site_name" content="Curious Techizen" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-31T21:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Kiran Rao" />
+<script type="application/ld+json">
+{"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "Android Gradle: Lessons learnt using missingDimensionStrategy",
+"datePublished": "2020-03-31T21:00:00+02:00",
+"description": "Advanced flavor configuration in Android Gradle, and the missingDimensionStrategy DSL",
+"url": "http://localhost:4000/blog/2020/03/31/gradle-missing-flavors/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
   </head>
 
   <body>
@@ -89,57 +112,58 @@
     </div>
     <h1 class="page-title" itemprop="name headline">Android Gradle: Lessons learnt using missingDimensionStrategy</h1>
     <div itemprop="articleBody">
-      <h2>TL;DR:</h2>
+      <h2 id="tldr">TL;DR:</h2>
 
 <ol>
-<li>If a <em>library module</em> includes a flavor dimension that the <em>app flavor</em> does not, then use <code>missingDimensionStrategy</code> to specify default flavors from the missing dimension</li>
-<li>More generally, you can use this any time a <em>consumed module</em> includes a flavor that the <em>consumer module</em> does not. Remember, <code>missingDimensionStrategy</code> DSL should be used in the <code>build.gradle</code> of the <em>consumer module</em>.</li>
-<li>However, point 2 might not always do what you think it is doing. In particular, when the <em>consumer module</em> which is missing the flavor dimension is in <strong>itself a dependency for another module</strong>, you are probably better off introducing this flavor dimension in this module, mirroring that of the consumed module.</li>
+  <li>If a <em>library module</em> includes a flavor dimension that the <em>app flavor</em> does not, then use <code class="highlighter-rouge">missingDimensionStrategy</code> to specify default flavors from the missing dimension</li>
+  <li>More generally, you can use this any time a <em>consumed module</em> includes a flavor that the <em>consumer module</em> does not. Remember, <code class="highlighter-rouge">missingDimensionStrategy</code> DSL should be used in the <code class="highlighter-rouge">build.gradle</code> of the <em>consumer module</em>.</li>
+  <li>However, point 2 might not always do what you think it is doing. In particular, when the <em>consumer module</em> which is missing the flavor dimension is in <strong>itself a dependency for another module</strong>, you are probably better off introducing this flavor dimension in this module, mirroring that of the consumed module.</li>
 </ol>
 
-<h2>Introduction</h2>
+<h2 id="introduction">Introduction</h2>
 
 <p>The Android Gradle Plugin introduces the concept of product flavors. When you have a project that contains multiple modules, it is possible that your modules do not agree on the number of flavors or flavor dimensions. The DSL offers ways to handle such situations.</p>
 
-<p>The important portions of the DSL are <code>matchingFallbacks</code> and <code>missingDimensionStrategy</code>. Which one you choose depends on <strong>which module declares more flavors</strong>: the <em>consuming module</em>, or the <em>consumed module</em>. <a href="https://developer.android.com/studio/build/dependencies#resolve_matching_errors">This table</a> in the Android Gradle documentation explains this in more detail.</p>
+<p>The important portions of the DSL are <code class="highlighter-rouge">matchingFallbacks</code> and <code class="highlighter-rouge">missingDimensionStrategy</code>. Which one you choose depends on <strong>which module declares more flavors</strong>: the <em>consuming module</em>, or the <em>consumed module</em>. <a href="https://developer.android.com/studio/build/dependencies#resolve_matching_errors">This table</a> in the Android Gradle documentation explains this in more detail.</p>
 
-<p>I had a slightly more complex project structure where I thought <code>missingDimensionStrategy</code> would be my tool of choice, but it turns out I was wrong. This post describes my situation and why I was wrong.</p>
+<p>I had a slightly more complex project structure where I thought <code class="highlighter-rouge">missingDimensionStrategy</code> would be my tool of choice, but it turns out I was wrong. This post describes my situation and why I was wrong.</p>
 
-<h2>Project structure</h2>
+<h2 id="project-structure">Project structure</h2>
 
 <p>The project that I use for this blog post is <a href="https://github.com/curioustechizen/android-gradle-missing-flavors-demo">here</a>. The app itself is a shell. It has no activities, no functionality and almost no Android code. It has the following modules:</p>
 
 <ol>
-<li><code>app</code> module. 
-
-<ul>
-<li>Includes a flavor dimension <code>&quot;target&quot;</code>, with values <code>&quot;emulator&quot;</code> and <code>&quot;realdevice&quot;</code></li>
-<li>Depends on <code>intermediate-1</code>, <code>intermediate-2</code> and <code>leaf</code></li>
-</ul></li>
-<li><code>intermediate-1</code> module. 
-
-<ul>
-<li>Does not know about flavors</li>
-<li>Depends on <code>leaf</code></li>
-</ul></li>
-<li><code>intermediate-2</code> module. 
-
-<ul>
-<li>Does not know about flavors</li>
-<li>Depends on <code>leaf</code></li>
-</ul></li>
-<li><code>leaf</code> module. 
-
-<ul>
-<li>Includes the same flavor dimension and flavors as <code>app</code> module</li>
-<li>Has no dependencies</li>
-</ul></li>
+  <li><code class="highlighter-rouge">app</code> module.
+    <ul>
+      <li>Includes a flavor dimension <code class="highlighter-rouge">"target"</code>, with values <code class="highlighter-rouge">"emulator"</code> and <code class="highlighter-rouge">"realdevice"</code></li>
+      <li>Depends on <code class="highlighter-rouge">intermediate-1</code>, <code class="highlighter-rouge">intermediate-2</code> and <code class="highlighter-rouge">leaf</code></li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">intermediate-1</code> module.
+    <ul>
+      <li>Does not know about flavors</li>
+      <li>Depends on <code class="highlighter-rouge">leaf</code></li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">intermediate-2</code> module.
+    <ul>
+      <li>Does not know about flavors</li>
+      <li>Depends on <code class="highlighter-rouge">leaf</code></li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">leaf</code> module.
+    <ul>
+      <li>Includes the same flavor dimension and flavors as <code class="highlighter-rouge">app</code> module</li>
+      <li>Has no dependencies</li>
+    </ul>
+  </li>
 </ol>
 
-<h3>String resources</h3>
+<h3 id="string-resources">String resources</h3>
 
-<p>To demonstrate how flavors work, I&#39;ve created some string resources (using gradle&#39;s <code>resValue</code> feature) in every flavor, in every module that does care about the flavor. When I build an APK for a particular flavor, I can inspect the string resources in APK analyzer to figure out which variant was used.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">// app/build.gradle
+<p>To demonstrate how flavors work, I’ve created some string resources (using gradle’s <code class="highlighter-rouge">resValue</code> feature) in every flavor, in every module that does care about the flavor. When I build an APK for a particular flavor, I can inspect the string resources in APK analyzer to figure out which variant was used.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// app/build.gradle
 
 flavorDimensions "target"
 productFlavors {
@@ -166,53 +190,59 @@ productFlavors {
         resValue("string", "name_leaf_module", "Leaf module Real Device")
     }
 }
-</code></pre></div>
-<h2>The build error</h2>
+</code></pre>
+</div>
 
-<p>This is the starting point of my experiment, and it fails to build. You can <code>git checkout checkpoint-2</code> if you want to <a href="https://github.com/curioustechizen/android-gradle-missing-flavors-demo/tree/checkpoint-2">see it in action</a>. The build error you see looks like this:</p>
+<h2 id="the-build-error">The build error</h2>
 
-<p><img src="/blog/assets/img/build_error.png" alt="Build Error"></p>
+<p>This is the starting point of my experiment, and it fails to build. You can <code class="highlighter-rouge">git checkout checkpoint-2</code> if you want to <a href="https://github.com/curioustechizen/android-gradle-missing-flavors-demo/tree/checkpoint-2">see it in action</a>. The build error you see looks like this:</p>
 
-<p>The reason for this build error is that both the <code>intermediate</code> modules know nothing flavors but they depend on <code>leaf</code> which does.</p>
+<p><img src="/blog/assets/img/build_error.png" alt="Build Error" /></p>
 
-<h2>Configuring <code>missingDimensionStrategy</code></h2>
+<p>The reason for this build error is that both the <code class="highlighter-rouge">intermediate</code> modules know nothing flavors but they depend on <code class="highlighter-rouge">leaf</code> which does.</p>
 
-<p>My first attempt at fixing this was to configure the <code>intermediate</code> modules to specify <code>missingDimensionStrategy</code></p>
-<div class="highlight"><pre><code class="language-" data-lang="">//intermediate-1/build.gradle and intermediate-2/build.gradle
+<h2 id="configuring-missingdimensionstrategy">Configuring <code class="highlighter-rouge">missingDimensionStrategy</code></h2>
+
+<p>My first attempt at fixing this was to configure the <code class="highlighter-rouge">intermediate</code> modules to specify <code class="highlighter-rouge">missingDimensionStrategy</code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//intermediate-1/build.gradle and intermediate-2/build.gradle
 //this goes inside android { defaultConfig block
 
 missingDimensionStrategy 'target', 'emulator'
-</code></pre></div>
-<p>Here we&#39;re saying that when trying to build the intermediate modules, choose the <code>emulator</code> variant of the <code>leaf</code> module. This works, <em>kind of</em>. We can build the APKs for both flavors and we can see the correct strings get included in the built APKs.</p>
+</code></pre>
+</div>
 
-<p>This is what the <code>emulatorDebug</code> flavor looks like. Note that it has included the strings <code>&quot;App Emulator&quot;</code> and <code>&quot;Leaf module Emulator&quot;</code></p>
+<p>Here we’re saying that when trying to build the intermediate modules, choose the <code class="highlighter-rouge">emulator</code> variant of the <code class="highlighter-rouge">leaf</code> module. This works, <em>kind of</em>. We can build the APKs for both flavors and we can see the correct strings get included in the built APKs.</p>
 
-<p><img src="/blog/assets/img/app-emulator-debug-apk-missing-dimension-strategy.png" alt="app-emulator-debug-apk-missingDimensionStrategy"></p>
+<p>This is what the <code class="highlighter-rouge">emulatorDebug</code> flavor looks like. Note that it has included the strings <code class="highlighter-rouge">"App Emulator"</code> and <code class="highlighter-rouge">"Leaf module Emulator"</code></p>
 
-<p>And here&#39;s the <code>realdeviceDebug</code> APK. Note that it has included the strings <code>&quot;App Real Device&quot;</code> and <code>&quot;Leaf module Real Device&quot;</code></p>
+<p><img src="/blog/assets/img/app-emulator-debug-apk-missing-dimension-strategy.png" alt="app-emulator-debug-apk-missingDimensionStrategy" /></p>
 
-<p><img src="/blog/assets/img/app-realdevice-debug-apk-missing-dimension-strategy.png" alt="app-realdevice-debug-apk-missingDimensionStrategy"></p>
+<p>And here’s the <code class="highlighter-rouge">realdeviceDebug</code> APK. Note that it has included the strings <code class="highlighter-rouge">"App Real Device"</code> and <code class="highlighter-rouge">"Leaf module Real Device"</code></p>
 
-<p>You can <code>git checkout checkpoint-3</code> if you want to <a href="https://github.com/curioustechizen/android-gradle-missing-flavors-demo/tree/checkpoint-3">see it in action</a>.</p>
+<p><img src="/blog/assets/img/app-realdevice-debug-apk-missing-dimension-strategy.png" alt="app-realdevice-debug-apk-missingDimensionStrategy" /></p>
 
-<h4>The problem</h4>
+<p>You can <code class="highlighter-rouge">git checkout checkpoint-3</code> if you want to <a href="https://github.com/curioustechizen/android-gradle-missing-flavors-demo/tree/checkpoint-3">see it in action</a>.</p>
+
+<h4 id="the-problem">The problem</h4>
 
 <p>The problem with this solution becomes obvious when you see the build output window. It contains this warning</p>
 
 <blockquote>
-<p>Module &#39;leaf&#39; has variant &#39;realdeviceDebug&#39; selected, but the modules [&#39;intermediate-1&#39;, &#39;intermediate-2&#39;] depend on variant &#39;emulatorDebug&#39;</p>
+  <p>Module ‘leaf’ has variant ‘realdeviceDebug’ selected, but the modules [‘intermediate-1’, ‘intermediate-2’] depend on variant ‘emulatorDebug’</p>
 </blockquote>
 
-<p>The problem is this: When you chose <code>realdeviceDebug</code> variant for <code>app</code> module, the same variant is selected for <code>leaf</code>module. However, for the <code>intermediate</code> modules, we specified we want to use <code>emulator</code> flavor.</p>
+<p>The problem is this: When you chose <code class="highlighter-rouge">realdeviceDebug</code> variant for <code class="highlighter-rouge">app</code> module, the same variant is selected for <code class="highlighter-rouge">leaf </code>module. However, for the <code class="highlighter-rouge">intermediate</code> modules, we specified we want to use <code class="highlighter-rouge">emulator</code> flavor.</p>
 
-<p>This is not a problem for us because we explicitly stated that the intermediate flavors don&#39;t know or care about flavors. But, how do you fix those warnings?</p>
+<p>This is not a problem for us because we explicitly stated that the intermediate flavors don’t know or care about flavors. But, how do you fix those warnings?</p>
 
-<h2>Making intermediate module flavor-aware</h2>
+<h2 id="making-intermediate-module-flavor-aware">Making intermediate module flavor-aware</h2>
 
-<p>Unfortunately, the only <strong>correct</strong> way to achieve this was to make the intermediate module flavor-aware. This might seem tedious and against the original intent, but I would argue that for this situation, it is a future-proof approach compared to <code>missingDimensionStrategy</code>. Because with <code>missingDimensionStrategy</code> if for some reason an intermediate module had to become flavor-aware, it could end up silently choosing the wrong flavor of the leaf module.</p>
+<p>Unfortunately, the only <strong>correct</strong> way to achieve this was to make the intermediate module flavor-aware. This might seem tedious and against the original intent, but I would argue that for this situation, it is a future-proof approach compared to <code class="highlighter-rouge">missingDimensionStrategy</code>. Because with <code class="highlighter-rouge">missingDimensionStrategy</code> if for some reason an intermediate module had to become flavor-aware, it could end up silently choosing the wrong flavor of the leaf module.</p>
 
-<p>So, the fix is to actually introduce the same flavor dimensions and flavors in the intermediate modules as in the leaf modules. You can <code>git checkout checkpoint-4</code> to <a href="https://github.com/curioustechizen/android-gradle-missing-flavors-demo/tree/checkpoint-4">see it in action</a>. If you are worried about the repetitive flavor configuration code in the intermdiate modules, you can extract it into a <code>flavors.gradle</code> and then use it in the build.gradle files.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">// root flavors.gradle
+<p>So, the fix is to actually introduce the same flavor dimensions and flavors in the intermediate modules as in the leaf modules. You can <code class="highlighter-rouge">git checkout checkpoint-4</code> to <a href="https://github.com/curioustechizen/android-gradle-missing-flavors-demo/tree/checkpoint-4">see it in action</a>. If you are worried about the repetitive flavor configuration code in the intermdiate modules, you can extract it into a <code class="highlighter-rouge">flavors.gradle</code> and then use it in the build.gradle files.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// root flavors.gradle
 
 android {
     flavorDimensions "target"
@@ -228,14 +258,16 @@ android {
 
 // build.gradle of intermediate modules
 apply from: '../flavors.gradle'
-</code></pre></div>
-<h2>Conclusion</h2>
+</code></pre>
+</div>
 
-<p>Use <code>missingDimensionStrategy</code> mainly if your <strong>app</strong> module is missing flavor dimensions compared to library modules. Think twice before using it in a module that is itself a dependency for another module. It might look like it works, but it might be doing the wrong thing.</p>
+<h2 id="conclusion">Conclusion</h2>
 
-<h2>Credits</h2>
+<p>Use <code class="highlighter-rouge">missingDimensionStrategy</code> mainly if your <strong>app</strong> module is missing flavor dimensions compared to library modules. Think twice before using it in a module that is itself a dependency for another module. It might look like it works, but it might be doing the wrong thing.</p>
 
-<p>Thanks to <a href="https://twitter.com/droidxav">Xavier Ducrohet (@droidxav)</a> for pointing out the potential pitfalls of using <code>missingDimensionStrategy</code> for my use case.</p>
+<h2 id="credits">Credits</h2>
+
+<p>Thanks to <a href="https://twitter.com/droidxav">Xavier Ducrohet (@droidxav)</a> for pointing out the potential pitfalls of using <code class="highlighter-rouge">missingDimensionStrategy</code> for my use case.</p>
 
     </div>
     

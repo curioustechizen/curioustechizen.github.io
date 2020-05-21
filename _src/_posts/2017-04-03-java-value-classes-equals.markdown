@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Java: Value classes and the equals() method"
+description: "Gotchas while overriding equal() method while using Java's value classes"
 date: 2017-04-03 22:00
 comments: true
 tags: [effectivejava]

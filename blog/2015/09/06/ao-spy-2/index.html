@@ -28,6 +28,29 @@
 
       
 
+      <!-- Begin Jekyll SEO tag v2.1.0 -->
+<title>AO(sp)y Episode 2 - Lambdas - Curious Techizen</title>
+<meta property="og:title" content="AO(sp)y Episode 2 - Lambdas" />
+<meta name="description" content="This post is the second episode in a series where I peek into random commits on AOSP and try to predict what’s coming to the world of Android development." />
+<meta property="og:description" content="This post is the second episode in a series where I peek into random commits on AOSP and try to predict what’s coming to the world of Android development." />
+<link rel="canonical" href="http://localhost:4000/blog/2015/09/06/ao-spy-2/" />
+<meta property="og:url" content="http://localhost:4000/blog/2015/09/06/ao-spy-2/" />
+<meta property="og:site_name" content="Curious Techizen" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-09-06T00:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Kiran Rao" />
+<script type="application/ld+json">
+{"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "AO(sp)y Episode 2 - Lambdas",
+"datePublished": "2015-09-06T00:00:00+02:00",
+"description": "This post is the second episode in a series where I peek into random commits on AOSP and try to predict what’s coming to the world of Android development.",
+"url": "http://localhost:4000/blog/2015/09/06/ao-spy-2/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
   </head>
 
   <body>
@@ -89,10 +112,10 @@
     </div>
     <h1 class="page-title" itemprop="name headline">AO(sp)y Episode 2 - Lambdas</h1>
     <div itemprop="articleBody">
-      <p>This post is the second episode in a series where I peek into random commits on AOSP and try to predict what&#39;s coming to the world of Android development.</p>
+      <p>This post is the second episode in a series where I peek into random commits on AOSP and try to predict what’s coming to the world of Android development.</p>
 
 <blockquote>
-<p>Disclaimer: These tidbits have been gleaned primarily from the commit messages on AOSP. I very rarely even read (let alone understand) the code. As such expect inaccuracies or downright mistakes here. Do not make decisions based on what you read in this post.</p>
+  <p>Disclaimer: These tidbits have been gleaned primarily from the commit messages on AOSP. I very rarely even read (let alone understand) the code. As such expect inaccuracies or downright mistakes here. Do not make decisions based on what you read in this post.</p>
 </blockquote>
 
 <p>That out of the way, let’s dig in. This episode was supposed to be about toolchain improvements, but the headline feature is what the title says - lambdas! Lest I am accused of clickbait, let me clarify that all of this is still experimental. Several commits are not even merged. There is no saying when (and if) any of these features will actually find their way into production.</p>
@@ -102,60 +125,56 @@
 <p>Java 8 brought about two types of enhancements to the Java programming language:</p>
 
 <ol>
-<li>Features and syntax in the language itself</li>
-<li>Additions to the standard libraries to take advantage of the new features</li>
+  <li>Features and syntax in the language itself</li>
+  <li>Additions to the standard libraries to take advantage of the new features</li>
 </ol>
 
 <p>This article concentrates purely on the first type of enhancements, i.e.,</p>
 
 <ul>
-<li><a href="http://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html">Lambdas</a></li>
-<li><a href="http://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html">Method references</a></li>
-<li><a href="http://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html">Default methods in interfaces</a></li>
-<li>Static methods in interfaces</li>
+  <li><a href="http://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html">Lambdas</a></li>
+  <li><a href="http://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html">Method references</a></li>
+  <li><a href="http://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html">Default methods in interfaces</a></li>
+  <li>Static methods in interfaces</li>
 </ul>
 
-<p>It does not look like there is any move to bring the enhancements to the runtime libraries in the form of new collections and <code>java.util.function</code> package to Android.</p>
+<p>It does not look like there is any move to bring the enhancements to the runtime libraries in the form of new collections and <code class="highlighter-rouge">java.util.function</code> package to Android.</p>
 
 <p>So, what’s cooking?</p>
 
-<h3>Runtime support</h3>
+<p>###Runtime support
+Opcodes for creating and invoking lambdas are <a href="https://android-review.googlesource.com/#/c/147957/">being added</a> to the Dalvik bytecode (dex) format. The ART interpreter is <a href="https://android-review.googlesource.com/#/c/155661/">being updated</a> to be able to use these opcodes.</p>
 
-<p>Opcodes for creating and invoking lambdas are <a href="https://android-review.googlesource.com/#/c/147957/">being added</a> to the Dalvik bytecode (dex) format. The ART interpreter is <a href="https://android-review.googlesource.com/#/c/155661/">being updated</a> to be able to use these opcodes.</p>
-
-<p>The first of these commits also points to the <code>dex2oat</code> compiler being taught how to compile lambdas from your dex bytecode into the corresponding opcodes for OAT.</p>
+<p>The first of these commits also points to the <code class="highlighter-rouge">dex2oat</code> compiler being taught how to compile lambdas from your dex bytecode into the corresponding opcodes for OAT.</p>
 
 <p>What does all this mean? It means that <em>lambdas might be supported natively</em> in a future version of Android.</p>
 
-<h3>Toolchain enhancements</h3>
+<p>###Toolchain enhancements
+<a href="https://android-review.googlesource.com/#/c/158285/">This commit</a> and related ones point to the possibility of Jack compiler doing basically what is achieved with <a href="https://github.com/evant/gradle-retrolambda">gradle-retrolambda</a> today. In other words, Jack compiler will be able to compile lambdas into bytecode that works even on runtimes that don’t support lambda opcodes. Similarly, Jill will likely do to lambdas in .class/.jar libraries what Jack does to them in source code.</p>
 
-<p><a href="https://android-review.googlesource.com/#/c/158285/">This commit</a> and related ones point to the possibility of Jack compiler doing basically what is achieved with <a href="https://github.com/evant/gradle-retrolambda">gradle-retrolambda</a> today. In other words, Jack compiler will be able to compile lambdas into bytecode that works even on runtimes that don’t support lambda opcodes. Similarly, Jill will likely do to lambdas in .class/.jar libraries what Jack does to them in source code.</p>
+<p>###Other Java8 features
+There’s more to Java8 than just the lambda syntax. AOSP also has commits that hint at support for <a href="https://android-review.googlesource.com/#/c/169003/">default methods</a> and <a href="https://android-review.googlesource.com/#/c/158165/">Single Abstract Methods</a>. I did not find any obvious mention of method references, but that might be because I’m not looking hard enough. In any case, method references are just syntax sugar for lambdas so if lambda expressions are supported, so should method references.</p>
 
-<h3>Other Java8 features</h3>
+<p>###Compatibility
+At first glance, one might conclude that lambdas will be used only if <code class="highlighter-rouge">minSdkVersion &gt;=</code> the version of Android in which they are introduced, and that Jack’s feature of down-compiling lambdas into Java7-compatible bytecode will be used in all other cases. This means that the runtime lambdas will not be used <em>even on the runtimes that support them unless <code class="highlighter-rouge">minSdkVersion</code> is set to the latest</em>. However, this is (more than) likely to negatively impact the adoption of lambdas.</p>
 
-<p>There&#39;s more to Java8 than just the lambda syntax. AOSP also has commits that hint at support for <a href="https://android-review.googlesource.com/#/c/169003/">default methods</a> and <a href="https://android-review.googlesource.com/#/c/158165/">Single Abstract Methods</a>. I did not find any obvious mention of method references, but that might be because I&#39;m not looking hard enough. In any case, method references are just syntax sugar for lambdas so if lambda expressions are supported, so should method references.</p>
+<p>So, what might be strategies to work around this? What follows is a <strong>wild guess</strong> as to how this might pan out. I haven’t dug in the source code into much (or … <em>any</em>) detail (not that I’d understand much of it even if I had, but that’s beside the point).</p>
 
-<h3>Compatibility</h3>
+<p>Remember that <code class="highlighter-rouge">dex2oat</code> runs on the Android device. The APK file only has dex bytecode, and it is converted into OAT at installation time. Could this be used to enhance the compatibility story?</p>
 
-<p>At first glance, one might conclude that lambdas will be used only if <code>minSdkVersion &gt;=</code> the version of Android in which they are introduced, and that Jack&#39;s feature of down-compiling lambdas into Java7-compatible bytecode will be used in all other cases. This means that the runtime lambdas will not be used <em>even on the runtimes that support them unless <code>minSdkVersion</code> is set to the latest</em>. However, this is (more than) likely to negatively impact the adoption of lambdas.</p>
+<p>Jack might use <code class="highlighter-rouge">targetSdkVersion</code> to decide whether to include lambdas in the compiled dex bytecode. If <code class="highlighter-rouge">targetSdkVersion &gt;=</code> the version in which lambda support is introduced, then the generated dex might <em>include</em> the Java8 bytecode. But wait, aren’t we back at square one? <code class="highlighter-rouge">dex2oat</code> is part of the Android OS and cannot (yet) be updated independently of the OS. This means that <code class="highlighter-rouge">dex2oat</code> that is running on an older version of the OS will not understand the new dex bytecode.</p>
 
-<p>So, what might be strategies to work around this? What follows is a <strong>wild guess</strong> as to how this might pan out. I haven&#39;t dug in the source code into much (or ... <em>any</em>) detail (not that I&#39;d understand much of it even if I had, but that&#39;s beside the point).</p>
+<p>This is why I say <em>include</em> Java8 opcodes instead of <em>generate</em> - that is to say, Jack might generate both the Java7-compatible byte code as well as new Java8 opcodes. Hopefully, <code class="highlighter-rouge">dex2oat</code> running on older versions of Android simply ignore the Java8 opcodes. But, what about the size implications of this arrangement? In lambda-heavy apps, will this result in bloated <code class="highlighter-rouge">.dex</code> files?</p>
 
-<p>Remember that <code>dex2oat</code> runs on the Android device. The APK file only has dex bytecode, and it is converted into OAT at installation time. Could this be used to enhance the compatibility story?</p>
+<p>The other option is that Jack might always generate Java7 compatible bytecode (compiles lambda expressions into anonymous inner classes), but it might include some sort of flag to indicate to <code class="highlighter-rouge">dex2oat</code> that these constructs be compiled into the corresponding Java8 OAT format. But this begs the question - what, then, is the point of the new opcodes in <code class="highlighter-rouge">.dex</code> format at all?</p>
 
-<p>Jack might use <code>targetSdkVersion</code> to decide whether to include lambdas in the compiled dex bytecode. If <code>targetSdkVersion &gt;=</code> the version in which lambda support is introduced, then the generated dex might <em>include</em> the Java8 bytecode. But wait, aren&#39;t we back at square one? <code>dex2oat</code> is part of the Android OS and cannot (yet) be updated independently of the OS. This means that <code>dex2oat</code> that is running on an older version of the OS will not understand the new dex bytecode.</p>
-
-<p>This is why I say <em>include</em> Java8 opcodes instead of <em>generate</em> - that is to say, Jack might generate both the Java7-compatible byte code as well as new Java8 opcodes. Hopefully, <code>dex2oat</code> running on older versions of Android simply ignore the Java8 opcodes. But, what about the size implications of this arrangement? In lambda-heavy apps, will this result in bloated <code>.dex</code> files?</p>
-
-<p>The other option is that Jack might always generate Java7 compatible bytecode (compiles lambda expressions into anonymous inner classes), but it might include some sort of flag to indicate to <code>dex2oat</code> that these constructs be compiled into the corresponding Java8 OAT format. But this begs the question - what, then, is the point of the new opcodes in <code>.dex</code> format at all?</p>
-
-<p>I do not have the answers to these questions yet (nor does AOSP). But I&#39;m sure the answers will reveal themselves in the days to come. If you are interested in this topic, you can follow the progress yourself at the following locations on AOSP:</p>
+<p>I do not have the answers to these questions yet (nor does AOSP). But I’m sure the answers will reveal themselves in the days to come. If you are interested in this topic, you can follow the progress yourself at the following locations on AOSP:</p>
 
 <ul>
-<li><a href="https://android-review.googlesource.com/#/q/project:platform/art">platform/art</a> project ...</li>
-<li>... particularly, the <a href="https://android-review.googlesource.com/#/q/status:merged+project:platform/art+branch:master+topic:lambda_experimental">lambda_experimental</a> topic</li>
-<li><a href="https://android-review.googlesource.com/#/q/project:toolchain/jack">toolchain/jack</a> project </li>
-<li>Pay special attention to <a href="https://android-review.googlesource.com/#/q/status:open+project:toolchain/jack+branch:ub-jack-lang-dev">ub-jack-lang-dev</a> branch</li>
+  <li><a href="https://android-review.googlesource.com/#/q/project:platform/art">platform/art</a> project …</li>
+  <li>… particularly, the <a href="https://android-review.googlesource.com/#/q/status:merged+project:platform/art+branch:master+topic:lambda_experimental">lambda_experimental</a> topic</li>
+  <li><a href="https://android-review.googlesource.com/#/q/project:toolchain/jack">toolchain/jack</a> project</li>
+  <li>Pay special attention to <a href="https://android-review.googlesource.com/#/q/status:open+project:toolchain/jack+branch:ub-jack-lang-dev">ub-jack-lang-dev</a> branch</li>
 </ul>
 
     </div>

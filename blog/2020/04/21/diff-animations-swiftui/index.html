@@ -28,6 +28,29 @@
 
       
 
+      <!-- Begin Jekyll SEO tag v2.1.0 -->
+<title>Diff animations with SwiftUI - Curious Techizen</title>
+<meta property="og:title" content="Diff animations with SwiftUI" />
+<meta name="description" content="SwiftUI: Recreating Android circular diff animations from a previous post using SwiftUI" />
+<meta property="og:description" content="SwiftUI: Recreating Android circular diff animations from a previous post using SwiftUI" />
+<link rel="canonical" href="http://localhost:4000/blog/2020/04/21/diff-animations-swiftui/" />
+<meta property="og:url" content="http://localhost:4000/blog/2020/04/21/diff-animations-swiftui/" />
+<meta property="og:site_name" content="Curious Techizen" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-21T21:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Kiran Rao" />
+<script type="application/ld+json">
+{"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "Diff animations with SwiftUI",
+"datePublished": "2020-04-21T21:00:00+02:00",
+"description": "SwiftUI: Recreating Android circular diff animations from a previous post using SwiftUI",
+"url": "http://localhost:4000/blog/2020/04/21/diff-animations-swiftui/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
   </head>
 
   <body>
@@ -89,15 +112,15 @@
     </div>
     <h1 class="page-title" itemprop="name headline">Diff animations with SwiftUI</h1>
     <div itemprop="articleBody">
-      <p>A few months back, I wrote <a href="https://kiranrao.in/blog/2020/01/12/diff-util-part3/">a post</a> about implementing custom animations in Android using DiffUtil. In this post, we&#39;ll explore how similar animations can be achieved with Apple&#39;s <a href="https://developer.apple.com/documentation/swiftui">SwiftUI</a>.</p>
+      <p>A few months back, I wrote <a href="https://kiranrao.in/blog/2020/01/12/diff-util-part3/">a post</a> about implementing custom animations in Android using DiffUtil. In this post, we’ll explore how similar animations can be achieved with Apple’s <a href="https://developer.apple.com/documentation/swiftui">SwiftUI</a>.</p>
 
 <p><strong>Spoiler Alert:</strong> It was a breeze to implement this with SwiftUI. It was an enjoyable experience with the Preview canvas in XCode, and the framework itself is very well suited for stuff like implementing animations.</p>
 
-<p>This post uses GIFs to show off videos of the animations I achieved, but GIFs don&#39;t convey really how smooth the animations are. I encourage you to check out the code and run it on a simulator or iOS device. The code for everything in this post is <a href="https://github.com/curioustechizen/diff-animations-declarative-ui-frameworks">here</a>. You&#39;ll need XCode 11 and Mac OSX Catalina to run it.</p>
+<p>This post uses GIFs to show off videos of the animations I achieved, but GIFs don’t convey really how smooth the animations are. I encourage you to check out the code and run it on a simulator or iOS device. The code for everything in this post is <a href="https://github.com/curioustechizen/diff-animations-declarative-ui-frameworks">here</a>. You’ll need XCode 11 and Mac OSX Catalina to run it.</p>
 
-<h2>The sample app</h2>
+<h2 id="the-sample-app">The sample app</h2>
 
-<p>Here&#39;s an example of what we will achieve</p>
+<p>Here’s an example of what we will achieve</p>
 
 <p><img src="/blog/assets/video/diff-circle-swiftui-custom.gif" alt="Custom animation" style="max-height: 448px; max-width: 207px;" /></p>
 
@@ -106,18 +129,18 @@
 <p>To recap, this is how it works:</p>
 
 <ul>
-<li>There are up to 7 colored circle views, arranged in a circle</li>
-<li>Some circles are &quot;expanded&quot;</li>
-<li>When you click on &quot;Toggle&quot;, some colored circles get removed, while others are added, and some get resized (their expansion state changes)</li>
+  <li>There are up to 7 colored circle views, arranged in a circle</li>
+  <li>Some circles are “expanded”</li>
+  <li>When you click on “Toggle”, some colored circles get removed, while others are added, and some get resized (their expansion state changes)</li>
 </ul>
 
 <p>The model consists of 2 pre-defined lists of circle data. Clicking the toggle button simple toggles the state between these 2 lists.</p>
 
-<h2>Baseline: Toggling state without animations</h2>
+<h2 id="baseline-toggling-state-without-animations">Baseline: Toggling state without animations</h2>
 
 <p>The <a href="https://github.com/curioustechizen/diff-animations-declarative-ui-frameworks/tree/swift_ui_no_animations/CircleDiffAnimationsSwiftUI">starting point</a> of this experiment is toggling between 2 states, <em>without</em> any animation. For this, I took inspiration from <a href="https://github.com/christophedellac/CDCircularMenu">this library</a> to arrange the views in a circle. Then, all I had to do was set the color and size property of each view from the model.</p>
 
-<p>On clicking the Toggle button, I update a <code>@State var</code> property. All this is pretty standard.</p>
+<p>On clicking the Toggle button, I update a <code class="highlighter-rouge">@State var</code> property. All this is pretty standard.</p>
 
 <figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">struct</span> <span class="kt">ColorView</span><span class="p">:</span> <span class="kt">View</span> <span class="p">{</span>
     <span class="k">let</span> <span class="nv">circleInfo</span><span class="p">:</span> <span class="kt">CircleInfo</span>
@@ -149,11 +172,11 @@
     
 <span class="p">}</span></code></pre></figure>
 
-<p>The relevant code is in <a href="https://github.com/curioustechizen/diff-animations-declarative-ui-frameworks/blob/swift_ui_no_animations/CircleDiffAnimationsSwiftUI/CircleDiffAnimations/CircularArrangementView.swift">this file</a> and here&#39;s how this looks</p>
+<p>The relevant code is in <a href="https://github.com/curioustechizen/diff-animations-declarative-ui-frameworks/blob/swift_ui_no_animations/CircleDiffAnimationsSwiftUI/CircleDiffAnimations/CircularArrangementView.swift">this file</a> and here’s how this looks</p>
 
 <p><img src="/blog/assets/video/diff-circle-swiftui-no-anims.gif" alt="No animation" style="max-height: 448px; max-width: 207px;" /></p>
 
-<h2>Adding animations</h2>
+<h2 id="adding-animations">Adding animations</h2>
 
 <p>This is where SwiftUI impresses. All I had to do was add one line to get nice default animations. Yes, you read that right. It was <strong>a one-line change</strong> to get animations out of the box.</p>
 
@@ -175,9 +198,9 @@
 
 <p>But wait, it gets better.</p>
 
-<h2>Custom animations</h2>
+<h2 id="custom-animations">Custom animations</h2>
 
-<p>This default animation is okay, but it is not what we want. You can see that item appearance animation doesn&#39;t look all that good. The item just fades in behind whatever was there previously.</p>
+<p>This default animation is okay, but it is not what we want. You can see that item appearance animation doesn’t look all that good. The item just fades in behind whatever was there previously.</p>
 
 <p>How can we improve this? Well, again, just a handful of lines of code. First, create a transition to describe what the animation should look like</p>
 
@@ -200,16 +223,16 @@
     <span class="o">.</span><span class="nf">transition</span><span class="p">(</span><span class="o">.</span><span class="n">custom</span><span class="p">)</span>
 <span class="p">}</span></code></pre></figure>
 
-<p>And that&#39;s it. With these changes, you get the nice animations that you saw at the top of this post. The code is <a href="https://github.com/curioustechizen/diff-animations-declarative-ui-frameworks/blob/swiftui_custom_animation/CircleDiffAnimationsSwiftUI/CircleDiffAnimations/CircularArrangementView.swift">here</a>.</p>
+<p>And that’s it. With these changes, you get the nice animations that you saw at the top of this post. The code is <a href="https://github.com/curioustechizen/diff-animations-declarative-ui-frameworks/blob/swiftui_custom_animation/CircleDiffAnimationsSwiftUI/CircleDiffAnimations/CircularArrangementView.swift">here</a>.</p>
 
-<p><strong>Note:</strong> There seems to be a problem with the Preview Canvas in XCode. It did not show the custom animation when I tried this code. Instead, it kept showing the default animation. Don&#39;t rely too much on the LivePreview feature, especially for animations.</p>
+<p><strong>Note:</strong> There seems to be a problem with the Preview Canvas in XCode. It did not show the custom animation when I tried this code. Instead, it kept showing the default animation. Don’t rely too much on the LivePreview feature, especially for animations.</p>
 
-<h3>Icing on the cake</h3>
+<h3 id="icing-on-the-cake">Icing on the cake</h3>
 
 <p>If you see the post on the Android implementation, you see this disclaimer:</p>
 
 <blockquote>
-<p>if you submit a list while animations for the previous diff are already in progress, it could crash</p>
+  <p>if you submit a list while animations for the previous diff are already in progress, it could crash</p>
 </blockquote>
 
 <p>What do we need to make our SwiftUI version handle this case? What happens if an animation is in progress and you click the Toggle button again?</p>
@@ -218,20 +241,20 @@
 
 <p><img src="/blog/assets/video/diff-circle-swiftui-interruptible.gif" alt="Default animation" style="max-height: 448px; max-width: 207px;" /></p>
 
-<h2>What&#39;s the catch?</h2>
+<h2 id="whats-the-catch">What’s the catch?</h2>
 
 <p>This automagical animation feature is fine for a lot of situations, but there are still a lot of them that it might not be able to handle. For example</p>
 
 <ol>
-<li>Choreographing the animations: If you look at the Android example, we wanted to perform the animations in a certain order (removals first, followed by moves and finally inserts). The SwiftUI version just animates everything simultaneously. You could probably play with <code>asymmetric(insertion:removal:)</code> to impose some ordering but it would be rather limited.</li>
-<li>Animations occur on individual items: What if you wanted the animation to occur in relation to the containing view? For example, what if you wanted to animate scrolling to a different row in a list when the currently &quot;selected&quot; one gets deleted? These are possible but would probably require a lot of code.</li>
+  <li>Choreographing the animations: If you look at the Android example, we wanted to perform the animations in a certain order (removals first, followed by moves and finally inserts). The SwiftUI version just animates everything simultaneously. You could probably play with <code class="highlighter-rouge">asymmetric(insertion:removal:)</code> to impose some ordering but it would be rather limited.</li>
+  <li>Animations occur on individual items: What if you wanted the animation to occur in relation to the containing view? For example, what if you wanted to animate scrolling to a different row in a list when the currently “selected” one gets deleted? These are possible but would probably require a lot of code.</li>
 </ol>
 
-<p>There are probably others that I&#39;m missing.</p>
+<p>There are probably others that I’m missing.</p>
 
-<h2>Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
-<p>SwiftUI is great for implementing animations. I had to barely write any code to achieve this pretty cool animation (it took me days to achieve the same on Android, and I&#39;ve several years of Android experience!). However, all of this magic does come with its own limitations and it is good to be aware of them before going all-in.</p>
+<p>SwiftUI is great for implementing animations. I had to barely write any code to achieve this pretty cool animation (it took me days to achieve the same on Android, and I’ve several years of Android experience!). However, all of this magic does come with its own limitations and it is good to be aware of them before going all-in.</p>
 
     </div>
     

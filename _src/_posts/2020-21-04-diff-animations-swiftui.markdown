@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Diff animations with SwiftUI"
+description: "SwiftUI: Recreating Android circular diff animations from a previous post using SwiftUI"
 date: 2020-04-21 21:00
 comments: true
 tags: [swiftui, animations]

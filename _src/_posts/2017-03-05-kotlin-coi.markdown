@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Delegates - Composition over Inheritance in Kotlin"
+description: "Using Kotlin's interface delegation feature to replace inheritance with composition"
 date:   2017-03-05 15:21:22
 comments: true
 tags: [kotlin]

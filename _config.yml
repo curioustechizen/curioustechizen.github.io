@@ -20,6 +20,8 @@ github: curioustechizen
 googleplus: 116652261752707476836
 stackoverflow: curioustechizen
 twitter: ki_run
+  username: ki_run
+  card: summary
 
 # Google Analytics (you may want to changes these with yours or even delete :)
 
@@ -28,14 +30,14 @@ ga_tracking_id: UA-66125769-1
 
 # Other (refer to http://jekyllrb.com/docs/home/ for further details on the below)
 
-markdown: redcarpet
+markdown: kramdown
 permalink: pretty
 highlighter: rouge
 
 paginate: 5
 paginate_path: "/page/:num"
 
-gems: [jekyll-paginate]
+gems: [jekyll-paginate, jekyll-seo-tag]
 
 # SCSS
 

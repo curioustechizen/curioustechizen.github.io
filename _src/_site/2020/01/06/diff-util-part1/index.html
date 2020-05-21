@@ -28,6 +28,29 @@
 
       
 
+      <!-- Begin Jekyll SEO tag v2.1.0 -->
+<title>What’s the big difference? A deep dive into Android DiffUtil - Curious Techizen</title>
+<meta property="og:title" content="What’s the big difference? A deep dive into Android DiffUtil" />
+<meta name="description" content="A 3 part series on Android’s DiffUtil; Part 1 is about the API and how to use it" />
+<meta property="og:description" content="A 3 part series on Android’s DiffUtil; Part 1 is about the API and how to use it" />
+<link rel="canonical" href="http://localhost:4000/blog/2020/01/06/diff-util-part1/" />
+<meta property="og:url" content="http://localhost:4000/blog/2020/01/06/diff-util-part1/" />
+<meta property="og:site_name" content="Curious Techizen" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-01-06T16:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Kiran Rao" />
+<script type="application/ld+json">
+{"@context": "http://schema.org",
+"@type": "BlogPosting",
+"headline": "What’s the big difference? A deep dive into Android DiffUtil",
+"datePublished": "2020-01-06T16:00:00+01:00",
+"description": "A 3 part series on Android’s DiffUtil; Part 1 is about the API and how to use it",
+"url": "http://localhost:4000/blog/2020/01/06/diff-util-part1/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
   </head>
 
   <body>
@@ -91,12 +114,12 @@
     <div itemprop="articleBody">
       <p>This is a series of posts that looks into calculating the diffs between two lists on Android. This first post in the series looks at the basics of what the DiffUtil is.</p>
 
-<h2>What&#39;s DiffUtil?</h2>
+<h2 id="whats-diffutil">What’s DiffUtil?</h2>
 
 <p>The <a href="https://developer.android.com/reference/androidx/recyclerview/widget/DiffUtil">docs for DiffUtil</a> describe it as</p>
 
 <blockquote>
-<p>DiffUtil is a utility class that calculates the difference between two lists and outputs a list of update operations that converts the first list into the second one.</p>
+  <p>DiffUtil is a utility class that calculates the difference between two lists and outputs a list of update operations that converts the first list into the second one.</p>
 </blockquote>
 
 <p>The selling point of this utility is it is nicely integrated with RecyclerView such that the following simple series of steps is sufficient to display nice animations for newly added items and disappearing items in the list.</p>
@@ -115,29 +138,29 @@
 
 <p><img src="/blog/assets/video/diff_basic.gif" alt="Basic diff animation" style="max-height: 512px; max-width: 288px;" /></p>
 
-<p>You could also achieve this effect using the <code>notifyItemXYZ</code> family of methods on <code>RecyclerView.Adapter</code>, if you maintain the list of items yourself and mutate it. However, in unidirectional data flow architectures, it is likely that you have an immutable list in your state. In those situations, <code>DiffUtil</code> is more suitable.</p>
+<p>You could also achieve this effect using the <code class="highlighter-rouge">notifyItemXYZ</code> family of methods on <code class="highlighter-rouge">RecyclerView.Adapter</code>, if you maintain the list of items yourself and mutate it. However, in unidirectional data flow architectures, it is likely that you have an immutable list in your state. In those situations, <code class="highlighter-rouge">DiffUtil</code> is more suitable.</p>
 
-<h2>DiffUtil API usage in detail</h2>
+<h2 id="diffutil-api-usage-in-detail">DiffUtil API usage in detail</h2>
 
-<p>Let&#39;s dig into how to use the API. Using DiffUtil consists of the following high-level steps</p>
+<p>Let’s dig into how to use the API. Using DiffUtil consists of the following high-level steps</p>
 
 <ol>
-<li>You tell the API how to compare items in the list (what constitutes a &quot;removal&quot;? What does a &quot;change&quot; mean?)</li>
-<li>You ask the API to calculate the diff and give you a result</li>
-<li>You use the DiffResult object to get called back for each update operation.</li>
+  <li>You tell the API how to compare items in the list (what constitutes a “removal”? What does a “change” mean?)</li>
+  <li>You ask the API to calculate the diff and give you a result</li>
+  <li>You use the DiffResult object to get called back for each update operation.</li>
 </ol>
 
-<p>Let&#39;s go through each step in more detail. We&#39;ll use a <code>Player</code> class like this for this example</p>
+<p>Let’s go through each step in more detail. We’ll use a <code class="highlighter-rouge">Player</code> class like this for this example</p>
 
 <figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="kd">data class</span> <span class="nc">Player</span><span class="p">(</span><span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="kd">val</span> <span class="py">score</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span></code></pre></figure>
 
-<h3>Step 1: Comparing list items</h3>
+<h3 id="step-1-comparing-list-items">Step 1: Comparing list items</h3>
 
-<p>DiffUtil tells you what items were removed, added and changed between 2 lists, but how does it know? Android chose to not use <code>equals</code> and <code>hashCode</code> for this purpose - instead having you extend a <code>DiffUtil.Callback</code> class. The relevant methods that you need to override are</p>
+<p>DiffUtil tells you what items were removed, added and changed between 2 lists, but how does it know? Android chose to not use <code class="highlighter-rouge">equals</code> and <code class="highlighter-rouge">hashCode</code> for this purpose - instead having you extend a <code class="highlighter-rouge">DiffUtil.Callback</code> class. The relevant methods that you need to override are</p>
 
 <ol>
-<li><code>areItemsTheSame()</code> - This method is used for <strong>identity comparison</strong>. In the case of the Player class above, 2 items have the same identity if they have the same name. We don&#39;t care about the score for this comparison</li>
-<li><code>areContentsTheSame()</code> - This method is used for <strong>equality comparison</strong>. In the case of the Player class, 2 items have the same contents if they have the same name and score.</li>
+  <li><code class="highlighter-rouge">areItemsTheSame()</code> - This method is used for <strong>identity comparison</strong>. In the case of the Player class above, 2 items have the same identity if they have the same name. We don’t care about the score for this comparison</li>
+  <li><code class="highlighter-rouge">areContentsTheSame()</code> - This method is used for <strong>equality comparison</strong>. In the case of the Player class, 2 items have the same contents if they have the same name and score.</li>
 </ol>
 
 <p>The latter is used to tell you if an item retained the same identity but its contents changed. This can be useful for item change animations (for example, if a user liked a tweet you can animate the heart icon using this feature)</p>
@@ -157,62 +180,62 @@
         <span class="n">oldList</span><span class="p">[</span><span class="n">oldItemPosition</span><span class="p">]</span> <span class="p">==</span> <span class="n">newList</span><span class="p">[</span><span class="n">newItemPosition</span><span class="p">]</span>
 <span class="p">}</span></code></pre></figure>
 
-<h3>Step 2: Calculating the diff</h3>
+<h3 id="step-2-calculating-the-diff">Step 2: Calculating the diff</h3>
 
 <p>This step is a one-liner</p>
 
 <figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="kd">val</span> <span class="py">diffResult</span> <span class="p">=</span> <span class="n">DiffUtil</span><span class="p">.</span><span class="n">calculateDiff</span><span class="p">(</span><span class="n">PlayerDiffCallback</span><span class="p">(</span><span class="n">oldList</span><span class="p">,</span> <span class="n">newList</span><span class="p">))</span></code></pre></figure>
 
-<p>However, there&#39;s a lot going on behind the scenes. <code>calculateDiff</code> implements the standard algorithm used for diffing: Eugene Myers diff algorithm. This is also the algorithm used by diff tools like <code>git diff</code> and text editors. It is not necessary to know the implementation details of this algorithm, but if you are interested, you can go through <a href="https://blog.jcoglan.com/2017/02/12/the-myers-diff-algorithm-part-1/">this article</a>.</p>
+<p>However, there’s a lot going on behind the scenes. <code class="highlighter-rouge">calculateDiff</code> implements the standard algorithm used for diffing: Eugene Myers diff algorithm. This is also the algorithm used by diff tools like <code class="highlighter-rouge">git diff</code> and text editors. It is not necessary to know the implementation details of this algorithm, but if you are interested, you can go through <a href="https://blog.jcoglan.com/2017/02/12/the-myers-diff-algorithm-part-1/">this article</a>.</p>
 
-<p>DiffUtil can also detect moves. If the position of an item in the list changes, then instead of reporting it as a removal followed by an insertion, DiffUtil can report it as a move from position A to position B. You do this by passing <code>true</code> to the second argument (<code>detectMoves</code>)</p>
+<p>DiffUtil can also detect moves. If the position of an item in the list changes, then instead of reporting it as a removal followed by an insertion, DiffUtil can report it as a move from position A to position B. You do this by passing <code class="highlighter-rouge">true</code> to the second argument (<code class="highlighter-rouge">detectMoves</code>)</p>
 
 <p>We will ignore moves for the rest of this series.</p>
 
-<h3>Step 3: Using the DiffResult</h3>
+<h3 id="step-3-using-the-diffresult">Step 3: Using the DiffResult</h3>
 
-<p>This is the step where I found the API to be a bit ... unexpected. I would expect the DiffResult to give me a collection of update operations in the order that they need to be performed (something like a <code>List&lt;DiffOperation&gt;</code>). Instead, you need to call one of the <code>dispatchUpdatesTo</code> overloads:</p>
+<p>This is the step where I found the API to be a bit … unexpected. I would expect the DiffResult to give me a collection of update operations in the order that they need to be performed (something like a <code class="highlighter-rouge">List&lt;DiffOperation&gt;</code>). Instead, you need to call one of the <code class="highlighter-rouge">dispatchUpdatesTo</code> overloads:</p>
 
 <ol>
-<li><code>dispatchUpdatesTo(adapter: Adapter)</code>: This is the one that you&#39;ll probably use 99% of the time. You pass on the results to your existing RecyclerView adapter and you get all those animations automagically.</li>
-<li><code>dispatchUpdatesTo(updateCallback: ListUpdateCallback)</code>: You use this if you want custom animations. In a later post in this series, we&#39;ll look at an example where you might need this.</li>
+  <li><code class="highlighter-rouge">dispatchUpdatesTo(adapter: Adapter)</code>: This is the one that you’ll probably use 99% of the time. You pass on the results to your existing RecyclerView adapter and you get all those animations automagically.</li>
+  <li><code class="highlighter-rouge">dispatchUpdatesTo(updateCallback: ListUpdateCallback)</code>: You use this if you want custom animations. In a later post in this series, we’ll look at an example where you might need this.</li>
 </ol>
 
-<h3><code>ListUpdateCallback</code> in detail</h3>
+<h3 id="listupdatecallback-in-detail"><code class="highlighter-rouge">ListUpdateCallback</code> in detail</h3>
 
 <p><a href="https://developer.android.com/reference/androidx/recyclerview/widget/ListUpdateCallback.html">This interface</a> has the following methods:</p>
 
 <ul>
-<li><code>onChanged(position: Int, count: Int, payload: Any?)</code>: This is called when DiffUtil detects that <code>count</code> items have changed starting at <code>position</code>.</li>
-<li><code>onInserted(position: Int, count: Int)</code>: This is called when DiffUtil determines that <code>count</code> elements have been inserted into the old list starting at <code>position</code></li>
-<li><code>onRemoved(position: Int, count: Int)</code>: This is called when DiffUtil determines that <code>count</code> elements have been removed from the old list starting at <code>position</code></li>
+  <li><code class="highlighter-rouge">onChanged(position: Int, count: Int, payload: Any?)</code>: This is called when DiffUtil detects that <code class="highlighter-rouge">count</code> items have changed starting at <code class="highlighter-rouge">position</code>.</li>
+  <li><code class="highlighter-rouge">onInserted(position: Int, count: Int)</code>: This is called when DiffUtil determines that <code class="highlighter-rouge">count</code> elements have been inserted into the old list starting at <code class="highlighter-rouge">position</code></li>
+  <li><code class="highlighter-rouge">onRemoved(position: Int, count: Int)</code>: This is called when DiffUtil determines that <code class="highlighter-rouge">count</code> elements have been removed from the old list starting at <code class="highlighter-rouge">position</code></li>
 </ul>
 
 <p>Some important points to note here:</p>
 
 <ol>
-<li>These methods <strong>atomic</strong>: the <code>position</code> argument reported in every method is with reference to the <em>list as it was after the previous step</em>, not as it was at the beginning of the diff operation.</li>
-<li>The <code>count</code> parameter in these methods makes it so that only consecutive similar changes are grouped together, not disjoint ones. </li>
+  <li>These methods <strong>atomic</strong>: the <code class="highlighter-rouge">position</code> argument reported in every method is with reference to the <em>list as it was after the previous step</em>, not as it was at the beginning of the diff operation.</li>
+  <li>The <code class="highlighter-rouge">count</code> parameter in these methods makes it so that only consecutive similar changes are grouped together, not disjoint ones.</li>
 </ol>
 
-<p>Point 2 above merits more discussion. To put it another way, if items at position 0 and 2 are deleted, DiffUtil reports it as &quot;Hey item 2 was removed&quot; and &quot;Hey item 0 was removed&quot; as separate callbacks instead of telling you &quot;Hey items 0 and 2 were removed&quot; in a single callback. This follows as a consequence of point 1 because each disjoint operation might have altered the structure of the list.</p>
+<p>Point 2 above merits more discussion. To put it another way, if items at position 0 and 2 are deleted, DiffUtil reports it as “Hey item 2 was removed” and “Hey item 0 was removed” as separate callbacks instead of telling you “Hey items 0 and 2 were removed” in a single callback. This follows as a consequence of point 1 because each disjoint operation might have altered the structure of the list.</p>
 
-<p>The API designed this way allows you to basically endlessly &quot;stream&quot; diff operations from DiffResult to your UI component. This is powerful, but can also have downsides (as we will see in a future post).</p>
+<p>The API designed this way allows you to basically endlessly “stream” diff operations from DiffResult to your UI component. This is powerful, but can also have downsides (as we will see in a future post).</p>
 
-<h4>Position conversions</h4>
+<h4 id="position-conversions">Position conversions</h4>
 
-<p>In addition to <code>ListUpdateCallback</code>, there are 2 additional API&#39;s offered by <code>DiffResult</code></p>
+<p>In addition to <code class="highlighter-rouge">ListUpdateCallback</code>, there are 2 additional API’s offered by <code class="highlighter-rouge">DiffResult</code></p>
 
 <ol>
-<li><code>convertOldPositionToNew(oldListPosition: Int)</code></li>
-<li><code>convertNewPositionToOld(newListPosition: Int)</code></li>
+  <li><code class="highlighter-rouge">convertOldPositionToNew(oldListPosition: Int)</code></li>
+  <li><code class="highlighter-rouge">convertNewPositionToOld(newListPosition: Int)</code></li>
 </ol>
 
-<p>They do what their names suggest. When would you use these? Remember that when one of the ListUpdate callbacks has been dispatched, the number of items in the list might have changed. An item at index <code>i</code> in the new list might not represent the same item at index <code>i</code> in the old list (it might not even exist in the old list). This pair of conversion methods is useful in such situations. One example is for animations, where you need to access the same view in both the old and new layouts.</p>
+<p>They do what their names suggest. When would you use these? Remember that when one of the ListUpdate callbacks has been dispatched, the number of items in the list might have changed. An item at index <code class="highlighter-rouge">i</code> in the new list might not represent the same item at index <code class="highlighter-rouge">i</code> in the old list (it might not even exist in the old list). This pair of conversion methods is useful in such situations. One example is for animations, where you need to access the same view in both the old and new layouts.</p>
 
-<h2>Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 
-<p>In this post, we got an introduction to DiffUtil and how to use it. We also peeked under the hood into <code>ListUpdateCallback</code>, but we haven&#39;t used it in an example yet.</p>
+<p>In this post, we got an introduction to DiffUtil and how to use it. We also peeked under the hood into <code class="highlighter-rouge">ListUpdateCallback</code>, but we haven’t used it in an example yet.</p>
 
 <p>In the next post in this series, we will conduct a brief survey of how other platforms handle list diffs.</p>
 

@@ -3,7 +3,7 @@
 
 	<url>
 	 	<loc>http://localhost:4000/blog/</loc>
-	 	<lastmod>2020-04-21</lastmod>
+	 	<lastmod>2020-05-21</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
@@ -191,7 +191,7 @@
 
 	<url>
 		<loc>http://localhost:4000/blog/tags/</loc>
-		<lastmod>2020-04-21</lastmod>
+		<lastmod>2020-05-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 
@@ -239,7 +239,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/android/</loc>
-		<lastmod>2020-04-21</lastmod>
+		<lastmod>2020-05-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -332,7 +332,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/aosp/</loc>
-		<lastmod>2020-04-21</lastmod>
+		<lastmod>2020-05-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -341,7 +341,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/studio/</loc>
-		<lastmod>2020-04-21</lastmod>
+		<lastmod>2020-05-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -350,7 +350,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/java8/</loc>
-		<lastmod>2020-04-21</lastmod>
+		<lastmod>2020-05-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -359,7 +359,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/lambda/</loc>
-		<lastmod>2020-04-21</lastmod>
+		<lastmod>2020-05-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -368,7 +368,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/kotlin/</loc>
-		<lastmod>2020-04-21</lastmod>
+		<lastmod>2020-05-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -377,7 +377,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/effectivejava/</loc>
-		<lastmod>2020-04-21</lastmod>
+		<lastmod>2020-05-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -386,7 +386,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/next-billion/</loc>
-		<lastmod>2020-04-21</lastmod>
+		<lastmod>2020-05-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -395,7 +395,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/android-go/</loc>
-		<lastmod>2020-04-21</lastmod>
+		<lastmod>2020-05-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -404,7 +404,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/diff/</loc>
-		<lastmod>2020-04-21</lastmod>
+		<lastmod>2020-05-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -413,7 +413,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/gradle/</loc>
-		<lastmod>2020-04-21</lastmod>
+		<lastmod>2020-05-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -422,7 +422,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/swiftui/</loc>
-		<lastmod>2020-04-21</lastmod>
+		<lastmod>2020-05-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -431,7 +431,7 @@
 	
 	<url>
 		<loc>http://localhost:4000/blog/tags/animations/</loc>
-		<lastmod>2020-04-21</lastmod>
+		<lastmod>2020-05-21</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
