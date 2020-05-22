@@ -26,3 +26,5 @@ swiftui:
   name: SwiftUI
 animations:
   name: Animations
+flutter:
+  name: Flutter

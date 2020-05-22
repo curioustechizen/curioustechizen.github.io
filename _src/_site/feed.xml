@@ -5,9 +5,168 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>https://kiranrao.in/blog/</link>
     <atom:link href="https://kiranrao.in/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 21 May 2020 14:50:24 +0200</pubDate>
-    <lastBuildDate>Thu, 21 May 2020 14:50:24 +0200</lastBuildDate>
+    <pubDate>Fri, 22 May 2020 14:10:33 +0200</pubDate>
+    <lastBuildDate>Fri, 22 May 2020 14:10:33 +0200</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Stateless widget animations in Flutter</title>
+        <description>&lt;p&gt;I’m a Flutter newbie (my day job is Android developer), and it took me some time to understand how animations work in Flutter. In particular, most posts and videos on this topic show how to achieve one of these:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;How to animate properties of a State&lt;em&gt;less&lt;/em&gt; widget between a fixed pair of start and end values&lt;/li&gt;
+  &lt;li&gt;How to animate properties of a State&lt;em&gt;ful&lt;/em&gt; widget from whatever the current value is, to an end value.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;What I wanted to achieve was a mix of the two. My objective was:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Animate a State&lt;strong&gt;less&lt;/strong&gt; widget to an end value, beginning with whatever the &lt;em&gt;current&lt;/em&gt; value is&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In this post, we’re going to look at exactly that.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;TL;DR:&lt;/strong&gt; Within your Stateless widget, use an implicit animation (a widget that extend from &lt;code class=&quot;highlighter-rouge&quot;&gt;ImplicitlyAnimatedWidget&lt;/code&gt;) to animate the properties you wish to.&lt;/p&gt;
+
+&lt;p&gt;This is the animation that we are going to build.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/video/flutter_stateless_animation.gif&quot; alt=&quot;Flutter stateless animation&quot; style=&quot;max-height: 200px; max-width: 200px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see, it is a very simple animation. Every time you tap the container, it animates:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;The background color (this animates between a shade of blue and completely transparent)&lt;/li&gt;
+  &lt;li&gt;A drop shadow for the background&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;These properties are applied wrapping our content in a &lt;code class=&quot;highlighter-rouge&quot;&gt;DecoratedBox&lt;/code&gt; widget, and applying these properties as a &lt;code class=&quot;highlighter-rouge&quot;&gt;BoxDecoration(color:, borderRadius:, boxShadow:[])&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;starting-point-one-time-animation&quot;&gt;Starting point: One-time animation&lt;/h2&gt;
+
+&lt;p&gt;To start off, we’ll see how to achieve this as a one-time animation, without the tap handling. This requires us to create a &lt;code class=&quot;highlighter-rouge&quot;&gt;StatefulWidget&lt;/code&gt;, provide an &lt;code class=&quot;highlighter-rouge&quot;&gt;AnimationController&lt;/code&gt; and provide a tween. All this is pretty standard for making an animation in Flutter.&lt;/p&gt;
+
+&lt;p&gt;Here’s the tween definition&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;  &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DecorationTween&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decorationTween&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DecorationTween&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;end:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BoxDecoration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;color:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kSelectedColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;withAlpha&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;borderRadius:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kSelectedBorderRadius&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;boxShadow:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BoxShadow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;[&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;BoxShadow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;nl&quot;&gt;color:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kSelectedColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;withOpacity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+            &lt;span class=&quot;nl&quot;&gt;blurRadius:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;8.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;nl&quot;&gt;offset:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kSelectedShadowOffset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;begin:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BoxDecoration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;color:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kUnselectedColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;borderRadius:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kSelectedBorderRadius&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;// No shadow.&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;And here’s how we use it inside of a &lt;code class=&quot;highlighter-rouge&quot;&gt;DecoratedBoxTransition&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DecoratedBoxTransition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;decoration:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decorationTween&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;animate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_controller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;child:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Container&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/*Rest of the content*/&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You can see the full runnable example on &lt;a href=&quot;https://dartpad.dev/9e9d8a42de5ec14ee6e61f75b71953c8&quot;&gt;this DartPad snippet&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;toggling-between-states-on-tap&quot;&gt;Toggling between states on tap&lt;/h2&gt;
+
+&lt;p&gt;As the next step, we’ll introduce an &lt;code class=&quot;highlighter-rouge&quot;&gt;isSelected&lt;/code&gt; state that we toggle when the user taps on our widget. This allows us to make the animation go forward/reverse depending on the state.&lt;/p&gt;
+
+&lt;p&gt;First, we introduce a bool field in our state class&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_isSelected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Then, in our &lt;code class=&quot;highlighter-rouge&quot;&gt;build&lt;/code&gt; method we wrap our &lt;code class=&quot;highlighter-rouge&quot;&gt;DecoratedBoxTransition&lt;/code&gt; in a &lt;code class=&quot;highlighter-rouge&quot;&gt;GestureDetector&lt;/code&gt; to handle taps&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;GestureDetector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;onTap:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_handleTap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;child:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DecoratedBoxTransition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/*Rest of the code as before*/&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Finally, instead of starting the animation in &lt;code class=&quot;highlighter-rouge&quot;&gt;initState()&lt;/code&gt;, we start the animation in either forward or reverse direction in &lt;code class=&quot;highlighter-rouge&quot;&gt;_handleTap&lt;/code&gt;, depending on the &lt;code class=&quot;highlighter-rouge&quot;&gt;_isSelected&lt;/code&gt; state. And of course, we need to update the state by calling &lt;code class=&quot;highlighter-rouge&quot;&gt;setState()&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;  &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_handleTap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;_isSelected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_controller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;reverse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_controller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;forward&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;setState&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;_isSelected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_isSelected&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You can see this in action on &lt;a href=&quot;https://dartpad.dev/b424985022624c3d8c94a0ea184d5699&quot;&gt;this Dartpad&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;going-stateless&quot;&gt;Going Stateless&lt;/h2&gt;
+
+&lt;p&gt;The previous solutions both work, but what I really wanted was to make my widget stateless. The reason is that in my app, state is managed outside the widgets. When a user taps on a widget, it simply calls a &lt;code class=&quot;highlighter-rouge&quot;&gt;Function&lt;/code&gt; that was passed to it. I have a different component in my architecture that updates the state and passes back the new &lt;code class=&quot;highlighter-rouge&quot;&gt;isSelected&lt;/code&gt; to me.&lt;/p&gt;
+
+&lt;p&gt;So, can we just cheat and give the &lt;code class=&quot;highlighter-rouge&quot;&gt;DecoratedBoxTransition&lt;/code&gt; only the end value so that it begins with whatever the current value is?&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//Does NOT work - throws an exception&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;DecorationTween&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decorationTween&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DecorationTween&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;end:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_isSelected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_boxDecorationSelected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_boxDecorationUnselected&lt;/span&gt;
+   &lt;span class=&quot;c1&quot;&gt;// Don't provide a begin&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Unfortunately, this does not work. &lt;code class=&quot;highlighter-rouge&quot;&gt;DecoratedBoxTransition&lt;/code&gt; expects both &lt;code class=&quot;highlighter-rouge&quot;&gt;begin&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;end&lt;/code&gt; to be not null. This is because &lt;code class=&quot;highlighter-rouge&quot;&gt;DecoratedBoxTransition&lt;/code&gt; is not an &lt;code class=&quot;highlighter-rouge&quot;&gt;ImplicitlyAnimatedWidget&lt;/code&gt;. Understanding this was a light bulb moment for me.&lt;/p&gt;
+
+&lt;p&gt;To achieve what I want, what we really need is an implicit animation. Is there one that suits my needs? Indeed, there is.&lt;/p&gt;
+
+&lt;h3 id=&quot;enter-animatedcontainer&quot;&gt;Enter, &lt;code class=&quot;highlighter-rouge&quot;&gt;AnimatedContainer&lt;/code&gt;.&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;AnimatedContainer&lt;/code&gt; is an &lt;code class=&quot;highlighter-rouge&quot;&gt;ImplicitlyAnimatedWidget&lt;/code&gt; and it allows setting several properties of a child, including &lt;code class=&quot;highlighter-rouge&quot;&gt;constraints&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;paddding&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt; and, the one relevant for us: &lt;code class=&quot;highlighter-rouge&quot;&gt;decoration&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;So, all I had to do was replace &lt;code class=&quot;highlighter-rouge&quot;&gt;DecoratedBoxTransition&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;AnimatedContainer&lt;/code&gt; and voila! My widget works exactly as I expect it to.&lt;/p&gt;
+
+&lt;p&gt;Some relevant pieces of code: First, make the widget completely stateless by passing in the &lt;code class=&quot;highlighter-rouge&quot;&gt;isSelected&lt;/code&gt; and a function to handle taps as constructor parameters:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;  &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isSelected&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;onSelectionChanged&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Then, in the build method, return an &lt;code class=&quot;highlighter-rouge&quot;&gt;AnimatedContainer&lt;/code&gt;, passing in a &lt;code class=&quot;highlighter-rouge&quot;&gt;decoration&lt;/code&gt; object that conditionally returns either an empty decoration or the one we want.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;  &lt;span class=&quot;nd&quot;&gt;@override&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Widget&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BuildContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GestureDetector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;onTap:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;onSelectionChanged&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;child:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AnimatedContainer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;nl&quot;&gt;decoration:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BoxDecoration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;nl&quot;&gt;color:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;isSelected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kSelectedColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;withAlpha&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kUnselectedColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;nl&quot;&gt;borderRadius:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BorderRadius&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;circular&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+            &lt;span class=&quot;nl&quot;&gt;boxShadow:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isSelected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;_selectedBoxShadow:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+        &lt;span class=&quot;nl&quot;&gt;duration:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Duration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;milliseconds:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;350&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+        &lt;span class=&quot;nl&quot;&gt;curve:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Curves&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;easeInOut&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;nl&quot;&gt;child:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MyContent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You can see the full working sample on &lt;a href=&quot;https://dartpad.dev/1dc8122b218795f118dbfd4339538397&quot;&gt;this Dartpad&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;gotchas&quot;&gt;Gotchas&lt;/h3&gt;
+
+&lt;p&gt;I was able to get away with using a Stateless widget in my case because there already existed an &lt;code class=&quot;highlighter-rouge&quot;&gt;ImplicitlyAnimatedWidget&lt;/code&gt; that fulfils my needs. This might not always be the case, so you might end up needing to make your widget stateful anyway. If you are faced with this situation, you might also consider creating your own subclass of &lt;code class=&quot;highlighter-rouge&quot;&gt;ImplicitlyAnimatedWidget&lt;/code&gt; to perform the animation - so that you can keep your actual widget stateless.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;In this post, we saw how to use implicit animations in Flutter to keep your widget stateless, and what the limitations are.&lt;/p&gt;
+
+&lt;p&gt;To see a real world use of the techniques described in this post, see the &lt;a href=&quot;https://github.com/curioustechizen/covid19india-flutter&quot;&gt;Covid19-India flutter app&lt;/a&gt; (where you switch between the categories like “active”, “recovered” etc.)&lt;/p&gt;
+</description>
+        <pubDate>Thu, 21 May 2020 21:00:00 +0200</pubDate>
+        <link>https://kiranrao.in/blog/2020/05/21/flutter-stateless-animations/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2020/05/21/flutter-stateless-animations/</guid>
+        
+        <category>flutter</category>
+        
+        <category>animations</category>
+        
+        
+      </item>
     
       <item>
         <title>Diff animations with SwiftUI</title>
@@ -1281,57 +1440,6 @@ At first glance, one might conclude that lambdas will be used only if &lt;code c
         <category>java8</category>
         
         <category>lambda</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>AO(sp)y Part 1</title>
-        <description>&lt;p&gt;This post is the first in a series (hopefully) in which I spy on AOSP (hence the title - yes, I know I’m not winning any prizes for creative blog post titles!) and try to gather glimpses of what’s coming to the world of Android.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; Most of this is guess work. In many cases I’m not even looking at any code - the commit messages and review comments are as far I go. Do not make any decisions based on this post!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;In this first episode, we will look at improvements coming to Android Studio (most probably in 1.4)&lt;/p&gt;
-
-&lt;p&gt;###Material Icon Picker&lt;/p&gt;
-
-&lt;p&gt;There &lt;a href=&quot;https://plugins.jetbrains.com/plugin/7647?pr=androidstudio&quot;&gt;already exist&lt;/a&gt; plugins for Android Studio that make it easy for you to include Material Design icons in your project. Google is &lt;a href=&quot;https://android-review.googlesource.com/#/c/155698/&quot;&gt;working on&lt;/a&gt; bringing something similar into the Android Studio.&lt;/p&gt;
-
-&lt;p&gt;Now, I haven’t actually checked out this code and built it so I don’t know what the picker actually looks like, but it would be a safe bet to assume that it’ll be integrated into the existing “Asset Studio” (which itself started as a web app, then found its way into Eclipse and in its current avatar, it is part of AS).&lt;/p&gt;
-
-&lt;p&gt;###Material Color Suggestor&lt;/p&gt;
-
-&lt;p&gt;If I want to change the color palette of my app today, I need to go to http://www.materialpalette.com/ and choose my colors there and finally download the styles.xml file. &lt;a href=&quot;https://android-review.googlesource.com/#/c/156624/&quot;&gt;This feature&lt;/a&gt; will make it easy for you to set your material color palette from within Android Studio. Moreover, the tool is a color suggestor - you choose a primary color and AS will suggest a primaryDark and an accent color that goes with it according to the material design specs.&lt;/p&gt;
-
-&lt;p&gt;###Import SVG as Vector Drawable&lt;/p&gt;
-
-&lt;p&gt;Again, there &lt;a href=&quot;http://inloop.github.io/svg2android/&quot;&gt;already exist&lt;/a&gt; tools to convert an SVG file into an Android-compatibe Vector Drawable, but it would be nice to have &lt;a href=&quot;https://android-review.googlesource.com/#/c/163309/&quot;&gt;this functionality&lt;/a&gt; right in Studio.&lt;/p&gt;
-
-&lt;p&gt;###VectorDrawable to PNG&lt;/p&gt;
-
-&lt;p&gt;This is not an Android Studio feature - rather it is a &lt;a href=&quot;https://android-review.googlesource.com/#/c/162815/&quot;&gt;Gradle feature&lt;/a&gt;. It will convert vector drawables into PNGs for use with pre-Lollipop. This will be done at build time. I’m not sure if this means that we can do away with creating those &lt;code class=&quot;highlighter-rouge&quot;&gt;drawable-*hdpi&lt;/code&gt; PNGs altogether though.&lt;/p&gt;
-
-&lt;p&gt;###New Layout Editor&lt;/p&gt;
-
-&lt;p&gt;There is a &lt;a href=&quot;https://android-review.googlesource.com/#/c/159435/&quot;&gt;large list of commits&lt;/a&gt; mentioning the “Nele” which seems to be an internal acronym for New Layout Editor. A cursory glance at it did not reveal much about what exactly is new in this layout editor. However, it is possible that this info is there buried somewhere in one of the 49 related commits and that I have missed it. One thing is for sure - this is a pretty big change and Google wouldn’t have embarked on it if it wouldn’t bring significant advantages to developers.&lt;/p&gt;
-
-&lt;p&gt;###AppBar creation in AS&lt;/p&gt;
-
-&lt;p&gt;Android Studio is &lt;a href=&quot;https://android-review.googlesource.com/#/c/162681/&quot;&gt;gaining the capability&lt;/a&gt; to include an AppBar when you use the templates to create a new Activity. According to the commit message, this will be optional. Also, a dependency on the design support library will be included by default for new projects. This is a very welcome change.&lt;/p&gt;
-
-&lt;p&gt;Stay tuned for Part 2 where we go beyond the IDE and dig a little deeper into the toolchain.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 12 Aug 2015 00:00:00 +0200</pubDate>
-        <link>https://kiranrao.in/blog/2015/08/12/ao-spy-1/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2015/08/12/ao-spy-1/</guid>
-        
-        <category>aosp</category>
-        
-        <category>studio</category>
-        
-        <category>android</category>
         
         
       </item>
