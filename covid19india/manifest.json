@@ -1,11 +1,11 @@
 {
-    "name": "flutter_web_sample",
-    "short_name": "flutter_web_sample",
+    "name": "Covid 19 India Flutter App",
+    "short_name": "Covid19 India Flutter",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Landing page for Covid 19 India Flutter App",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
