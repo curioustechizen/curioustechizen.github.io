@@ -3,10 +3,16 @@
 
 	<url>
 	 	<loc>https://kiranrao.in/blog/</loc>
-	 	<lastmod>2020-05-22</lastmod>
+	 	<lastmod>2020-10-24</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
+	
+	<url>
+	 	<loc>https://kiranrao.in/blog/2020/10/24/falsehoods-about-addresses/</loc>
+	 	<lastmod>2020-10-24</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
 	
 	<url>
 	 	<loc>https://kiranrao.in/blog/2020/05/21/flutter-stateless-animations/</loc>
@@ -197,7 +203,7 @@
 
 	<url>
 		<loc>https://kiranrao.in/blog/tags/</loc>
-		<lastmod>2020-05-22</lastmod>
+		<lastmod>2020-10-24</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 
@@ -245,7 +251,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/android/</loc>
-		<lastmod>2020-05-22</lastmod>
+		<lastmod>2020-10-24</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -338,7 +344,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/aosp/</loc>
-		<lastmod>2020-05-22</lastmod>
+		<lastmod>2020-10-24</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -347,7 +353,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/studio/</loc>
-		<lastmod>2020-05-22</lastmod>
+		<lastmod>2020-10-24</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -356,7 +362,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/java8/</loc>
-		<lastmod>2020-05-22</lastmod>
+		<lastmod>2020-10-24</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -365,7 +371,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/lambda/</loc>
-		<lastmod>2020-05-22</lastmod>
+		<lastmod>2020-10-24</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -374,7 +380,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/kotlin/</loc>
-		<lastmod>2020-05-22</lastmod>
+		<lastmod>2020-10-24</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -383,7 +389,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/effectivejava/</loc>
-		<lastmod>2020-05-22</lastmod>
+		<lastmod>2020-10-24</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -392,7 +398,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/next-billion/</loc>
-		<lastmod>2020-05-22</lastmod>
+		<lastmod>2020-10-24</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -401,7 +407,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/android-go/</loc>
-		<lastmod>2020-05-22</lastmod>
+		<lastmod>2020-10-24</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -410,7 +416,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/diff/</loc>
-		<lastmod>2020-05-22</lastmod>
+		<lastmod>2020-10-24</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -419,7 +425,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/gradle/</loc>
-		<lastmod>2020-05-22</lastmod>
+		<lastmod>2020-10-24</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -428,7 +434,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/swiftui/</loc>
-		<lastmod>2020-05-22</lastmod>
+		<lastmod>2020-10-24</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -437,7 +443,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/animations/</loc>
-		<lastmod>2020-05-22</lastmod>
+		<lastmod>2020-10-24</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -446,7 +452,16 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/flutter/</loc>
-		<lastmod>2020-05-22</lastmod>
+		<lastmod>2020-10-24</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	
+	
+	
+	
+	<url>
+		<loc>https://kiranrao.in/blog/tags/falsehoods/</loc>
+		<lastmod>2020-10-24</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	

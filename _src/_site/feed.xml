@@ -5,9 +5,96 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>https://kiranrao.in/blog/</link>
     <atom:link href="https://kiranrao.in/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 22 May 2020 14:10:33 +0200</pubDate>
-    <lastBuildDate>Fri, 22 May 2020 14:10:33 +0200</lastBuildDate>
+    <pubDate>Sat, 24 Oct 2020 17:06:22 +0200</pubDate>
+    <lastBuildDate>Sat, 24 Oct 2020 17:06:22 +0200</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Falsehoods programmers believe about addresses</title>
+        <description>&lt;p&gt;I’ve spent the better part of the last three years developing a navigation app at work. It includes features like&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Searching for a location&lt;/li&gt;
+  &lt;li&gt;Adding a location to favorites&lt;/li&gt;
+  &lt;li&gt;Turn by turn navigation to a destination&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I had the seemingly simple task of splitting an address into two parts for displaying in the user interface (line 1 and line 2). The exact mechanism of the split didn’t matter as long as it could be reasonably split.&lt;/p&gt;
+
+&lt;p&gt;Here as some examples of how I presumed it could be split depending on the length of the address&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Line 1 = Place Name; Line 2 = address&lt;/li&gt;
+  &lt;li&gt;Line 1 = Place name, number, street; Line 2 = city, state&lt;/li&gt;
+  &lt;li&gt;Line 1 = Place name, number; Line 2 = street, city&lt;/li&gt;
+  &lt;li&gt;… and so on&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Simple, right? Wrong.&lt;/p&gt;
+
+&lt;p&gt;Over the course, I’ve made several assumptions about addresses that turned out to be incorrect. This post attempts to list the things I learned about addresses.&lt;/p&gt;
+
+&lt;p&gt;This post is inspired by other “Falsehood programmers believe” posts (and hence uses a similar format). In fact, there’s a &lt;a href=&quot;https://github.com/kdeldycke/awesome-falsehood&quot;&gt;GitHub repo&lt;/a&gt; that lists all such posts. Other people before me have already made “Falsehoods about addresses” lists, but I’m making one based on my own experience.&lt;/p&gt;
+
+&lt;p&gt;So, let’s get right to the falsehoods. Every one of the statements below is false.&lt;/p&gt;
+
+&lt;p&gt;About &lt;strong&gt;locations&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Every location has a unique address. This is false: every location has a unique &lt;em&gt;geocoordinate&lt;/em&gt; (lat-long), or other such &lt;em&gt;identifier&lt;/em&gt; like &lt;a href=&quot;https://maps.google.com/pluscodes/&quot;&gt;Google Plus Codes&lt;/a&gt; or &lt;a href=&quot;https://what3words.com/about-us/&quot;&gt;what3words&lt;/a&gt;, but it does not have a unique &lt;em&gt;address&lt;/em&gt;.&lt;/li&gt;
+  &lt;li&gt;A location has an address&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;About &lt;strong&gt;addresses&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The concept of an address is universal&lt;/li&gt;
+  &lt;li&gt;What constitutes an address is universal&lt;/li&gt;
+  &lt;li&gt;An address has a number&lt;/li&gt;
+  &lt;li&gt;An address identifies a single house/shop/office&lt;/li&gt;
+  &lt;li&gt;An address has a street name&lt;/li&gt;
+  &lt;li&gt;An address has a post code/zip code/pin code&lt;/li&gt;
+  &lt;li&gt;An address has a neighborhood/locality name&lt;/li&gt;
+  &lt;li&gt;An address has a place name&lt;/li&gt;
+  &lt;li&gt;An address is hierarchical (number, street, city, state, country)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;User interface&lt;/strong&gt; related:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;An address has sufficient info to make sense in a user interface&lt;/li&gt;
+  &lt;li&gt;An address, when shortened (ellipsized etc) to fit on a user interface, still gives enough context to the user&lt;/li&gt;
+  &lt;li&gt;An address fits on one screen on a mobile phone with a readable font size&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;About &lt;strong&gt;streets&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;A street has a name&lt;/li&gt;
+  &lt;li&gt;A street name is unique in a city&lt;/li&gt;
+  &lt;li&gt;A street name is unique in a locality&lt;/li&gt;
+  &lt;li&gt;A road number (like highway number) is unique in a locality&lt;/li&gt;
+  &lt;li&gt;A road number uniquely identifies a road&lt;/li&gt;
+  &lt;li&gt;A neighborhood/locality name is unique in a city&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;About &lt;strong&gt;directions&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;What constitutes a navigation instruction is universal&lt;/li&gt;
+  &lt;li&gt;A navigation instruction at a point is unambiguous&lt;/li&gt;
+  &lt;li&gt;Restrictions applied to navigation (like avoid highways, avoid tolls etc) are unambiguous&lt;/li&gt;
+  &lt;li&gt;Navigation directions are user-friendly (this one is an opinion, and not a fact)&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sat, 24 Oct 2020 11:00:00 +0200</pubDate>
+        <link>https://kiranrao.in/blog/2020/10/24/falsehoods-about-addresses/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2020/10/24/falsehoods-about-addresses/</guid>
+        
+        <category>falsehoods</category>
+        
+        
+      </item>
     
       <item>
         <title>Stateless widget animations in Flutter</title>
@@ -1358,88 +1445,6 @@ apply from: '../flavors.gradle'
         <guid isPermaLink="true">https://kiranrao.in/blog/2017/03/05/kotlin-coi/</guid>
         
         <category>kotlin</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>AO(sp)y Episode 2 - Lambdas</title>
-        <description>&lt;p&gt;This post is the second episode in a series where I peek into random commits on AOSP and try to predict what’s coming to the world of Android development.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Disclaimer: These tidbits have been gleaned primarily from the commit messages on AOSP. I very rarely even read (let alone understand) the code. As such expect inaccuracies or downright mistakes here. Do not make decisions based on what you read in this post.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;That out of the way, let’s dig in. This episode was supposed to be about toolchain improvements, but the headline feature is what the title says - lambdas! Lest I am accused of clickbait, let me clarify that all of this is still experimental. Several commits are not even merged. There is no saying when (and if) any of these features will actually find their way into production.&lt;/p&gt;
-
-&lt;p&gt;Ever since Java8 was released, the clamor for using lambdas in Android development has been growing, with good reason too. Android is full of anonymous inner classes for all kinds of things and several of these use cases would benefit from the use of lambdas.&lt;/p&gt;
-
-&lt;p&gt;Java 8 brought about two types of enhancements to the Java programming language:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Features and syntax in the language itself&lt;/li&gt;
-  &lt;li&gt;Additions to the standard libraries to take advantage of the new features&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;This article concentrates purely on the first type of enhancements, i.e.,&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html&quot;&gt;Lambdas&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html&quot;&gt;Method references&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html&quot;&gt;Default methods in interfaces&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Static methods in interfaces&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;It does not look like there is any move to bring the enhancements to the runtime libraries in the form of new collections and &lt;code class=&quot;highlighter-rouge&quot;&gt;java.util.function&lt;/code&gt; package to Android.&lt;/p&gt;
-
-&lt;p&gt;So, what’s cooking?&lt;/p&gt;
-
-&lt;p&gt;###Runtime support
-Opcodes for creating and invoking lambdas are &lt;a href=&quot;https://android-review.googlesource.com/#/c/147957/&quot;&gt;being added&lt;/a&gt; to the Dalvik bytecode (dex) format. The ART interpreter is &lt;a href=&quot;https://android-review.googlesource.com/#/c/155661/&quot;&gt;being updated&lt;/a&gt; to be able to use these opcodes.&lt;/p&gt;
-
-&lt;p&gt;The first of these commits also points to the &lt;code class=&quot;highlighter-rouge&quot;&gt;dex2oat&lt;/code&gt; compiler being taught how to compile lambdas from your dex bytecode into the corresponding opcodes for OAT.&lt;/p&gt;
-
-&lt;p&gt;What does all this mean? It means that &lt;em&gt;lambdas might be supported natively&lt;/em&gt; in a future version of Android.&lt;/p&gt;
-
-&lt;p&gt;###Toolchain enhancements
-&lt;a href=&quot;https://android-review.googlesource.com/#/c/158285/&quot;&gt;This commit&lt;/a&gt; and related ones point to the possibility of Jack compiler doing basically what is achieved with &lt;a href=&quot;https://github.com/evant/gradle-retrolambda&quot;&gt;gradle-retrolambda&lt;/a&gt; today. In other words, Jack compiler will be able to compile lambdas into bytecode that works even on runtimes that don’t support lambda opcodes. Similarly, Jill will likely do to lambdas in .class/.jar libraries what Jack does to them in source code.&lt;/p&gt;
-
-&lt;p&gt;###Other Java8 features
-There’s more to Java8 than just the lambda syntax. AOSP also has commits that hint at support for &lt;a href=&quot;https://android-review.googlesource.com/#/c/169003/&quot;&gt;default methods&lt;/a&gt; and &lt;a href=&quot;https://android-review.googlesource.com/#/c/158165/&quot;&gt;Single Abstract Methods&lt;/a&gt;. I did not find any obvious mention of method references, but that might be because I’m not looking hard enough. In any case, method references are just syntax sugar for lambdas so if lambda expressions are supported, so should method references.&lt;/p&gt;
-
-&lt;p&gt;###Compatibility
-At first glance, one might conclude that lambdas will be used only if &lt;code class=&quot;highlighter-rouge&quot;&gt;minSdkVersion &amp;gt;=&lt;/code&gt; the version of Android in which they are introduced, and that Jack’s feature of down-compiling lambdas into Java7-compatible bytecode will be used in all other cases. This means that the runtime lambdas will not be used &lt;em&gt;even on the runtimes that support them unless &lt;code class=&quot;highlighter-rouge&quot;&gt;minSdkVersion&lt;/code&gt; is set to the latest&lt;/em&gt;. However, this is (more than) likely to negatively impact the adoption of lambdas.&lt;/p&gt;
-
-&lt;p&gt;So, what might be strategies to work around this? What follows is a &lt;strong&gt;wild guess&lt;/strong&gt; as to how this might pan out. I haven’t dug in the source code into much (or … &lt;em&gt;any&lt;/em&gt;) detail (not that I’d understand much of it even if I had, but that’s beside the point).&lt;/p&gt;
-
-&lt;p&gt;Remember that &lt;code class=&quot;highlighter-rouge&quot;&gt;dex2oat&lt;/code&gt; runs on the Android device. The APK file only has dex bytecode, and it is converted into OAT at installation time. Could this be used to enhance the compatibility story?&lt;/p&gt;
-
-&lt;p&gt;Jack might use &lt;code class=&quot;highlighter-rouge&quot;&gt;targetSdkVersion&lt;/code&gt; to decide whether to include lambdas in the compiled dex bytecode. If &lt;code class=&quot;highlighter-rouge&quot;&gt;targetSdkVersion &amp;gt;=&lt;/code&gt; the version in which lambda support is introduced, then the generated dex might &lt;em&gt;include&lt;/em&gt; the Java8 bytecode. But wait, aren’t we back at square one? &lt;code class=&quot;highlighter-rouge&quot;&gt;dex2oat&lt;/code&gt; is part of the Android OS and cannot (yet) be updated independently of the OS. This means that &lt;code class=&quot;highlighter-rouge&quot;&gt;dex2oat&lt;/code&gt; that is running on an older version of the OS will not understand the new dex bytecode.&lt;/p&gt;
-
-&lt;p&gt;This is why I say &lt;em&gt;include&lt;/em&gt; Java8 opcodes instead of &lt;em&gt;generate&lt;/em&gt; - that is to say, Jack might generate both the Java7-compatible byte code as well as new Java8 opcodes. Hopefully, &lt;code class=&quot;highlighter-rouge&quot;&gt;dex2oat&lt;/code&gt; running on older versions of Android simply ignore the Java8 opcodes. But, what about the size implications of this arrangement? In lambda-heavy apps, will this result in bloated &lt;code class=&quot;highlighter-rouge&quot;&gt;.dex&lt;/code&gt; files?&lt;/p&gt;
-
-&lt;p&gt;The other option is that Jack might always generate Java7 compatible bytecode (compiles lambda expressions into anonymous inner classes), but it might include some sort of flag to indicate to &lt;code class=&quot;highlighter-rouge&quot;&gt;dex2oat&lt;/code&gt; that these constructs be compiled into the corresponding Java8 OAT format. But this begs the question - what, then, is the point of the new opcodes in &lt;code class=&quot;highlighter-rouge&quot;&gt;.dex&lt;/code&gt; format at all?&lt;/p&gt;
-
-&lt;p&gt;I do not have the answers to these questions yet (nor does AOSP). But I’m sure the answers will reveal themselves in the days to come. If you are interested in this topic, you can follow the progress yourself at the following locations on AOSP:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://android-review.googlesource.com/#/q/project:platform/art&quot;&gt;platform/art&lt;/a&gt; project …&lt;/li&gt;
-  &lt;li&gt;… particularly, the &lt;a href=&quot;https://android-review.googlesource.com/#/q/status:merged+project:platform/art+branch:master+topic:lambda_experimental&quot;&gt;lambda_experimental&lt;/a&gt; topic&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://android-review.googlesource.com/#/q/project:toolchain/jack&quot;&gt;toolchain/jack&lt;/a&gt; project&lt;/li&gt;
-  &lt;li&gt;Pay special attention to &lt;a href=&quot;https://android-review.googlesource.com/#/q/status:open+project:toolchain/jack+branch:ub-jack-lang-dev&quot;&gt;ub-jack-lang-dev&lt;/a&gt; branch&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sun, 06 Sep 2015 00:00:00 +0200</pubDate>
-        <link>https://kiranrao.in/blog/2015/09/06/ao-spy-2/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2015/09/06/ao-spy-2/</guid>
-        
-        <category>aosp</category>
-        
-        <category>android</category>
-        
-        <category>java8</category>
-        
-        <category>lambda</category>
         
         
       </item>

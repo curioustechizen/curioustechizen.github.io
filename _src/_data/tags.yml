@@ -28,3 +28,5 @@ animations:
   name: Animations
 flutter:
   name: Flutter
+falsehoods:
+  name: Falsehoods
