@@ -105,6 +105,15 @@
         ga('create', '{{ site.ga_tracking_id }}', '{{ site.ga_domain }}');
         ga('send', 'pageview');
       </script>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-6NSXY6WHWF"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-6NSXY6WHWF');
+      </script>
     {% endif %}
 
   </body>

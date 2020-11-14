@@ -3,10 +3,10 @@
   <channel>
     <title>Curious Techizen</title>
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
-    <link>https://kiranrao.in/blog/</link>
-    <atom:link href="https://kiranrao.in/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 24 Oct 2020 17:06:22 +0200</pubDate>
-    <lastBuildDate>Sat, 24 Oct 2020 17:06:22 +0200</lastBuildDate>
+    <link>http://localhost:4000/blog/</link>
+    <atom:link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sat, 14 Nov 2020 13:04:15 +0100</pubDate>
+    <lastBuildDate>Sat, 14 Nov 2020 13:04:15 +0100</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -88,8 +88,8 @@
 &lt;/ol&gt;
 </description>
         <pubDate>Sat, 24 Oct 2020 11:00:00 +0200</pubDate>
-        <link>https://kiranrao.in/blog/2020/10/24/falsehoods-about-addresses/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2020/10/24/falsehoods-about-addresses/</guid>
+        <link>http://localhost:4000/blog/2020/10/24/falsehoods-about-addresses/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2020/10/24/falsehoods-about-addresses/</guid>
         
         <category>falsehoods</category>
         
@@ -245,8 +245,8 @@
 &lt;p&gt;To see a real world use of the techniques described in this post, see the &lt;a href=&quot;https://github.com/curioustechizen/covid19india-flutter&quot;&gt;Covid19-India flutter app&lt;/a&gt; (where you switch between the categories like “active”, “recovered” etc.)&lt;/p&gt;
 </description>
         <pubDate>Thu, 21 May 2020 21:00:00 +0200</pubDate>
-        <link>https://kiranrao.in/blog/2020/05/21/flutter-stateless-animations/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2020/05/21/flutter-stateless-animations/</guid>
+        <link>http://localhost:4000/blog/2020/05/21/flutter-stateless-animations/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2020/05/21/flutter-stateless-animations/</guid>
         
         <category>flutter</category>
         
@@ -402,8 +402,8 @@
 &lt;p&gt;SwiftUI is great for implementing animations. I had to barely write any code to achieve this pretty cool animation (it took me days to achieve the same on Android, and I’ve several years of Android experience!). However, all of this magic does come with its own limitations and it is good to be aware of them before going all-in.&lt;/p&gt;
 </description>
         <pubDate>Tue, 21 Apr 2020 21:00:00 +0200</pubDate>
-        <link>https://kiranrao.in/blog/2020/04/21/diff-animations-swiftui/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2020/04/21/diff-animations-swiftui/</guid>
+        <link>http://localhost:4000/blog/2020/04/21/diff-animations-swiftui/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2020/04/21/diff-animations-swiftui/</guid>
         
         <category>swiftui</category>
         
@@ -572,8 +572,8 @@ apply from: '../flavors.gradle'
 &lt;p&gt;Thanks to &lt;a href=&quot;https://twitter.com/droidxav&quot;&gt;Xavier Ducrohet (@droidxav)&lt;/a&gt; for pointing out the potential pitfalls of using &lt;code class=&quot;highlighter-rouge&quot;&gt;missingDimensionStrategy&lt;/code&gt; for my use case.&lt;/p&gt;
 </description>
         <pubDate>Tue, 31 Mar 2020 21:00:00 +0200</pubDate>
-        <link>https://kiranrao.in/blog/2020/03/31/gradle-missing-flavors/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2020/03/31/gradle-missing-flavors/</guid>
+        <link>http://localhost:4000/blog/2020/03/31/gradle-missing-flavors/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2020/03/31/gradle-missing-flavors/</guid>
         
         <category>android</category>
         
@@ -748,8 +748,8 @@ apply from: '../flavors.gradle'
 &lt;p&gt;You might also apply this technique when you want to display custom animations and RV’s ItemAnimator does not suffice for your use case.&lt;/p&gt;
 </description>
         <pubDate>Sun, 12 Jan 2020 10:00:00 +0100</pubDate>
-        <link>https://kiranrao.in/blog/2020/01/12/diff-util-part3/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2020/01/12/diff-util-part3/</guid>
+        <link>http://localhost:4000/blog/2020/01/12/diff-util-part3/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2020/01/12/diff-util-part3/</guid>
         
         <category>android</category>
         
@@ -939,8 +939,8 @@ apply from: '../flavors.gradle'
 &lt;p&gt;That is exactly what we will do in the next post in this series: Look at an example situation where RecyclerView might not be best fit, and instead wrap the &lt;code class=&quot;highlighter-rouge&quot;&gt;ListUpdateCallback&lt;/code&gt; to implement some custom UI.&lt;/p&gt;
 </description>
         <pubDate>Tue, 07 Jan 2020 10:00:00 +0100</pubDate>
-        <link>https://kiranrao.in/blog/2020/01/07/diff-util-part2/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2020/01/07/diff-util-part2/</guid>
+        <link>http://localhost:4000/blog/2020/01/07/diff-util-part2/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2020/01/07/diff-util-part2/</guid>
         
         <category>android</category>
         
@@ -1079,8 +1079,8 @@ apply from: '../flavors.gradle'
 &lt;p&gt;In the next post in this series, we will conduct a brief survey of how other platforms handle list diffs.&lt;/p&gt;
 </description>
         <pubDate>Mon, 06 Jan 2020 16:00:00 +0100</pubDate>
-        <link>https://kiranrao.in/blog/2020/01/06/diff-util-part1/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2020/01/06/diff-util-part1/</guid>
+        <link>http://localhost:4000/blog/2020/01/06/diff-util-part1/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2020/01/06/diff-util-part1/</guid>
         
         <category>android</category>
         
@@ -1106,8 +1106,8 @@ apply from: '../flavors.gradle'
 &lt;p&gt;Remember, it is not about how many users you have, but about how useful your app is to those users.&lt;/p&gt;
 </description>
         <pubDate>Thu, 25 May 2017 11:00:00 +0200</pubDate>
-        <link>https://kiranrao.in/blog/2017/05/25/one-size-doesnt-fit-all/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2017/05/25/one-size-doesnt-fit-all/</guid>
+        <link>http://localhost:4000/blog/2017/05/25/one-size-doesnt-fit-all/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2017/05/25/one-size-doesnt-fit-all/</guid>
         
         <category>next-billion</category>
         
@@ -1323,8 +1323,8 @@ apply from: '../flavors.gradle'
 &lt;p&gt;For value classes, prefer to do a strict type comparison in the &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt; method, unless it is likely that the value class might be proxied.&lt;/p&gt;
 </description>
         <pubDate>Mon, 03 Apr 2017 22:00:00 +0200</pubDate>
-        <link>https://kiranrao.in/blog/2017/04/03/java-value-classes-equals/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2017/04/03/java-value-classes-equals/</guid>
+        <link>http://localhost:4000/blog/2017/04/03/java-value-classes-equals/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2017/04/03/java-value-classes-equals/</guid>
         
         <category>effectivejava</category>
         
@@ -1441,8 +1441,8 @@ apply from: '../flavors.gradle'
 &lt;p&gt;This is a limitation with the pattern, rather than with Kotlin’s implementation of the pattern - you can only use delegation if you control the instantiation of the object of the wrapped class. You cannot, for example compose Android’s Activity classes because the framework instantiates an Activity for you. Of course, you should probably be composing Presenters/ViewModels/Whatever rather than Activities/Fragments but that is a topic for another blog post!&lt;/p&gt;
 </description>
         <pubDate>Sun, 05 Mar 2017 16:21:22 +0100</pubDate>
-        <link>https://kiranrao.in/blog/2017/03/05/kotlin-coi/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2017/03/05/kotlin-coi/</guid>
+        <link>http://localhost:4000/blog/2017/03/05/kotlin-coi/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2017/03/05/kotlin-coi/</guid>
         
         <category>kotlin</category>
         
