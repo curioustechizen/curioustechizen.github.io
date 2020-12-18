@@ -5,8 +5,8 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>https://kiranrao.in/blog/</link>
     <atom:link href="https://kiranrao.in/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 18 Dec 2020 14:50:41 +0100</pubDate>
-    <lastBuildDate>Fri, 18 Dec 2020 14:50:41 +0100</lastBuildDate>
+    <pubDate>Fri, 18 Dec 2020 22:00:51 +0100</pubDate>
+    <lastBuildDate>Fri, 18 Dec 2020 22:00:51 +0100</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -15,9 +15,27 @@
 
 &lt;p&gt;You can find all posts in this series &lt;a href=&quot;/blog/tags/obvious&quot;&gt;here&lt;/a&gt;. Be sure to check back because more posts will be added in this series over the coming period.&lt;/p&gt;
 
+&lt;h2 id=&quot;what-exactly-is-scalable&quot;&gt;What exactly is “scalable”?&lt;/h2&gt;
+
+&lt;p&gt;Here’s the &lt;a href=&quot;https://en.wikipedia.org/wiki/Scalability&quot;&gt;wikipedia definition&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Scalability&lt;/strong&gt; is the property of a system to handle a growing amount of work by adding resources to the system.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;During the initial stages of my career, a tech lead once described a scalable system in layman terms to me as follows:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A scalable system is one where by adding just a small amount effort or resources you can increase the output or gain by a large amount.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;A real-life (albeit silly) example I like to cite is cooking rice versus making rotis. Cooking rice is scalable because you don’t need to double the effort in order to cook double the amount of rice. On the other hand, if you want to double the number of rotis, you need to (more or less) double the effort. Making rotis, is thus not scalable.&lt;/p&gt;
+
 &lt;h2 id=&quot;scalable-tech&quot;&gt;Scalable tech&lt;/h2&gt;
 
-&lt;p&gt;The software industry has brought about a revolution in scalable technology. We routinely see CXOs of tech giants at their respective annual conferences reeling off staggering statistics about their products.&lt;/p&gt;
+&lt;p&gt;In technology terms, scalability refers to the ability to handle more users, requests, traffic etc without the system hitting its limits. Let’s say you create a system that can handle 1 million users with a team of 100 engineers. If you want to increase your target 10 fold to 10 million, you should not need to employ 10 times as many engineers.&lt;/p&gt;
+
+&lt;p&gt;The software industry has brought about a revolution in massively scalable technology. We routinely see CXOs of tech giants at their respective annual conferences reeling off staggering statistics about their products.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;X million concurrent users per second&lt;/li&gt;
@@ -28,8 +46,6 @@
 
 &lt;p&gt;This is no mean feat, mind you. Achieving this scale is a humongous engineering effort that requires coordintation between countless moving parts (from the software stack to the OS to the hardware to the network, even ventilation, cooling and geopolitical factors come into play). It is a marvel, no less.&lt;/p&gt;
 
-&lt;h2 id=&quot;scalable-business&quot;&gt;Scalable business&lt;/h2&gt;
-
 &lt;p&gt;But does this translate to a scalable business? For example&lt;/p&gt;
 
 &lt;ul&gt;
@@ -37,6 +53,10 @@
   &lt;li&gt;What’s the cost of mistakes when the business relies on &lt;strong&gt;content moderation&lt;/strong&gt;?&lt;/li&gt;
   &lt;li&gt;How well does the tech mesh with the need for global &lt;strong&gt;regulatory compliance&lt;/strong&gt;?&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h2 id=&quot;scalable-business&quot;&gt;Scalable business&lt;/h2&gt;
+
+&lt;p&gt;A scalable business refers to one that can expand (for example to multiple geographies) with just an increment in investment (in terms of cost or effort).&lt;/p&gt;
 
 &lt;p&gt;The manufacturing industry has shown the world how to conduct a globally scalable business for decades. Here are some examples&lt;/p&gt;
 
