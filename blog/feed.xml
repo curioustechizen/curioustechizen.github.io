@@ -5,9 +5,74 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>https://kiranrao.in/blog/</link>
     <atom:link href="https://kiranrao.in/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 18 Dec 2020 22:00:51 +0100</pubDate>
-    <lastBuildDate>Fri, 18 Dec 2020 22:00:51 +0100</lastBuildDate>
+    <pubDate>Sun, 20 Dec 2020 17:21:43 +0100</pubDate>
+    <lastBuildDate>Sun, 20 Dec 2020 17:21:43 +0100</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Tech as an Enhancer</title>
+        <description>&lt;p&gt;This is a non-programming post in the series I call “re-stating the obvious”. This series talks about topics that have been beaten to pulp already. I’m simply adding to the cacophony. You can find all posts in this series &lt;a href=&quot;/blog/tags/obvious&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-trigger-for-this-post&quot;&gt;The trigger for this post&lt;/h2&gt;
+
+&lt;p&gt;In November 2020, some Amazon Web Services servers suffered an outage that caused a domino effect across countless products and services which depend on AWS. Social media was quick to poke fun at the incident with an explosion of jokes and memes. This tweet is a summary of the mood of social media on that day:&lt;/p&gt;
+
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;I... can&amp;#39;t vacuum... because us-east-1 is down.&lt;/p&gt;&amp;mdash; Geoff Belknap (@geoffbelknap) &lt;a href=&quot;https://twitter.com/geoffbelknap/status/1331690657170157568?ref_src=twsrc%5Etfw&quot;&gt;November 25, 2020&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;h2 id=&quot;lessons-learnt&quot;&gt;Lessons learnt&lt;/h2&gt;
+
+&lt;p&gt;My take-away from this incident (and others before it) is&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Most products and services ought to dwell on the role of technology in the system. Does tech bring the most value as an &lt;em&gt;enhancer&lt;/em&gt; or as a &lt;em&gt;prerequisite&lt;/em&gt;? In other words, &lt;strong&gt;does the system degrade gracefully&lt;/strong&gt; in the absence of the very tech that differentiates it?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;(In this post, I use the term “tech” in a very loose sense)&lt;/p&gt;
+
+&lt;h3 id=&quot;examples&quot;&gt;Examples&lt;/h3&gt;
+
+&lt;p&gt;Let’s look at some (mostly hypothetical) examples. Since I spent a large portion of my career in two domains (IoT and automobile), some bias is bound to creep into the examples.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;It is awesome that my air-conditioner is connected to the internet. I can set the temperature on my way home so that the house is already comfortable when I reach there. But should it really &lt;em&gt;require&lt;/em&gt; the internet to function? Do I absolutely have to configure the WiFi settings &lt;em&gt;before&lt;/em&gt; using the air-conditioner?&lt;/li&gt;
+  &lt;li&gt;An internet-connected blood pressure monitor is a really good idea since it eliminates the manual data entry process and lets medical personnel have direct access to the necessary data. However, a blood pressure monitor that &lt;em&gt;refuses to function when a server is down&lt;/em&gt; is not very useful, is it?&lt;/li&gt;
+  &lt;li&gt;I can unlock my car with my phone? Amazing. Does it also have a good old key for backup? It would be awkward if my &lt;em&gt;phone is out of battery and I cannot even unlock the car&lt;/em&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;That last point seems far-fetched but it really isn’t. It is just one step away from this:&lt;/p&gt;
+
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Got in our &lt;a href=&quot;https://twitter.com/Zipcar?ref_src=twsrc%5Etfw&quot;&gt;@Zipcar&lt;/a&gt; we&amp;#39;ve been driving for 3 days. It doesn&amp;#39;t start. Call Zipcar and get told that the car can&amp;#39;t access the internet so it won&amp;#39;t start. The only option is to have a tow truck come and tow it to somewhere where it has internet.&lt;/p&gt;&amp;mdash; Keith Smiley (@SmileyKeith) &lt;a href=&quot;https://twitter.com/SmileyKeith/status/1078417333540990976?ref_src=twsrc%5Etfw&quot;&gt;December 27, 2018&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;I could go on with dozens of examples but I think I’ve illustrated my point.&lt;/p&gt;
+
+&lt;h3 id=&quot;offline-first&quot;&gt;Offline first&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://offlinefirst.org/&quot;&gt;“Offline-first”&lt;/a&gt; is often used to describe apps that function when the network is unavailable, but it is more than that. Offline-first apps also behave well in the face of a &lt;em&gt;poor network connection&lt;/em&gt;. As an end user, the experience when you have that feeble network is way worse than when you have no network at all.&lt;/p&gt;
+
+&lt;p&gt;This concept of offline-first can be extended to all things tech. In majority of the cases, solutions need to be designed&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;First&lt;/strong&gt; for the situation where the tech crutch on which the solution depends is unavailable for whatever reason&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Then&lt;/strong&gt; for the case where the tech is available but in a significantly reduced form&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Then and only then&lt;/strong&gt; for the case where the differentiating technology is healthy and functioning at its peak&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I do qualify all my opinions with “majority of” or “most of” because I’m pretty sure there are situations where this is not feasible. I know there must be some solutions out there that rely completely on the tech, where the solution ceases to exist without the tech.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Tech is making its mark in unimaginable ways in unprecedented fields. It works really well when it enhances an existing system. It would be a shame to go overboard and make a system overly reliant on tech where there is no real need to.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 18 Dec 2020 21:00:00 +0100</pubDate>
+        <link>https://kiranrao.in/blog/2020/12/18/tech-enhancer/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2020/12/18/tech-enhancer/</guid>
+        
+        <category>obvious</category>
+        
+        
+      </item>
     
       <item>
         <title>Scalable tech ≠ scalable business</title>
@@ -1232,221 +1297,6 @@ apply from: '../flavors.gradle'
         <category>next-billion</category>
         
         <category>android-go</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Java: Value classes and the equals() method</title>
-        <description>&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Rule 1:&lt;/strong&gt; When overriding &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt; method for a &lt;em&gt;value class&lt;/em&gt; in java, it is preferable to reject instances of sub-classes of this class. In other words, use &lt;code class=&quot;highlighter-rouge&quot;&gt;getClass()&lt;/code&gt; instead of &lt;code class=&quot;highlighter-rouge&quot;&gt;instanceof&lt;/code&gt; for ensuring that the other object is of the correct type.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;instead of&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(!(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MyClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Rule 2:&lt;/strong&gt; Exception to Rule 1: If it is likely that the object that will be passed around is an instance of &lt;strong&gt;&lt;em&gt;a proxy of your class&lt;/em&gt;&lt;/strong&gt;, then use &lt;code class=&quot;highlighter-rouge&quot;&gt;instanceof&lt;/code&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;deep-dive&quot;&gt;Deep-dive&lt;/h2&gt;
-
-&lt;p&gt;A lot has been written about &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt; in Java. For me the definitive source has been from “Effective Java 2nd Edition”. Item 8 says “Obey the general contract when overriding equals”.&lt;/p&gt;
-
-&lt;p&gt;However, as a programmer I do not need to remember the recipe provided by Joshua Bloch (well, most of the time). This is because IDEs offer options to auto-generate the &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt; (and a corresponding &lt;code class=&quot;highlighter-rouge&quot;&gt;hashCode()&lt;/code&gt;) methods for me. Mechanisms for creating value classes (like &lt;a href=&quot;https://github.com/google/auto/tree/master/value&quot;&gt;AutoValue&lt;/a&gt; or Kotlin’s &lt;a href=&quot;https://kotlinlang.org/docs/reference/data-classes.html&quot;&gt;data classes&lt;/a&gt;) go one step further by not even requiring you to maintain the equals() method in source code format.&lt;/p&gt;
-
-&lt;p&gt;That said, there are some gotchas to be aware of that crop up from time to time. The point relevant to this post is (I might be para-phrasing it)&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;It is not possible to extend an instantiable class and add a field without violating the contract of the equals method.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I encourage you to read Joshua Bloch’s explanation of this along with the excellent examples to understand what the contract is and why extending a class might break this contract. Once you understand this concept, Rule 1 is a logical conclusion. If you are comparing an instance of this class with an instance of a sub-class, you want to return &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;However, this is not always feasible. There are cases where the value class is just a crutch for a framework to do its work. The value class that you define serves as the interface between you and the framework, while the framework generates sub-classes of your class to use as a proxy.&lt;/p&gt;
-
-&lt;h4 id=&quot;example&quot;&gt;Example&lt;/h4&gt;
-
-&lt;p&gt;That’s a lot of hand-waving! Let’s get to a concrete example, in this case the example which led me to write this blog post in the first place - &lt;a href=&quot;https://realm.io/docs/java/latest/&quot;&gt;Realm&lt;/a&gt;. Realm is an object database for Android. You declare your models as POJOs and you can then use Realm to persist/query them.&lt;/p&gt;
-
-&lt;p&gt;Here’s how you would define a User model in Realm:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RealmObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    
-    &lt;span class=&quot;c1&quot;&gt;// Rest of the class left out for brevity&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Now, let’s see what happens when we use the strict interpretation of the &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt; method:&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//Strict type comparison&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Now, assume you are writing a test to check whether a &lt;code class=&quot;highlighter-rouge&quot;&gt;User&lt;/code&gt; instance retrieved from Realm is what you expect it to be.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;givenADatabase_whenRetrieveByName_thenReturnsCorrectUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Realm&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;realm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getRealm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ACTUAL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Android&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    
-    &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EXPECTED&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Android&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EXPECTED&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ACTUAL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;You will find that this test fails, even though the instance returned from Realm has the correct &lt;code class=&quot;highlighter-rouge&quot;&gt;name&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;age&lt;/code&gt;. Why is this so?&lt;/p&gt;
-
-&lt;h4 id=&quot;proxy-classes&quot;&gt;Proxy classes&lt;/h4&gt;
-
-&lt;p&gt;This is because the object that Realm returns is an instance of &lt;code class=&quot;highlighter-rouge&quot;&gt;UserRealmProxy&lt;/code&gt; that extends your &lt;code class=&quot;highlighter-rouge&quot;&gt;User&lt;/code&gt; class. Even though the fields that matter for this comparison are the same, the &lt;code class=&quot;highlighter-rouge&quot;&gt;if (!getClass().equals(o.getClass()) return false;&lt;/code&gt; line leads our equals implementation to report that the instances are not equal.&lt;/p&gt;
-
-&lt;p&gt;The fix is of course to be more lenient in checking the types in equals(), with the trade-off that you potentially break the contract of &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//lenient type comparison&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Realm is just one example of where a proxy class is used. There is a host of libraries/frameworks that proxy your value classes under the covers. Although the intent is for you as a user of the framework to be largely unaware of the use of these proxies, the peculiar case of &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt; and sub-classes means that at times you need to be aware of these implementation details.&lt;/p&gt;
-
-&lt;h4 id=&quot;aside-order-of-expected-and-actual-in-tests&quot;&gt;Aside: Order of Expected and Actual in tests&lt;/h4&gt;
-
-&lt;p&gt;When I got started with unit testing, I often did not care about the order in which I passed the &lt;code class=&quot;highlighter-rouge&quot;&gt;expected&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;actual&lt;/code&gt; in tests. I did not differentiate between &lt;code class=&quot;highlighter-rouge&quot;&gt;assertEquals(expected, actual)&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;assertEquals(actual, expected)&lt;/code&gt;. The worst that could happen was that I would be slightly confused by the JUnit error message sometimes, but my tests that should pass would still pass, and those that should fail would still fail.&lt;/p&gt;
-
-&lt;p&gt;However, in the example above, you will notice that if you switch the positions of &lt;code class=&quot;highlighter-rouge&quot;&gt;expected&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;actual&lt;/code&gt;, the result of the test will be different.&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;assertEquals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ACTUAL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;EXPECTED&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;This test fails. This is because the &lt;code class=&quot;highlighter-rouge&quot;&gt;UserRealmProxy&lt;/code&gt; class has extended &lt;code class=&quot;highlighter-rouge&quot;&gt;User&lt;/code&gt; and overridden &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt; in a way that breaks symmetry.&lt;/p&gt;
-
-&lt;p&gt;This is one of the reasons why the contract of &lt;code class=&quot;highlighter-rouge&quot;&gt;equals&lt;/code&gt; says that it should be symmetric, i.e., &lt;code class=&quot;highlighter-rouge&quot;&gt;x.equals(y)&lt;/code&gt; should return &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt; &lt;strong&gt;if and only if&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;y.equals(x)&lt;/code&gt; returns &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;a-survey-of-equals-generators&quot;&gt;A survey of equals-generators&lt;/h2&gt;
-
-&lt;p&gt;We will now survey existing tools that generate &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt; for you and see how they handle type-checks.&lt;/p&gt;
-
-&lt;h4 id=&quot;eclipse&quot;&gt;Eclipse&lt;/h4&gt;
-
-&lt;p&gt;At the time of this writing, Eclipse Neon, in the wizard to “Generate hashCode() and equals()” has a checkbox “Use ‘instanceof’ to compare types”. If you check this checkbox that Eclipse generates a strict type comparison, else it generates the more lenient one.&lt;/p&gt;
-
-&lt;h4 id=&quot;intellij-ides&quot;&gt;IntelliJ IDEs&lt;/h4&gt;
-
-&lt;p&gt;IntelliJ IDEA, Android Studio and other similar IDEs have a checkbox “Accept subclasses as parameters to equals() method”. Checking this checkbox will generate the &lt;em&gt;lenient&lt;/em&gt; type comparison, while the default (un-checking it) will generate the strict type comparison&lt;/p&gt;
-
-&lt;h4 id=&quot;kotlin-data-classes&quot;&gt;Kotlin data classes&lt;/h4&gt;
-
-&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserKt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;This generates bytecode equivalent to the following Java code&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserKt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;UserKt&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserKt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Intrinsics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;areEqual&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;var2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-           &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;As you can see, it generates an &lt;code class=&quot;highlighter-rouge&quot;&gt;instanceof&lt;/code&gt; check but this &lt;strong&gt;does not violate the contract of equals()&lt;/strong&gt;. This is because in Kotlin (as of v1.1.0), data classes cannot be sub-classed.&lt;/p&gt;
-
-&lt;h4 id=&quot;auto-value&quot;&gt;Auto-Value&lt;/h4&gt;
-
-&lt;p&gt;With this declaration using AutoValue&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@AutoValue&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserAV&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserAV&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;AutoValue_UserAV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;The generated code (snipped to show only relevant portions) is&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AutoValue_UserAV&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserAV&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  
-  &lt;span class=&quot;c1&quot;&gt;// ...snip...&lt;/span&gt;
-
-  &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;o&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;instanceof&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserAV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;UserAV&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;that&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UserAV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;o&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;that&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()))&lt;/span&gt;
-           &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;that&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;The two points to observe:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;The generated &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt; uses the lenient &lt;code class=&quot;highlighter-rouge&quot;&gt;instanceof&lt;/code&gt; for type comparison&lt;/li&gt;
-  &lt;li&gt;The generated class is declared &lt;code class=&quot;highlighter-rouge&quot;&gt;final&lt;/code&gt;, hence it is guaranteed that there are no sub-classes which means the contract of &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt; is not violated.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;In a majority of the cases, tools that generate &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt; method are good enough. There is no reason to customize the code that they generate for you. However, there are cases where it is advantageous to be aware of what is going on under the hood.&lt;/p&gt;
-
-&lt;p&gt;For value classes, prefer to do a strict type comparison in the &lt;code class=&quot;highlighter-rouge&quot;&gt;equals()&lt;/code&gt; method, unless it is likely that the value class might be proxied.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 03 Apr 2017 22:00:00 +0200</pubDate>
-        <link>https://kiranrao.in/blog/2017/04/03/java-value-classes-equals/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2017/04/03/java-value-classes-equals/</guid>
-        
-        <category>effectivejava</category>
         
         
       </item>
