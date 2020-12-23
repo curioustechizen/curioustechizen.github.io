@@ -5,9 +5,71 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>https://kiranrao.in/blog/</link>
     <atom:link href="https://kiranrao.in/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 20 Dec 2020 17:21:43 +0100</pubDate>
-    <lastBuildDate>Sun, 20 Dec 2020 17:21:43 +0100</lastBuildDate>
+    <pubDate>Wed, 23 Dec 2020 19:03:24 +0100</pubDate>
+    <lastBuildDate>Wed, 23 Dec 2020 19:03:24 +0100</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>UI ≠ UX</title>
+        <description>&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;und&quot; dir=&quot;ltr&quot;&gt;&lt;a href=&quot;https://t.co/R8DfByhDJL&quot;&gt;pic.twitter.com/R8DfByhDJL&lt;/a&gt;&lt;/p&gt;&amp;mdash; Rachel Appel (@RachelAppel) &lt;a href=&quot;https://twitter.com/RachelAppel/status/1168905856773230594?ref_src=twsrc%5Etfw&quot;&gt;September 3, 2019&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;This is a non-programming post in the series I call “re-stating the obvious”. This series talks about topics that have been discussed at length, I’m just making my own observations about them. You can find all posts in this series &lt;a href=&quot;/blog/tags/obvious&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; I’m not a designer, so please take the opinions in this post with a pinch of salt.&lt;/p&gt;
+
+&lt;h2 id=&quot;ui-and-ux&quot;&gt;UI and UX&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A good user interface is a user acquisition tool, while a good user experience is a user retention tool.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To put it differently, a good user interface attracts users to your system, while a good user experience gets users to keep using your system. A couple of important observations about this:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Neither is a subset of the other; a good UI does not necessarily translate to good UX and it is possible to have a good UX while the UI is poor.&lt;/li&gt;
+  &lt;li&gt;Both of these are important; their relative importance depends on the nature of the system (more on this when we discuss some examples in a minute).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;good-ui-not-so-good-ux&quot;&gt;Good UI, not so good UX&lt;/h3&gt;
+
+&lt;p&gt;Let’s look at some examples where UI is good, but UX not so:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Automatic soap dispensers:&lt;/strong&gt; I got one for myself because it worked great when I tried it (It had a great UI). However during everyday use, I realized that it dispenses too much soap and that causes a mess near the sink. It has a poor UX.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Xcode:&lt;/strong&gt; All those “poof” animations looks so sleek (amazing UI) but they completely and utterly destroy the overall IDE experience (unacceptably poor UX). So many actions rely on gimmicky gestures and are completely undiscoverable (how do you remove a breakpoint that you set in XCode? Clue: It is not “right click and remove” like every other sane IDE on the planet)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;In-car controls:&lt;/strong&gt; Multi-function controls on the steering wheels give them such a futuristic look. Those buttons on the infotainment console looks straight out of a spaceship. Amazing UI. But, how many times do you need to click on the steering wheel button to achieve a certain task? How reliably can you turn on or off the defogger using the center console? Can you do all of this without taking your eyes off the road?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;There was a reason I chose that last example. Imagine an ill-thought out UX that causes a driver to take their eyes off the road for even a couple of seconds at three-digit speeds. The consequences can be disastrous, even death. This is compounded by the fact that the &lt;em&gt;problems with the UX are often not discoverable&lt;/em&gt; until it is too late.&lt;/p&gt;
+
+&lt;p&gt;This goes back to the relative importance part. The In-car controls example above is an instance where UX ought to be given a lot more importance than just UI.&lt;/p&gt;
+
+&lt;h3 id=&quot;good-ux-with-mediocre-ui&quot;&gt;Good UX with mediocre UI&lt;/h3&gt;
+
+&lt;p&gt;Now, some examples of systems where the UX is good but UI not so:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Elevators:&lt;/strong&gt; The elevator in my apartment is old-fashioned and … how do I say this … &lt;em&gt;boring&lt;/em&gt;. It is not really welcoming in appearance. However, it just works. All the buttons are intuitive, it is disabled-friendly with braille buttons and you just cannot go wrong using it. The UX is near-perfect even though the UI does leave a lot to be desired.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Older cars:&lt;/strong&gt; My first car was very low on features, but now that I look back I have to admit the UX for the driver was fantastic. It had barely any features but whatever little it did, was a breeze to operate. The only control on the steering wheel was the horn, the stalks on the steering wheel column only had the light, indicators and wiper controls. The Air conditioner and defogger were trivial to operate without taking my eyes off the road, even in the dark. Fantastic UX, not an inviting UI at all.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Git:&lt;/strong&gt; (Uh oh .. I failed in my resolve to not include any programming related examples). Git is an indispensable tool for programmers and makes our lives so much easier. The whole experience of cheap branching, not requiring a network to work and more make it orders of magnitude better than its predecessors like CVS. However, the commands are named rather weirdly. Worse, some commands do very different things compared to what they did in previous source control systems like SVN. Incredibly good UX, a UI that leaves a lot to be desired.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This category probably has a lot more examples than the first. Think of all the things around you that just work even though they are not particularly attractive.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;UI ≠ UX. In my limited experience, UI is given more importance than UX. In my opinion this is counter-productive in the long run, both for businesses and users.&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 20 Dec 2020 17:30:00 +0100</pubDate>
+        <link>https://kiranrao.in/blog/2020/12/20/ui-not-ux/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2020/12/20/ui-not-ux/</guid>
+        
+        <category>obvious</category>
+        
+        
+      </item>
     
       <item>
         <title>Tech as an Enhancer</title>
@@ -1270,33 +1332,6 @@ apply from: '../flavors.gradle'
         <category>android</category>
         
         <category>diff</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>The Limits of One-size-fits-all</title>
-        <description>&lt;p&gt;At Google I/O 2017, Google announced Android Go, a  configuration of Android that is optimized for entry-level devices. The focus of this initiative is around affordability, limited connectivity and multi-lingual capability. Starting Android O, all devices that have a memory of 1GB or less will ship with this configuration.&lt;/p&gt;
-
-&lt;p&gt;I see this step as sort of an acknowledgement that we are reaching the limits of “one-size-fits-all” mentality we’ve had all these years. It is a refreshing change from the “We have a potential target of a billion users, hence we &lt;strong&gt;must&lt;/strong&gt; make a single app that caters to all”. Android has reached the tipping point (2 billion active users) where that approach no longer scales. In the best case it results in a solution that satisfies one subset of users at the expense of the other. In the worst case it produces something that does not solve the needs of either!&lt;/p&gt;
-
-&lt;p&gt;The requirements and constraints of the developing world are vastly different from that of the developed world. App usage patterns for the same app might differ between the target groups. Localization is about more than translating strings, currency and temperature units. Not all the guidelines about &lt;a href=&quot;https://material.io/guidelines/style/writing.html#&quot;&gt;writing style&lt;/a&gt; are applicable globally. Metaphors do not scale well across languages and cultures.&lt;/p&gt;
-
-&lt;p&gt;Facebook set the ball rolling with the Facebook Lite app. This is a tiny app (&amp;lt;2MB installed size excluding data on my Android 6.0 phone). Compare this with the regular Facebook app that is &amp;gt;70MB at the time of this writing. The Facebook Lite app is also frugal in its mobile data usage.&lt;/p&gt;
-
-&lt;p&gt;YouTube Go seems to be following in the footsteps. They have studied and understood how people use YouTube in developing markets. They have realized that always requiring an internet connection is absurd to the point of being stupid. The peer to peer sharing feature is the killer. Most people were using some shady youtube downloader apps to download YT videos offline, and then sharing it with peers using ShareIt or the like anyway.&lt;/p&gt;
-
-&lt;p&gt;I believe Android Go will act as a turning point in the industry’s approach to global apps. It is no longer taboo to offer multiple flavors of the same app, catering to different target groups. In fact, with Android Go’s Google Play catalog that highlights apps optimized for the entry-level devices, I believe this will become a norm going forward.&lt;/p&gt;
-
-&lt;p&gt;Remember, it is not about how many users you have, but about how useful your app is to those users.&lt;/p&gt;
-</description>
-        <pubDate>Thu, 25 May 2017 11:00:00 +0200</pubDate>
-        <link>https://kiranrao.in/blog/2017/05/25/one-size-doesnt-fit-all/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2017/05/25/one-size-doesnt-fit-all/</guid>
-        
-        <category>next-billion</category>
-        
-        <category>android-go</category>
         
         
       </item>
