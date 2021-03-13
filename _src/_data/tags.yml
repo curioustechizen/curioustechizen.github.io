@@ -32,3 +32,5 @@ falsehoods:
   name: Falsehoods
 obvious:
   name: Restating the Obvious
+privacy:
+  name: Privacy
