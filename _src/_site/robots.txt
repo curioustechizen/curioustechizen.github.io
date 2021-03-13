@@ -1,3 +1,3 @@
 User-agent: *
-Sitemap: http://localhost:4000/blog/sitemap.xml
+Sitemap: https://kiranrao.in/blog/sitemap.xml
 Disallow:

@@ -2,237 +2,231 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 	<url>
-	 	<loc>http://localhost:4000/blog/</loc>
+	 	<loc>https://kiranrao.in/blog/</loc>
 	 	<lastmod>2021-03-13</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2021/03/13/privacy-friendly-analytics/</loc>
+	 	<loc>https://kiranrao.in/blog/2021/03/13/privacy-friendly-analytics/</loc>
 	 	<lastmod>2021-03-13</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2020/12/22/basic-first/</loc>
-	 	<lastmod>2020-12-22</lastmod>
-	 	<changefreq>never</changefreq>
-	</url>
-	
-	<url>
-	 	<loc>http://localhost:4000/blog/2020/12/20/ui-not-ux/</loc>
+	 	<loc>https://kiranrao.in/blog/2020/12/20/ui-not-ux/</loc>
 	 	<lastmod>2020-12-20</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2020/12/18/tech-enhancer/</loc>
+	 	<loc>https://kiranrao.in/blog/2020/12/18/tech-enhancer/</loc>
 	 	<lastmod>2020-12-18</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2020/12/15/scalable-tech-business/</loc>
+	 	<loc>https://kiranrao.in/blog/2020/12/15/scalable-tech-business/</loc>
 	 	<lastmod>2020-12-15</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2020/10/24/falsehoods-about-addresses/</loc>
+	 	<loc>https://kiranrao.in/blog/2020/10/24/falsehoods-about-addresses/</loc>
 	 	<lastmod>2020-10-24</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2020/05/21/flutter-stateless-animations/</loc>
+	 	<loc>https://kiranrao.in/blog/2020/05/21/flutter-stateless-animations/</loc>
 	 	<lastmod>2020-05-21</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2020/04/21/diff-animations-swiftui/</loc>
+	 	<loc>https://kiranrao.in/blog/2020/04/21/diff-animations-swiftui/</loc>
 	 	<lastmod>2020-04-21</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2020/03/31/gradle-missing-flavors/</loc>
+	 	<loc>https://kiranrao.in/blog/2020/03/31/gradle-missing-flavors/</loc>
 	 	<lastmod>2020-03-31</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2020/01/12/diff-util-part3/</loc>
+	 	<loc>https://kiranrao.in/blog/2020/01/12/diff-util-part3/</loc>
 	 	<lastmod>2020-01-12</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2020/01/07/diff-util-part2/</loc>
+	 	<loc>https://kiranrao.in/blog/2020/01/07/diff-util-part2/</loc>
 	 	<lastmod>2020-01-07</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2020/01/06/diff-util-part1/</loc>
+	 	<loc>https://kiranrao.in/blog/2020/01/06/diff-util-part1/</loc>
 	 	<lastmod>2020-01-06</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2017/05/25/one-size-doesnt-fit-all/</loc>
+	 	<loc>https://kiranrao.in/blog/2017/05/25/one-size-doesnt-fit-all/</loc>
 	 	<lastmod>2017-05-25</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2017/04/03/java-value-classes-equals/</loc>
+	 	<loc>https://kiranrao.in/blog/2017/04/03/java-value-classes-equals/</loc>
 	 	<lastmod>2017-04-03</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2017/03/05/kotlin-coi/</loc>
+	 	<loc>https://kiranrao.in/blog/2017/03/05/kotlin-coi/</loc>
 	 	<lastmod>2017-03-05</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2015/09/06/ao-spy-2/</loc>
+	 	<loc>https://kiranrao.in/blog/2015/09/06/ao-spy-2/</loc>
 	 	<lastmod>2015-09-06</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2015/08/12/ao-spy-1/</loc>
+	 	<loc>https://kiranrao.in/blog/2015/08/12/ao-spy-1/</loc>
 	 	<lastmod>2015-08-12</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2014/02/09/nested-fragments-and-backstack-part-3/</loc>
+	 	<loc>https://kiranrao.in/blog/2014/02/09/nested-fragments-and-backstack-part-3/</loc>
 	 	<lastmod>2014-02-09</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2014/02/02/nested-fragment-and-backstack-part-2/</loc>
+	 	<loc>https://kiranrao.in/blog/2014/02/02/nested-fragment-and-backstack-part-2/</loc>
 	 	<lastmod>2014-02-02</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2014/01/25/nested-fragments-and-back-stack/</loc>
+	 	<loc>https://kiranrao.in/blog/2014/01/25/nested-fragments-and-back-stack/</loc>
 	 	<lastmod>2014-01-25</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2013/06/08/android-listviews-hybrid-choice-behavior/</loc>
+	 	<loc>https://kiranrao.in/blog/2013/06/08/android-listviews-hybrid-choice-behavior/</loc>
 	 	<lastmod>2013-06-08</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2013/03/09/shift-to-octopress-postponed/</loc>
+	 	<loc>https://kiranrao.in/blog/2013/03/09/shift-to-octopress-postponed/</loc>
 	 	<lastmod>2013-03-09</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2013/02/18/android-constants-preference-keys/</loc>
+	 	<loc>https://kiranrao.in/blog/2013/02/18/android-constants-preference-keys/</loc>
 	 	<lastmod>2013-02-18</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2013/02/01/android-passing-arbitrary-object-to/</loc>
+	 	<loc>https://kiranrao.in/blog/2013/02/01/android-passing-arbitrary-object-to/</loc>
 	 	<lastmod>2013-02-01</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2013/01/29/android-ondestroy-is-new-onstop/</loc>
+	 	<loc>https://kiranrao.in/blog/2013/01/29/android-ondestroy-is-new-onstop/</loc>
 	 	<lastmod>2013-01-29</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2013/01/05/extensibility-and-immutability-in-java/</loc>
+	 	<loc>https://kiranrao.in/blog/2013/01/05/extensibility-and-immutability-in-java/</loc>
 	 	<lastmod>2013-01-05</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2012/12/18/code-smells-calling-life-cycle-methods/</loc>
+	 	<loc>https://kiranrao.in/blog/2012/12/18/code-smells-calling-life-cycle-methods/</loc>
 	 	<lastmod>2012-12-18</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2012/12/03/android-application-level-pause-and/</loc>
+	 	<loc>https://kiranrao.in/blog/2012/12/03/android-application-level-pause-and/</loc>
 	 	<lastmod>2012-12-03</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2012/09/29/google-play-services-and-why-we-still/</loc>
+	 	<loc>https://kiranrao.in/blog/2012/09/29/google-play-services-and-why-we-still/</loc>
 	 	<lastmod>2012-09-29</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2012/07/26/thats-not-fragmentation-but-then-what-is/</loc>
+	 	<loc>https://kiranrao.in/blog/2012/07/26/thats-not-fragmentation-but-then-what-is/</loc>
 	 	<lastmod>2012-07-26</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2012/06/13/internationalization-in-spirit-part-3/</loc>
+	 	<loc>https://kiranrao.in/blog/2012/06/13/internationalization-in-spirit-part-3/</loc>
 	 	<lastmod>2012-06-13</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2012/05/07/code-on-move/</loc>
+	 	<loc>https://kiranrao.in/blog/2012/05/07/code-on-move/</loc>
 	 	<lastmod>2012-05-07</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2012/04/05/mark-it-down/</loc>
+	 	<loc>https://kiranrao.in/blog/2012/04/05/mark-it-down/</loc>
 	 	<lastmod>2012-04-05</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2012/03/27/internationalization-in-spirit-part-2/</loc>
+	 	<loc>https://kiranrao.in/blog/2012/03/27/internationalization-in-spirit-part-2/</loc>
 	 	<lastmod>2012-03-27</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2012/03/19/override-and-debug/</loc>
+	 	<loc>https://kiranrao.in/blog/2012/03/19/override-and-debug/</loc>
 	 	<lastmod>2012-03-19</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2012/03/10/internationalization-in-spirit/</loc>
+	 	<loc>https://kiranrao.in/blog/2012/03/10/internationalization-in-spirit/</loc>
 	 	<lastmod>2012-03-10</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://localhost:4000/blog/2012/02/04/testing-template/</loc>
+	 	<loc>https://kiranrao.in/blog/2012/02/04/testing-template/</loc>
 	 	<lastmod>2012-02-04</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 
 	<url>
-		<loc>http://localhost:4000/blog/tags/</loc>
+		<loc>https://kiranrao.in/blog/tags/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
@@ -280,7 +274,7 @@
 	
 	
 	<url>
-		<loc>http://localhost:4000/blog/tags/android/</loc>
+		<loc>https://kiranrao.in/blog/tags/android/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
@@ -373,7 +367,7 @@
 	
 	
 	<url>
-		<loc>http://localhost:4000/blog/tags/aosp/</loc>
+		<loc>https://kiranrao.in/blog/tags/aosp/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
@@ -382,7 +376,7 @@
 	
 	
 	<url>
-		<loc>http://localhost:4000/blog/tags/studio/</loc>
+		<loc>https://kiranrao.in/blog/tags/studio/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
@@ -391,7 +385,7 @@
 	
 	
 	<url>
-		<loc>http://localhost:4000/blog/tags/java8/</loc>
+		<loc>https://kiranrao.in/blog/tags/java8/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
@@ -400,7 +394,7 @@
 	
 	
 	<url>
-		<loc>http://localhost:4000/blog/tags/lambda/</loc>
+		<loc>https://kiranrao.in/blog/tags/lambda/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
@@ -409,7 +403,7 @@
 	
 	
 	<url>
-		<loc>http://localhost:4000/blog/tags/kotlin/</loc>
+		<loc>https://kiranrao.in/blog/tags/kotlin/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
@@ -418,7 +412,7 @@
 	
 	
 	<url>
-		<loc>http://localhost:4000/blog/tags/effectivejava/</loc>
+		<loc>https://kiranrao.in/blog/tags/effectivejava/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
@@ -427,7 +421,7 @@
 	
 	
 	<url>
-		<loc>http://localhost:4000/blog/tags/next-billion/</loc>
+		<loc>https://kiranrao.in/blog/tags/next-billion/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
@@ -436,7 +430,7 @@
 	
 	
 	<url>
-		<loc>http://localhost:4000/blog/tags/android-go/</loc>
+		<loc>https://kiranrao.in/blog/tags/android-go/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
@@ -445,7 +439,7 @@
 	
 	
 	<url>
-		<loc>http://localhost:4000/blog/tags/diff/</loc>
+		<loc>https://kiranrao.in/blog/tags/diff/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
@@ -454,7 +448,7 @@
 	
 	
 	<url>
-		<loc>http://localhost:4000/blog/tags/gradle/</loc>
+		<loc>https://kiranrao.in/blog/tags/gradle/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
@@ -463,7 +457,7 @@
 	
 	
 	<url>
-		<loc>http://localhost:4000/blog/tags/swiftui/</loc>
+		<loc>https://kiranrao.in/blog/tags/swiftui/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
@@ -472,7 +466,7 @@
 	
 	
 	<url>
-		<loc>http://localhost:4000/blog/tags/animations/</loc>
+		<loc>https://kiranrao.in/blog/tags/animations/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
@@ -481,7 +475,7 @@
 	
 	
 	<url>
-		<loc>http://localhost:4000/blog/tags/flutter/</loc>
+		<loc>https://kiranrao.in/blog/tags/flutter/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
@@ -490,7 +484,7 @@
 	
 	
 	<url>
-		<loc>http://localhost:4000/blog/tags/falsehoods/</loc>
+		<loc>https://kiranrao.in/blog/tags/falsehoods/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
@@ -499,7 +493,7 @@
 	
 	
 	<url>
-		<loc>http://localhost:4000/blog/tags/obvious/</loc>
+		<loc>https://kiranrao.in/blog/tags/obvious/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
@@ -508,7 +502,7 @@
 	
 	
 	<url>
-		<loc>http://localhost:4000/blog/tags/privacy/</loc>
+		<loc>https://kiranrao.in/blog/tags/privacy/</loc>
 		<lastmod>2021-03-13</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>

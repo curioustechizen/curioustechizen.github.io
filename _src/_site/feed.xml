@@ -3,10 +3,10 @@
   <channel>
     <title>Curious Techizen</title>
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
-    <link>http://localhost:4000/blog/</link>
-    <atom:link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 13 Mar 2021 18:30:59 +0100</pubDate>
-    <lastBuildDate>Sat, 13 Mar 2021 18:30:59 +0100</lastBuildDate>
+    <link>https://kiranrao.in/blog/</link>
+    <atom:link href="https://kiranrao.in/blog/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sat, 13 Mar 2021 18:36:08 +0100</pubDate>
+    <lastBuildDate>Sat, 13 Mar 2021 18:36:08 +0100</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -40,65 +40,10 @@
 &lt;p&gt;Even for businesses, there are privacy-friendly alternatives to traditional analytics engines. I want to end this post by advocating against analytics engine that invade your users’ privacy. We can do better and our users deserve better.&lt;/p&gt;
 </description>
         <pubDate>Sat, 13 Mar 2021 18:15:00 +0100</pubDate>
-        <link>http://localhost:4000/blog/2021/03/13/privacy-friendly-analytics/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2021/03/13/privacy-friendly-analytics/</guid>
+        <link>https://kiranrao.in/blog/2021/03/13/privacy-friendly-analytics/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2021/03/13/privacy-friendly-analytics/</guid>
         
         <category>privacy</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Basic before advanced</title>
-        <description>&lt;p&gt;This is a non-programming post in the series I call “re-stating the obvious”. This series talks about topics that already boast extensive literature, I’m merely adding my own annotations. You can find all posts in this series &lt;a href=&quot;/blog/tags/obvious&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;an-anectode&quot;&gt;An anectode&lt;/h2&gt;
-
-&lt;p&gt;I start this post with an anecdote. The era was 1990s and the scene was a bus stand. While my father and I were waiting for a bus, a hawker approached us with a bunch of imitation Casio watches. Here’s the conversation that ensued:&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Father:&lt;/strong&gt; How much for that watch?
-&lt;br /&gt;
-&lt;strong&gt;Hawker:&lt;/strong&gt; 100 rupees
-&lt;br /&gt;
-&lt;strong&gt;F:&lt;/strong&gt; That is a lot for a watch. Why is it so expensive?
-&lt;br /&gt;
-&lt;strong&gt;H:&lt;/strong&gt; It has a lot of amazing features …
-&lt;br /&gt;
-&lt;strong&gt;F:&lt;/strong&gt; Like what?
-&lt;br /&gt;
-&lt;strong&gt;H:&lt;/strong&gt; See this button here? It activates the stop watch … and look, it glows in the dark … and also, it is water resistant … and oh, do you see the strap? It is reversible .. and …
-&lt;br /&gt;
-&lt;strong&gt;F:&lt;/strong&gt; I see the watch is running behind by 5 minutes. Why is that?
-&lt;br /&gt;
-&lt;strong&gt;H:&lt;/strong&gt; Oh that is probably because the light and stopwatch consume a lot of battery
-&lt;br /&gt;
-&lt;strong&gt;F:&lt;/strong&gt; So you are trying to sell me a watch that does not even tell the time correctly but has lot of other useless fancy features?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;feature-creep&quot;&gt;Feature creep&lt;/h2&gt;
-
-&lt;p&gt;Wikipedia has a great definition of &lt;a href=&quot;https://en.wikipedia.org/wiki/Feature_creep&quot;&gt;featue creep&lt;/a&gt;. To paraphrase it, and add my own flavor to the definition:&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;Feature creep is the tendency to add advanced features to a system even before the main purpose of the existence of the system is fulfilled.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I say “system” but feature creep could also occur in a narrower scope, i.e., a subsystem of a system (more on this in a bit). Let’s take a look at some examples.&lt;/p&gt;
-
-&lt;h3 id=&quot;smartphones&quot;&gt;Smartphones&lt;/h3&gt;
-
-&lt;p&gt;A smartphone is perhaps the obvious example that comes to mind. Smartphones function as calculators, cameras, navigation devices, alarms, calendars, books, entertainment devices and a whole bunch more. With so much functionality crammed in, the fundamental purpose of making and receiving phone calls has taken a back seat. All the other features use up resources like battery, leaving very little for actual phone calls.&lt;/p&gt;
-
-&lt;p&gt;###&lt;/p&gt;
-
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Debunking the &lt;a href=&quot;https://twitter.com/hashtag/MVP?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#MVP&lt;/a&gt; myth: a key figure from &amp;quot;The Lean Product Playbook&amp;quot; &lt;a href=&quot;http://t.co/TvuHbBnE7e&quot;&gt;http://t.co/TvuHbBnE7e&lt;/a&gt; &lt;a href=&quot;https://twitter.com/hashtag/leanstartup?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#leanstartup&lt;/a&gt; &lt;a href=&quot;https://twitter.com/hashtag/prodmgmt?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#prodmgmt&lt;/a&gt; &lt;a href=&quot;http://t.co/DqM0tWPzLG&quot;&gt;pic.twitter.com/DqM0tWPzLG&lt;/a&gt;&lt;/p&gt;&amp;mdash; Dan Olsen (@danolsen) &lt;a href=&quot;https://twitter.com/danolsen/status/613581087617384449?ref_src=twsrc%5Etfw&quot;&gt;June 24, 2015&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-
-</description>
-        <pubDate>Tue, 22 Dec 2020 17:30:00 +0100</pubDate>
-        <link>http://localhost:4000/blog/2020/12/22/basic-first/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2020/12/22/basic-first/</guid>
-        
-        <category>obvious</category>
         
         
       </item>
@@ -157,8 +102,8 @@
 
 </description>
         <pubDate>Sun, 20 Dec 2020 17:30:00 +0100</pubDate>
-        <link>http://localhost:4000/blog/2020/12/20/ui-not-ux/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2020/12/20/ui-not-ux/</guid>
+        <link>https://kiranrao.in/blog/2020/12/20/ui-not-ux/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2020/12/20/ui-not-ux/</guid>
         
         <category>obvious</category>
         
@@ -222,8 +167,8 @@
 &lt;p&gt;Tech is making its mark in unimaginable ways in unprecedented fields. It works really well when it enhances an existing system. It would be a shame to go overboard and make a system overly reliant on tech where there is no real need to.&lt;/p&gt;
 </description>
         <pubDate>Fri, 18 Dec 2020 21:00:00 +0100</pubDate>
-        <link>http://localhost:4000/blog/2020/12/18/tech-enhancer/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2020/12/18/tech-enhancer/</guid>
+        <link>https://kiranrao.in/blog/2020/12/18/tech-enhancer/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2020/12/18/tech-enhancer/</guid>
         
         <category>obvious</category>
         
@@ -342,8 +287,8 @@
 
 </description>
         <pubDate>Tue, 15 Dec 2020 19:00:00 +0100</pubDate>
-        <link>http://localhost:4000/blog/2020/12/15/scalable-tech-business/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2020/12/15/scalable-tech-business/</guid>
+        <link>https://kiranrao.in/blog/2020/12/15/scalable-tech-business/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2020/12/15/scalable-tech-business/</guid>
         
         <category>obvious</category>
         
@@ -429,8 +374,8 @@
 &lt;/ol&gt;
 </description>
         <pubDate>Sat, 24 Oct 2020 11:00:00 +0200</pubDate>
-        <link>http://localhost:4000/blog/2020/10/24/falsehoods-about-addresses/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2020/10/24/falsehoods-about-addresses/</guid>
+        <link>https://kiranrao.in/blog/2020/10/24/falsehoods-about-addresses/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2020/10/24/falsehoods-about-addresses/</guid>
         
         <category>falsehoods</category>
         
@@ -586,8 +531,8 @@
 &lt;p&gt;To see a real world use of the techniques described in this post, see the &lt;a href=&quot;https://github.com/curioustechizen/covid19india-flutter&quot;&gt;Covid19-India flutter app&lt;/a&gt; (where you switch between the categories like “active”, “recovered” etc.)&lt;/p&gt;
 </description>
         <pubDate>Thu, 21 May 2020 21:00:00 +0200</pubDate>
-        <link>http://localhost:4000/blog/2020/05/21/flutter-stateless-animations/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2020/05/21/flutter-stateless-animations/</guid>
+        <link>https://kiranrao.in/blog/2020/05/21/flutter-stateless-animations/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2020/05/21/flutter-stateless-animations/</guid>
         
         <category>flutter</category>
         
@@ -743,8 +688,8 @@
 &lt;p&gt;SwiftUI is great for implementing animations. I had to barely write any code to achieve this pretty cool animation (it took me days to achieve the same on Android, and I’ve several years of Android experience!). However, all of this magic does come with its own limitations and it is good to be aware of them before going all-in.&lt;/p&gt;
 </description>
         <pubDate>Tue, 21 Apr 2020 21:00:00 +0200</pubDate>
-        <link>http://localhost:4000/blog/2020/04/21/diff-animations-swiftui/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2020/04/21/diff-animations-swiftui/</guid>
+        <link>https://kiranrao.in/blog/2020/04/21/diff-animations-swiftui/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2020/04/21/diff-animations-swiftui/</guid>
         
         <category>swiftui</category>
         
@@ -913,8 +858,8 @@ apply from: '../flavors.gradle'
 &lt;p&gt;Thanks to &lt;a href=&quot;https://twitter.com/droidxav&quot;&gt;Xavier Ducrohet (@droidxav)&lt;/a&gt; for pointing out the potential pitfalls of using &lt;code class=&quot;highlighter-rouge&quot;&gt;missingDimensionStrategy&lt;/code&gt; for my use case.&lt;/p&gt;
 </description>
         <pubDate>Tue, 31 Mar 2020 21:00:00 +0200</pubDate>
-        <link>http://localhost:4000/blog/2020/03/31/gradle-missing-flavors/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2020/03/31/gradle-missing-flavors/</guid>
+        <link>https://kiranrao.in/blog/2020/03/31/gradle-missing-flavors/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2020/03/31/gradle-missing-flavors/</guid>
         
         <category>android</category>
         
@@ -1089,8 +1034,199 @@ apply from: '../flavors.gradle'
 &lt;p&gt;You might also apply this technique when you want to display custom animations and RV’s ItemAnimator does not suffice for your use case.&lt;/p&gt;
 </description>
         <pubDate>Sun, 12 Jan 2020 10:00:00 +0100</pubDate>
-        <link>http://localhost:4000/blog/2020/01/12/diff-util-part3/</link>
-        <guid isPermaLink="true">http://localhost:4000/blog/2020/01/12/diff-util-part3/</guid>
+        <link>https://kiranrao.in/blog/2020/01/12/diff-util-part3/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2020/01/12/diff-util-part3/</guid>
+        
+        <category>android</category>
+        
+        <category>diff</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Android DiffUtil Part 2: List Diffs on other platforms</title>
+        <description>&lt;p&gt;This is the second post in a series that looks into calculating diffs between two lists on Android. You can read &lt;a href=&quot;/blog/2020/01/06/diff-util-part1/&quot;&gt;Part 1 here&lt;/a&gt;. In this post, we will look at how other platforms handle list diffing.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Edit:&lt;/strong&gt; Edited to add code snippets for each platform.&lt;/p&gt;
+
+&lt;h2 id=&quot;swift-standard-library&quot;&gt;Swift Standard Library&lt;/h2&gt;
+
+&lt;p&gt;The Swift standard library has a &lt;a href=&quot;https://developer.apple.com/documentation/swift/bidirectionalcollection/3200721-difference&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;difference(from:)&lt;/code&gt;&lt;/a&gt; method on &lt;code class=&quot;highlighter-rouge&quot;&gt;BidirectionalCollection&lt;/code&gt; protocol that returns a &lt;code class=&quot;highlighter-rouge&quot;&gt;CollectionDifference&lt;/code&gt; result. &lt;a href=&quot;https://www.fivestars.blog/code/swift-5-1-collection-diffing.html&quot;&gt;This blog post&lt;/a&gt; does a deep dive into this API in Swift.&lt;/p&gt;
+
+&lt;p&gt;It looks like this facility is intended as a general purpose list diff API, not specific to UI programming. Remember, it is in the &lt;em&gt;standard library&lt;/em&gt; so it can be used in backend server programming, for example.&lt;/p&gt;
+
+&lt;h4 id=&quot;example&quot;&gt;Example&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;oldList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;C&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;D&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;newList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;D&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;E&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;diffResult&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;difference&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;diffResult&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//CollectionDifference&amp;lt;String&amp;gt;(&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//    insertions: [.insert(offset: 3, element: &quot;E&quot;, associatedWith: nil)], &lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//    removals: [.remove(offset: 2, element: &quot;C&quot;, associatedWith: nil)]&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Some notable features of this API&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The most interesting feature is the return type: &lt;code class=&quot;highlighter-rouge&quot;&gt;CollectionDifference&lt;/code&gt;. This API provides you a way to iterate through all the diff operations, or even to only pick the insertions (or removals). This is different from how Android does it. More on this in a minute.&lt;/li&gt;
+  &lt;li&gt;By default, it does not detect moves, but there’s an &lt;code class=&quot;highlighter-rouge&quot;&gt;inferringMoves()&lt;/code&gt; method on &lt;code class=&quot;highlighter-rouge&quot;&gt;CollectionDifference&lt;/code&gt; that you can use if you want to do this&lt;/li&gt;
+  &lt;li&gt;It uses equality by default for the comparison, but you can customize how the comparison occurs using &lt;a href=&quot;https://developer.apple.com/documentation/swift/bidirectionalcollection/3200722-difference&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;difference(from: by:)&lt;/code&gt;&lt;/a&gt; variant. Here you pass in a closure that returns a &lt;code class=&quot;highlighter-rouge&quot;&gt;Bool&lt;/code&gt; so you can use whatever logic you wish to compare the elements.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;collectiondifference&quot;&gt;CollectionDifference&lt;/h4&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;CollectionDifference&lt;/code&gt; provides in itself a Collection of &lt;code class=&quot;highlighter-rouge&quot;&gt;CollectionDifference.Change&lt;/code&gt; - which is an enum with 2 values: &lt;code class=&quot;highlighter-rouge&quot;&gt;.insert&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;.remove&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.insert&lt;/code&gt; provides you with an &lt;code class=&quot;highlighter-rouge&quot;&gt;element&lt;/code&gt; and its offset in the &lt;em&gt;final list&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.remove&lt;/code&gt; provides you with an &lt;code class=&quot;highlighter-rouge&quot;&gt;element&lt;/code&gt; and its offset in the &lt;em&gt;original list&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;associatedWith&lt;/code&gt; parameter of the enums inform you about moves&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There’s no concept of “changes” in this API - i.e., it does not tell you if an item retained its identity but did not retain equality.&lt;/p&gt;
+
+&lt;p&gt;I could not find a way to convert positions between old and new lists, but I’m not sure if it is ever required when using this API in practice.&lt;/p&gt;
+
+&lt;h2 id=&quot;swift-apple-platforms&quot;&gt;Swift Apple platforms&lt;/h2&gt;
+
+&lt;p&gt;We started this series with an example of how Android’s RecyclerView animates between 2 lists using DiffUtil. It should come as no surprise that Apple’s UI frameworks have similar capabilities too.&lt;/p&gt;
+
+&lt;p&gt;It has always been possible to achieve this on Apple platforms but it has been verbose and error-prone (frequently giving rise to the Swift equivalent of &lt;code class=&quot;highlighter-rouge&quot;&gt;ArrayIndexOutOfBoundsException&lt;/code&gt;). Recent API improvements have greatly enhanced the developer ergonomics here.&lt;/p&gt;
+
+&lt;p&gt;The headline API is &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableViewDiffableDataSource&lt;/code&gt; and friends (quite a mouthful!). This is completely out of my comfort zone so I’ll point you to &lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2019/215&quot;&gt;these&lt;/a&gt; &lt;a href=&quot;https://developer.apple.com/videos/play/wwdc2019/220&quot;&gt;talks&lt;/a&gt; from WWDC (there are also PDF slides available) if you want to learn more. I will point out though, that the items participating in this API need to be &lt;code class=&quot;highlighter-rouge&quot;&gt;Hashable&lt;/code&gt;. This is how the framework decides that items have “changed”. It fulfils the role of &lt;code class=&quot;highlighter-rouge&quot;&gt;areContentsTheSame()&lt;/code&gt; from Android’s DiffUtil.&lt;/p&gt;
+
+&lt;h2 id=&quot;flutter&quot;&gt;Flutter&lt;/h2&gt;
+
+&lt;p&gt;I could not find any official API for List Diffs in Flutter. However, there’s a third party library that is inspired by Android’s DiffUtils. It is called &lt;a href=&quot;https://github.com/adithyaxx/animated-stream-list&quot;&gt;AnimatedStreamList&lt;/a&gt;. The relevant files in this repo are &lt;a href=&quot;https://github.com/adithyaxx/animated-stream-list/blob/c5b3b17e8dd0b723e2b3777521924c272580c4bf/lib/src/myers_diff.dart&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;myers_diff.dart&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://github.com/adithyaxx/animated-stream-list/blob/c5b3b17e8dd0b723e2b3777521924c272580c4bf/lib/src/diff_payload.dart&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;diff_payload.dart&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;example-1&quot;&gt;Example&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;oldList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;B&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;C&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;D&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;B&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;D&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;E&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Diff&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;diffs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;diffUtil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;calculateDiff&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oldList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//diffs[0] = DeleteDiff(2, 1)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//diffs[1] = InsertDiff(3, 1)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Of note in this library:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It returns a &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;Diff&amp;gt;&lt;/code&gt;. In this sense it is similar to the Swift implementation&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Diff&lt;/code&gt; can be one of &lt;code class=&quot;highlighter-rouge&quot;&gt;InsertDiff&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;DeleteDiff&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;ChangeDiff&lt;/code&gt;. This library does not implement moves.&lt;/li&gt;
+  &lt;li&gt;Each instance of &lt;code class=&quot;highlighter-rouge&quot;&gt;Diff&lt;/code&gt; includes an &lt;code class=&quot;highlighter-rouge&quot;&gt;index&lt;/code&gt; and a &lt;code class=&quot;highlighter-rouge&quot;&gt;size&lt;/code&gt;. In this respect, it is similar to the Android DiffUtil implementation.&lt;/li&gt;
+  &lt;li&gt;It uses an &lt;a href=&quot;https://github.com/adithyaxx/animated-stream-list/blob/c5b3b17e8dd0b723e2b3777521924c272580c4bf/lib/src/myers_diff.dart#L5&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Equalizer&lt;/code&gt;&lt;/a&gt; to customize the comparison.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;angular&quot;&gt;Angular&lt;/h2&gt;
+
+&lt;p&gt;Angular has an &lt;code class=&quot;highlighter-rouge&quot;&gt;IterableDiffer&lt;/code&gt; API that can be used to compute the diff between 2 Iterables. From what I can tell, it is not intended to be used directly by applications, instead it is used internally by the framework (for example, by the &lt;code class=&quot;highlighter-rouge&quot;&gt;NgForOf&lt;/code&gt; directive). &lt;a href=&quot;https://blog.mgechev.com/2017/11/14/angular-iterablediffer-keyvaluediffer-custom-differ-track-by-fn-performance/&quot;&gt;This article&lt;/a&gt; goes into the nuts and bolts of this API.&lt;/p&gt;
+
+&lt;h4 id=&quot;example-2&quot;&gt;Example&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-typescript&quot; data-lang=&quot;typescript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;oldList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;C&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;D&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;newList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;D&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;E&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;diffResult&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;differ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;diff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ngForOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//diffResult consists of following IterableChangeRecords&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//(item = &quot;C&quot;, currentIndex = null, previousIndex = 2)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//(item = &quot;E&quot;, currentIndex = 3, previousIndex = null)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//(item = &quot;D&quot;, currentIndex = 2, previousIndex = 3)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The interesting classes are&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://angular.io/api/core/IterableDiffer&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;IterableDiffer&lt;/code&gt;&lt;/a&gt;: The entry point of the API. Offers the &lt;code class=&quot;highlighter-rouge&quot;&gt;diff&lt;/code&gt; function&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://angular.io/api/core/IterableChanges&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;IterableChanges&lt;/code&gt;&lt;/a&gt;: The diff result, which in itself is an Iterable&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://angular.io/api/core/IterableChangeRecord&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;IterableChangeRecord&lt;/code&gt;&lt;/a&gt;: Each individual update operation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;IterableChanges&lt;/code&gt; interface is pretty interesting: it exposes functions to iterate over the changes in a variety of ways (all updates, only additions, only removals etc). The &lt;code class=&quot;highlighter-rouge&quot;&gt;DefaultIterableDiffer&lt;/code&gt; accepts a &lt;code class=&quot;highlighter-rouge&quot;&gt;TrackByFn&lt;/code&gt; argument, which fulfils the role of Android’s &lt;code class=&quot;highlighter-rouge&quot;&gt;DiffUtil.Callback&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;IterableChangeRecord&lt;/code&gt; is also interesting: It does not directly state the diff operation. Instead, it contains &lt;code class=&quot;highlighter-rouge&quot;&gt;currentIndex&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;previousIndex&lt;/code&gt;. Together, these can be used to decide if an item was added, removed etc. It also fulfils the role of position conversion APIs in Android.&lt;/p&gt;
+
+&lt;p&gt;In practice, you’d probably use the &lt;code class=&quot;highlighter-rouge&quot;&gt;IterableChanges&lt;/code&gt; API to figure out the additions and removals.&lt;/p&gt;
+
+&lt;h2 id=&quot;at-a-glance&quot;&gt;At a glance&lt;/h2&gt;
+
+&lt;p&gt;Here’s a table summarizing all the diff APIs across these platforms.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;Android&lt;/th&gt;
+      &lt;th&gt;Swift&lt;/th&gt;
+      &lt;th&gt;Flutter (3rd party)&lt;/th&gt;
+      &lt;th&gt;Angular&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Detect Moves&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Change payloads&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Custom comparison&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;DiffUtil.Callback&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;difference(from:by:)&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Hashable&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Equalizer&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;TrackByFn&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Position conversion&lt;/td&gt;
+      &lt;td&gt;Methods on &lt;code class=&quot;highlighter-rouge&quot;&gt;DiffResult&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;NA&lt;/td&gt;
+      &lt;td&gt;NA&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;IterableChangeRecord&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;a-note-about-declarative-ui-frameworks&quot;&gt;A note about declarative UI frameworks&lt;/h3&gt;
+
+&lt;p&gt;This series of blog posts actually started when I was trying to implement custom animations for a list view on Android. When I started this research, the question I wanted to answer was&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;How do declarative UI frameworks deal with allowing custom animations for changes in lists?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Note that declarative UI frameworks in general receive a UI state and render that state. They don’t have a concept of “previous state” so “this item was removed” animation does not fit into this paradigm.&lt;/p&gt;
+
+&lt;p&gt;So far, I haven’t found an answer to this question!&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;SwiftUI provides some default animations, but I did not find a way to customize them.&lt;/li&gt;
+  &lt;li&gt;Flutter has no official APIs for this use case.&lt;/li&gt;
+  &lt;li&gt;Angular has some APIs that look like they are used internally. I’m way out of my depth about Angular to form any practical opinion about it.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It will be really interesting to see how Jetpack Compose is going to solve this problem!&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;After my research for this post, I came to the conclusion that Android’s DiffUtil API is the most flexible of all. It is the lowest level API for exposing the diff operations (the &lt;code class=&quot;highlighter-rouge&quot;&gt;ListUpdateCallback&lt;/code&gt;). All other platforms expose collection-style APIs for this purpose.&lt;/p&gt;
+
+&lt;p&gt;I reckon Android has this low-level API because it plays well together with RecyclerView Adapter API. One can write a wrapper to expose it as a collection-style API.&lt;/p&gt;
+
+&lt;p&gt;That is exactly what we will do in the next post in this series: Look at an example situation where RecyclerView might not be best fit, and instead wrap the &lt;code class=&quot;highlighter-rouge&quot;&gt;ListUpdateCallback&lt;/code&gt; to implement some custom UI.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 07 Jan 2020 10:00:00 +0100</pubDate>
+        <link>https://kiranrao.in/blog/2020/01/07/diff-util-part2/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2020/01/07/diff-util-part2/</guid>
         
         <category>android</category>
         
