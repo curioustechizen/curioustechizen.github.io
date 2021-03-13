@@ -28,6 +28,8 @@
       {% endif %}
 
       {% seo %}
+      {% comment %} Counter {% endcomment %}
+      <script>if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"curioustechizen",utcoffset:"1"}))};sessionStorage.setItem("_swa","1");</script>
 
   </head>
 
@@ -105,16 +107,6 @@
         ga('create', '{{ site.ga_tracking_id }}', '{{ site.ga_domain }}');
         ga('send', 'pageview');
       </script>
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-6NSXY6WHWF"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-6NSXY6WHWF');
-      </script>
     {% endif %}
-
   </body>
 </html>

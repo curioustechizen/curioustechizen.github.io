@@ -33,9 +33,9 @@ social:
 
 # Google Analytics (you may want to changes these with yours or even delete :)
 
-ga_domain: kiranrao.in
-ga_tracking_id: UA-66125769-1
-google_site_verification: "H8RGMD_f_siP2w-pSgSovLpeKIMac--hZGy47rZWoUM"
+# ga_domain: kiranrao.in
+# ga_tracking_id: UA-66125769-1
+# google_site_verification: "H8RGMD_f_siP2w-pSgSovLpeKIMac--hZGy47rZWoUM"
 
 # Other (refer to http://jekyllrb.com/docs/home/ for further details on the below)
 
