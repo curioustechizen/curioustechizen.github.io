@@ -5,9 +5,102 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>https://kiranrao.in/blog/</link>
     <atom:link href="https://kiranrao.in/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 20 Mar 2021 18:50:35 +0100</pubDate>
-    <lastBuildDate>Sat, 20 Mar 2021 18:50:35 +0100</lastBuildDate>
+    <pubDate>Sun, 21 Mar 2021 16:53:26 +0100</pubDate>
+    <lastBuildDate>Sun, 21 Mar 2021 16:53:26 +0100</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Basic before advanced</title>
+        <description>&lt;p&gt;This is a non-programming post in the series I call “re-stating the obvious”. This series talks about topics that already boast extensive literature, I’m merely adding my own annotations. You can find all posts in this series &lt;a href=&quot;/blog/tags/obvious&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;an-anectode&quot;&gt;An anectode&lt;/h2&gt;
+
+&lt;p&gt;I start this post with an anecdote. The era was 1990s and the scene was a bus stand. While my father and I were waiting for a bus, a hawker approached us with a bunch of imitation Casio watches. Here’s the conversation that ensued:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Father:&lt;/strong&gt; How much for that watch?
+&lt;br /&gt;
+&lt;strong&gt;Hawker:&lt;/strong&gt; 100 rupees
+&lt;br /&gt;
+&lt;strong&gt;F:&lt;/strong&gt; That is a lot for a watch. Why is it so expensive?
+&lt;br /&gt;
+&lt;strong&gt;H:&lt;/strong&gt; It has a lot of amazing features …
+&lt;br /&gt;
+&lt;strong&gt;F:&lt;/strong&gt; Like what?
+&lt;br /&gt;
+&lt;strong&gt;H:&lt;/strong&gt; See this button here? It activates the stop watch … and look, it glows in the dark … and also, it is water resistant … and oh, do you see the strap? It is reversible .. and …
+&lt;br /&gt;
+&lt;strong&gt;F:&lt;/strong&gt; I see the watch is running behind by 5 minutes. Why is that?
+&lt;br /&gt;
+&lt;strong&gt;H:&lt;/strong&gt; Oh that is probably because the light and stopwatch consume a lot of battery
+&lt;br /&gt;
+&lt;strong&gt;F:&lt;/strong&gt; So you are trying to sell me a watch that does not even tell the time correctly but has lot of other useless fancy features?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;feature-creep&quot;&gt;Feature creep&lt;/h2&gt;
+
+&lt;p&gt;Wikipedia has a great definition of &lt;a href=&quot;https://en.wikipedia.org/wiki/Feature_creep&quot;&gt;featue creep&lt;/a&gt;. To paraphrase it, and add my own flavor to the definition:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Feature creep is the tendency to add advanced features to a system even before the main purpose of the existence of the system is fulfilled.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I say “system” but feature creep could also occur in a narrower scope, i.e., a subsystem of a system (more on this in a bit). Let’s take a look at some examples.&lt;/p&gt;
+
+&lt;h3 id=&quot;smartphones&quot;&gt;Smartphones&lt;/h3&gt;
+
+&lt;p&gt;A smartphone is perhaps the obvious example that comes to mind. Smartphones function as calculators, cameras, navigation devices, alarms, calendars, books, entertainment devices and a whole bunch more. With so much functionality crammed in, the fundamental purpose of making and receiving phone calls has taken a back seat. All the other features use up resources like battery, leaving very little for actual phone calls.&lt;/p&gt;
+
+&lt;h3 id=&quot;automotive-systems&quot;&gt;Automotive systems&lt;/h3&gt;
+
+&lt;p&gt;In the automotive space, the line between what is infotainment and what is driver-assist is constantly blurring. What is a luxury today becomes a basic safety feature tomorrow. It is no wonder that companies get carried away trying to pack their vehicles to the brim with features This is where things start going awry.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Feature creep starts seeping in such a way that safety features of one subsystem are rendered almost useless due to overcrowded features in another.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Consider this. Let’s say you have a vehicle with every major driver assist safety feature that you can think of: Tyre pressure monitoring system, Anti-lock Braking system, Side-stand alert, cruise control, collision warning - you name it. And then, you go and pair this with an infotainment system that distracts the driver, or requires the driver to spend too much time fiddling with the controls in order to achieve anything. What use are all those advanced features then? &lt;strong&gt;The feature creep in the infotainment subsystem could cause fatal crashes long before the safety subsystem can even kick in.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If you think this is hypothetical, think again. Next time you use your vehicle, check how easy it is to perform some tasks like the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Changing the destination of your navigation system while you are driving&lt;/li&gt;
+  &lt;li&gt;Checking the tyre pressure (if your vehicle is equipped with a TPMS)&lt;/li&gt;
+  &lt;li&gt;If you use phone projection systems like Android Auto or Apple CarPlay, how seamlessly does the system recover from a lost connection between the vehicle and phone?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And note that this list does not even include the “tainment” part of infotainment. I have not even gotten to the part where you try to control your music or podcasts or message someone.&lt;/p&gt;
+
+&lt;h2 id=&quot;basic-first&quot;&gt;Basic First&lt;/h2&gt;
+
+&lt;p&gt;I’m not here to advocate that there is one true solution to this problem. I’m a fan of the “a product should do one thing and do it well” philosophy but it does not apply to every product.&lt;/p&gt;
+
+&lt;p&gt;What might be interesting is to come up with some principles for a threshold for a feature to make it in. This tweet about Minimum Viable Product comes to mind:&lt;/p&gt;
+
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Debunking the &lt;a href=&quot;https://twitter.com/hashtag/MVP?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#MVP&lt;/a&gt; myth: a key figure from &amp;quot;The Lean Product Playbook&amp;quot; &lt;a href=&quot;http://t.co/TvuHbBnE7e&quot;&gt;http://t.co/TvuHbBnE7e&lt;/a&gt; &lt;a href=&quot;https://twitter.com/hashtag/leanstartup?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#leanstartup&lt;/a&gt; &lt;a href=&quot;https://twitter.com/hashtag/prodmgmt?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#prodmgmt&lt;/a&gt; &lt;a href=&quot;http://t.co/DqM0tWPzLG&quot;&gt;pic.twitter.com/DqM0tWPzLG&lt;/a&gt;&lt;/p&gt;&amp;mdash; Dan Olsen (@danolsen) &lt;a href=&quot;https://twitter.com/danolsen/status/613581087617384449?ref_src=twsrc%5Etfw&quot;&gt;June 24, 2015&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;It might be an interesting experiment to repurpose (and kind of negate) the second image in this tweet and use it as a template for deciding if a feature should be added:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Bottom of the pyramid (Functionality): Will absence of this feature prevent the core functionality of the feature from being fulfilled?&lt;/li&gt;
+  &lt;li&gt;Second from the bottom (Reliability): Without this feature, will the reliability of the product be impacted?&lt;/li&gt;
+  &lt;li&gt;Second from top (Usability): Does absence of this feature have detrimental effect on the usability of the core product?&lt;/li&gt;
+  &lt;li&gt;Top of the pyramid (Delight): Only if the product passes through the other three filters, then ask the question - Do we have no way to delight the user without this feature?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If the answer to all these questions is a resounding Yes, then the feature makes it in, else it stays out.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;At the risk of restating the obvious, &lt;strong&gt;advanced features are useless if the basic ones don’t work well&lt;/strong&gt;. Products ought to focus on the basic reason for their existence to work solidly before trying to add more. Otherwise it risks being perceived as gimmicky.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 21 Mar 2021 16:30:00 +0100</pubDate>
+        <link>https://kiranrao.in/blog/2021/03/21/basic-first/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2021/03/21/basic-first/</guid>
+        
+        <category>obvious</category>
+        
+        
+      </item>
     
       <item>
         <title>Facebook and Privacy</title>
@@ -66,7 +159,7 @@
 
 &lt;p&gt;It is possible to use Facebook without entirely letting go of my privacy. It introduces some friction but in my personal experience, it has only resulted in a net gain for me.&lt;/p&gt;
 
-&lt;p&gt;This is a post in my series related to digital privacy. You can read more posts in this series &lt;a href=&quot;https://kiranrao.in/blog/tags/privacy/&quot;&gt;here&lt;/a&gt;. For more advanced information and inspiration about digital privacy, you can visit the &lt;a href=&quot;https://privacytools.io/&quot;&gt;Privacy Tools&lt;/a&gt; page.&lt;/p&gt;
+&lt;p&gt;This is a post in my series related to digital privacy. You can read more posts in this series &lt;a href=&quot;/blog/tags/privacy&quot;&gt;here&lt;/a&gt;. For more advanced information and inspiration about digital privacy, you can visit the &lt;a href=&quot;https://privacytools.io/&quot;&gt;Privacy Tools&lt;/a&gt; page.&lt;/p&gt;
 </description>
         <pubDate>Sat, 20 Mar 2021 17:30:00 +0100</pubDate>
         <link>https://kiranrao.in/blog/2021/03/20/facebook-privacy/</link>
@@ -932,182 +1025,6 @@ apply from: '../flavors.gradle'
         <category>android</category>
         
         <category>gradle</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Android DiffUtil Part 3: Custom animations</title>
-        <description>&lt;p&gt;This is part 3 in a series of posts that looks into DiffUtil on Android. The previous posts in this series are:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;/blog/2020/01/06/diff-util-part1/&quot;&gt;Part 1&lt;/a&gt; where we take a deep dive into the DiffUtil API&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/blog/2020/01/07/diff-util-part2/&quot;&gt;Part 2&lt;/a&gt; where we compare this API with similar APIs on other platforms.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;In this post, we’ll look at an example of when to use custom animations.&lt;/p&gt;
-
-&lt;h2 id=&quot;the-sample-app&quot;&gt;The sample app&lt;/h2&gt;
-
-&lt;p&gt;Here’s an example of the animations that we will achieve. The code for this sampe is available &lt;a href=&quot;https://github.com/curioustechizen/diffutil-custom-animations&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/video/diff_custom.gif&quot; alt=&quot;Custom diff animation&quot; style=&quot;max-height: 512px; max-width: 288px;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This is admittedly a goofy example, but it serves a purpose. I originally wanted to demonstrate this using visualization of RingBuffer data structure as an example, but I settled for this Color Circles example because it prevents us from getting distracted learning ring buffer!&lt;/p&gt;
-
-&lt;p&gt;Here is how the sample works:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;There are 7 slots, arranged in a circle&lt;/li&gt;
-  &lt;li&gt;Each slot can be empty, or occupied by a colored view (I chose the colors of the rainbow, hence the number 7)&lt;/li&gt;
-  &lt;li&gt;Each view can be “expanded” or not&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The data for the view is a &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;CircleInfo&amp;gt;&lt;/code&gt; where &lt;code class=&quot;highlighter-rouge&quot;&gt;CircleInfo&lt;/code&gt; is defined as follows:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CircleInfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;expanded&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;The “Toggle” button switches between two hard-coded lists. It submits the entire list to the &lt;code class=&quot;highlighter-rouge&quot;&gt;ColorCirclesView&lt;/code&gt;, which in turn &lt;a href=&quot;https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/app/src/main/java/in/kiranrao/diffutilsamples/ColorCirclesView.kt#L107&quot;&gt;applies a diff&lt;/a&gt; and runs some animations:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;If an item’s &lt;code class=&quot;highlighter-rouge&quot;&gt;expanded&lt;/code&gt; property changed, then we animate the change in width and height of that view&lt;/li&gt;
-  &lt;li&gt;If an item was removed, then we shrink the view until it disappears, while simultaneously moving it to the center of the circle&lt;/li&gt;
-  &lt;li&gt;If an item was added, then we expand it from size 0 to its final size, while simultaneously moving it from the center of the circle to its final position along the circumference.&lt;/li&gt;
-  &lt;li&gt;For items that were present in both lists, but their positions in the list changed, we move the views along the circumference of the circle to arrive at the new positions. This animation “makes room” for items being inserted, and “fills the gap” created by disappearing items.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Finally, we run all these animations in a pre-determined order:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;All removals first&lt;/li&gt;
-  &lt;li&gt;Then, change animations together with move along circumference animations&lt;/li&gt;
-  &lt;li&gt;Finally the insertion animations are run&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;As you might have guessed, this example was carefully chosen to demonstrate the use of custom diffs. This example is not suitable for &lt;code class=&quot;highlighter-rouge&quot;&gt;RecyclerView&lt;/code&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;For one, there’s no straightforward way of arranging RV items along a circle&lt;/li&gt;
-  &lt;li&gt;Even if you do find a circular &lt;code class=&quot;highlighter-rouge&quot;&gt;LayoutManager&lt;/code&gt; for RV, you are unlikely to get it to work well with RV’s &lt;code class=&quot;highlighter-rouge&quot;&gt;ItemAnimator&lt;/code&gt; framework (this framework, although very powerful and flexible, requires you to understand way too much of the RV internal workings)&lt;/li&gt;
-  &lt;li&gt;In this specific example, there’s no recycling happening, so you don’t really need RV. There’s a fixed limit to the number of items (7) and they all fit on screen at once.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Here’s another example with more operations happening: There’s 2 removals, 2 changes and one insertion (I recommend to run the app on an emulator to see the real animations, the fidelity of GIF is not good enough)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/video/diff_custom_2.gif&quot; alt=&quot;Custom diff animation 2&quot; style=&quot;max-height: 512px; max-width: 288px;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; There are some situations that this sample does not handle. For example if you submit a list while animations for the previous diff are already in progress, it could crash. However, this is not related to the DiffUtil wrapper that we are discussing in this post, so I’ll leave it as is.&lt;/p&gt;
-
-&lt;h2 id=&quot;a-wrapper-for-diffutil&quot;&gt;A wrapper for DiffUtil&lt;/h2&gt;
-
-&lt;p&gt;In the previous posts, we discussed about wrapping Android’s DiffUtil in a collection-style API. It is necessary to do this for our sample. This is because of the order in which we want to run our animations: We want to run all removals together. The standard &lt;code class=&quot;highlighter-rouge&quot;&gt;ListUpdateCallback&lt;/code&gt; has no way of telling us “here are all the items that were removed”.&lt;/p&gt;
-
-&lt;p&gt;So, we can start off by doing the obvious: maintain our own list of diff operations (change, remove etc) and keep adding to this list when our &lt;code class=&quot;highlighter-rouge&quot;&gt;ListUpdateCallback&lt;/code&gt; is called. This is implemented &lt;a href=&quot;https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/atomic-diff-util/src/main/java/in/kiranrao/atomicdiffutil/AtomicDiffCalculator.kt#L49-L67&quot;&gt;here&lt;/a&gt; and a snippet is like this&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;k&quot;&gt;internal&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;diffOps&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mutableListOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RawDiffOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onChanged&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;diffOps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RawDiffOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Change&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Other&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;overrides&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;follow&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;And &lt;code class=&quot;highlighter-rouge&quot;&gt;RawDiffOperation&lt;/code&gt; is &lt;a href=&quot;https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/atomic-diff-util/src/main/java/in/kiranrao/atomicdiffutil/AtomicDiffResult.kt#L105-L109&quot;&gt;defined as&lt;/a&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;k&quot;&gt;sealed&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RawDiffOperation&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Insert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RawDiffOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Change&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;payload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RawDiffOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RawDiffOperation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;But we can do better. In our sample, we don’t actually care about the exact order in which the diff operations need to be applied. All we care about is the final set of changes, removals and additions. In other words, instead of&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Item at index 3 was deleted, then item at index 1 was deleted, then an item was inserted at index 0&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;we want to say&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Items at index 1 and 3 were deleted; and an item was inserted at index 0&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;atomicdiffresult&quot;&gt;AtomicDiffResult&lt;/h2&gt;
-
-&lt;p&gt;So, we use a combination of the RawDiffOperations and DiffUtil’s position conversion methods (&lt;code class=&quot;highlighter-rouge&quot;&gt;convertNewPositionToOld()&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;convertOldPositionToNew()&lt;/code&gt;) to expose an API like this:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;k&quot;&gt;sealed&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ItemDiffRecord&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Inserted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;newPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ItemDiffRecord&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Removed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;oldPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ItemDiffRecord&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Changed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;oldItem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;newItem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;oldPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;newPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;payload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ItemDiffRecord&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PositionChanged&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;oldPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;newPosition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;ItemDiffRecord&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AtomicDiffResult&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;insertionRecords&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Inserted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;removalRecords&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Removed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;changeRecords&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Changed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;positionChangeRecords&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PositionChanged&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Note that this API gives us everything we need to perform our animations. It gives us the item itself in addition to positions. In case of item changes, it gives us both the old and new items. You can see the implementation of &lt;a href=&quot;https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/atomic-diff-util/src/main/java/in/kiranrao/atomicdiffutil/AtomicDiffResult.kt#L8&quot;&gt;AtomicDiffResult here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Implementation note:&lt;/strong&gt; This implementation of AtomicDiffResult is leaves some room for optimization since it performs 2 extra iterations over the lists (once over the new list and once over the old one). In this example it is negligible.&lt;/p&gt;
-
-&lt;h2 id=&quot;entry-point-into-the-api&quot;&gt;Entry point into the API&lt;/h2&gt;
-
-&lt;p&gt;Now that we know what we want the result to look like, let’s consider how we want to calculate the diff. We want to provide the following pieces of information&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Old list&lt;/li&gt;
-  &lt;li&gt;New list&lt;/li&gt;
-  &lt;li&gt;How to compare items in the list&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;This leads us to the following signature&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calculateAtomicDiff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;oldList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;,&lt;/span&gt; 
-    &lt;span class=&quot;n&quot;&gt;newList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;,&lt;/span&gt; 
-    &lt;span class=&quot;n&quot;&gt;itemCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ItemCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AtomicDiffResult&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;The implementation of this function is &lt;a href=&quot;https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/atomic-diff-util/src/main/java/in/kiranrao/atomicdiffutil/AtomicDiffCalculator.kt#L7-L18&quot;&gt;here&lt;/a&gt;. You can find the tests for this implementation &lt;a href=&quot;https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/atomic-diff-util/src/test/java/in/kiranrao/atomicdiffutil/AtomicDiffUtilTest.kt&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;wrapping-up&quot;&gt;Wrapping up&lt;/h2&gt;
-
-&lt;p&gt;In this post, I explored one way to wrap DiffUtil’s &lt;code class=&quot;highlighter-rouge&quot;&gt;ListUpdateCallback&lt;/code&gt; into a more ergonomic API. This is by no means the most generic way:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;It does not handle moves&lt;/li&gt;
-  &lt;li&gt;It ignores the change payloads&lt;/li&gt;
-  &lt;li&gt;In some cases you do really want access to the raw diff operations in the order they were performed (note that &lt;code class=&quot;highlighter-rouge&quot;&gt;AtomicDiffresult&lt;/code&gt; does expose the underlying &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;RawDiffOperation&amp;gt;&lt;/code&gt; for this purpose)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;However, it does handle a lot of use cases where you might want to use &lt;code class=&quot;highlighter-rouge&quot;&gt;ListUpdateCallback&lt;/code&gt;. The API style I proposed here is closest to Angular’s style.&lt;/p&gt;
-
-&lt;p&gt;The most practical applications of wrapping DiffUtil are in situations where you have lists of data but you don’t want to use RecyclerView to display them. Examples include&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Situations where you have limited number of items and no recycling happening&lt;/li&gt;
-  &lt;li&gt;Lists shown in bottom sheets&lt;/li&gt;
-  &lt;li&gt;Custom UI like the one shown in the sample, or visualizing a ring buffer data structure&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;You might also apply this technique when you want to display custom animations and RV’s ItemAnimator does not suffice for your use case.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 12 Jan 2020 10:00:00 +0100</pubDate>
-        <link>https://kiranrao.in/blog/2020/01/12/diff-util-part3/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2020/01/12/diff-util-part3/</guid>
-        
-        <category>android</category>
-        
-        <category>diff</category>
         
         
       </item>

@@ -57,4 +57,4 @@ This is marginally more work than having the app installed, but it has actually 
 It is possible to use Facebook without entirely letting go of my privacy. It introduces some friction but in my personal experience, it has only resulted in a net gain for me.
 
 
-This is a post in my series related to digital privacy. You can read more posts in this series [here](https://kiranrao.in/blog/tags/privacy/). For more advanced information and inspiration about digital privacy, you can visit the [Privacy Tools](https://privacytools.io/) page.
+This is a post in my series related to digital privacy. You can read more posts in this series [here](/blog/tags/privacy). For more advanced information and inspiration about digital privacy, you can visit the [Privacy Tools](https://privacytools.io/) page.
