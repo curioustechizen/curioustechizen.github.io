@@ -34,3 +34,7 @@ obvious:
   name: Restating the Obvious
 privacy:
   name: Privacy
+multiplatform:
+  name: Multi-platform
+ios:
+  name: iOS
