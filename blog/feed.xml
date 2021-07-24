@@ -5,9 +5,112 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>https://kiranrao.in/blog/</link>
     <atom:link href="https://kiranrao.in/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 04 Apr 2021 10:50:16 +0200</pubDate>
-    <lastBuildDate>Sun, 04 Apr 2021 10:50:16 +0200</lastBuildDate>
+    <pubDate>Sat, 24 Jul 2021 22:48:51 +0200</pubDate>
+    <lastBuildDate>Sat, 24 Jul 2021 22:48:51 +0200</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Mobile Multiplatform and Me</title>
+        <description>&lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; This post is based on my own experience and is highly opinionated. It is not meant as a blanket “State of the Union” of mobile multiplatform.&lt;/p&gt;
+
+&lt;p&gt;Over the years, there have been several attempts at cross-platform frameworks for building mobile (Android and iOS) apps. This post is about my experience with three of them: &lt;a href=&quot;https://reactnative.dev/&quot;&gt;ReactNative&lt;/a&gt;, &lt;a href=&quot;https://flutter.dev/&quot;&gt;Flutter&lt;/a&gt; and &lt;a href=&quot;https://kotlinlang.org/lp/mobile/&quot;&gt;Kotlin Multiplatform Mobile&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This is not meant as a competition. I’m not going to announce a winner at the end of the post. Every framework serves a different audience and has different use cases. I made sure to call out the sweet spot for each of these frameworks.&lt;/p&gt;
+
+&lt;h1 id=&quot;react-native&quot;&gt;React Native&lt;/h1&gt;
+
+&lt;p&gt;RN was my first experience with mobile cross-platform. I worked with it in 2017 and at the time it was not very mature. However I expect things to have evolved since then.&lt;/p&gt;
+
+&lt;h3 id=&quot;pros&quot;&gt;Pros&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Concepts of React carry over directly. This makes mobile app development approachable for a large developer audience.&lt;/li&gt;
+  &lt;li&gt;Edit-refresh development cycle is very rapid compared to traditional mobile app development.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;cons&quot;&gt;Cons&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;ReactNative initially had only iOS support. Android was added later. This was obvious when I was working with it - Android frequently lagged behind iOS.&lt;/li&gt;
+  &lt;li&gt;ReactNative ultimately interpretes JavaScript code on the target platform. On Android this is achieved using a JS bridge, which makes it slow. It also results in “stringly-typed APIs” while crossing the bridge which kind of negates the productivity gains of the edit-refresh cycle.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;sweet-spot&quot;&gt;Sweet spot&lt;/h3&gt;
+
+&lt;p&gt;The sweet spot for RN is when you have web developers that want to get into mobile development.&lt;/p&gt;
+
+&lt;h1 id=&quot;kotlin-mobile-multiplatform&quot;&gt;Kotlin Mobile Multiplatform&lt;/h1&gt;
+
+&lt;p&gt;I worked with KMM in 2019-2020. At the time the technology was not very mature. At the time of writing this, it is still in Alpha. Do note that KMM is from JetBrains. My experience with JetBrains technology is that when it is designated as alpha, it is already very usable, even in production.&lt;/p&gt;
+
+&lt;h3 id=&quot;pros-1&quot;&gt;Pros&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;KMM does not provide multiplatform UI libraries. It is intended to share logic, leaving writing the UIs to platform native code. This, in my opinion, is the correct approach to multiplatform.&lt;/li&gt;
+  &lt;li&gt;It is from JetBrains, from the Kotlin team. Hence the tooling is great.&lt;/li&gt;
+  &lt;li&gt;It is Kotlin, which is my favourite language!&lt;/li&gt;
+  &lt;li&gt;Due to the nature of KMM, you can share as little or as much of the code between platforms as you wish. You don’t give up on any of the platform native features.&lt;/li&gt;
+  &lt;li&gt;You don’t need to change the way you develop your Android app to make it multiplatform-capable.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;cons-1&quot;&gt;Cons&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Kotlin was a JVM language for several years. For mobile, you could interprete this as KMM being Android-first.&lt;/li&gt;
+  &lt;li&gt;While Kotlin, the language is very stable and mature, the KMM technology is still immature.&lt;/li&gt;
+  &lt;li&gt;KMM can be unnatural for iOS developers. The Kotlin-ObjC (and hence Kotlin-Swift) &lt;a href=&quot;https://www.reddit.com/r/Kotlin/comments/odau0p/marrying_kmm_and_swift_with_sourcery/h4056dq?utm_source=share&amp;amp;utm_medium=web2x&amp;amp;context=3&quot;&gt;interop has some limitations&lt;/a&gt; which can ruin the experience on the iOS consuming side.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;sweet-spot-1&quot;&gt;Sweet spot&lt;/h3&gt;
+
+&lt;p&gt;The sweet spots for KMM are:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Android developers who have also dabbled in iOS&lt;/li&gt;
+  &lt;li&gt;Minimum Viable Products (MVPs). Remember point 5 from the pros of KMM. If you developed an app using KMM, and you later want to change your iOS app to become a pure native app, what you are left with is still a fully functional native Android app.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;flutter&quot;&gt;Flutter&lt;/h1&gt;
+
+&lt;p&gt;I did not work professionally with Flutter. However, I made an open source app for learning Flutter in 2020.&lt;/p&gt;
+
+&lt;h3 id=&quot;pros-2&quot;&gt;Pros&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Flutter is the most mature of the mobile cross-platform frameworks&lt;/li&gt;
+  &lt;li&gt;Hot reload! Seriously. Flutter’s hot-reload is life-changing.&lt;/li&gt;
+  &lt;li&gt;Mature implementations of several libraries (especially those from Google like Maps, Analytics etc)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;cons-2&quot;&gt;Cons&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Dart is a dated language compared to Kotlin, Swift or TypeScript. This could have something to do with Dart’s history of a compile-to-JS language that dramatically pivoted to mobile multiplatform.&lt;/li&gt;
+  &lt;li&gt;Writing platform plugins for Flutter is not as natural as plugging into native functionality with KMM’s expect/actual mechanism. It used to be stringly-typed but that seems to have changed with the &lt;a href=&quot;https://pub.dev/packages/pigeon&quot;&gt;pigeon package&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;sweet-spot-2&quot;&gt;Sweet spot&lt;/h3&gt;
+
+&lt;p&gt;The sweet spot for Flutter is for teams that want end-to-end cross platform apps without having to go through the mess of the web development ecosystem.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;Each of the mobile multiplatform frameworks have their use cases, and each have their sore weaknesses. Mobile cross-platform is still very much an unsolved problem.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 24 Jul 2021 16:30:00 +0200</pubDate>
+        <link>https://kiranrao.in/blog/2021/07/24/mobile-multiplatform/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2021/07/24/mobile-multiplatform/</guid>
+        
+        <category>multiplatform</category>
+        
+        <category>flutter</category>
+        
+        <category>android</category>
+        
+        <category>ios</category>
+        
+        
+      </item>
     
       <item>
         <title>Basic before advanced</title>
@@ -855,176 +958,6 @@
         <category>swiftui</category>
         
         <category>animations</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Android Gradle: Lessons learnt using missingDimensionStrategy</title>
-        <description>&lt;h2 id=&quot;tldr&quot;&gt;TL;DR:&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;If a &lt;em&gt;library module&lt;/em&gt; includes a flavor dimension that the &lt;em&gt;app flavor&lt;/em&gt; does not, then use &lt;code class=&quot;highlighter-rouge&quot;&gt;missingDimensionStrategy&lt;/code&gt; to specify default flavors from the missing dimension&lt;/li&gt;
-  &lt;li&gt;More generally, you can use this any time a &lt;em&gt;consumed module&lt;/em&gt; includes a flavor that the &lt;em&gt;consumer module&lt;/em&gt; does not. Remember, &lt;code class=&quot;highlighter-rouge&quot;&gt;missingDimensionStrategy&lt;/code&gt; DSL should be used in the &lt;code class=&quot;highlighter-rouge&quot;&gt;build.gradle&lt;/code&gt; of the &lt;em&gt;consumer module&lt;/em&gt;.&lt;/li&gt;
-  &lt;li&gt;However, point 2 might not always do what you think it is doing. In particular, when the &lt;em&gt;consumer module&lt;/em&gt; which is missing the flavor dimension is in &lt;strong&gt;itself a dependency for another module&lt;/strong&gt;, you are probably better off introducing this flavor dimension in this module, mirroring that of the consumed module.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
-
-&lt;p&gt;The Android Gradle Plugin introduces the concept of product flavors. When you have a project that contains multiple modules, it is possible that your modules do not agree on the number of flavors or flavor dimensions. The DSL offers ways to handle such situations.&lt;/p&gt;
-
-&lt;p&gt;The important portions of the DSL are &lt;code class=&quot;highlighter-rouge&quot;&gt;matchingFallbacks&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;missingDimensionStrategy&lt;/code&gt;. Which one you choose depends on &lt;strong&gt;which module declares more flavors&lt;/strong&gt;: the &lt;em&gt;consuming module&lt;/em&gt;, or the &lt;em&gt;consumed module&lt;/em&gt;. &lt;a href=&quot;https://developer.android.com/studio/build/dependencies#resolve_matching_errors&quot;&gt;This table&lt;/a&gt; in the Android Gradle documentation explains this in more detail.&lt;/p&gt;
-
-&lt;p&gt;I had a slightly more complex project structure where I thought &lt;code class=&quot;highlighter-rouge&quot;&gt;missingDimensionStrategy&lt;/code&gt; would be my tool of choice, but it turns out I was wrong. This post describes my situation and why I was wrong.&lt;/p&gt;
-
-&lt;h2 id=&quot;project-structure&quot;&gt;Project structure&lt;/h2&gt;
-
-&lt;p&gt;The project that I use for this blog post is &lt;a href=&quot;https://github.com/curioustechizen/android-gradle-missing-flavors-demo&quot;&gt;here&lt;/a&gt;. The app itself is a shell. It has no activities, no functionality and almost no Android code. It has the following modules:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;app&lt;/code&gt; module.
-    &lt;ul&gt;
-      &lt;li&gt;Includes a flavor dimension &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;target&quot;&lt;/code&gt;, with values &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;emulator&quot;&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;realdevice&quot;&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;Depends on &lt;code class=&quot;highlighter-rouge&quot;&gt;intermediate-1&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;intermediate-2&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;leaf&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;intermediate-1&lt;/code&gt; module.
-    &lt;ul&gt;
-      &lt;li&gt;Does not know about flavors&lt;/li&gt;
-      &lt;li&gt;Depends on &lt;code class=&quot;highlighter-rouge&quot;&gt;leaf&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;intermediate-2&lt;/code&gt; module.
-    &lt;ul&gt;
-      &lt;li&gt;Does not know about flavors&lt;/li&gt;
-      &lt;li&gt;Depends on &lt;code class=&quot;highlighter-rouge&quot;&gt;leaf&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;leaf&lt;/code&gt; module.
-    &lt;ul&gt;
-      &lt;li&gt;Includes the same flavor dimension and flavors as &lt;code class=&quot;highlighter-rouge&quot;&gt;app&lt;/code&gt; module&lt;/li&gt;
-      &lt;li&gt;Has no dependencies&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;string-resources&quot;&gt;String resources&lt;/h3&gt;
-
-&lt;p&gt;To demonstrate how flavors work, I’ve created some string resources (using gradle’s &lt;code class=&quot;highlighter-rouge&quot;&gt;resValue&lt;/code&gt; feature) in every flavor, in every module that does care about the flavor. When I build an APK for a particular flavor, I can inspect the string resources in APK analyzer to figure out which variant was used.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// app/build.gradle
-
-flavorDimensions &quot;target&quot;
-productFlavors {
-    emulator {
-        dimension &quot;target&quot;
-        resValue(&quot;string&quot;, &quot;name_app_module&quot;, &quot;App Emulator&quot;)
-    }
-    realdevice {
-        dimension &quot;target&quot;
-        resValue(&quot;string&quot;, &quot;name_app_module&quot;, &quot;App Real Device&quot;)
-    }
-}
-
-// leaf/build.gradle
-
-flavorDimensions &quot;target&quot;
-productFlavors {
-    emulator {
-        dimension &quot;target&quot;
-        resValue(&quot;string&quot;, &quot;name_leaf_module&quot;, &quot;Leaf module Emulator&quot;)
-    }
-    realdevice {
-        dimension &quot;target&quot;
-        resValue(&quot;string&quot;, &quot;name_leaf_module&quot;, &quot;Leaf module Real Device&quot;)
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;the-build-error&quot;&gt;The build error&lt;/h2&gt;
-
-&lt;p&gt;This is the starting point of my experiment, and it fails to build. You can &lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout checkpoint-2&lt;/code&gt; if you want to &lt;a href=&quot;https://github.com/curioustechizen/android-gradle-missing-flavors-demo/tree/checkpoint-2&quot;&gt;see it in action&lt;/a&gt;. The build error you see looks like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/img/build_error.png&quot; alt=&quot;Build Error&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The reason for this build error is that both the &lt;code class=&quot;highlighter-rouge&quot;&gt;intermediate&lt;/code&gt; modules know nothing flavors but they depend on &lt;code class=&quot;highlighter-rouge&quot;&gt;leaf&lt;/code&gt; which does.&lt;/p&gt;
-
-&lt;h2 id=&quot;configuring-missingdimensionstrategy&quot;&gt;Configuring &lt;code class=&quot;highlighter-rouge&quot;&gt;missingDimensionStrategy&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;My first attempt at fixing this was to configure the &lt;code class=&quot;highlighter-rouge&quot;&gt;intermediate&lt;/code&gt; modules to specify &lt;code class=&quot;highlighter-rouge&quot;&gt;missingDimensionStrategy&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//intermediate-1/build.gradle and intermediate-2/build.gradle
-//this goes inside android { defaultConfig block
-
-missingDimensionStrategy 'target', 'emulator'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Here we’re saying that when trying to build the intermediate modules, choose the &lt;code class=&quot;highlighter-rouge&quot;&gt;emulator&lt;/code&gt; variant of the &lt;code class=&quot;highlighter-rouge&quot;&gt;leaf&lt;/code&gt; module. This works, &lt;em&gt;kind of&lt;/em&gt;. We can build the APKs for both flavors and we can see the correct strings get included in the built APKs.&lt;/p&gt;
-
-&lt;p&gt;This is what the &lt;code class=&quot;highlighter-rouge&quot;&gt;emulatorDebug&lt;/code&gt; flavor looks like. Note that it has included the strings &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;App Emulator&quot;&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Leaf module Emulator&quot;&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/img/app-emulator-debug-apk-missing-dimension-strategy.png&quot; alt=&quot;app-emulator-debug-apk-missingDimensionStrategy&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;And here’s the &lt;code class=&quot;highlighter-rouge&quot;&gt;realdeviceDebug&lt;/code&gt; APK. Note that it has included the strings &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;App Real Device&quot;&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Leaf module Real Device&quot;&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/img/app-realdevice-debug-apk-missing-dimension-strategy.png&quot; alt=&quot;app-realdevice-debug-apk-missingDimensionStrategy&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;You can &lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout checkpoint-3&lt;/code&gt; if you want to &lt;a href=&quot;https://github.com/curioustechizen/android-gradle-missing-flavors-demo/tree/checkpoint-3&quot;&gt;see it in action&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h4 id=&quot;the-problem&quot;&gt;The problem&lt;/h4&gt;
-
-&lt;p&gt;The problem with this solution becomes obvious when you see the build output window. It contains this warning&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Module ‘leaf’ has variant ‘realdeviceDebug’ selected, but the modules [‘intermediate-1’, ‘intermediate-2’] depend on variant ‘emulatorDebug’&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The problem is this: When you chose &lt;code class=&quot;highlighter-rouge&quot;&gt;realdeviceDebug&lt;/code&gt; variant for &lt;code class=&quot;highlighter-rouge&quot;&gt;app&lt;/code&gt; module, the same variant is selected for &lt;code class=&quot;highlighter-rouge&quot;&gt;leaf &lt;/code&gt;module. However, for the &lt;code class=&quot;highlighter-rouge&quot;&gt;intermediate&lt;/code&gt; modules, we specified we want to use &lt;code class=&quot;highlighter-rouge&quot;&gt;emulator&lt;/code&gt; flavor.&lt;/p&gt;
-
-&lt;p&gt;This is not a problem for us because we explicitly stated that the intermediate flavors don’t know or care about flavors. But, how do you fix those warnings?&lt;/p&gt;
-
-&lt;h2 id=&quot;making-intermediate-module-flavor-aware&quot;&gt;Making intermediate module flavor-aware&lt;/h2&gt;
-
-&lt;p&gt;Unfortunately, the only &lt;strong&gt;correct&lt;/strong&gt; way to achieve this was to make the intermediate module flavor-aware. This might seem tedious and against the original intent, but I would argue that for this situation, it is a future-proof approach compared to &lt;code class=&quot;highlighter-rouge&quot;&gt;missingDimensionStrategy&lt;/code&gt;. Because with &lt;code class=&quot;highlighter-rouge&quot;&gt;missingDimensionStrategy&lt;/code&gt; if for some reason an intermediate module had to become flavor-aware, it could end up silently choosing the wrong flavor of the leaf module.&lt;/p&gt;
-
-&lt;p&gt;So, the fix is to actually introduce the same flavor dimensions and flavors in the intermediate modules as in the leaf modules. You can &lt;code class=&quot;highlighter-rouge&quot;&gt;git checkout checkpoint-4&lt;/code&gt; to &lt;a href=&quot;https://github.com/curioustechizen/android-gradle-missing-flavors-demo/tree/checkpoint-4&quot;&gt;see it in action&lt;/a&gt;. If you are worried about the repetitive flavor configuration code in the intermdiate modules, you can extract it into a &lt;code class=&quot;highlighter-rouge&quot;&gt;flavors.gradle&lt;/code&gt; and then use it in the build.gradle files.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// root flavors.gradle
-
-android {
-    flavorDimensions &quot;target&quot;
-    productFlavors {
-        emulator {
-            dimension &quot;target&quot;
-        }
-        realdevice {
-            dimension &quot;target&quot;
-        }
-    }
-}
-
-// build.gradle of intermediate modules
-apply from: '../flavors.gradle'
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;Use &lt;code class=&quot;highlighter-rouge&quot;&gt;missingDimensionStrategy&lt;/code&gt; mainly if your &lt;strong&gt;app&lt;/strong&gt; module is missing flavor dimensions compared to library modules. Think twice before using it in a module that is itself a dependency for another module. It might look like it works, but it might be doing the wrong thing.&lt;/p&gt;
-
-&lt;h2 id=&quot;credits&quot;&gt;Credits&lt;/h2&gt;
-
-&lt;p&gt;Thanks to &lt;a href=&quot;https://twitter.com/droidxav&quot;&gt;Xavier Ducrohet (@droidxav)&lt;/a&gt; for pointing out the potential pitfalls of using &lt;code class=&quot;highlighter-rouge&quot;&gt;missingDimensionStrategy&lt;/code&gt; for my use case.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 31 Mar 2020 21:00:00 +0200</pubDate>
-        <link>https://kiranrao.in/blog/2020/03/31/gradle-missing-flavors/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2020/03/31/gradle-missing-flavors/</guid>
-        
-        <category>android</category>
-        
-        <category>gradle</category>
         
         
       </item>
