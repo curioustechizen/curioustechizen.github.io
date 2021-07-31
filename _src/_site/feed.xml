@@ -5,9 +5,54 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>https://kiranrao.in/blog/</link>
     <atom:link href="https://kiranrao.in/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 24 Jul 2021 22:53:18 +0200</pubDate>
-    <lastBuildDate>Sat, 24 Jul 2021 22:53:18 +0200</lastBuildDate>
+    <pubDate>Sat, 31 Jul 2021 16:55:17 +0200</pubDate>
+    <lastBuildDate>Sat, 31 Jul 2021 16:55:17 +0200</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Writing as a Problem Solving tool</title>
+        <description>&lt;h1 id=&quot;the-history&quot;&gt;The history&lt;/h1&gt;
+
+&lt;p&gt;When I was new to StackOverflow, I was (to put it plainly) scared to ask a question there. The culture there was not exactly the most welcoming. People would downvote questions for no apparent reason, or even post comments or answers trivializing my question. I had very low points on StackOverflow and I did not want to risk losing points to downvotes.&lt;/p&gt;
+
+&lt;p&gt;How did I cope? Well, I started to critique my own question before I posted it on StackOverflow. I started to try to anticipate how people would try to find fault with it, and try to fix those flaws in my question. This included things like&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Did I make sure to check all official documentation and samples related to this topic?&lt;/li&gt;
+  &lt;li&gt;Is the code sample reasonably complete? Can one just copy-paste it into the IDE and run it?&lt;/li&gt;
+  &lt;li&gt;Does the code example in my question cover all error cases?&lt;/li&gt;
+  &lt;li&gt;How is my question different from a similar-but-not-quite-the-same question that was already answered on StackOverflow?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I would then iterate over this. Surprisingly, I found that in a lot of cases, this process would lead me to the solution, without me having posted the question at all.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;In more than 50% of the cases, when I start typing a question on StackOverflow, I find the answer even before I post it there.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;beyond-stackoverflow&quot;&gt;Beyond StackOverflow&lt;/h1&gt;
+
+&lt;p&gt;I realized that this technique can be applied even outside of contexts that have a negative connotation. What started out as a self-defense mechanism turned into a general problem-solving technique. Now, I often apply the same idea whenever I get stuck with a problem. The steps are:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;First, I identify that to solve this problem I need to ask for help&lt;/li&gt;
+  &lt;li&gt;Next, I write down the problem in as much detail as I can think of&lt;/li&gt;
+  &lt;li&gt;Then, I try to put myself in the shoes of the audience for this question. What details might they need for fixing the problem?&lt;/li&gt;
+  &lt;li&gt;Only if I do not solve the problem after iterating through Steps 2 and 3 a few times do I actually go ahead and post it&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;Writing is a great tool for problem-solving. Of course, it is not the only tool and is not applicable for all scenarios. For example, sometimes the huge level of detail could hide the problem and throw potential helpers off track. However when used in moderation, I find that it leads me to the solution without ever having to bother others.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 31 Jul 2021 15:00:00 +0200</pubDate>
+        <link>https://kiranrao.in/blog/2021/07/31/writing-as-problem-solving/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2021/07/31/writing-as-problem-solving/</guid>
+        
+        <category>tipsntricks</category>
+        
+        
+      </item>
     
       <item>
         <title>Mobile Multiplatform and Me</title>
@@ -799,163 +844,6 @@
         <guid isPermaLink="true">https://kiranrao.in/blog/2020/05/21/flutter-stateless-animations/</guid>
         
         <category>flutter</category>
-        
-        <category>animations</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Diff animations with SwiftUI</title>
-        <description>&lt;p&gt;A few months back, I wrote &lt;a href=&quot;https://kiranrao.in/blog/2020/01/12/diff-util-part3/&quot;&gt;a post&lt;/a&gt; about implementing custom animations in Android using DiffUtil. In this post, we’ll explore how similar animations can be achieved with Apple’s &lt;a href=&quot;https://developer.apple.com/documentation/swiftui&quot;&gt;SwiftUI&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Spoiler Alert:&lt;/strong&gt; It was a breeze to implement this with SwiftUI. It was an enjoyable experience with the Preview canvas in XCode, and the framework itself is very well suited for stuff like implementing animations.&lt;/p&gt;
-
-&lt;p&gt;This post uses GIFs to show off videos of the animations I achieved, but GIFs don’t convey really how smooth the animations are. I encourage you to check out the code and run it on a simulator or iOS device. The code for everything in this post is &lt;a href=&quot;https://github.com/curioustechizen/diff-animations-declarative-ui-frameworks&quot;&gt;here&lt;/a&gt;. You’ll need XCode 11 and Mac OSX Catalina to run it.&lt;/p&gt;
-
-&lt;h2 id=&quot;the-sample-app&quot;&gt;The sample app&lt;/h2&gt;
-
-&lt;p&gt;Here’s an example of what we will achieve&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/video/diff-circle-swiftui-custom.gif&quot; alt=&quot;Custom animation&quot; style=&quot;max-height: 448px; max-width: 207px;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This is not exactly the same as the one we ended up in the Android example, but it is close enough.&lt;/p&gt;
-
-&lt;p&gt;To recap, this is how it works:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;There are up to 7 colored circle views, arranged in a circle&lt;/li&gt;
-  &lt;li&gt;Some circles are “expanded”&lt;/li&gt;
-  &lt;li&gt;When you click on “Toggle”, some colored circles get removed, while others are added, and some get resized (their expansion state changes)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The model consists of 2 pre-defined lists of circle data. Clicking the toggle button simple toggles the state between these 2 lists.&lt;/p&gt;
-
-&lt;h2 id=&quot;baseline-toggling-state-without-animations&quot;&gt;Baseline: Toggling state without animations&lt;/h2&gt;
-
-&lt;p&gt;The &lt;a href=&quot;https://github.com/curioustechizen/diff-animations-declarative-ui-frameworks/tree/swift_ui_no_animations/CircleDiffAnimationsSwiftUI&quot;&gt;starting point&lt;/a&gt; of this experiment is toggling between 2 states, &lt;em&gt;without&lt;/em&gt; any animation. For this, I took inspiration from &lt;a href=&quot;https://github.com/christophedellac/CDCircularMenu&quot;&gt;this library&lt;/a&gt; to arrange the views in a circle. Then, all I had to do was set the color and size property of each view from the model.&lt;/p&gt;
-
-&lt;p&gt;On clicking the Toggle button, I update a &lt;code class=&quot;highlighter-rouge&quot;&gt;@State var&lt;/code&gt; property. All this is pretty standard.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ColorView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;circleInfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CircleInfo&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;some&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kt&quot;&gt;Circle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;foregroundColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;circleInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-                &lt;span class=&quot;nv&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;circleInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getSize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
-                &lt;span class=&quot;nv&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;circleInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;getSize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;some&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    
-    &lt;span class=&quot;kt&quot;&gt;ZStack&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kt&quot;&gt;ForEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;circleInfoModel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;activeCircles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;circleInfo&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;ColorView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;circleInfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;circleInfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/*calculate offset */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                        &lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/*calculate offset */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        
-        &lt;span class=&quot;kt&quot;&gt;Button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;circleInfoModel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;Text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Toggle&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;font&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;The relevant code is in &lt;a href=&quot;https://github.com/curioustechizen/diff-animations-declarative-ui-frameworks/blob/swift_ui_no_animations/CircleDiffAnimationsSwiftUI/CircleDiffAnimations/CircularArrangementView.swift&quot;&gt;this file&lt;/a&gt; and here’s how this looks&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/video/diff-circle-swiftui-no-anims.gif&quot; alt=&quot;No animation&quot; style=&quot;max-height: 448px; max-width: 207px;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;adding-animations&quot;&gt;Adding animations&lt;/h2&gt;
-
-&lt;p&gt;This is where SwiftUI impresses. All I had to do was add one line to get nice default animations. Yes, you read that right. It was &lt;strong&gt;a one-line change&lt;/strong&gt; to get animations out of the box.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//Replace this&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;Button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;circleInfoModel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//With this&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;Button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;withAnimation&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;circleInfoModel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;This change is &lt;a href=&quot;https://github.com/curioustechizen/diff-animations-declarative-ui-frameworks/blob/swiftui_withAnimation_default/CircleDiffAnimationsSwiftUI/CircleDiffAnimations/CircularArrangementView.swift&quot;&gt;tagged here&lt;/a&gt; and this is what it looks like&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/video/diff-circle-swiftui-withAnimation.gif&quot; alt=&quot;Default animation&quot; style=&quot;max-height: 448px; max-width: 207px;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I cannot get over how easy this was. Did you notice that we wrote zero code to find out what the diff was, zero code to tell what to insert, what to delete? Nothing. Compare this with what I had to do in the previous article on Android!&lt;/p&gt;
-
-&lt;p&gt;But wait, it gets better.&lt;/p&gt;
-
-&lt;h2 id=&quot;custom-animations&quot;&gt;Custom animations&lt;/h2&gt;
-
-&lt;p&gt;This default animation is okay, but it is not what we want. You can see that item appearance animation doesn’t look all that good. The item just fades in behind whatever was there previously.&lt;/p&gt;
-
-&lt;p&gt;How can we improve this? Well, again, just a handful of lines of code. First, create a transition to describe what the animation should look like&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyTransition&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;custom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyTransition&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;insertion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyTransition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scale&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;combined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;removal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyTransition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scale&lt;/span&gt;
-        
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;asymmetric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;insertion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;insertion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;removal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;removal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Then, just apply an animation to each circle view specifying the transition and the curve.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kt&quot;&gt;ForEach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;circleInfoModel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;activeCircles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;circleInfo&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;ColorView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;circleInfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;circleInfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/*calculate offset */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                &lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/*calculate offset */&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;animation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;easeInOut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;transition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;custom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;And that’s it. With these changes, you get the nice animations that you saw at the top of this post. The code is &lt;a href=&quot;https://github.com/curioustechizen/diff-animations-declarative-ui-frameworks/blob/swiftui_custom_animation/CircleDiffAnimationsSwiftUI/CircleDiffAnimations/CircularArrangementView.swift&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; There seems to be a problem with the Preview Canvas in XCode. It did not show the custom animation when I tried this code. Instead, it kept showing the default animation. Don’t rely too much on the LivePreview feature, especially for animations.&lt;/p&gt;
-
-&lt;h3 id=&quot;icing-on-the-cake&quot;&gt;Icing on the cake&lt;/h3&gt;
-
-&lt;p&gt;If you see the post on the Android implementation, you see this disclaimer:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;if you submit a list while animations for the previous diff are already in progress, it could crash&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;What do we need to make our SwiftUI version handle this case? What happens if an animation is in progress and you click the Toggle button again?&lt;/p&gt;
-
-&lt;p&gt;Well, the answer is - you guessed it - &lt;strong&gt;We need to do nothing&lt;/strong&gt;. The animations are interruptible by default. If we click on the toggle button while an animation is in progress, then the next animation starts. Like this&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/video/diff-circle-swiftui-interruptible.gif&quot; alt=&quot;Default animation&quot; style=&quot;max-height: 448px; max-width: 207px;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;whats-the-catch&quot;&gt;What’s the catch?&lt;/h2&gt;
-
-&lt;p&gt;This automagical animation feature is fine for a lot of situations, but there are still a lot of them that it might not be able to handle. For example&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Choreographing the animations: If you look at the Android example, we wanted to perform the animations in a certain order (removals first, followed by moves and finally inserts). The SwiftUI version just animates everything simultaneously. You could probably play with &lt;code class=&quot;highlighter-rouge&quot;&gt;asymmetric(insertion:removal:)&lt;/code&gt; to impose some ordering but it would be rather limited.&lt;/li&gt;
-  &lt;li&gt;Animations occur on individual items: What if you wanted the animation to occur in relation to the containing view? For example, what if you wanted to animate scrolling to a different row in a list when the currently “selected” one gets deleted? These are possible but would probably require a lot of code.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;There are probably others that I’m missing.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;SwiftUI is great for implementing animations. I had to barely write any code to achieve this pretty cool animation (it took me days to achieve the same on Android, and I’ve several years of Android experience!). However, all of this magic does come with its own limitations and it is good to be aware of them before going all-in.&lt;/p&gt;
-</description>
-        <pubDate>Tue, 21 Apr 2020 21:00:00 +0200</pubDate>
-        <link>https://kiranrao.in/blog/2020/04/21/diff-animations-swiftui/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2020/04/21/diff-animations-swiftui/</guid>
-        
-        <category>swiftui</category>
         
         <category>animations</category>
         

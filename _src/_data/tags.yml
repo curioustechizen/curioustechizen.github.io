@@ -38,3 +38,5 @@ multiplatform:
   name: Multi-platform
 ios:
   name: iOS
+tipsntricks:
+  name: Tips n Tricks
