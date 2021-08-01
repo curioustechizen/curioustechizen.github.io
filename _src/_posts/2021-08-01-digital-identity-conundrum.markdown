@@ -98,4 +98,4 @@ However, this is far from perfect.
 
 We entrust too much in the hands of BigTech, including our whole identity in the digital world. Moving away is hard because of the inertia created by investment in the existing system. I proposed one solution that might work but does not address the inertia problem.
 
-Do you have any solutions to this conundrum?
+Do you have any solutions to this conundrum? You can comment using disqus below, or on twitter [here](https://twitter.com/ki_run/status/1421842364109402117?s=20).
