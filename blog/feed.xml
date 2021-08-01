@@ -5,9 +5,126 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>https://kiranrao.in/blog/</link>
     <atom:link href="https://kiranrao.in/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 31 Jul 2021 16:55:17 +0200</pubDate>
-    <lastBuildDate>Sat, 31 Jul 2021 16:55:17 +0200</lastBuildDate>
+    <pubDate>Sun, 01 Aug 2021 16:34:06 +0200</pubDate>
+    <lastBuildDate>Sun, 01 Aug 2021 16:34:06 +0200</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>The Digital Identity Conundrum</title>
+        <description>&lt;p&gt;In this post, I look at why surrendering our digital identities to BigTech is a bad idea (with some examples). I then examine some potential solutions to the digital identity problem and the shortcomings of those solutions. I conclude by proposing my own solution, albeit still a far from perfect one.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-doomsday-scenario&quot;&gt;The doomsday scenario&lt;/h1&gt;
+
+&lt;p&gt;Let’s say you run a restaurant business. You operate a chain of outlets across the country . You’re doing great business for a few years. Then, one fine day, all of a sudden, you’re hit with a termination.&lt;/p&gt;
+
+&lt;p&gt;You are informed that you need to close your business because you violated a law, with the following additional points&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;You are not informed exactly what law you violated. You are only vaguely told that it is “something related to fire safety”, but not any more details.&lt;/li&gt;
+  &lt;li&gt;Not only are you supposed to close your business, you are not allowed to apply for a license for another business. Ever.&lt;/li&gt;
+  &lt;li&gt;In addition to losing your business, you also lose your ID documents (passport, driving license, etc). Now you cannot drive, travel or transact with your bank.&lt;/li&gt;
+  &lt;li&gt;These terminations apply not only to you, but also to some other businesses that were associated with you (some suppliers etc)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You are desperate. You are no criminal, you &lt;em&gt;want&lt;/em&gt; to obey the law. The only problem is you don’t know what to fix. You check your outlets for fire hazard standards, you ensure that the emergency exits are all functioning according to specifications.&lt;/p&gt;
+
+&lt;p&gt;You approach the authorities, requesting more information. But all you receive in response is a vague automated reply that is no use.&lt;/p&gt;
+
+&lt;p&gt;Not only have you lost your business, with no hope of starting another one, your entire life that is not even related to the business is destroyed as well. Your identity has been snatched from you.&lt;/p&gt;
+
+&lt;h1 id=&quot;when-digital-identity-providers-are-gatekeepers&quot;&gt;When digital identity providers are gatekeepers&lt;/h1&gt;
+
+&lt;p&gt;That opening section seems impossible, doesn’t it? Unless you are in an authoritarian state, it is unlikely that you will be handed out such an extreme punishment without even a chance at redemption. However, this is &lt;em&gt;exactly&lt;/em&gt; how it works in tech. Here’s a sampling of some situations where a mistake in the business can get your digital accounts in trouble:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;People have had their &lt;a href=&quot;https://medium.com/android-news/google-just-terminated-our-start-up-google-play-publisher-account-on-christmas-day-5cb69a454da0&quot;&gt;developer accounts terminated&lt;/a&gt;, not because of any violation, but mereley on grounds of association. Yes, you read that right: Accounts have been terminated &lt;em&gt;merely on grounds of association&lt;/em&gt;.&lt;/li&gt;
+  &lt;li&gt;People have had their YouTube accounts &lt;a href=&quot;https://www.reddit.com/r/LivestreamFail/comments/dtv9g2/google_issues_account_permabans_for_many_of/&quot;&gt;permanently banned&lt;/a&gt; for flimsy reasons.&lt;/li&gt;
+  &lt;li&gt;Your domain registrar &lt;a href=&quot;https://blog.gitbook.com/tech/post-mortems/06-20-gitbook-domains-blocked-by-registrar&quot;&gt;can suspend your domain&lt;/a&gt; based on suspicion (for example on suspicion that your domain is being used for phishing attacks)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These bans by themselves might not sound serious. Where it does get alarming is that these accounts are also tied to your digital identity. Did you notice that all the examples I provided above are Google accounts? When your Google Play or YouTube account is banned, so is your GMail account.&lt;/p&gt;
+
+&lt;p&gt;Think about what could happen if you suddenly lost access to your email account. Your email is the identity for all other services you use on the internet. Your bank, bill payment reminders, education services, password recovery mechanism, travel tickets, even governmental services - everything is tied to your email. It is the end of your digital identity.&lt;/p&gt;
+
+&lt;p&gt;I don’t know about you, but I like a lot of Google services. I use them day in and day out. The root of the problem here is not that the services are from Google. The problems are multi-fold.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;The identity provider (in this case Google) is also the gatekeeper of some services (in this example, YouTube, Google Domains or Google Play).&lt;/li&gt;
+    &lt;li&gt;The gatekeeper uses opaque algorithms to identify violations&lt;/li&gt;
+    &lt;li&gt;The gatekeeper does not have effective redressal mechanisms&lt;/li&gt;
+    &lt;li&gt;The gatekeeper is not regulated by law to improve the situation&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Points 2 and 3 above relate to the false sense of “scalability”. See my &lt;a href=&quot;/blog/2020/12/15/scalable-tech-business/&quot;&gt;related post&lt;/a&gt; in that topic.&lt;/p&gt;
+
+&lt;p&gt;Also, remember that this problem is not only about bans. What happens if Google disappears one fine day? What happens to your digital identity?&lt;/p&gt;
+
+&lt;p&gt;Finally, despite what the above examples might imply, this problem is not restricted to Google. It could just as well be any other bigtech.&lt;/p&gt;
+
+&lt;h1 id=&quot;work-arounds-that-dont-really-work&quot;&gt;Work-arounds that don’t really work&lt;/h1&gt;
+
+&lt;p&gt;How do you protect yourself against this potential ban-hammer? There are some solutions but they are all not very effective:&lt;/p&gt;
+
+&lt;h3 id=&quot;use-a-different-google-account-for-business&quot;&gt;Use a different Google account for business&lt;/h3&gt;
+
+&lt;p&gt;This solution involves using a different Google account, separate from your personal one, specifically for the business. This simply does not work (see termination by association above). Google does not disclose how it identifies the association. It could be IP-based. It could be all e-mail addresses associated with the same person. It could be anything.&lt;/p&gt;
+
+&lt;h3 id=&quot;use-a-non-google-account-for-your-personal-email&quot;&gt;Use a non-Google account for your personal email.&lt;/h3&gt;
+
+&lt;p&gt;This might work but it has some downsides.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;You still have years of history tied to your GMail account and migrating them elsewhere is non-trivial.&lt;/li&gt;
+  &lt;li&gt;Trusting a private corporation with your identity has the same risks as giving it to Google. That private tech company could ban your account in the same way as Google and that private company could disappear from business, leaving you stranded.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;use-your-own-domain-and-own-email-address&quot;&gt;Use your own domain and own email address&lt;/h3&gt;
+
+&lt;p&gt;Again, this might work but it has some downsides.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The history and migration problems described in the previous solution apply&lt;/li&gt;
+  &lt;li&gt;The cost and administrative effort involved in this solution are out of reach of most netizens.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;governments-as-digital-identity-providers&quot;&gt;Governments as digital identity providers&lt;/h1&gt;
+
+&lt;p&gt;My proposed solution is that the responsibility of providing digital identity should be with &lt;strong&gt;Governments&lt;/strong&gt;. They are already responsible for our &lt;em&gt;physical&lt;/em&gt; identity documents. Passports, driving licenses, unique citizen numbers. This is just one more in the same vein.&lt;/p&gt;
+
+&lt;p&gt;Here are some ways in which this proposal is better than the existing solutions:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Government issued identities are bound to be longer lived than a corporate-issued one&lt;/li&gt;
+  &lt;li&gt;At least in the democratic world, it is unlikely that you will be stripped of your identity without giving you a fair chance at redressal&lt;/li&gt;
+  &lt;li&gt;Governments change, but your identity will remain. In other words, unlike corporates, Governments rarely go out of business.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;However, this is far from perfect.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;For one, this will be a new identity, so migrating your history to it will still be a challenge&lt;/li&gt;
+  &lt;li&gt;Governmental solutions are bound to be inferior in quality compared to corporate ones&lt;/li&gt;
+  &lt;li&gt;Ethical questions like surveillance are likely to come up when a Government is entrusted with digital identity.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;We entrust too much in the hands of BigTech, including our whole identity in the digital world. Moving away is hard because of the inertia created by investment in the existing system. I proposed one solution that might work but does not address the inertia problem.&lt;/p&gt;
+
+&lt;p&gt;Do you have any solutions to this conundrum?&lt;/p&gt;
+</description>
+        <pubDate>Sun, 01 Aug 2021 16:00:00 +0200</pubDate>
+        <link>https://kiranrao.in/blog/2021/08/01/digital-identity-conundrum/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2021/08/01/digital-identity-conundrum/</guid>
+        
+        <category>digitalidentity</category>
+        
+        <category>bigtech</category>
+        
+        
+      </item>
     
       <item>
         <title>Writing as a Problem Solving tool</title>
@@ -687,165 +804,6 @@
         <guid isPermaLink="true">https://kiranrao.in/blog/2020/10/24/falsehoods-about-addresses/</guid>
         
         <category>falsehoods</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Stateless widget animations in Flutter</title>
-        <description>&lt;p&gt;I’m a Flutter newbie (my day job is Android developer), and it took me some time to understand how animations work in Flutter. In particular, most posts and videos on this topic show how to achieve one of these:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;How to animate properties of a State&lt;em&gt;less&lt;/em&gt; widget between a fixed pair of start and end values&lt;/li&gt;
-  &lt;li&gt;How to animate properties of a State&lt;em&gt;ful&lt;/em&gt; widget from whatever the current value is, to an end value.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;What I wanted to achieve was a mix of the two. My objective was:&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;Animate a State&lt;strong&gt;less&lt;/strong&gt; widget to an end value, beginning with whatever the &lt;em&gt;current&lt;/em&gt; value is&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;In this post, we’re going to look at exactly that.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;TL;DR:&lt;/strong&gt; Within your Stateless widget, use an implicit animation (a widget that extend from &lt;code class=&quot;highlighter-rouge&quot;&gt;ImplicitlyAnimatedWidget&lt;/code&gt;) to animate the properties you wish to.&lt;/p&gt;
-
-&lt;p&gt;This is the animation that we are going to build.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/blog/assets/video/flutter_stateless_animation.gif&quot; alt=&quot;Flutter stateless animation&quot; style=&quot;max-height: 200px; max-width: 200px;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;As you can see, it is a very simple animation. Every time you tap the container, it animates:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;The background color (this animates between a shade of blue and completely transparent)&lt;/li&gt;
-  &lt;li&gt;A drop shadow for the background&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;These properties are applied wrapping our content in a &lt;code class=&quot;highlighter-rouge&quot;&gt;DecoratedBox&lt;/code&gt; widget, and applying these properties as a &lt;code class=&quot;highlighter-rouge&quot;&gt;BoxDecoration(color:, borderRadius:, boxShadow:[])&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;starting-point-one-time-animation&quot;&gt;Starting point: One-time animation&lt;/h2&gt;
-
-&lt;p&gt;To start off, we’ll see how to achieve this as a one-time animation, without the tap handling. This requires us to create a &lt;code class=&quot;highlighter-rouge&quot;&gt;StatefulWidget&lt;/code&gt;, provide an &lt;code class=&quot;highlighter-rouge&quot;&gt;AnimationController&lt;/code&gt; and provide a tween. All this is pretty standard for making an animation in Flutter.&lt;/p&gt;
-
-&lt;p&gt;Here’s the tween definition&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;  &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DecorationTween&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decorationTween&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DecorationTween&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;end:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BoxDecoration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;color:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kSelectedColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;withAlpha&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;borderRadius:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kSelectedBorderRadius&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;boxShadow:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BoxShadow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;[&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;BoxShadow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
-            &lt;span class=&quot;nl&quot;&gt;color:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kSelectedColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;withOpacity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
-            &lt;span class=&quot;nl&quot;&gt;blurRadius:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;8.0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;nl&quot;&gt;offset:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kSelectedShadowOffset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;begin:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BoxDecoration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;color:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kUnselectedColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;borderRadius:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kSelectedBorderRadius&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;c1&quot;&gt;// No shadow.&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;And here’s how we use it inside of a &lt;code class=&quot;highlighter-rouge&quot;&gt;DecoratedBoxTransition&lt;/code&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DecoratedBoxTransition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;decoration:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decorationTween&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;animate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_controller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;child:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Container&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/*Rest of the content*/&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;You can see the full runnable example on &lt;a href=&quot;https://dartpad.dev/9e9d8a42de5ec14ee6e61f75b71953c8&quot;&gt;this DartPad snippet&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;toggling-between-states-on-tap&quot;&gt;Toggling between states on tap&lt;/h2&gt;
-
-&lt;p&gt;As the next step, we’ll introduce an &lt;code class=&quot;highlighter-rouge&quot;&gt;isSelected&lt;/code&gt; state that we toggle when the user taps on our widget. This allows us to make the animation go forward/reverse depending on the state.&lt;/p&gt;
-
-&lt;p&gt;First, we introduce a bool field in our state class&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_isSelected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Then, in our &lt;code class=&quot;highlighter-rouge&quot;&gt;build&lt;/code&gt; method we wrap our &lt;code class=&quot;highlighter-rouge&quot;&gt;DecoratedBoxTransition&lt;/code&gt; in a &lt;code class=&quot;highlighter-rouge&quot;&gt;GestureDetector&lt;/code&gt; to handle taps&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;GestureDetector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;onTap:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_handleTap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;child:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DecoratedBoxTransition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/*Rest of the code as before*/&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Finally, instead of starting the animation in &lt;code class=&quot;highlighter-rouge&quot;&gt;initState()&lt;/code&gt;, we start the animation in either forward or reverse direction in &lt;code class=&quot;highlighter-rouge&quot;&gt;_handleTap&lt;/code&gt;, depending on the &lt;code class=&quot;highlighter-rouge&quot;&gt;_isSelected&lt;/code&gt; state. And of course, we need to update the state by calling &lt;code class=&quot;highlighter-rouge&quot;&gt;setState()&lt;/code&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;  &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_handleTap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;_isSelected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_controller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;reverse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_controller&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;forward&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;setState&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;_isSelected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_isSelected&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;You can see this in action on &lt;a href=&quot;https://dartpad.dev/b424985022624c3d8c94a0ea184d5699&quot;&gt;this Dartpad&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;going-stateless&quot;&gt;Going Stateless&lt;/h2&gt;
-
-&lt;p&gt;The previous solutions both work, but what I really wanted was to make my widget stateless. The reason is that in my app, state is managed outside the widgets. When a user taps on a widget, it simply calls a &lt;code class=&quot;highlighter-rouge&quot;&gt;Function&lt;/code&gt; that was passed to it. I have a different component in my architecture that updates the state and passes back the new &lt;code class=&quot;highlighter-rouge&quot;&gt;isSelected&lt;/code&gt; to me.&lt;/p&gt;
-
-&lt;p&gt;So, can we just cheat and give the &lt;code class=&quot;highlighter-rouge&quot;&gt;DecoratedBoxTransition&lt;/code&gt; only the end value so that it begins with whatever the current value is?&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//Does NOT work - throws an exception&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;DecorationTween&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decorationTween&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DecorationTween&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;end:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_isSelected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_boxDecorationSelected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_boxDecorationUnselected&lt;/span&gt;
-   &lt;span class=&quot;c1&quot;&gt;// Don't provide a begin&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Unfortunately, this does not work. &lt;code class=&quot;highlighter-rouge&quot;&gt;DecoratedBoxTransition&lt;/code&gt; expects both &lt;code class=&quot;highlighter-rouge&quot;&gt;begin&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;end&lt;/code&gt; to be not null. This is because &lt;code class=&quot;highlighter-rouge&quot;&gt;DecoratedBoxTransition&lt;/code&gt; is not an &lt;code class=&quot;highlighter-rouge&quot;&gt;ImplicitlyAnimatedWidget&lt;/code&gt;. Understanding this was a light bulb moment for me.&lt;/p&gt;
-
-&lt;p&gt;To achieve what I want, what we really need is an implicit animation. Is there one that suits my needs? Indeed, there is.&lt;/p&gt;
-
-&lt;h3 id=&quot;enter-animatedcontainer&quot;&gt;Enter, &lt;code class=&quot;highlighter-rouge&quot;&gt;AnimatedContainer&lt;/code&gt;.&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;AnimatedContainer&lt;/code&gt; is an &lt;code class=&quot;highlighter-rouge&quot;&gt;ImplicitlyAnimatedWidget&lt;/code&gt; and it allows setting several properties of a child, including &lt;code class=&quot;highlighter-rouge&quot;&gt;constraints&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;paddding&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt; and, the one relevant for us: &lt;code class=&quot;highlighter-rouge&quot;&gt;decoration&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;So, all I had to do was replace &lt;code class=&quot;highlighter-rouge&quot;&gt;DecoratedBoxTransition&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;AnimatedContainer&lt;/code&gt; and voila! My widget works exactly as I expect it to.&lt;/p&gt;
-
-&lt;p&gt;Some relevant pieces of code: First, make the widget completely stateless by passing in the &lt;code class=&quot;highlighter-rouge&quot;&gt;isSelected&lt;/code&gt; and a function to handle taps as constructor parameters:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;  &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isSelected&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;onSelectionChanged&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Then, in the build method, return an &lt;code class=&quot;highlighter-rouge&quot;&gt;AnimatedContainer&lt;/code&gt;, passing in a &lt;code class=&quot;highlighter-rouge&quot;&gt;decoration&lt;/code&gt; object that conditionally returns either an empty decoration or the one we want.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-dart&quot; data-lang=&quot;dart&quot;&gt;  &lt;span class=&quot;nd&quot;&gt;@override&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;Widget&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BuildContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GestureDetector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;onTap:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;onSelectionChanged&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;child:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AnimatedContainer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;nl&quot;&gt;decoration:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BoxDecoration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
-            &lt;span class=&quot;nl&quot;&gt;color:&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;isSelected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kSelectedColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;withAlpha&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kUnselectedColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;nl&quot;&gt;borderRadius:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BorderRadius&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;circular&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
-            &lt;span class=&quot;nl&quot;&gt;boxShadow:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isSelected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;_selectedBoxShadow:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
-        &lt;span class=&quot;nl&quot;&gt;duration:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Duration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;milliseconds:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;350&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
-        &lt;span class=&quot;nl&quot;&gt;curve:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Curves&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;easeInOut&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;nl&quot;&gt;child:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MyContent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
-      &lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;You can see the full working sample on &lt;a href=&quot;https://dartpad.dev/1dc8122b218795f118dbfd4339538397&quot;&gt;this Dartpad&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;gotchas&quot;&gt;Gotchas&lt;/h3&gt;
-
-&lt;p&gt;I was able to get away with using a Stateless widget in my case because there already existed an &lt;code class=&quot;highlighter-rouge&quot;&gt;ImplicitlyAnimatedWidget&lt;/code&gt; that fulfils my needs. This might not always be the case, so you might end up needing to make your widget stateful anyway. If you are faced with this situation, you might also consider creating your own subclass of &lt;code class=&quot;highlighter-rouge&quot;&gt;ImplicitlyAnimatedWidget&lt;/code&gt; to perform the animation - so that you can keep your actual widget stateless.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;In this post, we saw how to use implicit animations in Flutter to keep your widget stateless, and what the limitations are.&lt;/p&gt;
-
-&lt;p&gt;To see a real world use of the techniques described in this post, see the &lt;a href=&quot;https://github.com/curioustechizen/covid19india-flutter&quot;&gt;Covid19-India flutter app&lt;/a&gt; (where you switch between the categories like “active”, “recovered” etc.)&lt;/p&gt;
-</description>
-        <pubDate>Thu, 21 May 2020 21:00:00 +0200</pubDate>
-        <link>https://kiranrao.in/blog/2020/05/21/flutter-stateless-animations/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2020/05/21/flutter-stateless-animations/</guid>
-        
-        <category>flutter</category>
-        
-        <category>animations</category>
         
         
       </item>
