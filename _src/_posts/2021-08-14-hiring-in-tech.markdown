@@ -18,9 +18,9 @@ This is a very opinionated topic, and I don’t claim that all of these points a
 
 ## Hire for learning ability, not knowledge
 
-The programming landscape changes fast. _Real_ fast. 
+The programming landscape changes fast. _Really_ fast. 
 
-If you did Android development in 2017, then moved to some other technology, then returned to Android in 2021, chances are that you would pretty much start from scratch. Libraries and patterns that are standard in Android today were almost unheard of in 2017. Co-routines. Flow. Hilt. Jetpack Compose are all new, and we've not even started talking about the impact of continuous PlayStore policy updates.
+If you did Android development in 2017, then moved to some other technology, then returned to Android in 2021, chances are that you would pretty much start from scratch. Libraries and patterns that are standard in Android today were almost unheard of in 2017. Co-routines, Flow, Hilt, and Jetpack Compose are all new, and we've not even started talking about the impact of continuous PlayStore policy updates.
 
 In this landscape where knowledge goes stale quickly, what a candidate knows has less value than whether they are capable of learning.
 
