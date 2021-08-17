@@ -142,3 +142,8 @@ Here is the TL;DR of the tech portion of the hiring process
 
 1. Tiny take-home assignment; pair programming session if a take-home is not possible for the candidate
 1. Technical interview as a follow up to Step 1.
+
+
+# Credits
+
+Thanks for [Mike Wolfson (@mikewolfson)](https://twitter.com/mikewolfson) for reviewing this article.
