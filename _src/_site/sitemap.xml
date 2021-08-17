@@ -3,10 +3,16 @@
 
 	<url>
 	 	<loc>https://kiranrao.in/blog/</loc>
-	 	<lastmod>2021-08-01</lastmod>
+	 	<lastmod>2021-08-17</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
+	
+	<url>
+	 	<loc>https://kiranrao.in/blog/2021/08/14/hiring-in-tech/</loc>
+	 	<lastmod>2021-08-14</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
 	
 	<url>
 	 	<loc>https://kiranrao.in/blog/2021/08/01/digital-identity-conundrum/</loc>
@@ -257,7 +263,7 @@
 
 	<url>
 		<loc>https://kiranrao.in/blog/tags/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 
@@ -305,7 +311,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/android/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -398,7 +404,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/aosp/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -407,7 +413,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/studio/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -416,7 +422,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/java8/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -425,7 +431,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/lambda/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -434,7 +440,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/kotlin/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -443,7 +449,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/effectivejava/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -452,7 +458,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/next-billion/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -461,7 +467,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/android-go/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -470,7 +476,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/diff/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -479,7 +485,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/gradle/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -488,7 +494,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/swiftui/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -497,7 +503,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/animations/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -506,7 +512,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/flutter/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -515,7 +521,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/falsehoods/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -524,7 +530,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/obvious/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -533,7 +539,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/privacy/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -542,7 +548,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/multiplatform/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -551,7 +557,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/ios/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -560,7 +566,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/tipsntricks/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -569,7 +575,7 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/digitalidentity/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	
@@ -578,7 +584,16 @@
 	
 	<url>
 		<loc>https://kiranrao.in/blog/tags/bigtech/</loc>
-		<lastmod>2021-08-01</lastmod>
+		<lastmod>2021-08-17</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	
+	
+	
+	
+	<url>
+		<loc>https://kiranrao.in/blog/tags/hiring/</loc>
+		<lastmod>2021-08-17</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	

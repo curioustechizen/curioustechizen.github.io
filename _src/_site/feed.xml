@@ -5,9 +5,174 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>https://kiranrao.in/blog/</link>
     <atom:link href="https://kiranrao.in/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 01 Aug 2021 16:42:23 +0200</pubDate>
-    <lastBuildDate>Sun, 01 Aug 2021 16:42:23 +0200</lastBuildDate>
+    <pubDate>Tue, 17 Aug 2021 07:54:39 +0200</pubDate>
+    <lastBuildDate>Tue, 17 Aug 2021 07:54:39 +0200</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Hiring in Tech</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;“The illiterate of the 21st century will not be those who cannot read and write, but those who cannot learn, unlearn, and relearn.” ~Alvin Toffler&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In this post, I share my experience in the world of tech hiring. The examples in this post are from tech that I’ve worked with (Android, iOS), but most points apply to &lt;em&gt;any&lt;/em&gt; tech. I start off by listing the core criteria that I’m looking for when I’m hiring, and later I’ll describe the process that could be used to determine if a candidate fulfils those criteria.&lt;/p&gt;
+
+&lt;p&gt;This is a very opinionated topic, and I don’t claim that all of these points are applicable to everyone. Also, this is not necessarily how I hire at my current position. It is a culmination of what I learnt during the course of my career.&lt;/p&gt;
+
+&lt;h1 id=&quot;hiring-principles&quot;&gt;Hiring principles&lt;/h1&gt;
+
+&lt;h2 id=&quot;hire-for-learning-ability-not-knowledge&quot;&gt;Hire for learning ability, not knowledge&lt;/h2&gt;
+
+&lt;p&gt;The programming landscape changes fast. &lt;em&gt;Real&lt;/em&gt; fast.&lt;/p&gt;
+
+&lt;p&gt;If you did Android development in 2017, then moved to some other technology, then returned to Android in 2021, chances are that you would pretty much start from scratch. Libraries and patterns that are standard in Android today were almost unheard of in 2017. Co-routines. Flow. Hilt. Jetpack Compose are all new, and we’ve not even started talking about the impact of continuous PlayStore policy updates.&lt;/p&gt;
+
+&lt;p&gt;In this landscape where knowledge goes stale quickly, what a candidate knows has less value than whether they are capable of learning.&lt;/p&gt;
+
+&lt;h2 id=&quot;experience-matters-but-only-to-a-degree&quot;&gt;Experience matters, but only to a degree&lt;/h2&gt;
+
+&lt;p&gt;While &lt;em&gt;knowledge&lt;/em&gt; can be treated as a past laurel that one must not rest on, &lt;em&gt;experience&lt;/em&gt; certainly has value. It does not need to be experience in a certain technology. Mere experience brings with it a lot of value. Even more if the candidate has had experience switching tech stacks; or unlearning and re-learning.&lt;/p&gt;
+
+&lt;p&gt;That said, sometimes experience is given too much importance. Not every role requires a Senior developer.&lt;/p&gt;
+
+&lt;h2 id=&quot;evaluate-based-on-typical-day-at-work-&quot;&gt;Evaluate based on “typical day at work” …&lt;/h2&gt;
+
+&lt;p&gt;… not based on something that might only be required sparingly.&lt;/p&gt;
+
+&lt;p&gt;When hiring for a mobile developer, I want to evaluate how good the candidate is at developing mobile apps. &lt;em&gt;That&lt;/em&gt; should be the goal of the process.&lt;/p&gt;
+
+&lt;p&gt;What does a mobile developer do during a typical day at work?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Understand specs for a feature&lt;/li&gt;
+  &lt;li&gt;Implement the feature&lt;/li&gt;
+  &lt;li&gt;Design a reasonable architecture&lt;/li&gt;
+  &lt;li&gt;Write tests for the feature&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;What does a mobile developer &lt;em&gt;not&lt;/em&gt; do during a typical day at work?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Print a fibonacci sequence&lt;/li&gt;
+  &lt;li&gt;Implement a sorting algorithm by hand&lt;/li&gt;
+  &lt;li&gt;Micro-optimize a data structure&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This is an unpopular opinion: for the role of a mobile developer, quizzing a candidate about data structures and algorithms is not very fruitful (Of course, if you’re hiring for the role of a standard library developer for a programming language, chances are that data structures and algorithms are exactly what matter to you).&lt;/p&gt;
+
+&lt;p&gt;The basics are important though. If the architecture is good, then tweaking an algorithm here or there will be an isolated operation leaving the rest of the code base untouched.&lt;/p&gt;
+
+&lt;h2 id=&quot;skip-anything-that-can-be-easily-looked-up&quot;&gt;Skip anything that can be easily looked up&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;I was once at an Android interview where I was asked to explain the &lt;a href=&quot;https://developer.android.com/guide/components/activities/tasks-and-back-stack#TaskLaunchModes&quot;&gt;Intent launch modes&lt;/a&gt;. In my opinion no one should ever use any of those modes without first consulting the documentation. There are far too many subtleties.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;But really, what is the point of asking this question? What insight would you gain into the candidate by asking such a question?&lt;/p&gt;
+
+&lt;p&gt;My rule of thumb : If it can be looked up in 30 minutes, it is not interview material.&lt;/p&gt;
+
+&lt;h2 id=&quot;even-so-called-basics-are-changing&quot;&gt;Even so-called basics are changing&lt;/h2&gt;
+
+&lt;p&gt;In mobile development, the absolute basics are generally the lifecycles of the core platform components (Activity on Android, UIViewController on iOS). Strong foundations in these basics has been considered a non-negotiable criterion while interviewing candidates.&lt;/p&gt;
+
+&lt;p&gt;I’m going to state yet another unpopular opinion: Even these basics are not required anymore. If a candidate has experience with &lt;em&gt;any&lt;/em&gt; platform that has a lifecycle, they’re going to learn how his works. Even with the platform that they do have experience with, it is unlikely that they know about the lifecycle beyond the core inner loops.&lt;/p&gt;
+
+&lt;p&gt;For example, on Android I find the &lt;a href=&quot;https://developer.android.com/guide/fragments/lifecycle?hl=en&quot;&gt;Fragment lifecycle’s&lt;/a&gt; interaction with the Activity lifecycle very tricky. I can never remember whether &lt;code class=&quot;highlighter-rouge&quot;&gt;onCreate&lt;/code&gt; is called first or &lt;code class=&quot;highlighter-rouge&quot;&gt;onCreateView&lt;/code&gt;. For an Activity, there is no guarantee of the order of &lt;code class=&quot;highlighter-rouge&quot;&gt;onSaveInstanceState&lt;/code&gt; calls with respect to &lt;code class=&quot;highlighter-rouge&quot;&gt;onPause&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;onStop&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;As with the previous point, this can just be looked up. Just knowing that some lifecycle exists, and that it is one documentation link away, is sufficient.&lt;/p&gt;
+
+&lt;h2 id=&quot;enable-the-candidate-to-bring-out-the-best-in-them&quot;&gt;Enable the candidate to bring out the best in them&lt;/h2&gt;
+
+&lt;p&gt;An interview process should be such that it allows the candidate to shine. You want to see the best side of the candidate. You do not want to make the candidate a nervous wreck.&lt;/p&gt;
+
+&lt;p&gt;Unpopular opinion #3: Allow the candidate to steer the interview. Allow the candidate to take control.&lt;/p&gt;
+
+&lt;p&gt;A sub-point: Avoid requiring “preparation” on the candidate’s part. I’m not even referring to LeetCode or Cracking the Coding Interview. I find those artificial anyway.&lt;/p&gt;
+
+&lt;p&gt;The point here is the candidate should not need to prepare for an interview with your company, instead you should judge the candidate for what they are.&lt;/p&gt;
+
+&lt;h1 id=&quot;hiring-process&quot;&gt;Hiring process&lt;/h1&gt;
+
+&lt;p&gt;Now that I’ve listed what according to me are the core principles for hiring in tech, I’ll describe the process that worked best for me in the past. This is subjective, and depends on the role. It worked well for hiring for the role of a mobile developer.&lt;/p&gt;
+
+&lt;p&gt;My process consists of 2 steps for the &lt;em&gt;technical&lt;/em&gt; part of the interview. Beyond this, you still need the HR interviews and to assess whether they are a cultural fit.&lt;/p&gt;
+
+&lt;h2 id=&quot;step-1-small-take-home-assignment&quot;&gt;Step 1: Small take-home assignment&lt;/h2&gt;
+
+&lt;p&gt;This step involves providing a small take-home assignment.&lt;/p&gt;
+
+&lt;p&gt;What you glean from this step is:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Does the candidate understand requirements?
+    &lt;ul&gt;
+      &lt;li&gt;Do they ask clarifying questions?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;How do they approach architecting a solution?&lt;/li&gt;
+  &lt;li&gt;How do they approach testing?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This needs to be a tiny assignment. I cannot stress this point enough. Be sensitive to the fact that the candidate is likely interviewing at other companies too. This is an assignment that they will be doing in their free time. You don’t want your assignment to take up their entire weekend.&lt;/p&gt;
+
+&lt;p&gt;Most companies that I interviewed at wanted me to develop an app with at least 2 screens, lists, network calls to some backend APIs and more. Half the time is spent obtaining API keys and setting up the infrastructure. Some companies even state something along the lines of “Give us your best”.&lt;/p&gt;
+
+&lt;p&gt;I am a strong opponent of such take-homes. A candidate should not need to spend more than half a day on the assessment. You can take simple apps like counters, timers, “click-to-change-color” and add some interesting twists to them to come up with requirements that satisfy all the criteria stated above.&lt;/p&gt;
+
+&lt;h3 id=&quot;alternative-pair-programming&quot;&gt;Alternative: Pair programming&lt;/h3&gt;
+
+&lt;p&gt;For some candidates, a take-home is not an option. For those, a pair programming session can be used to approximate the same result.&lt;/p&gt;
+
+&lt;h2 id=&quot;step-2-technical-interview&quot;&gt;Step 2: Technical interview&lt;/h2&gt;
+
+&lt;p&gt;If the candidate passes Step 1, then they are invited for a technical interview.&lt;/p&gt;
+
+&lt;p&gt;The goals of this step:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Understand if the candidate really came up with this solution on their own&lt;/li&gt;
+  &lt;li&gt;Have a technical discussion with the candidate&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The first of these goals can be achieved by discussing their assessment. Asking them to explain their choices. Adding more requirements, or changing a requirement to see how they adapt their solution, pair programming (this need not be complete, running code; just an explanation would suffice).&lt;/p&gt;
+
+&lt;p&gt;The second point in this interview goes back to the point about allowing the candidate to shine. For this I shamelessly copy a strategy from an interview where I was a candidate. I ask an open-ended question, like:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“What’s the one thing in your career that you’re most proud of/least proud of?”, “What’s the most difficult challenge that you had so far? How did you solve it?”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In my experience this often puts candidates at ease and lets them open up. The answers to these questions give a lot of valuable insight into their technical and critical thinking abilities.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;So there is my formula for hiring in tech.&lt;/p&gt;
+
+&lt;p&gt;As a recap, here are the core principles:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The ability to learn, unlearn and relearn is more valuable than existing knowledge&lt;/li&gt;
+  &lt;li&gt;Experience always has value, but not every role needs to be a Senior Developer&lt;/li&gt;
+  &lt;li&gt;Evaluating based on what a candidate does every day at work is beneficial over evaluating something that they do occasionally&lt;/li&gt;
+  &lt;li&gt;If it can be looked up in 30 minutes, it is not interview material&lt;/li&gt;
+  &lt;li&gt;What constitutes “basics” is changing every day, it is advisable to not get too hung up on them&lt;/li&gt;
+  &lt;li&gt;Bringing out the best in the candidate is a win-win&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Here is the TL;DR of the tech portion of the hiring process&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Tiny take-home assignment; pair programming session if a take-home is not possible for the candidate&lt;/li&gt;
+  &lt;li&gt;Technical interview as a follow up to Step 1.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sat, 14 Aug 2021 21:00:00 +0200</pubDate>
+        <link>https://kiranrao.in/blog/2021/08/14/hiring-in-tech/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2021/08/14/hiring-in-tech/</guid>
+        
+        <category>hiring</category>
+        
+        
+      </item>
     
       <item>
         <title>The Digital Identity Conundrum</title>
@@ -717,93 +882,6 @@
         <guid isPermaLink="true">https://kiranrao.in/blog/2020/12/15/scalable-tech-business/</guid>
         
         <category>obvious</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Falsehoods programmers believe about addresses</title>
-        <description>&lt;p&gt;I’ve spent the better part of the last three years developing a navigation app at work. It includes features like&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Searching for a location&lt;/li&gt;
-  &lt;li&gt;Adding a location to favorites&lt;/li&gt;
-  &lt;li&gt;Turn by turn navigation to a destination&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I had the seemingly simple task of splitting an address into two parts for displaying in the user interface (line 1 and line 2). The exact mechanism of the split didn’t matter as long as it could be reasonably split.&lt;/p&gt;
-
-&lt;p&gt;Here as some examples of how I presumed it could be split depending on the length of the address&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Line 1 = Place Name; Line 2 = address&lt;/li&gt;
-  &lt;li&gt;Line 1 = Place name, number, street; Line 2 = city, state&lt;/li&gt;
-  &lt;li&gt;Line 1 = Place name, number; Line 2 = street, city&lt;/li&gt;
-  &lt;li&gt;… and so on&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Simple, right? Wrong.&lt;/p&gt;
-
-&lt;p&gt;Over the course, I’ve made several assumptions about addresses that turned out to be incorrect. This post attempts to list the things I learned about addresses.&lt;/p&gt;
-
-&lt;p&gt;This post is inspired by other “Falsehood programmers believe” posts (and hence uses a similar format). In fact, there’s a &lt;a href=&quot;https://github.com/kdeldycke/awesome-falsehood&quot;&gt;GitHub repo&lt;/a&gt; that lists all such posts. Other people before me have already made “Falsehoods about addresses” lists, but I’m making one based on my own experience.&lt;/p&gt;
-
-&lt;p&gt;So, let’s get right to the falsehoods. Every one of the statements below is false.&lt;/p&gt;
-
-&lt;p&gt;About &lt;strong&gt;locations&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Every location has a unique address. This is false: every location has a unique &lt;em&gt;geocoordinate&lt;/em&gt; (lat-long), or other such &lt;em&gt;identifier&lt;/em&gt; like &lt;a href=&quot;https://maps.google.com/pluscodes/&quot;&gt;Google Plus Codes&lt;/a&gt; or &lt;a href=&quot;https://what3words.com/about-us/&quot;&gt;what3words&lt;/a&gt;, but it does not have a unique &lt;em&gt;address&lt;/em&gt;.&lt;/li&gt;
-  &lt;li&gt;A location has an address&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;About &lt;strong&gt;addresses&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;The concept of an address is universal&lt;/li&gt;
-  &lt;li&gt;What constitutes an address is universal&lt;/li&gt;
-  &lt;li&gt;An address has a number&lt;/li&gt;
-  &lt;li&gt;An address identifies a single house/shop/office&lt;/li&gt;
-  &lt;li&gt;An address has a street name&lt;/li&gt;
-  &lt;li&gt;An address has a post code/zip code/pin code&lt;/li&gt;
-  &lt;li&gt;An address has a neighborhood/locality name&lt;/li&gt;
-  &lt;li&gt;An address has a place name&lt;/li&gt;
-  &lt;li&gt;An address is hierarchical (number, street, city, state, country)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;User interface&lt;/strong&gt; related:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;An address has sufficient info to make sense in a user interface&lt;/li&gt;
-  &lt;li&gt;An address, when shortened (ellipsized etc) to fit on a user interface, still gives enough context to the user&lt;/li&gt;
-  &lt;li&gt;An address fits on one screen on a mobile phone with a readable font size&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;About &lt;strong&gt;streets&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;A street has a name&lt;/li&gt;
-  &lt;li&gt;A street name is unique in a city&lt;/li&gt;
-  &lt;li&gt;A street name is unique in a locality&lt;/li&gt;
-  &lt;li&gt;A road number (like highway number) is unique in a locality&lt;/li&gt;
-  &lt;li&gt;A road number uniquely identifies a road&lt;/li&gt;
-  &lt;li&gt;A neighborhood/locality name is unique in a city&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;About &lt;strong&gt;directions&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;What constitutes a navigation instruction is universal&lt;/li&gt;
-  &lt;li&gt;A navigation instruction at a point is unambiguous&lt;/li&gt;
-  &lt;li&gt;Restrictions applied to navigation (like avoid highways, avoid tolls etc) are unambiguous&lt;/li&gt;
-  &lt;li&gt;Navigation directions are user-friendly (this one is an opinion, and not a fact)&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Sat, 24 Oct 2020 11:00:00 +0200</pubDate>
-        <link>https://kiranrao.in/blog/2020/10/24/falsehoods-about-addresses/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2020/10/24/falsehoods-about-addresses/</guid>
-        
-        <category>falsehoods</category>
         
         
       </item>

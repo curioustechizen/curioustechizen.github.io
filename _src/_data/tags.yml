@@ -44,3 +44,5 @@ digitalidentity:
   name: Digital Identity
 bigtech:
   name: BigTech
+hiring:
+  name: Hiring
