@@ -145,3 +145,7 @@ Because of these factors, slots work best when in the following situations:
 1. Near the top of your Composable tree. For example you could have a top-level Composable observe state changes from a ViewModel and instead of dumping the entire composite state object to a Composable, it could partition the state into several sections and pass them as one composable per section.
 
 It is not a good idea to use this technique at all levels though. In particular, when you are near the leaves of your tree of Composable nodes, it is more convenient to pass data parameters. For example, the [ShoppingCart composable](https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/ui/components/ShoppingCart.kt) used in this demo does not use slots.
+
+## Credits
+
+Thanks [Adam Powell](https://twitter.com/adamwp) for explaining the idea of slots and for reviewing this article.
