@@ -46,3 +46,5 @@ bigtech:
   name: BigTech
 hiring:
   name: Hiring
+jetpack-compose:
+  name: Jetpack Compose

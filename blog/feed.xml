@@ -5,9 +5,159 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>https://kiranrao.in/blog/</link>
     <atom:link href="https://kiranrao.in/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 17 Aug 2021 17:59:08 +0200</pubDate>
-    <lastBuildDate>Tue, 17 Aug 2021 17:59:08 +0200</lastBuildDate>
+    <pubDate>Fri, 03 Dec 2021 21:15:57 +0100</pubDate>
+    <lastBuildDate>Fri, 03 Dec 2021 21:15:57 +0100</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>Effectively using slots in Jetpack Compose</title>
+        <description>&lt;p&gt;Jetpack Compose is great for developing UIs for Android (and more!). Declarative UI comes with its own set of problems and quirks though, and that in turn opens the door for idioms and patterns specific to this declarative nature.&lt;/p&gt;
+
+&lt;p&gt;One such problem with Jetpack Compose is having to pass parameters through from a Composable down to its children (Note: this problem is not specific to Compose, it is also seen with SwiftUI, Flutter and ReactNative). In this post, we’ll look at how to use Composable lambdas (also called “slots”) to improve the situation.&lt;/p&gt;
+
+&lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
+
+&lt;p&gt;Let’s look at an example: A screen showing a list of books to buy and a shopping cart. On narrow screens, the list of books takes up the entire width and the shopping cart is placed in a bottom sheet. On wide screens the list of books takes up the first 65% of the screen width while the shopping cart takes up the rest.&lt;/p&gt;
+
+&lt;p&gt;Here are a couple of screenshots. It does not look pretty, but it serves the purpose of this post.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/img/SlotsDemoNarrow.png&quot; alt=&quot;Slots demo narrow&quot; style=&quot;max-height: 555px; max-width: 270px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/img/SlotsDemoWide.png&quot; alt=&quot;Slots demo wide&quot; style=&quot;max-height: 270px; max-width: 555px;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;implementation&quot;&gt;Implementation&lt;/h2&gt;
+
+&lt;p&gt;Here is how one might implement it (&lt;a href=&quot;https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/ui/components/MainScreen.kt#L14-L34&quot;&gt;GitHub source&lt;/a&gt;):&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;n&quot;&gt;@Composable&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MainScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isWideScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isWideScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fillMaxHeight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.65f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;BookList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;books&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;onBookAdded&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.35f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;ShoppingCart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;BottomSheetScaffold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;sheetContent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ShoppingCart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;BookList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;books&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;onBookAdded&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{})&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;MainScreen&lt;/code&gt; composable receives the the &lt;a href=&quot;https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/data/MainScreenModel.kt&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MainScreenModel&lt;/code&gt;&lt;/a&gt; as a parameter, and it passes pieces of this data to child composables:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;books&lt;/code&gt; property, which is a &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;BookModel&amp;gt;&lt;/code&gt;, is passed to the &lt;code class=&quot;highlighter-rouge&quot;&gt;BookList&lt;/code&gt; composable&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;shoppingCartModel&lt;/code&gt; property is passed to the &lt;code class=&quot;highlighter-rouge&quot;&gt;ShoppingCart&lt;/code&gt; composable.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/MainActivity.kt#L24&quot;&gt;call site&lt;/a&gt; is straightforward:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;n&quot;&gt;MainScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mainScreenModel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sampleMainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;In this simple example, it doesn’t look all that bad. However, it starts getting tedious when your MainScreen needs to pass that the same model (and callback lambdas) further down the tree.&lt;/p&gt;
+
+&lt;h2 id=&quot;slots-to-the-rescue&quot;&gt;Slots to the rescue&lt;/h2&gt;
+
+&lt;p&gt;If a Composable accepts another Composable as a parameter, then that parameter is called a slot. Many core composables are designed this way:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;All the basic layouts like &lt;code class=&quot;highlighter-rouge&quot;&gt;Row&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Column&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Box&lt;/code&gt; accept a &lt;code class=&quot;highlighter-rouge&quot;&gt;content&lt;/code&gt; parameter that is a Composable lambda.&lt;/li&gt;
+  &lt;li&gt;Components like &lt;code class=&quot;highlighter-rouge&quot;&gt;Button&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Card&lt;/code&gt; do the same.&lt;/li&gt;
+  &lt;li&gt;More advanced components like Scaffolds accept multiple composable lambdas for different sections of the scaffold. For example, &lt;a href=&quot;https://cs.android.com/androidx/platform/tools/dokka-devsite-plugin/+/master:testData/compose/source/androidx/compose/material/BottomSheetScaffold.kt;l=259;drc=6fed3de7a56143de954d55e508a7449deb9af582&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;BottomSheetScaffold&lt;/code&gt;&lt;/a&gt; has five(!!) slots for the &lt;code class=&quot;highlighter-rouge&quot;&gt;sheetContent&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;drawerContent&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;snackbarHost&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;floatingActionButton&lt;/code&gt; and the &lt;code class=&quot;highlighter-rouge&quot;&gt;content&lt;/code&gt; itself.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Let’s change our MainScreen composable to accept slots. Here’s the signature:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;n&quot;&gt;@Composable&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MainScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;shoppingCartContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;@Composable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Unit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;booksContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;@Composable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Unit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;isWideScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;What we’ve done here is to accept two Composables as parameters, one each for the shopping cart section and the books list section. Now the &lt;a href=&quot;https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/ui/components/MainScreen.kt#L37-L57&quot;&gt;implementation changes to this&lt;/a&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;n&quot;&gt;@Composable&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MainScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;shoppingCartContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;@Composable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Unit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;booksContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;@Composable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Unit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;isWideScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isWideScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fillMaxHeight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.65f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;booksContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.35f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;shoppingCartContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;BottomSheetScaffold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sheetContent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shoppingCartContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;booksContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Note that now the &lt;code class=&quot;highlighter-rouge&quot;&gt;MainScreen&lt;/code&gt; composable does not pass along &lt;em&gt;any&lt;/em&gt; data parameters at all. It now has the focused responsibility of dealing with the layout rather than also having to forward parameters. It only receives parameters that it uses directly (&lt;code class=&quot;highlighter-rouge&quot;&gt;isWideScreen&lt;/code&gt;). The slots it receives are opaque to it and it does not need to know what parameters they need or what callback lambdas they offer.&lt;/p&gt;
+
+&lt;p&gt;Also note that if you change the signature of either &lt;code class=&quot;highlighter-rouge&quot;&gt;BookList&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;ShoppingCart&lt;/code&gt; (add, remove, reorder parameters), &lt;code class=&quot;highlighter-rouge&quot;&gt;MainScreen&lt;/code&gt; does not need to change at all.&lt;/p&gt;
+
+&lt;p&gt;Here’s what the &lt;a href=&quot;https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/SlotsActivity.kt#L27-L39&quot;&gt;call site&lt;/a&gt; looks like:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;n&quot;&gt;MainScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;shoppingCartContent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;ShoppingCart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sampleMainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;booksContent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;BookList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;books&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sampleMainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;onBookAdded&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;isWideScreen&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You’ll notice that we pushed considerable responsibility to the call site. That brings us to the next topic:&lt;/p&gt;
+
+&lt;h2 id=&quot;when-to-use-slots&quot;&gt;When to use slots?&lt;/h2&gt;
+
+&lt;p&gt;This pattern of using composable slots makes some trade-offs. So it is not the right choice for all situations. In particular, it means the caller of this composable&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Is exposed to more knowledge of the inner workings of the composable. In this case, the caller previously did not know that &lt;code class=&quot;highlighter-rouge&quot;&gt;MainScreen&lt;/code&gt; is split into two high-level sections but now it does.&lt;/li&gt;
+  &lt;li&gt;Is required to split the data itself rather than having &lt;code class=&quot;highlighter-rouge&quot;&gt;MainScreen&lt;/code&gt; do this job&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Because of these factors, slots work best when in the following situations:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;You want to hide complexity from the “in-between” levels of the tree of Composable nodes. This means that you have some intermediate composables that you don’t want to be burdened with passing data around&lt;/li&gt;
+  &lt;li&gt;You are creating reusable generic layouts or components like Row or Scaffold&lt;/li&gt;
+  &lt;li&gt;Near the top of your Composable tree. For example you could have a top-level Composable observe state changes from a ViewModel and instead of dumping the entire composite state object to a Composable, it could partition the state into several sections and pass them as one composable per section.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;It is not a good idea to use this technique at all levels though. In particular, when you are near the leaves of your tree of Composable nodes, it is more convenient to pass data parameters. For example, the &lt;a href=&quot;https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/ui/components/ShoppingCart.kt&quot;&gt;ShoppingCart composable&lt;/a&gt; used in this demo does not use slots.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 03 Dec 2021 20:00:00 +0100</pubDate>
+        <link>https://kiranrao.in/blog/2021/12/03/jetpack-compose-slots/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2021/12/03/jetpack-compose-slots/</guid>
+        
+        <category>android</category>
+        
+        <category>jetpack-compose</category>
+        
+        
+      </item>
     
       <item>
         <title>Hiring in Tech</title>
@@ -764,126 +914,6 @@
         <pubDate>Fri, 18 Dec 2020 21:00:00 +0100</pubDate>
         <link>https://kiranrao.in/blog/2020/12/18/tech-enhancer/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2020/12/18/tech-enhancer/</guid>
-        
-        <category>obvious</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Scalable tech ≠ scalable business</title>
-        <description>&lt;p&gt;This is a non-programming post in the series I call “re-stating the obvious”. This series talks about topics that are nothing new, a lot has been said and written about these topics already. I’m simply putting it in my own words.&lt;/p&gt;
-
-&lt;p&gt;You can find all posts in this series &lt;a href=&quot;/blog/tags/obvious&quot;&gt;here&lt;/a&gt;. Be sure to check back because more posts will be added in this series over the coming period.&lt;/p&gt;
-
-&lt;h2 id=&quot;what-exactly-is-scalable&quot;&gt;What exactly is “scalable”?&lt;/h2&gt;
-
-&lt;p&gt;Here’s the &lt;a href=&quot;https://en.wikipedia.org/wiki/Scalability&quot;&gt;wikipedia definition&lt;/a&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Scalability&lt;/strong&gt; is the property of a system to handle a growing amount of work by adding resources to the system.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;During the initial stages of my career, a tech lead once described a scalable system in layman terms to me as follows:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;A scalable system is one where by adding just a small amount effort or resources you can increase the output or gain by a large amount.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;A real-life (albeit silly) example I like to cite is cooking rice versus making rotis. Cooking rice is scalable because you don’t need to double the effort in order to cook double the amount of rice. On the other hand, if you want to double the number of rotis, you need to (more or less) double the effort. Making rotis, is thus not scalable.&lt;/p&gt;
-
-&lt;h2 id=&quot;scalable-tech&quot;&gt;Scalable tech&lt;/h2&gt;
-
-&lt;p&gt;In technology terms, scalability refers to the ability to handle more users, requests, traffic etc without the system hitting its limits. Let’s say you create a system that can handle 1 million users with a team of 100 engineers. If you want to increase your target 10 fold to 10 million, you should not need to employ 10 times as many engineers.&lt;/p&gt;
-
-&lt;p&gt;The software industry has brought about a revolution in massively scalable technology. We routinely see CXOs of tech giants at their respective annual conferences reeling off staggering statistics about their products.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;X million concurrent users per second&lt;/li&gt;
-  &lt;li&gt;Y billion total active users&lt;/li&gt;
-  &lt;li&gt;Z terabytes of data served per day&lt;/li&gt;
-  &lt;li&gt;… and so on …&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;This is no mean feat, mind you. Achieving this scale is a humongous engineering effort that requires coordintation between countless moving parts (from the software stack to the OS to the hardware to the network, even ventilation, cooling and geopolitical factors come into play). It is a marvel, no less.&lt;/p&gt;
-
-&lt;p&gt;But does this translate to a scalable business? For example&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;How does the cost for manual fallbacks increase with the problem size for a business based on &lt;strong&gt;algorithmic decisions&lt;/strong&gt;?&lt;/li&gt;
-  &lt;li&gt;What’s the cost of mistakes when the business relies on &lt;strong&gt;content moderation&lt;/strong&gt;?&lt;/li&gt;
-  &lt;li&gt;How well does the tech mesh with the need for global &lt;strong&gt;regulatory compliance&lt;/strong&gt;?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;scalable-business&quot;&gt;Scalable business&lt;/h2&gt;
-
-&lt;p&gt;A scalable business refers to one that can expand (for example to multiple geographies) with just an increment in investment (in terms of cost or effort).&lt;/p&gt;
-
-&lt;p&gt;The manufacturing industry has shown the world how to conduct a globally scalable business for decades. Here are some examples&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Every country has differing standards when it comes to &lt;strong&gt;automobile industry&lt;/strong&gt;. This includes factors like pollution limits, safety features like seat belts, airbags, ISOFix and more.&lt;/li&gt;
-  &lt;li&gt;Norway is very strict about speed limits. So much so that cars sold in Norway are &lt;strong&gt;required to calibrate the speedometer&lt;/strong&gt; to show the speed as 10% more than the actual speed.&lt;/li&gt;
-  &lt;li&gt;Every country has differing standards regarding &lt;strong&gt;consumer electrical and electronic equipment&lt;/strong&gt;. Refrigerators, air conditioners, microwave ovens etc have to adhere to different standards of energy consumption, fluctuations, even noise requirements.&lt;/li&gt;
-  &lt;li&gt;Some countries like South Korea require that cellphone cameras should always have the &lt;strong&gt;shutter sound permanently enabled&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;In spite of these differences, we see the automotive, consumer electronics and other industries comply with these local requirements. These industries have built scalable businesses that work with differing local policies around the globe.&lt;/p&gt;
-
-&lt;h2 id=&quot;scalable-tech--scalable-business&quot;&gt;Scalable tech ≠ scalable business&lt;/h2&gt;
-
-&lt;p&gt;Sadly, the tech industry does not seem to have learnt from the manufacturing industry. Here are a few examples that illustrate the problem:&lt;/p&gt;
-
-&lt;h3 id=&quot;mobile-app-stores&quot;&gt;Mobile app stores&lt;/h3&gt;
-
-&lt;p&gt;Mobile app stores are grappling with the problem of app approvals. Approvals take weeks or even months and this is a major pain point for businesses that wish to publish apps on the stores.&lt;/p&gt;
-
-&lt;p&gt;The story doesn’t end there. At least one of the big mobile app stores has serious problems with automated app removals. If you are a mobile app developer, chances are you have come across multiple instances of apps being removed for no apparent reason, and developers not being given a fair chance at redressal.&lt;/p&gt;
-
-&lt;p&gt;This here is a classic example of confusing the scalability of the tech for scalability of the business.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The app review algorithms are great piece of scalable technology. Unfortunately, the same algorithms come in the way of a scalable business because the business has been designed around not requiring much manual review.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;content-moderation&quot;&gt;Content moderation&lt;/h3&gt;
-
-&lt;p&gt;Social networks, video platforms and similar platforms have a problem very similar to mobile app stores, except the stumbling block is content moderation. Some examples of situations where the scale failed the business:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Social media used for interference in the electoral process&lt;/li&gt;
-  &lt;li&gt;Misinformation campaigns on social media, ranging from incorrect information about Covid-19 vaccines to using social media to whip up mob frenzy (remember all the lynching incidents across the world in 2018-2020?)&lt;/li&gt;
-  &lt;li&gt;Gory incidents telecast live over various video streaming platforms (remember Christchurch shootings in 2019?)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Some platforms have scrambled to “fix” some of these problems (some social networks added “labels” to disputed posts etc).&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;But these seem to be band-aid. The real problem is that the products themselves are not built for real scale (beyond the technology itself).&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;regulatory-compliance&quot;&gt;Regulatory compliance&lt;/h3&gt;
-
-&lt;p&gt;We all know what happened with user data (in the scandal-that-shall-not-be-named involving the social-network-that-also-shall-not-be-named). But that is just part of the picture.&lt;/p&gt;
-
-&lt;p&gt;Several countries are now coming up with regulations around privacy of the data of their citizens. Some are taking it a step further and proposing rules that dictate where the data of their citizens should physically reside.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The real problem here is tech companies building their business models around regulations that existed &lt;em&gt;when the product was conceptualized&lt;/em&gt;, and failing to foresee that regulations will catch up eventually.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Again, the products scale really well from a purely technical standpoint, but leave a lot to be desired when the rubber meets the road.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;I’m pretty sure I just scratched the surface - of both sides of the coin. There are dozens more examples of business scaling done right; and dozens more where they fall short despite a stellar tech stack.&lt;/p&gt;
-
-&lt;p&gt;In conclusion, at the risk of re-stating the obvious, &lt;strong&gt;A scalable tech stack is necessary but not sufficient for running a scalable business&lt;/strong&gt;.&lt;/p&gt;
-
-</description>
-        <pubDate>Tue, 15 Dec 2020 19:00:00 +0100</pubDate>
-        <link>https://kiranrao.in/blog/2020/12/15/scalable-tech-business/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2020/12/15/scalable-tech-business/</guid>
         
         <category>obvious</category>
         
