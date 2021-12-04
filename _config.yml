@@ -5,7 +5,10 @@ name: "Curious Techizen"
 description: "A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively."
 
 # Your name. Will show in your footer + sidebar
-author: "Kiran Rao"
+author: 
+  name: Kiran Rao
+  url: https://kiranrao.in
+
 lang: en
 
 url: "https://kiranrao.in"

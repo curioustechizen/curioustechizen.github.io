@@ -2,6 +2,7 @@
 layout: post
 title:  "Effectively using slots in Jetpack Compose"
 description: "Using slots to avoid having to trickle parameters down the tree of Composables"
+image: /blog/assets/img/composable_with_slots.png
 date: 2021-12-03 20:00
 comments: true
 tags: [android, jetpack-compose]
