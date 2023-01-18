@@ -28,26 +28,25 @@
 
       
 
-      <!-- Begin Jekyll SEO tag v2.1.0 -->
-<title>Android DiffUtil Part 2: List Diffs on other platforms - Curious Techizen</title>
+      <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Android DiffUtil Part 2: List Diffs on other platforms | Curious Techizen</title>
+<meta name="generator" content="Jekyll v3.9.0" />
 <meta property="og:title" content="Android DiffUtil Part 2: List Diffs on other platforms" />
+<meta name="author" content="Kiran Rao" />
+<meta property="og:locale" content="en" />
 <meta name="description" content="A 3 part series on Android’s DiffUtil; Part 2 is a survey of similar APIs on Swift, iOS, Angular and Flutter" />
 <meta property="og:description" content="A 3 part series on Android’s DiffUtil; Part 2 is a survey of similar APIs on Swift, iOS, Angular and Flutter" />
 <link rel="canonical" href="https://kiranrao.in/blog/2020/01/07/diff-util-part2/" />
 <meta property="og:url" content="https://kiranrao.in/blog/2020/01/07/diff-util-part2/" />
 <meta property="og:site_name" content="Curious Techizen" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-01-07T10:00:00+01:00" />
+<meta property="article:published_time" content="2020-01-07T10:00:00-06:00" />
 <meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Android DiffUtil Part 2: List Diffs on other platforms" />
 <meta name="twitter:site" content="@ki_run" />
-<meta name="twitter:creator" content="@{"name"=>"Kiran Rao", "url"=>"https://kiranrao.in"}" />
+<meta name="twitter:creator" content="@Kiran Rao" />
 <script type="application/ld+json">
-{"@context": "http://schema.org",
-"@type": "BlogPosting",
-"headline": "Android DiffUtil Part 2: List Diffs on other platforms",
-"datePublished": "2020-01-07T10:00:00+01:00",
-"description": "A 3 part series on Android’s DiffUtil; Part 2 is a survey of similar APIs on Swift, iOS, Angular and Flutter",
-"url": "https://kiranrao.in/blog/2020/01/07/diff-util-part2/"}</script>
+{"description":"A 3 part series on Android’s DiffUtil; Part 2 is a survey of similar APIs on Swift, iOS, Angular and Flutter","author":{"@type":"Person","name":"Kiran Rao"},"@type":"BlogPosting","url":"https://kiranrao.in/blog/2020/01/07/diff-util-part2/","headline":"Android DiffUtil Part 2: List Diffs on other platforms","dateModified":"2020-01-07T10:00:00-06:00","datePublished":"2020-01-07T10:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://kiranrao.in/blog/2020/01/07/diff-util-part2/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
       
@@ -107,7 +106,7 @@
   <article class="single-content" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="feat">
       <h5 class="page-date">
-        <time datetime="2020-01-07T10:00:00+01:00" itemprop="datePublished">
+        <time datetime="2020-01-07T10:00:00-06:00" itemprop="datePublished">
           07 January 2020
         </time>
       </h5>
@@ -120,7 +119,7 @@
 
 <h2 id="swift-standard-library">Swift Standard Library</h2>
 
-<p>The Swift standard library has a <a href="https://developer.apple.com/documentation/swift/bidirectionalcollection/3200721-difference"><code class="highlighter-rouge">difference(from:)</code></a> method on <code class="highlighter-rouge">BidirectionalCollection</code> protocol that returns a <code class="highlighter-rouge">CollectionDifference</code> result. <a href="https://www.fivestars.blog/code/swift-5-1-collection-diffing.html">This blog post</a> does a deep dive into this API in Swift.</p>
+<p>The Swift standard library has a <a href="https://developer.apple.com/documentation/swift/bidirectionalcollection/3200721-difference"><code class="language-plaintext highlighter-rouge">difference(from:)</code></a> method on <code class="language-plaintext highlighter-rouge">BidirectionalCollection</code> protocol that returns a <code class="language-plaintext highlighter-rouge">CollectionDifference</code> result. <a href="https://www.fivestars.blog/code/swift-5-1-collection-diffing.html">This blog post</a> does a deep dive into this API in Swift.</p>
 
 <p>It looks like this facility is intended as a general purpose list diff API, not specific to UI programming. Remember, it is in the <em>standard library</em> so it can be used in backend server programming, for example.</p>
 
@@ -140,19 +139,19 @@
 <p>Some notable features of this API</p>
 
 <ul>
-  <li>The most interesting feature is the return type: <code class="highlighter-rouge">CollectionDifference</code>. This API provides you a way to iterate through all the diff operations, or even to only pick the insertions (or removals). This is different from how Android does it. More on this in a minute.</li>
-  <li>By default, it does not detect moves, but there’s an <code class="highlighter-rouge">inferringMoves()</code> method on <code class="highlighter-rouge">CollectionDifference</code> that you can use if you want to do this</li>
-  <li>It uses equality by default for the comparison, but you can customize how the comparison occurs using <a href="https://developer.apple.com/documentation/swift/bidirectionalcollection/3200722-difference"><code class="highlighter-rouge">difference(from: by:)</code></a> variant. Here you pass in a closure that returns a <code class="highlighter-rouge">Bool</code> so you can use whatever logic you wish to compare the elements.</li>
+  <li>The most interesting feature is the return type: <code class="language-plaintext highlighter-rouge">CollectionDifference</code>. This API provides you a way to iterate through all the diff operations, or even to only pick the insertions (or removals). This is different from how Android does it. More on this in a minute.</li>
+  <li>By default, it does not detect moves, but there’s an <code class="language-plaintext highlighter-rouge">inferringMoves()</code> method on <code class="language-plaintext highlighter-rouge">CollectionDifference</code> that you can use if you want to do this</li>
+  <li>It uses equality by default for the comparison, but you can customize how the comparison occurs using <a href="https://developer.apple.com/documentation/swift/bidirectionalcollection/3200722-difference"><code class="language-plaintext highlighter-rouge">difference(from: by:)</code></a> variant. Here you pass in a closure that returns a <code class="language-plaintext highlighter-rouge">Bool</code> so you can use whatever logic you wish to compare the elements.</li>
 </ul>
 
 <h4 id="collectiondifference">CollectionDifference</h4>
 
-<p>The <code class="highlighter-rouge">CollectionDifference</code> provides in itself a Collection of <code class="highlighter-rouge">CollectionDifference.Change</code> - which is an enum with 2 values: <code class="highlighter-rouge">.insert</code> and <code class="highlighter-rouge">.remove</code>.</p>
+<p>The <code class="language-plaintext highlighter-rouge">CollectionDifference</code> provides in itself a Collection of <code class="language-plaintext highlighter-rouge">CollectionDifference.Change</code> - which is an enum with 2 values: <code class="language-plaintext highlighter-rouge">.insert</code> and <code class="language-plaintext highlighter-rouge">.remove</code>.</p>
 
 <ul>
-  <li><code class="highlighter-rouge">.insert</code> provides you with an <code class="highlighter-rouge">element</code> and its offset in the <em>final list</em></li>
-  <li><code class="highlighter-rouge">.remove</code> provides you with an <code class="highlighter-rouge">element</code> and its offset in the <em>original list</em></li>
-  <li>The <code class="highlighter-rouge">associatedWith</code> parameter of the enums inform you about moves</li>
+  <li><code class="language-plaintext highlighter-rouge">.insert</code> provides you with an <code class="language-plaintext highlighter-rouge">element</code> and its offset in the <em>final list</em></li>
+  <li><code class="language-plaintext highlighter-rouge">.remove</code> provides you with an <code class="language-plaintext highlighter-rouge">element</code> and its offset in the <em>original list</em></li>
+  <li>The <code class="language-plaintext highlighter-rouge">associatedWith</code> parameter of the enums inform you about moves</li>
 </ul>
 
 <p>There’s no concept of “changes” in this API - i.e., it does not tell you if an item retained its identity but did not retain equality.</p>
@@ -163,13 +162,13 @@
 
 <p>We started this series with an example of how Android’s RecyclerView animates between 2 lists using DiffUtil. It should come as no surprise that Apple’s UI frameworks have similar capabilities too.</p>
 
-<p>It has always been possible to achieve this on Apple platforms but it has been verbose and error-prone (frequently giving rise to the Swift equivalent of <code class="highlighter-rouge">ArrayIndexOutOfBoundsException</code>). Recent API improvements have greatly enhanced the developer ergonomics here.</p>
+<p>It has always been possible to achieve this on Apple platforms but it has been verbose and error-prone (frequently giving rise to the Swift equivalent of <code class="language-plaintext highlighter-rouge">ArrayIndexOutOfBoundsException</code>). Recent API improvements have greatly enhanced the developer ergonomics here.</p>
 
-<p>The headline API is <code class="highlighter-rouge">UITableViewDiffableDataSource</code> and friends (quite a mouthful!). This is completely out of my comfort zone so I’ll point you to <a href="https://developer.apple.com/videos/play/wwdc2019/215">these</a> <a href="https://developer.apple.com/videos/play/wwdc2019/220">talks</a> from WWDC (there are also PDF slides available) if you want to learn more. I will point out though, that the items participating in this API need to be <code class="highlighter-rouge">Hashable</code>. This is how the framework decides that items have “changed”. It fulfils the role of <code class="highlighter-rouge">areContentsTheSame()</code> from Android’s DiffUtil.</p>
+<p>The headline API is <code class="language-plaintext highlighter-rouge">UITableViewDiffableDataSource</code> and friends (quite a mouthful!). This is completely out of my comfort zone so I’ll point you to <a href="https://developer.apple.com/videos/play/wwdc2019/215">these</a> <a href="https://developer.apple.com/videos/play/wwdc2019/220">talks</a> from WWDC (there are also PDF slides available) if you want to learn more. I will point out though, that the items participating in this API need to be <code class="language-plaintext highlighter-rouge">Hashable</code>. This is how the framework decides that items have “changed”. It fulfils the role of <code class="language-plaintext highlighter-rouge">areContentsTheSame()</code> from Android’s DiffUtil.</p>
 
 <h2 id="flutter">Flutter</h2>
 
-<p>I could not find any official API for List Diffs in Flutter. However, there’s a third party library that is inspired by Android’s DiffUtils. It is called <a href="https://github.com/adithyaxx/animated-stream-list">AnimatedStreamList</a>. The relevant files in this repo are <a href="https://github.com/adithyaxx/animated-stream-list/blob/c5b3b17e8dd0b723e2b3777521924c272580c4bf/lib/src/myers_diff.dart"><code class="highlighter-rouge">myers_diff.dart</code></a> and <a href="https://github.com/adithyaxx/animated-stream-list/blob/c5b3b17e8dd0b723e2b3777521924c272580c4bf/lib/src/diff_payload.dart"><code class="highlighter-rouge">diff_payload.dart</code></a>.</p>
+<p>I could not find any official API for List Diffs in Flutter. However, there’s a third party library that is inspired by Android’s DiffUtils. It is called <a href="https://github.com/adithyaxx/animated-stream-list">AnimatedStreamList</a>. The relevant files in this repo are <a href="https://github.com/adithyaxx/animated-stream-list/blob/c5b3b17e8dd0b723e2b3777521924c272580c4bf/lib/src/myers_diff.dart"><code class="language-plaintext highlighter-rouge">myers_diff.dart</code></a> and <a href="https://github.com/adithyaxx/animated-stream-list/blob/c5b3b17e8dd0b723e2b3777521924c272580c4bf/lib/src/diff_payload.dart"><code class="language-plaintext highlighter-rouge">diff_payload.dart</code></a>.</p>
 
 <h4 id="example-1">Example</h4>
 
@@ -183,20 +182,20 @@
 <p>Of note in this library:</p>
 
 <ul>
-  <li>It returns a <code class="highlighter-rouge">List&lt;Diff&gt;</code>. In this sense it is similar to the Swift implementation</li>
-  <li><code class="highlighter-rouge">Diff</code> can be one of <code class="highlighter-rouge">InsertDiff</code>, <code class="highlighter-rouge">DeleteDiff</code> or <code class="highlighter-rouge">ChangeDiff</code>. This library does not implement moves.</li>
-  <li>Each instance of <code class="highlighter-rouge">Diff</code> includes an <code class="highlighter-rouge">index</code> and a <code class="highlighter-rouge">size</code>. In this respect, it is similar to the Android DiffUtil implementation.</li>
-  <li>It uses an <a href="https://github.com/adithyaxx/animated-stream-list/blob/c5b3b17e8dd0b723e2b3777521924c272580c4bf/lib/src/myers_diff.dart#L5"><code class="highlighter-rouge">Equalizer</code></a> to customize the comparison.</li>
+  <li>It returns a <code class="language-plaintext highlighter-rouge">List&lt;Diff&gt;</code>. In this sense it is similar to the Swift implementation</li>
+  <li><code class="language-plaintext highlighter-rouge">Diff</code> can be one of <code class="language-plaintext highlighter-rouge">InsertDiff</code>, <code class="language-plaintext highlighter-rouge">DeleteDiff</code> or <code class="language-plaintext highlighter-rouge">ChangeDiff</code>. This library does not implement moves.</li>
+  <li>Each instance of <code class="language-plaintext highlighter-rouge">Diff</code> includes an <code class="language-plaintext highlighter-rouge">index</code> and a <code class="language-plaintext highlighter-rouge">size</code>. In this respect, it is similar to the Android DiffUtil implementation.</li>
+  <li>It uses an <a href="https://github.com/adithyaxx/animated-stream-list/blob/c5b3b17e8dd0b723e2b3777521924c272580c4bf/lib/src/myers_diff.dart#L5"><code class="language-plaintext highlighter-rouge">Equalizer</code></a> to customize the comparison.</li>
 </ul>
 
 <h2 id="angular">Angular</h2>
 
-<p>Angular has an <code class="highlighter-rouge">IterableDiffer</code> API that can be used to compute the diff between 2 Iterables. From what I can tell, it is not intended to be used directly by applications, instead it is used internally by the framework (for example, by the <code class="highlighter-rouge">NgForOf</code> directive). <a href="https://blog.mgechev.com/2017/11/14/angular-iterablediffer-keyvaluediffer-custom-differ-track-by-fn-performance/">This article</a> goes into the nuts and bolts of this API.</p>
+<p>Angular has an <code class="language-plaintext highlighter-rouge">IterableDiffer</code> API that can be used to compute the diff between 2 Iterables. From what I can tell, it is not intended to be used directly by applications, instead it is used internally by the framework (for example, by the <code class="language-plaintext highlighter-rouge">NgForOf</code> directive). <a href="https://blog.mgechev.com/2017/11/14/angular-iterablediffer-keyvaluediffer-custom-differ-track-by-fn-performance/">This article</a> goes into the nuts and bolts of this API.</p>
 
 <h4 id="example-2">Example</h4>
 
-<figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">const</span> <span class="nx">oldList</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">];</span>
-<span class="kd">const</span> <span class="nx">newList</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">];</span>
+<figure class="highlight"><pre><code class="language-typescript" data-lang="typescript"><span class="kd">const</span> <span class="nx">oldList</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">A</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">B</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">C</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">D</span><span class="dl">"</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">newList</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">A</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">B</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">D</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">E</span><span class="dl">"</span><span class="p">];</span>
 
 <span class="kd">const</span> <span class="nx">diffResult</span> <span class="o">=</span> <span class="nx">differ</span><span class="p">.</span><span class="nx">diff</span><span class="p">(</span><span class="nx">ngForOf</span><span class="p">);</span>
 <span class="c1">//diffResult consists of following IterableChangeRecords</span>
@@ -207,16 +206,16 @@
 <p>The interesting classes are</p>
 
 <ul>
-  <li><a href="https://angular.io/api/core/IterableDiffer"><code class="highlighter-rouge">IterableDiffer</code></a>: The entry point of the API. Offers the <code class="highlighter-rouge">diff</code> function</li>
-  <li><a href="https://angular.io/api/core/IterableChanges"><code class="highlighter-rouge">IterableChanges</code></a>: The diff result, which in itself is an Iterable</li>
-  <li><a href="https://angular.io/api/core/IterableChangeRecord"><code class="highlighter-rouge">IterableChangeRecord</code></a>: Each individual update operation</li>
+  <li><a href="https://angular.io/api/core/IterableDiffer"><code class="language-plaintext highlighter-rouge">IterableDiffer</code></a>: The entry point of the API. Offers the <code class="language-plaintext highlighter-rouge">diff</code> function</li>
+  <li><a href="https://angular.io/api/core/IterableChanges"><code class="language-plaintext highlighter-rouge">IterableChanges</code></a>: The diff result, which in itself is an Iterable</li>
+  <li><a href="https://angular.io/api/core/IterableChangeRecord"><code class="language-plaintext highlighter-rouge">IterableChangeRecord</code></a>: Each individual update operation</li>
 </ul>
 
-<p>The <code class="highlighter-rouge">IterableChanges</code> interface is pretty interesting: it exposes functions to iterate over the changes in a variety of ways (all updates, only additions, only removals etc). The <code class="highlighter-rouge">DefaultIterableDiffer</code> accepts a <code class="highlighter-rouge">TrackByFn</code> argument, which fulfils the role of Android’s <code class="highlighter-rouge">DiffUtil.Callback</code>.</p>
+<p>The <code class="language-plaintext highlighter-rouge">IterableChanges</code> interface is pretty interesting: it exposes functions to iterate over the changes in a variety of ways (all updates, only additions, only removals etc). The <code class="language-plaintext highlighter-rouge">DefaultIterableDiffer</code> accepts a <code class="language-plaintext highlighter-rouge">TrackByFn</code> argument, which fulfils the role of Android’s <code class="language-plaintext highlighter-rouge">DiffUtil.Callback</code>.</p>
 
-<p><code class="highlighter-rouge">IterableChangeRecord</code> is also interesting: It does not directly state the diff operation. Instead, it contains <code class="highlighter-rouge">currentIndex</code> and <code class="highlighter-rouge">previousIndex</code>. Together, these can be used to decide if an item was added, removed etc. It also fulfils the role of position conversion APIs in Android.</p>
+<p><code class="language-plaintext highlighter-rouge">IterableChangeRecord</code> is also interesting: It does not directly state the diff operation. Instead, it contains <code class="language-plaintext highlighter-rouge">currentIndex</code> and <code class="language-plaintext highlighter-rouge">previousIndex</code>. Together, these can be used to decide if an item was added, removed etc. It also fulfils the role of position conversion APIs in Android.</p>
 
-<p>In practice, you’d probably use the <code class="highlighter-rouge">IterableChanges</code> API to figure out the additions and removals.</p>
+<p>In practice, you’d probably use the <code class="language-plaintext highlighter-rouge">IterableChanges</code> API to figure out the additions and removals.</p>
 
 <h2 id="at-a-glance">At a glance</h2>
 
@@ -249,17 +248,17 @@
     </tr>
     <tr>
       <td>Custom comparison</td>
-      <td><code class="highlighter-rouge">DiffUtil.Callback</code></td>
-      <td><code class="highlighter-rouge">difference(from:by:)</code>, <code class="highlighter-rouge">Hashable</code></td>
-      <td><code class="highlighter-rouge">Equalizer</code></td>
-      <td><code class="highlighter-rouge">TrackByFn</code></td>
+      <td><code class="language-plaintext highlighter-rouge">DiffUtil.Callback</code></td>
+      <td><code class="language-plaintext highlighter-rouge">difference(from:by:)</code>, <code class="language-plaintext highlighter-rouge">Hashable</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Equalizer</code></td>
+      <td><code class="language-plaintext highlighter-rouge">TrackByFn</code></td>
     </tr>
     <tr>
       <td>Position conversion</td>
-      <td>Methods on <code class="highlighter-rouge">DiffResult</code></td>
+      <td>Methods on <code class="language-plaintext highlighter-rouge">DiffResult</code></td>
       <td>NA</td>
       <td>NA</td>
-      <td><code class="highlighter-rouge">IterableChangeRecord</code></td>
+      <td><code class="language-plaintext highlighter-rouge">IterableChangeRecord</code></td>
     </tr>
   </tbody>
 </table>
@@ -286,11 +285,11 @@
 
 <h2 id="conclusion">Conclusion</h2>
 
-<p>After my research for this post, I came to the conclusion that Android’s DiffUtil API is the most flexible of all. It is the lowest level API for exposing the diff operations (the <code class="highlighter-rouge">ListUpdateCallback</code>). All other platforms expose collection-style APIs for this purpose.</p>
+<p>After my research for this post, I came to the conclusion that Android’s DiffUtil API is the most flexible of all. It is the lowest level API for exposing the diff operations (the <code class="language-plaintext highlighter-rouge">ListUpdateCallback</code>). All other platforms expose collection-style APIs for this purpose.</p>
 
 <p>I reckon Android has this low-level API because it plays well together with RecyclerView Adapter API. One can write a wrapper to expose it as a collection-style API.</p>
 
-<p>That is exactly what we will do in the next post in this series: Look at an example situation where RecyclerView might not be best fit, and instead wrap the <code class="highlighter-rouge">ListUpdateCallback</code> to implement some custom UI.</p>
+<p>That is exactly what we will do in the next post in this series: Look at an example situation where RecyclerView might not be best fit, and instead wrap the <code class="language-plaintext highlighter-rouge">ListUpdateCallback</code> to implement some custom UI.</p>
 
     </div>
     

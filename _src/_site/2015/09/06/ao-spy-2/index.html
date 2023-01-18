@@ -28,26 +28,25 @@
 
       
 
-      <!-- Begin Jekyll SEO tag v2.1.0 -->
-<title>AO(sp)y Episode 2 - Lambdas - Curious Techizen</title>
+      <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>AO(sp)y Episode 2 - Lambdas | Curious Techizen</title>
+<meta name="generator" content="Jekyll v3.9.0" />
 <meta property="og:title" content="AO(sp)y Episode 2 - Lambdas" />
+<meta name="author" content="Kiran Rao" />
+<meta property="og:locale" content="en" />
 <meta name="description" content="This post is the second episode in a series where I peek into random commits on AOSP and try to predict what’s coming to the world of Android development." />
 <meta property="og:description" content="This post is the second episode in a series where I peek into random commits on AOSP and try to predict what’s coming to the world of Android development." />
 <link rel="canonical" href="https://kiranrao.in/blog/2015/09/06/ao-spy-2/" />
 <meta property="og:url" content="https://kiranrao.in/blog/2015/09/06/ao-spy-2/" />
 <meta property="og:site_name" content="Curious Techizen" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2015-09-06T00:00:00+02:00" />
+<meta property="article:published_time" content="2015-09-06T00:00:00-05:00" />
 <meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="AO(sp)y Episode 2 - Lambdas" />
 <meta name="twitter:site" content="@ki_run" />
-<meta name="twitter:creator" content="@{"name"=>"Kiran Rao", "url"=>"https://kiranrao.in"}" />
+<meta name="twitter:creator" content="@Kiran Rao" />
 <script type="application/ld+json">
-{"@context": "http://schema.org",
-"@type": "BlogPosting",
-"headline": "AO(sp)y Episode 2 - Lambdas",
-"datePublished": "2015-09-06T00:00:00+02:00",
-"description": "This post is the second episode in a series where I peek into random commits on AOSP and try to predict what’s coming to the world of Android development.",
-"url": "https://kiranrao.in/blog/2015/09/06/ao-spy-2/"}</script>
+{"description":"This post is the second episode in a series where I peek into random commits on AOSP and try to predict what’s coming to the world of Android development.","author":{"@type":"Person","name":"Kiran Rao"},"@type":"BlogPosting","url":"https://kiranrao.in/blog/2015/09/06/ao-spy-2/","headline":"AO(sp)y Episode 2 - Lambdas","dateModified":"2015-09-06T00:00:00-05:00","datePublished":"2015-09-06T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://kiranrao.in/blog/2015/09/06/ao-spy-2/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
       
@@ -107,7 +106,7 @@
   <article class="single-content" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="feat">
       <h5 class="page-date">
-        <time datetime="2015-09-06T00:00:00+02:00" itemprop="datePublished">
+        <time datetime="2015-09-06T00:00:00-05:00" itemprop="datePublished">
           06 September 2015
         </time>
       </h5>
@@ -140,14 +139,14 @@
   <li>Static methods in interfaces</li>
 </ul>
 
-<p>It does not look like there is any move to bring the enhancements to the runtime libraries in the form of new collections and <code class="highlighter-rouge">java.util.function</code> package to Android.</p>
+<p>It does not look like there is any move to bring the enhancements to the runtime libraries in the form of new collections and <code class="language-plaintext highlighter-rouge">java.util.function</code> package to Android.</p>
 
 <p>So, what’s cooking?</p>
 
 <p>###Runtime support
 Opcodes for creating and invoking lambdas are <a href="https://android-review.googlesource.com/#/c/147957/">being added</a> to the Dalvik bytecode (dex) format. The ART interpreter is <a href="https://android-review.googlesource.com/#/c/155661/">being updated</a> to be able to use these opcodes.</p>
 
-<p>The first of these commits also points to the <code class="highlighter-rouge">dex2oat</code> compiler being taught how to compile lambdas from your dex bytecode into the corresponding opcodes for OAT.</p>
+<p>The first of these commits also points to the <code class="language-plaintext highlighter-rouge">dex2oat</code> compiler being taught how to compile lambdas from your dex bytecode into the corresponding opcodes for OAT.</p>
 
 <p>What does all this mean? It means that <em>lambdas might be supported natively</em> in a future version of Android.</p>
 
@@ -158,17 +157,17 @@ Opcodes for creating and invoking lambdas are <a href="https://android-review.go
 There’s more to Java8 than just the lambda syntax. AOSP also has commits that hint at support for <a href="https://android-review.googlesource.com/#/c/169003/">default methods</a> and <a href="https://android-review.googlesource.com/#/c/158165/">Single Abstract Methods</a>. I did not find any obvious mention of method references, but that might be because I’m not looking hard enough. In any case, method references are just syntax sugar for lambdas so if lambda expressions are supported, so should method references.</p>
 
 <p>###Compatibility
-At first glance, one might conclude that lambdas will be used only if <code class="highlighter-rouge">minSdkVersion &gt;=</code> the version of Android in which they are introduced, and that Jack’s feature of down-compiling lambdas into Java7-compatible bytecode will be used in all other cases. This means that the runtime lambdas will not be used <em>even on the runtimes that support them unless <code class="highlighter-rouge">minSdkVersion</code> is set to the latest</em>. However, this is (more than) likely to negatively impact the adoption of lambdas.</p>
+At first glance, one might conclude that lambdas will be used only if <code class="language-plaintext highlighter-rouge">minSdkVersion &gt;=</code> the version of Android in which they are introduced, and that Jack’s feature of down-compiling lambdas into Java7-compatible bytecode will be used in all other cases. This means that the runtime lambdas will not be used <em>even on the runtimes that support them unless <code class="language-plaintext highlighter-rouge">minSdkVersion</code> is set to the latest</em>. However, this is (more than) likely to negatively impact the adoption of lambdas.</p>
 
 <p>So, what might be strategies to work around this? What follows is a <strong>wild guess</strong> as to how this might pan out. I haven’t dug in the source code into much (or … <em>any</em>) detail (not that I’d understand much of it even if I had, but that’s beside the point).</p>
 
-<p>Remember that <code class="highlighter-rouge">dex2oat</code> runs on the Android device. The APK file only has dex bytecode, and it is converted into OAT at installation time. Could this be used to enhance the compatibility story?</p>
+<p>Remember that <code class="language-plaintext highlighter-rouge">dex2oat</code> runs on the Android device. The APK file only has dex bytecode, and it is converted into OAT at installation time. Could this be used to enhance the compatibility story?</p>
 
-<p>Jack might use <code class="highlighter-rouge">targetSdkVersion</code> to decide whether to include lambdas in the compiled dex bytecode. If <code class="highlighter-rouge">targetSdkVersion &gt;=</code> the version in which lambda support is introduced, then the generated dex might <em>include</em> the Java8 bytecode. But wait, aren’t we back at square one? <code class="highlighter-rouge">dex2oat</code> is part of the Android OS and cannot (yet) be updated independently of the OS. This means that <code class="highlighter-rouge">dex2oat</code> that is running on an older version of the OS will not understand the new dex bytecode.</p>
+<p>Jack might use <code class="language-plaintext highlighter-rouge">targetSdkVersion</code> to decide whether to include lambdas in the compiled dex bytecode. If <code class="language-plaintext highlighter-rouge">targetSdkVersion &gt;=</code> the version in which lambda support is introduced, then the generated dex might <em>include</em> the Java8 bytecode. But wait, aren’t we back at square one? <code class="language-plaintext highlighter-rouge">dex2oat</code> is part of the Android OS and cannot (yet) be updated independently of the OS. This means that <code class="language-plaintext highlighter-rouge">dex2oat</code> that is running on an older version of the OS will not understand the new dex bytecode.</p>
 
-<p>This is why I say <em>include</em> Java8 opcodes instead of <em>generate</em> - that is to say, Jack might generate both the Java7-compatible byte code as well as new Java8 opcodes. Hopefully, <code class="highlighter-rouge">dex2oat</code> running on older versions of Android simply ignore the Java8 opcodes. But, what about the size implications of this arrangement? In lambda-heavy apps, will this result in bloated <code class="highlighter-rouge">.dex</code> files?</p>
+<p>This is why I say <em>include</em> Java8 opcodes instead of <em>generate</em> - that is to say, Jack might generate both the Java7-compatible byte code as well as new Java8 opcodes. Hopefully, <code class="language-plaintext highlighter-rouge">dex2oat</code> running on older versions of Android simply ignore the Java8 opcodes. But, what about the size implications of this arrangement? In lambda-heavy apps, will this result in bloated <code class="language-plaintext highlighter-rouge">.dex</code> files?</p>
 
-<p>The other option is that Jack might always generate Java7 compatible bytecode (compiles lambda expressions into anonymous inner classes), but it might include some sort of flag to indicate to <code class="highlighter-rouge">dex2oat</code> that these constructs be compiled into the corresponding Java8 OAT format. But this begs the question - what, then, is the point of the new opcodes in <code class="highlighter-rouge">.dex</code> format at all?</p>
+<p>The other option is that Jack might always generate Java7 compatible bytecode (compiles lambda expressions into anonymous inner classes), but it might include some sort of flag to indicate to <code class="language-plaintext highlighter-rouge">dex2oat</code> that these constructs be compiled into the corresponding Java8 OAT format. But this begs the question - what, then, is the point of the new opcodes in <code class="language-plaintext highlighter-rouge">.dex</code> format at all?</p>
 
 <p>I do not have the answers to these questions yet (nor does AOSP). But I’m sure the answers will reveal themselves in the days to come. If you are interested in this topic, you can follow the progress yourself at the following locations on AOSP:</p>
 

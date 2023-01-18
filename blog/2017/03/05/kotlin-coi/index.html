@@ -28,26 +28,25 @@
 
       
 
-      <!-- Begin Jekyll SEO tag v2.1.0 -->
-<title>Delegates - Composition over Inheritance in Kotlin - Curious Techizen</title>
+      <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Delegates - Composition over Inheritance in Kotlin | Curious Techizen</title>
+<meta name="generator" content="Jekyll v3.9.0" />
 <meta property="og:title" content="Delegates - Composition over Inheritance in Kotlin" />
+<meta name="author" content="Kiran Rao" />
+<meta property="og:locale" content="en" />
 <meta name="description" content="Using Kotlin’s interface delegation feature to replace inheritance with composition" />
 <meta property="og:description" content="Using Kotlin’s interface delegation feature to replace inheritance with composition" />
 <link rel="canonical" href="https://kiranrao.in/blog/2017/03/05/kotlin-coi/" />
 <meta property="og:url" content="https://kiranrao.in/blog/2017/03/05/kotlin-coi/" />
 <meta property="og:site_name" content="Curious Techizen" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2017-03-05T16:21:22+01:00" />
+<meta property="article:published_time" content="2017-03-05T09:21:22-06:00" />
 <meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Delegates - Composition over Inheritance in Kotlin" />
 <meta name="twitter:site" content="@ki_run" />
-<meta name="twitter:creator" content="@{"name"=>"Kiran Rao", "url"=>"https://kiranrao.in"}" />
+<meta name="twitter:creator" content="@Kiran Rao" />
 <script type="application/ld+json">
-{"@context": "http://schema.org",
-"@type": "BlogPosting",
-"headline": "Delegates - Composition over Inheritance in Kotlin",
-"datePublished": "2017-03-05T16:21:22+01:00",
-"description": "Using Kotlin’s interface delegation feature to replace inheritance with composition",
-"url": "https://kiranrao.in/blog/2017/03/05/kotlin-coi/"}</script>
+{"description":"Using Kotlin’s interface delegation feature to replace inheritance with composition","author":{"@type":"Person","name":"Kiran Rao"},"@type":"BlogPosting","url":"https://kiranrao.in/blog/2017/03/05/kotlin-coi/","headline":"Delegates - Composition over Inheritance in Kotlin","dateModified":"2017-03-05T09:21:22-06:00","datePublished":"2017-03-05T09:21:22-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://kiranrao.in/blog/2017/03/05/kotlin-coi/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
       
@@ -107,7 +106,7 @@
   <article class="single-content" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="feat">
       <h5 class="page-date">
-        <time datetime="2017-03-05T16:21:22+01:00" itemprop="datePublished">
+        <time datetime="2017-03-05T09:21:22-06:00" itemprop="datePublished">
           05 March 2017
         </time>
       </h5>
@@ -116,11 +115,11 @@
     <div itemprop="articleBody">
       <p>Joshua Bloch’s Effective Java Item 16 says “Favor composition over Inheritance”. The reasons for doing so are well-described in the book, so we will concentrate on the implementation aspects and how Kotlin helps.</p>
 
-<p>The idea behind composition is that if <code class="highlighter-rouge">class A</code> needs behavior defined in <code class="highlighter-rouge">class B</code>, then instead of inheriting from <code class="highlighter-rouge">class B</code>, it could have a member variable of <code class="highlighter-rouge">class B</code>. Then any behavior that <code class="highlighter-rouge">class A</code> would have achieved by calling a method on <code class="highlighter-rouge">super</code>, it achieves the same by calling that method on the member variable of type <code class="highlighter-rouge">class B</code> instead.</p>
+<p>The idea behind composition is that if <code class="language-plaintext highlighter-rouge">class A</code> needs behavior defined in <code class="language-plaintext highlighter-rouge">class B</code>, then instead of inheriting from <code class="language-plaintext highlighter-rouge">class B</code>, it could have a member variable of <code class="language-plaintext highlighter-rouge">class B</code>. Then any behavior that <code class="language-plaintext highlighter-rouge">class A</code> would have achieved by calling a method on <code class="language-plaintext highlighter-rouge">super</code>, it achieves the same by calling that method on the member variable of type <code class="language-plaintext highlighter-rouge">class B</code> instead.</p>
 
-<p>An example of this is seen in the book: The <code class="highlighter-rouge">InstrumentedSet</code> - first a broken implementation that uses <a href="https://github.com/marhan/effective-java-examples/blob/master/src/main/java/org/effectivejava/examples/chapter04/item16/InstrumentedHashSet.java">Inheritance</a>, and then corrects it <a href="https://github.com/marhan/effective-java-examples/blob/master/src/main/java/org/effectivejava/examples/chapter04/item16/ForwardingSet.java">using</a> <a href="https://github.com/marhan/effective-java-examples/blob/master/src/main/java/org/effectivejava/examples/chapter04/item16/InstrumentedSet.java">Composition</a>. When you use the composition pattern, the <strong>wrapper</strong> class simply forwards all method calls to an instance of the <strong>wrapped</strong> class.</p>
+<p>An example of this is seen in the book: The <code class="language-plaintext highlighter-rouge">InstrumentedSet</code> - first a broken implementation that uses <a href="https://github.com/marhan/effective-java-examples/blob/master/src/main/java/org/effectivejava/examples/chapter04/item16/InstrumentedHashSet.java">Inheritance</a>, and then corrects it <a href="https://github.com/marhan/effective-java-examples/blob/master/src/main/java/org/effectivejava/examples/chapter04/item16/ForwardingSet.java">using</a> <a href="https://github.com/marhan/effective-java-examples/blob/master/src/main/java/org/effectivejava/examples/chapter04/item16/InstrumentedSet.java">Composition</a>. When you use the composition pattern, the <strong>wrapper</strong> class simply forwards all method calls to an instance of the <strong>wrapped</strong> class.</p>
 
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ForwardingSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ForwardingSet</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="o">{</span>
 	
 	<span class="cm">/*
 	 * ForwardingSet is the wrapper class and it wraps the Set.
@@ -129,9 +128,9 @@
 	 * in order to adhere to the interface and not for inheritance. Set, being an interface, there is
 	 * no implementations in {@code super}!
 	 */</span>
-	<span class="kd">private</span> <span class="kd">final</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">;</span> 
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">;</span> 
 
-	<span class="kd">public</span> <span class="nf">ForwardingSet</span><span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nf">ForwardingSet</span><span class="o">(</span><span class="nc">Set</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">this</span><span class="o">.</span><span class="na">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span>
 	<span class="o">}</span>
 
@@ -139,7 +138,7 @@
 		<span class="n">s</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contains</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contains</span><span class="o">(</span><span class="nc">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
 	<span class="o">}</span>
 
@@ -151,44 +150,44 @@
 		<span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">Iterator</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="n">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="no">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">remove</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">remove</span><span class="o">(</span><span class="nc">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsAll</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">containsAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="n">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="no">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">removeAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">removeAll</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">removeAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">retainAll</span><span class="o">(</span><span class="n">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">retainAll</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">retainAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="n">Object</span><span class="o">[]</span> <span class="nf">toArray</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">Object</span><span class="o">[]</span> <span class="nf">toArray</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>
 	<span class="o">}</span>
 
-	<span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span><span class="o">[]</span> <span class="nf">toArray</span><span class="o">(</span><span class="n">T</span><span class="o">[]</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="no">T</span><span class="o">[]</span> <span class="nf">toArray</span><span class="o">(</span><span class="no">T</span><span class="o">[]</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">toArray</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>
 	<span class="o">}</span>
 
 	<span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>
 	<span class="o">}</span>
 
@@ -198,7 +197,7 @@
 	<span class="o">}</span>
 
 	<span class="nd">@Override</span>
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
 		<span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
 	<span class="o">}</span>
 <span class="o">}</span></code></pre></figure>
@@ -211,9 +210,9 @@
 
 <p>Enter Kotlin’s delegates. Here is the same example using Kotlin delegates.</p>
 
-<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"> <span class="k">open</span> <span class="kd">class</span> <span class="nc">ForwardingMutableSet</span><span class="p">&lt;</span><span class="n">E</span><span class="p">&gt;(</span><span class="n">s</span><span class="p">:</span> <span class="n">MutableSet</span><span class="p">&lt;</span><span class="n">E</span><span class="p">&gt;):</span> <span class="n">MutableSet</span><span class="p">&lt;</span><span class="n">E</span><span class="p">&gt;</span> <span class="k">by</span> <span class="n">s</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"> <span class="k">open</span> <span class="kd">class</span> <span class="nc">ForwardingMutableSet</span><span class="p">&lt;</span><span class="nc">E</span><span class="p">&gt;(</span><span class="n">s</span><span class="p">:</span> <span class="nc">MutableSet</span><span class="p">&lt;</span><span class="nc">E</span><span class="p">&gt;):</span> <span class="nc">MutableSet</span><span class="p">&lt;</span><span class="nc">E</span><span class="p">&gt;</span> <span class="k">by</span> <span class="n">s</span></code></pre></figure>
 
-<p>It really is as simple as that. The <code class="highlighter-rouge">by s</code> clause basically tells Kotlin to maintain an object of <code class="highlighter-rouge">MutableSet</code> and forward any applicable calls to that instance instead. And remember all this is done at compile time.</p>
+<p>It really is as simple as that. The <code class="language-plaintext highlighter-rouge">by s</code> clause basically tells Kotlin to maintain an object of <code class="language-plaintext highlighter-rouge">MutableSet</code> and forward any applicable calls to that instance instead. And remember all this is done at compile time.</p>
 
 <p>The complete example, including a simple unit test is hosted <a href="http://try.kotlinlang.org/#/UserProjects/r6h47rducuggpve5g1l4d2d8nd/on2i6nnt4armofoep69ch5qknk">here</a>. You can play around with it thanks to the awesome try.kotlinlang.org.</p>
 

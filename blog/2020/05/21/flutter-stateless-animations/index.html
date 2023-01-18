@@ -28,26 +28,25 @@
 
       
 
-      <!-- Begin Jekyll SEO tag v2.1.0 -->
-<title>Stateless widget animations in Flutter - Curious Techizen</title>
+      <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Stateless widget animations in Flutter | Curious Techizen</title>
+<meta name="generator" content="Jekyll v3.9.0" />
 <meta property="og:title" content="Stateless widget animations in Flutter" />
+<meta name="author" content="Kiran Rao" />
+<meta property="og:locale" content="en" />
 <meta name="description" content="Using Implicit animations in Flutter to animate stateless widgets" />
 <meta property="og:description" content="Using Implicit animations in Flutter to animate stateless widgets" />
 <link rel="canonical" href="https://kiranrao.in/blog/2020/05/21/flutter-stateless-animations/" />
 <meta property="og:url" content="https://kiranrao.in/blog/2020/05/21/flutter-stateless-animations/" />
 <meta property="og:site_name" content="Curious Techizen" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-05-21T21:00:00+02:00" />
+<meta property="article:published_time" content="2020-05-21T21:00:00-05:00" />
 <meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Stateless widget animations in Flutter" />
 <meta name="twitter:site" content="@ki_run" />
-<meta name="twitter:creator" content="@{"name"=>"Kiran Rao", "url"=>"https://kiranrao.in"}" />
+<meta name="twitter:creator" content="@Kiran Rao" />
 <script type="application/ld+json">
-{"@context": "http://schema.org",
-"@type": "BlogPosting",
-"headline": "Stateless widget animations in Flutter",
-"datePublished": "2020-05-21T21:00:00+02:00",
-"description": "Using Implicit animations in Flutter to animate stateless widgets",
-"url": "https://kiranrao.in/blog/2020/05/21/flutter-stateless-animations/"}</script>
+{"description":"Using Implicit animations in Flutter to animate stateless widgets","author":{"@type":"Person","name":"Kiran Rao"},"@type":"BlogPosting","url":"https://kiranrao.in/blog/2020/05/21/flutter-stateless-animations/","headline":"Stateless widget animations in Flutter","dateModified":"2020-05-21T21:00:00-05:00","datePublished":"2020-05-21T21:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://kiranrao.in/blog/2020/05/21/flutter-stateless-animations/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
       
@@ -107,7 +106,7 @@
   <article class="single-content" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="feat">
       <h5 class="page-date">
-        <time datetime="2020-05-21T21:00:00+02:00" itemprop="datePublished">
+        <time datetime="2020-05-21T21:00:00-05:00" itemprop="datePublished">
           21 May 2020
         </time>
       </h5>
@@ -128,7 +127,7 @@
 
 <p>In this post, we’re going to look at exactly that.</p>
 
-<p><strong>TL;DR:</strong> Within your Stateless widget, use an implicit animation (a widget that extend from <code class="highlighter-rouge">ImplicitlyAnimatedWidget</code>) to animate the properties you wish to.</p>
+<p><strong>TL;DR:</strong> Within your Stateless widget, use an implicit animation (a widget that extend from <code class="language-plaintext highlighter-rouge">ImplicitlyAnimatedWidget</code>) to animate the properties you wish to.</p>
 
 <p>This is the animation that we are going to build.</p>
 
@@ -140,11 +139,11 @@
   <li>A drop shadow for the background</li>
 </ol>
 
-<p>These properties are applied wrapping our content in a <code class="highlighter-rouge">DecoratedBox</code> widget, and applying these properties as a <code class="highlighter-rouge">BoxDecoration(color:, borderRadius:, boxShadow:[])</code></p>
+<p>These properties are applied wrapping our content in a <code class="language-plaintext highlighter-rouge">DecoratedBox</code> widget, and applying these properties as a <code class="language-plaintext highlighter-rouge">BoxDecoration(color:, borderRadius:, boxShadow:[])</code></p>
 
 <h2 id="starting-point-one-time-animation">Starting point: One-time animation</h2>
 
-<p>To start off, we’ll see how to achieve this as a one-time animation, without the tap handling. This requires us to create a <code class="highlighter-rouge">StatefulWidget</code>, provide an <code class="highlighter-rouge">AnimationController</code> and provide a tween. All this is pretty standard for making an animation in Flutter.</p>
+<p>To start off, we’ll see how to achieve this as a one-time animation, without the tap handling. This requires us to create a <code class="language-plaintext highlighter-rouge">StatefulWidget</code>, provide an <code class="language-plaintext highlighter-rouge">AnimationController</code> and provide a tween. All this is pretty standard for making an animation in Flutter.</p>
 
 <p>Here’s the tween definition</p>
 
@@ -166,7 +165,7 @@
     <span class="o">),</span>
   <span class="o">);</span></code></pre></figure>
 
-<p>And here’s how we use it inside of a <code class="highlighter-rouge">DecoratedBoxTransition</code></p>
+<p>And here’s how we use it inside of a <code class="language-plaintext highlighter-rouge">DecoratedBoxTransition</code></p>
 
 <figure class="highlight"><pre><code class="language-dart" data-lang="dart"><span class="k">return</span> <span class="nf">DecoratedBoxTransition</span><span class="p">(</span>
     <span class="nl">decoration:</span> <span class="n">decorationTween</span><span class="o">.</span><span class="na">animate</span><span class="o">(</span><span class="n">_controller</span><span class="o">),</span>
@@ -177,20 +176,20 @@
 
 <h2 id="toggling-between-states-on-tap">Toggling between states on tap</h2>
 
-<p>As the next step, we’ll introduce an <code class="highlighter-rouge">isSelected</code> state that we toggle when the user taps on our widget. This allows us to make the animation go forward/reverse depending on the state.</p>
+<p>As the next step, we’ll introduce an <code class="language-plaintext highlighter-rouge">isSelected</code> state that we toggle when the user taps on our widget. This allows us to make the animation go forward/reverse depending on the state.</p>
 
 <p>First, we introduce a bool field in our state class</p>
 
 <figure class="highlight"><pre><code class="language-dart" data-lang="dart"><span class="kt">bool</span> <span class="n">_isSelected</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span></code></pre></figure>
 
-<p>Then, in our <code class="highlighter-rouge">build</code> method we wrap our <code class="highlighter-rouge">DecoratedBoxTransition</code> in a <code class="highlighter-rouge">GestureDetector</code> to handle taps</p>
+<p>Then, in our <code class="language-plaintext highlighter-rouge">build</code> method we wrap our <code class="language-plaintext highlighter-rouge">DecoratedBoxTransition</code> in a <code class="language-plaintext highlighter-rouge">GestureDetector</code> to handle taps</p>
 
 <figure class="highlight"><pre><code class="language-dart" data-lang="dart"><span class="k">return</span> <span class="nf">GestureDetector</span><span class="p">(</span>
     <span class="nl">onTap:</span> <span class="n">_handleTap</span><span class="o">,</span>
     <span class="nl">child:</span> <span class="n">DecoratedBoxTransition</span><span class="o">(</span><span class="cm">/*Rest of the code as before*/</span><span class="o">),</span>
 <span class="o">);</span></code></pre></figure>
 
-<p>Finally, instead of starting the animation in <code class="highlighter-rouge">initState()</code>, we start the animation in either forward or reverse direction in <code class="highlighter-rouge">_handleTap</code>, depending on the <code class="highlighter-rouge">_isSelected</code> state. And of course, we need to update the state by calling <code class="highlighter-rouge">setState()</code></p>
+<p>Finally, instead of starting the animation in <code class="language-plaintext highlighter-rouge">initState()</code>, we start the animation in either forward or reverse direction in <code class="language-plaintext highlighter-rouge">_handleTap</code>, depending on the <code class="language-plaintext highlighter-rouge">_isSelected</code> state. And of course, we need to update the state by calling <code class="language-plaintext highlighter-rouge">setState()</code></p>
 
 <figure class="highlight"><pre><code class="language-dart" data-lang="dart">  <span class="kt">void</span> <span class="nf">_handleTap</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">_isSelected</span> <span class="o">?</span> <span class="n">_controller</span><span class="o">.</span><span class="na">reverse</span><span class="o">()</span> <span class="o">:</span> <span class="n">_controller</span><span class="o">.</span><span class="na">forward</span><span class="o">();</span>
@@ -203,9 +202,9 @@
 
 <h2 id="going-stateless">Going Stateless</h2>
 
-<p>The previous solutions both work, but what I really wanted was to make my widget stateless. The reason is that in my app, state is managed outside the widgets. When a user taps on a widget, it simply calls a <code class="highlighter-rouge">Function</code> that was passed to it. I have a different component in my architecture that updates the state and passes back the new <code class="highlighter-rouge">isSelected</code> to me.</p>
+<p>The previous solutions both work, but what I really wanted was to make my widget stateless. The reason is that in my app, state is managed outside the widgets. When a user taps on a widget, it simply calls a <code class="language-plaintext highlighter-rouge">Function</code> that was passed to it. I have a different component in my architecture that updates the state and passes back the new <code class="language-plaintext highlighter-rouge">isSelected</code> to me.</p>
 
-<p>So, can we just cheat and give the <code class="highlighter-rouge">DecoratedBoxTransition</code> only the end value so that it begins with whatever the current value is?</p>
+<p>So, can we just cheat and give the <code class="language-plaintext highlighter-rouge">DecoratedBoxTransition</code> only the end value so that it begins with whatever the current value is?</p>
 
 <figure class="highlight"><pre><code class="language-dart" data-lang="dart"><span class="c1">//Does NOT work - throws an exception</span>
 <span class="n">DecorationTween</span> <span class="n">decorationTween</span> <span class="o">=</span> <span class="n">DecorationTween</span><span class="o">(</span>
@@ -213,22 +212,22 @@
    <span class="c1">// Don't provide a begin</span>
 <span class="o">);</span></code></pre></figure>
 
-<p>Unfortunately, this does not work. <code class="highlighter-rouge">DecoratedBoxTransition</code> expects both <code class="highlighter-rouge">begin</code> and <code class="highlighter-rouge">end</code> to be not null. This is because <code class="highlighter-rouge">DecoratedBoxTransition</code> is not an <code class="highlighter-rouge">ImplicitlyAnimatedWidget</code>. Understanding this was a light bulb moment for me.</p>
+<p>Unfortunately, this does not work. <code class="language-plaintext highlighter-rouge">DecoratedBoxTransition</code> expects both <code class="language-plaintext highlighter-rouge">begin</code> and <code class="language-plaintext highlighter-rouge">end</code> to be not null. This is because <code class="language-plaintext highlighter-rouge">DecoratedBoxTransition</code> is not an <code class="language-plaintext highlighter-rouge">ImplicitlyAnimatedWidget</code>. Understanding this was a light bulb moment for me.</p>
 
 <p>To achieve what I want, what we really need is an implicit animation. Is there one that suits my needs? Indeed, there is.</p>
 
-<h3 id="enter-animatedcontainer">Enter, <code class="highlighter-rouge">AnimatedContainer</code>.</h3>
+<h3 id="enter-animatedcontainer">Enter, <code class="language-plaintext highlighter-rouge">AnimatedContainer</code>.</h3>
 
-<p><code class="highlighter-rouge">AnimatedContainer</code> is an <code class="highlighter-rouge">ImplicitlyAnimatedWidget</code> and it allows setting several properties of a child, including <code class="highlighter-rouge">constraints</code>, <code class="highlighter-rouge">paddding</code>, <code class="highlighter-rouge">margin</code> and, the one relevant for us: <code class="highlighter-rouge">decoration</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">AnimatedContainer</code> is an <code class="language-plaintext highlighter-rouge">ImplicitlyAnimatedWidget</code> and it allows setting several properties of a child, including <code class="language-plaintext highlighter-rouge">constraints</code>, <code class="language-plaintext highlighter-rouge">paddding</code>, <code class="language-plaintext highlighter-rouge">margin</code> and, the one relevant for us: <code class="language-plaintext highlighter-rouge">decoration</code>.</p>
 
-<p>So, all I had to do was replace <code class="highlighter-rouge">DecoratedBoxTransition</code> with <code class="highlighter-rouge">AnimatedContainer</code> and voila! My widget works exactly as I expect it to.</p>
+<p>So, all I had to do was replace <code class="language-plaintext highlighter-rouge">DecoratedBoxTransition</code> with <code class="language-plaintext highlighter-rouge">AnimatedContainer</code> and voila! My widget works exactly as I expect it to.</p>
 
-<p>Some relevant pieces of code: First, make the widget completely stateless by passing in the <code class="highlighter-rouge">isSelected</code> and a function to handle taps as constructor parameters:</p>
+<p>Some relevant pieces of code: First, make the widget completely stateless by passing in the <code class="language-plaintext highlighter-rouge">isSelected</code> and a function to handle taps as constructor parameters:</p>
 
 <figure class="highlight"><pre><code class="language-dart" data-lang="dart">  <span class="kd">final</span> <span class="kt">bool</span> <span class="n">isSelected</span><span class="o">;</span>
   <span class="kd">final</span> <span class="n">Function</span> <span class="n">onSelectionChanged</span><span class="o">;</span></code></pre></figure>
 
-<p>Then, in the build method, return an <code class="highlighter-rouge">AnimatedContainer</code>, passing in a <code class="highlighter-rouge">decoration</code> object that conditionally returns either an empty decoration or the one we want.</p>
+<p>Then, in the build method, return an <code class="language-plaintext highlighter-rouge">AnimatedContainer</code>, passing in a <code class="language-plaintext highlighter-rouge">decoration</code> object that conditionally returns either an empty decoration or the one we want.</p>
 
 <figure class="highlight"><pre><code class="language-dart" data-lang="dart">  <span class="nd">@override</span>
   <span class="n">Widget</span> <span class="n">build</span><span class="o">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
@@ -252,7 +251,7 @@
 
 <h3 id="gotchas">Gotchas</h3>
 
-<p>I was able to get away with using a Stateless widget in my case because there already existed an <code class="highlighter-rouge">ImplicitlyAnimatedWidget</code> that fulfils my needs. This might not always be the case, so you might end up needing to make your widget stateful anyway. If you are faced with this situation, you might also consider creating your own subclass of <code class="highlighter-rouge">ImplicitlyAnimatedWidget</code> to perform the animation - so that you can keep your actual widget stateless.</p>
+<p>I was able to get away with using a Stateless widget in my case because there already existed an <code class="language-plaintext highlighter-rouge">ImplicitlyAnimatedWidget</code> that fulfils my needs. This might not always be the case, so you might end up needing to make your widget stateful anyway. If you are faced with this situation, you might also consider creating your own subclass of <code class="language-plaintext highlighter-rouge">ImplicitlyAnimatedWidget</code> to perform the animation - so that you can keep your actual widget stateless.</p>
 
 <h2 id="conclusion">Conclusion</h2>
 
@@ -287,7 +286,7 @@
       </a>
     
     
-      <a rel="prev" href="/blog/2020/04/21/diff-animations-swiftui/" id="prev">
+      <a rel="prev" href="/blog/2020/03/31/gradle-missing-flavors/" id="prev">
         &larr; <span class="nav-title nav-title-prev">older</span>
       </a>
     

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js" prefix="og: http://ogp.me/ns#"> <!--<![endif]-->
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta http-equiv="content-language" content="en" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+      
+        <meta name="description" content="A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.">
+
+      
+
+      <title> Internationalization, In Spirit - Part 1 | Curious Techizen</title>
+      
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300,700italic|Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="/blog/css/main.css" />
+      <link href="https://kiranrao.in/blog/feed.xml" type="application/rss+xml" rel="alternate" title="RSS2.0">
+      <link rel="shortcut icon" href="/blog/favicon.ico">
+
+      
+        
+
+
+      
+
+      <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Internationalization, In Spirit - Part 1 | Curious Techizen</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Internationalization, In Spirit - Part 1" />
+<meta name="author" content="Kiran Rao" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="You’re watching an amazing program on Discovery. It is about some mind-boggling natural wonder - say, the Grand Canyon, or the Amazon .. or something of the sort. You watch (and hear) in awe, as the narrator unfolds the statistics of the phenomenon. And then, in a bid to impress upon you how big the structure really is, he says “It is [insert-some-number] feet long, that’s [insert-some-other-number] New York city blocks put together”.And you go, “How in the world am I supposed to know how big a block is?”. You feel anger and disappointment rising up in equal amounts. You start trying to figure out that calculation. You miss the next five minutes of the program. Before you know it, you’ve lost track, and interest.****************Rewind to networking class in your college days. You are studying the token ring algorithm. Your book explains the workings of the algorithm in detail, but every so often makes a reference to “token system in public service office counters”. Basically the book assumes that you are already amply familiar with this token-something-something system, whatever it is. Forget the book, the algorithm itself makes this assumption.Bad assumption, you say. You come from a country where there is hardly a concept of a queue, let alone tokens. You have a hard time grasping the concept. Worse, you begin hating that algorithm!****************Okay. I admit that was exaggerated. But the fact remains.Internationalization has gone from being a best practice to becoming an absolute requirement in most software applications.How widely a software is adopted is directly tied to how usable it is by people all over the planet. These days it is pretty standard for any application development framework (language/platform/stack) to provide techniques for developers to easily internationalize their applications. Display messages, units, currencies are all externalized from the code itself. Heck, developers don’t even write the display messages - that task is outsourced to translators.But, is this sufficient? Would people the world over be happy if their web app displayed messages in their language, Rupees instead of Dollars, and kilometres in place of miles? I think not. In this series of posts, I will present my argument on why I think the software world is still a far cry from being truly global.Stay tuned for Part 2 of this series, which will talk about cultural sensitivity." />
+<meta property="og:description" content="You’re watching an amazing program on Discovery. It is about some mind-boggling natural wonder - say, the Grand Canyon, or the Amazon .. or something of the sort. You watch (and hear) in awe, as the narrator unfolds the statistics of the phenomenon. And then, in a bid to impress upon you how big the structure really is, he says “It is [insert-some-number] feet long, that’s [insert-some-other-number] New York city blocks put together”.And you go, “How in the world am I supposed to know how big a block is?”. You feel anger and disappointment rising up in equal amounts. You start trying to figure out that calculation. You miss the next five minutes of the program. Before you know it, you’ve lost track, and interest.****************Rewind to networking class in your college days. You are studying the token ring algorithm. Your book explains the workings of the algorithm in detail, but every so often makes a reference to “token system in public service office counters”. Basically the book assumes that you are already amply familiar with this token-something-something system, whatever it is. Forget the book, the algorithm itself makes this assumption.Bad assumption, you say. You come from a country where there is hardly a concept of a queue, let alone tokens. You have a hard time grasping the concept. Worse, you begin hating that algorithm!****************Okay. I admit that was exaggerated. But the fact remains.Internationalization has gone from being a best practice to becoming an absolute requirement in most software applications.How widely a software is adopted is directly tied to how usable it is by people all over the planet. These days it is pretty standard for any application development framework (language/platform/stack) to provide techniques for developers to easily internationalize their applications. Display messages, units, currencies are all externalized from the code itself. Heck, developers don’t even write the display messages - that task is outsourced to translators.But, is this sufficient? Would people the world over be happy if their web app displayed messages in their language, Rupees instead of Dollars, and kilometres in place of miles? I think not. In this series of posts, I will present my argument on why I think the software world is still a far cry from being truly global.Stay tuned for Part 2 of this series, which will talk about cultural sensitivity." />
+<link rel="canonical" href="https://kiranrao.in/blog/2012/03/09/internationalization-in-spirit/" />
+<meta property="og:url" content="https://kiranrao.in/blog/2012/03/09/internationalization-in-spirit/" />
+<meta property="og:site_name" content="Curious Techizen" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2012-03-09T22:08:00-06:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Internationalization, In Spirit - Part 1" />
+<meta name="twitter:site" content="@ki_run" />
+<meta name="twitter:creator" content="@Kiran Rao" />
+<script type="application/ld+json">
+{"description":"You’re watching an amazing program on Discovery. It is about some mind-boggling natural wonder - say, the Grand Canyon, or the Amazon .. or something of the sort. You watch (and hear) in awe, as the narrator unfolds the statistics of the phenomenon. And then, in a bid to impress upon you how big the structure really is, he says “It is [insert-some-number] feet long, that’s [insert-some-other-number] New York city blocks put together”.And you go, “How in the world am I supposed to know how big a block is?”. You feel anger and disappointment rising up in equal amounts. You start trying to figure out that calculation. You miss the next five minutes of the program. Before you know it, you’ve lost track, and interest.****************Rewind to networking class in your college days. You are studying the token ring algorithm. Your book explains the workings of the algorithm in detail, but every so often makes a reference to “token system in public service office counters”. Basically the book assumes that you are already amply familiar with this token-something-something system, whatever it is. Forget the book, the algorithm itself makes this assumption.Bad assumption, you say. You come from a country where there is hardly a concept of a queue, let alone tokens. You have a hard time grasping the concept. Worse, you begin hating that algorithm!****************Okay. I admit that was exaggerated. But the fact remains.Internationalization has gone from being a best practice to becoming an absolute requirement in most software applications.How widely a software is adopted is directly tied to how usable it is by people all over the planet. These days it is pretty standard for any application development framework (language/platform/stack) to provide techniques for developers to easily internationalize their applications. Display messages, units, currencies are all externalized from the code itself. Heck, developers don’t even write the display messages - that task is outsourced to translators.But, is this sufficient? Would people the world over be happy if their web app displayed messages in their language, Rupees instead of Dollars, and kilometres in place of miles? I think not. In this series of posts, I will present my argument on why I think the software world is still a far cry from being truly global.Stay tuned for Part 2 of this series, which will talk about cultural sensitivity.","author":{"@type":"Person","name":"Kiran Rao"},"@type":"BlogPosting","url":"https://kiranrao.in/blog/2012/03/09/internationalization-in-spirit/","headline":"Internationalization, In Spirit - Part 1","dateModified":"2012-03-09T22:08:00-06:00","datePublished":"2012-03-09T22:08:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://kiranrao.in/blog/2012/03/09/internationalization-in-spirit/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+      
+      <script>if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"curioustechizen",utcoffset:"1"}))};sessionStorage.setItem("_swa","1");</script>
+      <meta name="google-site-verification" content="H8RGMD_f_siP2w-pSgSovLpeKIMac--hZGy47rZWoUM" />
+  </head>
+
+  <body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="off-canvas">
+      <figure class="avatar">
+        <img src="/blog/assets/img/avatar.jpg" alt="Picture" title="That's me, {"name"=>"Kiran Rao", "url"=>"https://kiranrao.in"}.">
+      </figure>
+      <div class="bio">
+          <h1>Hi, I'm {"name"=>"Kiran Rao", "url"=>"https://kiranrao.in"}.</h1>
+          <p>Android Developer. Tech enthusiast. Serial dabbler.</p>
+      </div>
+      <nav>
+        <h6>Follow me on</h6>
+        <ul>
+          
+          <li><a target="_blank" href="http://twitter.com/ki_run">Twitter</a></li>
+          
+          
+          <li><a target="_blank" href="https://github.com/curioustechizen">Github</a></li>
+          
+          
+          
+          
+          <li><a target="_blank" href="https://plus.google.com/116652261752707476836">Google+</a></li>
+          
+        </ul>
+      </nav>
+      <nav>
+        <h6>Link</h6>
+        <ul>
+          <li><a href="/blog/">Home</a></li>
+          <li><a href="/blog/tags/">Tags</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-wrapper">
+
+      <header>
+        <div class="h-wrap">
+          <h1 class="title"><a href="/blog/" title="Back to Homepage">Curious Techizen</a></h1>
+          <a class="menu-icon" title="Open Bio"><span class="lines"></span></a>
+        </div>
+      </header>
+
+      <main>
+        <section class="single-wrap">
+  <article class="single-content" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="feat">
+      <h5 class="page-date">
+        <time datetime="2012-03-09T22:08:00-06:00" itemprop="datePublished">
+          09 March 2012
+        </time>
+      </h5>
+    </div>
+    <h1 class="page-title" itemprop="name headline">Internationalization, In Spirit - Part 1</h1>
+    <div itemprop="articleBody">
+      <div dir="ltr" style="text-align: left;" trbidi="on"><style type="text/css"> <!--   @page { margin: 0.79in }   P { margin-bottom: 0.08in }  -->  </style>  <br /><div align="JUSTIFY" class="western" style="line-height: 150%; margin-bottom: 0in;"><a href="http://www.blogger.com/blogger.g?blogID=1898571694993659507" name="internal-source-marker_0.7259663810191946"></a><br /><span style="color: black;"><span style="text-decoration: none;"><span style="font-family: Arial;"><span style="font-size: small;"><span style="font-style: normal;"><span style="font-weight: normal;"><span style="background: none repeat scroll 0% 0% transparent;">You’re watching an amazing program on Discovery. It is about some mind-boggling natural wonder - say, the Grand Canyon, or the Amazon .. or something of the sort. You watch (and hear) in awe, as the narrator unfolds the statistics of the phenomenon. And then, in a bid to impress upon you how big the structure really is, he says “It is [insert-some-number] feet long, that’s [insert-some-other-number] New York city blocks put together”.</span></span></span></span></span></span></span></div><div align="JUSTIFY" class="western" style="line-height: 150%;"><br /></div><div align="JUSTIFY" class="western" style="font-style: normal; font-weight: normal; line-height: 150%; margin-bottom: 0in; text-decoration: none;"><span style="color: black;"><span style="font-family: Arial;"><span style="font-size: small;"><span style="background: none repeat scroll 0% 0% transparent;">And you go, “How in the world am I supposed to know how big a block is?”. You feel anger and disappointment rising up in equal amounts. You start trying to figure out that calculation. You miss the next five minutes of the program. Before you know it, you’ve lost track, and interest.</span></span></span></span></div><div align="JUSTIFY" class="western" style="line-height: 150%;"><br /></div><div align="CENTER" class="western" style="font-style: normal; font-weight: normal; line-height: 150%; margin-bottom: 0in; text-decoration: none;"><span style="color: black;"><span style="font-family: Arial;"><span style="font-size: small;"><span style="background: none repeat scroll 0% 0% transparent;">****************</span></span></span></span></div><div align="JUSTIFY" class="western" style="line-height: 150%;"><br /></div><div align="JUSTIFY" class="western" style="font-style: normal; font-weight: normal; line-height: 150%; margin-bottom: 0in; text-decoration: none;"><span style="color: black;"><span style="font-family: Arial;"><span style="font-size: small;"><span style="background: none repeat scroll 0% 0% transparent;">Rewind to networking class in your college days. You are studying the token ring algorithm. Your book explains the workings of the algorithm in detail, but every so often makes a reference to “token system in public service office counters”. Basically the book assumes that you are already amply familiar with this token-something-something system, whatever it is. Forget the book, the algorithm itself makes this assumption.</span></span></span></span></div><div align="JUSTIFY" class="western" style="line-height: 150%;"><br /></div><div align="JUSTIFY" class="western" style="font-style: normal; font-weight: normal; line-height: 150%; margin-bottom: 0in; text-decoration: none;"><span style="color: black;"><span style="font-family: Arial;"><span style="font-size: small;"><span style="background: none repeat scroll 0% 0% transparent;">Bad assumption, you say. You come from a country where there is hardly a concept of a queue, let alone tokens. You have a hard time grasping the concept. Worse, you begin hating that algorithm!</span></span></span></span></div><div align="JUSTIFY" class="western" style="line-height: 150%;"><br /></div><div align="CENTER" class="western" style="font-style: normal; font-weight: normal; line-height: 150%; margin-bottom: 0in; text-decoration: none;"><span style="color: black;"><span style="font-family: Arial;"><span style="font-size: small;"><span style="background: none repeat scroll 0% 0% transparent;">****************</span></span></span></span></div><div align="JUSTIFY" class="western" style="line-height: 150%;"><br /></div><div align="JUSTIFY" class="western" style="font-style: normal; font-weight: normal; line-height: 150%; margin-bottom: 0in; text-decoration: none;"><span style="color: black;"><span style="font-family: Arial;"><span style="font-size: small;"><span style="background: none repeat scroll 0% 0% transparent;">Okay. I admit that was exaggerated. But the fact remains.</span></span></span></span></div><div align="JUSTIFY" class="western" style="line-height: 150%;"><br /></div><div align="JUSTIFY" class="western" style="line-height: 150%; margin-bottom: 0in;"><span style="color: black;"><span style="text-decoration: none;"><span style="font-family: Arial;"><span style="font-size: small;"><span style="font-style: normal;"><span style="font-weight: normal;"><span style="background: none repeat scroll 0% 0% transparent;">Internationalization has gone from being a best practice to becoming an absolute requirement in most software applications.</span></span></span></span></span></span></span><span style="color: black;"><span style="text-decoration: none;"><span style="background: none repeat scroll 0% 0% transparent;"></span></span></span><span style="color: black;"><span style="text-decoration: none;"><span style="font-family: Arial;"><span style="font-size: small;"><i><b><span style="background: none repeat scroll 0% 0% transparent;">How widely a software is adopted is directly tied to how usable it is by people all over the planet</span></b></i></span></span></span></span><span style="color: black;"><span style="text-decoration: none;"><span style="font-family: Arial;"><span style="font-size: small;"><span style="font-style: normal;"><span style="font-weight: normal;"><span style="background: none repeat scroll 0% 0% transparent;">. </span></span></span></span></span></span></span></div><div align="JUSTIFY" class="western" style="line-height: 150%;"><br /></div><div align="JUSTIFY" class="western" style="font-style: normal; font-weight: normal; line-height: 150%; margin-bottom: 0in; text-decoration: none;"><span style="color: black;"><span style="font-family: Arial;"><span style="font-size: small;"><span style="background: none repeat scroll 0% 0% transparent;">These days it is pretty standard for any application development framework (language/platform/stack) to provide techniques for developers to easily internationalize their applications. Display messages, units, currencies are all externalized from the code itself. Heck, developers don’t even write the display messages - that task is outsourced to translators.</span></span></span></span></div><div align="JUSTIFY" class="western" style="line-height: 150%;"><br /></div><div align="JUSTIFY" class="western" style="font-style: normal; font-weight: normal; line-height: 150%; margin-bottom: 0in; text-decoration: none;"><span style="color: black;"><span style="font-family: Arial;"><span style="font-size: small;"><span style="background: none repeat scroll 0% 0% transparent;">But, is this sufficient? Would people the world over be happy if their web app displayed messages in their language, Rupees instead of Dollars, and kilometres in place of miles? I think not. In this series of posts, I will present my argument on why I think the software world is still a far cry from being truly global.</span></span></span></span></div><div align="JUSTIFY" class="western" style="line-height: 150%;"><br /><br /></div><div align="JUSTIFY" class="western" style="font-style: normal; font-weight: normal; line-height: 150%; margin-bottom: 0in; text-decoration: none;"><span style="color: black;"><span style="font-family: Arial;"><span style="font-size: small;"><span style="background: none repeat scroll 0% 0% transparent;">Stay tuned for Part 2 of this series, which will talk about cultural sensitivity.</span></span></span></span></div><div align="JUSTIFY" class="western" style="line-height: 150%;"><br /><br /><br /></div></div>
+    </div>
+    
+    <div class="page-tags">
+      <ul>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">global</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">software-design</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">i18n</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">l10n</a>
+          
+        </li>
+        
+      </ul>
+    </div>
+    
+    <h6 class="back-to-top"><a href="#top">Back to Top</a></h6>
+    
+      <a rel="next" href="/blog/2012/03/19/override-and-debug/" id="next">
+        <span class="nav-title nav-title-next">newer</span> &rarr;
+      </a>
+    
+    
+      <a rel="prev" href="/blog/2012/02/03/testing-template/" id="prev">
+        &larr; <span class="nav-title nav-title-prev">older</span>
+      </a>
+    
+  </article>
+  
+</section>
+
+      </main>
+
+      <footer>
+        <medium><strong>Disclaimer:</strong> This is a personal blog. The opinions expressed here are my own and do not reflect those of my employer, relatives or any other person or entity.</medium>
+        <br><br>
+        <small>Powered by Jekyll - Theme: <a href="https://github.com/ogaclejapan/materi-for-jekyll">materi</a> - &copy; ogaclejapan</small>
+      </footer>
+
+    </div>
+    
+
+    <script src="/blog/js/main.js"></script>
+    
+    
+  </body>
+</html>

@@ -5,9 +5,91 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>https://kiranrao.in/blog/</link>
     <atom:link href="https://kiranrao.in/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 04 Dec 2021 12:04:29 +0100</pubDate>
-    <lastBuildDate>Sat, 04 Dec 2021 12:04:29 +0100</lastBuildDate>
-    <generator>Jekyll v3.3.1</generator>
+    <pubDate>Wed, 18 Jan 2023 08:01:33 -0600</pubDate>
+    <lastBuildDate>Wed, 18 Jan 2023 08:01:33 -0600</lastBuildDate>
+    <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>Framework laptop: A game-changer in sustainable electronics</title>
+        <description>&lt;p&gt;This post is the first in a series of businesses that are positive and sustainable. With this series, I want to show that it is possible for for-profit businesses to be ethical and sustainable.&lt;/p&gt;
+
+&lt;h2 id=&quot;about-framework&quot;&gt;About Framework&lt;/h2&gt;
+
+&lt;p&gt;In case you hadn’t heard of it already, &lt;a href=&quot;https://frame.work/about&quot;&gt;Framework&lt;/a&gt; is a laptop company that sells upgradable laptops. There already &lt;a href=&quot;https://www.youtube.com/watch?v=0rkTgPt3M4k&quot;&gt;exist&lt;/a&gt; &lt;a href=&quot;https://www.youtube.com/watch?v=jmgBwMHpP1w&quot;&gt;several&lt;/a&gt; &lt;a href=&quot;https://www.pcmag.com/reviews/framework-laptop&quot;&gt;reviews&lt;/a&gt; of the Framework laptop online so this post will not go into all the details.&lt;/p&gt;
+
+&lt;p&gt;Their mission is to fix consumer electronics. Specifically to make consumer electronics more sustainable. Does the laptop deliver on this promise? Let’s find out.I have been using a Framework laptop as my primary (and only) device since April 2022. This post is my honest review.&lt;/p&gt;
+
+&lt;h2 id=&quot;my-laptop-specs&quot;&gt;My laptop specs&lt;/h2&gt;
+
+&lt;p&gt;Here are some highlights of the configuration that I opted for&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I went for the DIY edition - that saved me about €200&lt;/li&gt;
+  &lt;li&gt;11th Gen Intel® Core™ i7&lt;/li&gt;
+  &lt;li&gt;64GB RAM&lt;/li&gt;
+  &lt;li&gt;A bunch of expansion cards (USB-A and C, HDMI, DP etc)&lt;/li&gt;
+  &lt;li&gt;I purchased the Windows 10 Home Edition but never installed it (been using Fedora Linux since day 1)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-good-so-far&quot;&gt;The Good so far&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The initial DIY setup experience was great. I was stuck at one point while inserting the RAM but Framework has an amazing community. It took me no time to find the solution.&lt;/li&gt;
+  &lt;li&gt;Performance is pretty good. I don’t have a MacBook to compare with but in general I don’t have problems with IDE usage or build speeds&lt;/li&gt;
+  &lt;li&gt;Fingerprint reader works with Linux out of the box&lt;/li&gt;
+  &lt;li&gt;Hardware switches for camera and mic are welcome. I never knew I needed them until I had them.&lt;/li&gt;
+  &lt;li&gt;Having the flexibility of slotting in any expansion card has been really useful. I was having trouble with USB-A ports and ADB. I then switched to a USB-C port and got a USB-C to USB-A hub and that solved the problem for me.&lt;/li&gt;
+  &lt;li&gt;Extremely light weight (I’m migrating from a ThinkPad T460P so you can imagine the difference). However, I barely use it as a laptop itself (see the cons below).&lt;/li&gt;
+  &lt;li&gt;I somehow managed to get ants attracted to the laptop (they had even laid eggs near the fan). I know. I know. Long story. However, the point is, it was trivial for me to get rid of them. Framework ships with a single screwdriver which was all I needed to do this repair work. Can you imagine if this had happened to your MacBook Pro?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-bad-so-far&quot;&gt;The Bad so far&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Battery life is not as good as I would have expected. This is not a big deal for me because 99% of the time I use it plugged to the power.&lt;/li&gt;
+  &lt;li&gt;I’m not finding it easy getting used to the 3:2 aspect ratio. This is also not a big deal for me since for an overwhelming majority of the time, I use an external monitor.&lt;/li&gt;
+  &lt;li&gt;Build quality itself is not the bestest out there (that said, I would say that the quality is absolutely good for the price).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-ugly-so-far&quot;&gt;The Ugly so far&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I’ve had some intermediate issues with freezes and such; but it turned out they were related to Fedora Linux and the kernel. Right now, all of these issues have been fixed.&lt;/li&gt;
+  &lt;li&gt;I purchased the laptop while I was in EU, but now I’m in India. At the time of this writing, Framework does not ship to India. So, if I need any accessories or support, I will be in a spot of trouble.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;beyond-my-personal-experience&quot;&gt;Beyond my personal experience&lt;/h2&gt;
+
+&lt;p&gt;It is no secret how that trillion-dollar company that shall not be named became a trillion-dollar company: By forcing you to upgrade your electronics even when it was not needed. By poisoning the environment through e-waste. It is no secret that $BIGTECH wants you to believe that this is the only way to run the electronics industry.&lt;/p&gt;
+
+&lt;p&gt;Framework set out to prove $BIGTECH wrong. That it is possible to make electronics that are sustainable. That you don’t need to throw out your old device after 2 years and buy a new one.&lt;/p&gt;
+
+&lt;p&gt;In my opinion, Framework has taken a solid first step. The fact that they embarked on this endeavour &lt;em&gt;before&lt;/em&gt; the various Right-To-Repair laws came into effect speaks for their vision. Other companies &lt;em&gt;cough&lt;/em&gt; &lt;em&gt;cough&lt;/em&gt; Gravity-Fruit-Company &lt;em&gt;cough&lt;/em&gt; were forced to introduce some semblance of repairability by regulators. Framework, on the other hand, started with it as a core tenet.&lt;/p&gt;
+
+&lt;p&gt;I’m also confident about the sustainability of the business model itself. Framework has already released an upgrade (2nd Gen) and it has a thriving marketplace.&lt;/p&gt;
+
+&lt;p&gt;And here’s the reason why I feel that Framework is a game-changer: The success of the Framework laptop is bound to catalyze the entire industry. More products, more categories. It is also bound to force the incumbents to start offering similar products. This has already happened, with Dell announcing a repairable laptop.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;All in all I do experience some pain points with my Framework laptop, but overall I find myself very productive with this laptop. It was a bold step to use this as my only laptop since as a developer it is my bread and butter; but I don’t regret my decision. That last sentence bears repeating:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;It was a bold step to use Framework as my only laptop since as a developer it is my bread and butter; but I don’t regret my decision.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Beyond my personal experience, I have no doubt in my mind that Framework will prove to be a turning point in the sustainable electronics industry.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 17 Jan 2023 10:00:00 -0600</pubDate>
+        <link>https://kiranrao.in/blog/2023/01/17/framework-laptop-owner-review/</link>
+        <guid isPermaLink="true">https://kiranrao.in/blog/2023/01/17/framework-laptop-owner-review/</guid>
+        
+        <category>sustainable</category>
+        
+        <category>reviews</category>
+        
+        
+      </item>
     
       <item>
         <title>Effectively using slots in Jetpack Compose</title>
@@ -29,39 +111,39 @@
 
 &lt;p&gt;Here is how one might implement it (&lt;a href=&quot;https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/ui/components/MainScreen.kt#L14-L34&quot;&gt;GitHub source&lt;/a&gt;):&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;n&quot;&gt;@Composable&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MainScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isWideScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@Composable&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MainScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isWideScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isWideScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fillMaxHeight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.65f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;BookList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;fillMaxHeight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.65f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nc&quot;&gt;BookList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
                     &lt;span class=&quot;n&quot;&gt;books&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
                     &lt;span class=&quot;n&quot;&gt;onBookAdded&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
                 &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.35f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;ShoppingCart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.35f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nc&quot;&gt;ShoppingCart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;BottomSheetScaffold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;sheetContent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ShoppingCart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;BottomSheetScaffold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;sheetContent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ShoppingCart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;BookList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;books&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;onBookAdded&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{})&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;BookList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;books&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;onBookAdded&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{})&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;MainScreen&lt;/code&gt; composable receives the the &lt;a href=&quot;https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/data/MainScreenModel.kt&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MainScreenModel&lt;/code&gt;&lt;/a&gt; as a parameter, and it passes pieces of this data to child composables:&lt;/p&gt;
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MainScreen&lt;/code&gt; composable receives the the &lt;a href=&quot;https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/data/MainScreenModel.kt&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MainScreenModel&lt;/code&gt;&lt;/a&gt; as a parameter, and it passes pieces of this data to child composables:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;books&lt;/code&gt; property, which is a &lt;code class=&quot;highlighter-rouge&quot;&gt;List&amp;lt;BookModel&amp;gt;&lt;/code&gt;, is passed to the &lt;code class=&quot;highlighter-rouge&quot;&gt;BookList&lt;/code&gt; composable&lt;/li&gt;
-  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;shoppingCartModel&lt;/code&gt; property is passed to the &lt;code class=&quot;highlighter-rouge&quot;&gt;ShoppingCart&lt;/code&gt; composable.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;books&lt;/code&gt; property, which is a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;List&amp;lt;BookModel&amp;gt;&lt;/code&gt;, is passed to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BookList&lt;/code&gt; composable&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;shoppingCartModel&lt;/code&gt; property is passed to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ShoppingCart&lt;/code&gt; composable.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;The &lt;a href=&quot;https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/MainActivity.kt#L24&quot;&gt;call site&lt;/a&gt; is straightforward:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;n&quot;&gt;MainScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mainScreenModel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sampleMainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;nc&quot;&gt;MainScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mainScreenModel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sampleMainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;In this simple example, it doesn’t look all that bad. However, it starts getting tedious when your MainScreen needs to pass that the same model (and callback lambdas) further down the tree.&lt;/p&gt;
 
@@ -70,56 +152,56 @@
 &lt;p&gt;If a Composable accepts another Composable as a parameter, then that parameter is called a slot. Many core composables are designed this way:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;All the basic layouts like &lt;code class=&quot;highlighter-rouge&quot;&gt;Row&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Column&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Box&lt;/code&gt; accept a &lt;code class=&quot;highlighter-rouge&quot;&gt;content&lt;/code&gt; parameter that is a Composable lambda.&lt;/li&gt;
-  &lt;li&gt;Components like &lt;code class=&quot;highlighter-rouge&quot;&gt;Button&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Card&lt;/code&gt; do the same.&lt;/li&gt;
-  &lt;li&gt;More advanced components like Scaffolds accept multiple composable lambdas for different sections of the scaffold. For example, &lt;a href=&quot;https://cs.android.com/androidx/platform/tools/dokka-devsite-plugin/+/master:testData/compose/source/androidx/compose/material/BottomSheetScaffold.kt;l=259;drc=6fed3de7a56143de954d55e508a7449deb9af582&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;BottomSheetScaffold&lt;/code&gt;&lt;/a&gt; has five(!!) slots for the &lt;code class=&quot;highlighter-rouge&quot;&gt;sheetContent&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;drawerContent&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;snackbarHost&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;floatingActionButton&lt;/code&gt; and the &lt;code class=&quot;highlighter-rouge&quot;&gt;content&lt;/code&gt; itself.&lt;/li&gt;
+  &lt;li&gt;All the basic layouts like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Row&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Column&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Box&lt;/code&gt; accept a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;content&lt;/code&gt; parameter that is a Composable lambda.&lt;/li&gt;
+  &lt;li&gt;Components like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Button&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Card&lt;/code&gt; do the same.&lt;/li&gt;
+  &lt;li&gt;More advanced components like Scaffolds accept multiple composable lambdas for different sections of the scaffold. For example, &lt;a href=&quot;https://cs.android.com/androidx/platform/tools/dokka-devsite-plugin/+/master:testData/compose/source/androidx/compose/material/BottomSheetScaffold.kt;l=259;drc=6fed3de7a56143de954d55e508a7449deb9af582&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BottomSheetScaffold&lt;/code&gt;&lt;/a&gt; has five(!!) slots for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sheetContent&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;drawerContent&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;snackbarHost&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;floatingActionButton&lt;/code&gt; and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;content&lt;/code&gt; itself.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Let’s change our MainScreen composable to accept slots. Here’s the signature:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;n&quot;&gt;@Composable&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@Composable&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MainScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;shoppingCartContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;@Composable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Unit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;booksContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;@Composable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Unit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;isWideScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;shoppingCartContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@Composable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Unit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;booksContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@Composable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Unit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;isWideScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;What we’ve done here is to accept two Composables as parameters, one each for the shopping cart section and the books list section. Now the &lt;a href=&quot;https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/ui/components/MainScreen.kt#L37-L57&quot;&gt;implementation changes to this&lt;/a&gt;:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;n&quot;&gt;@Composable&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@Composable&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MainScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;shoppingCartContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;@Composable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Unit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;booksContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;@Composable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Unit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;isWideScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;shoppingCartContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@Composable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Unit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;booksContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@Composable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Unit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;isWideScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Boolean&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isWideScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fillMaxHeight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.65f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;booksContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;fillMaxHeight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.65f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nf&quot;&gt;booksContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.35f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;n&quot;&gt;shoppingCartContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Modifier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.35f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nf&quot;&gt;shoppingCartContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;BottomSheetScaffold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sheetContent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shoppingCartContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;booksContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;BottomSheetScaffold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sheetContent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;shoppingCartContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nf&quot;&gt;booksContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Note that now the &lt;code class=&quot;highlighter-rouge&quot;&gt;MainScreen&lt;/code&gt; composable does not pass along &lt;em&gt;any&lt;/em&gt; data parameters at all. It now has the focused responsibility of dealing with the layout rather than also having to forward parameters. It only receives parameters that it uses directly (&lt;code class=&quot;highlighter-rouge&quot;&gt;isWideScreen&lt;/code&gt;). The slots it receives are opaque to it and it does not need to know what parameters they need or what callback lambdas they offer.&lt;/p&gt;
+&lt;p&gt;Note that now the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MainScreen&lt;/code&gt; composable does not pass along &lt;em&gt;any&lt;/em&gt; data parameters at all. It now has the focused responsibility of dealing with the layout rather than also having to forward parameters. It only receives parameters that it uses directly (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;isWideScreen&lt;/code&gt;). The slots it receives are opaque to it and it does not need to know what parameters they need or what callback lambdas they offer.&lt;/p&gt;
 
-&lt;p&gt;Also note that if you change the signature of either &lt;code class=&quot;highlighter-rouge&quot;&gt;BookList&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;ShoppingCart&lt;/code&gt; (add, remove, reorder parameters), &lt;code class=&quot;highlighter-rouge&quot;&gt;MainScreen&lt;/code&gt; does not need to change at all.&lt;/p&gt;
+&lt;p&gt;Also note that if you change the signature of either &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BookList&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ShoppingCart&lt;/code&gt; (add, remove, reorder parameters), &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MainScreen&lt;/code&gt; does not need to change at all.&lt;/p&gt;
 
 &lt;p&gt;Here’s what the &lt;a href=&quot;https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/SlotsActivity.kt#L27-L39&quot;&gt;call site&lt;/a&gt; looks like:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;n&quot;&gt;MainScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;span class=&quot;nc&quot;&gt;MainScreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;shoppingCartContent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;ShoppingCart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sampleMainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;ShoppingCart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sampleMainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shoppingCartModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;booksContent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;BookList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;BookList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
             &lt;span class=&quot;n&quot;&gt;books&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sampleMainScreenModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
             &lt;span class=&quot;n&quot;&gt;onBookAdded&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -134,8 +216,8 @@
 &lt;p&gt;This pattern of using composable slots makes some trade-offs. So it is not the right choice for all situations. In particular, it means the caller of this composable&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Is exposed to more knowledge of the inner workings of the composable. In this case, the caller previously did not know that &lt;code class=&quot;highlighter-rouge&quot;&gt;MainScreen&lt;/code&gt; is split into two high-level sections but now it does.&lt;/li&gt;
-  &lt;li&gt;Is required to split the data itself rather than having &lt;code class=&quot;highlighter-rouge&quot;&gt;MainScreen&lt;/code&gt; do this job&lt;/li&gt;
+  &lt;li&gt;Is exposed to more knowledge of the inner workings of the composable. In this case, the caller previously did not know that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MainScreen&lt;/code&gt; is split into two high-level sections but now it does.&lt;/li&gt;
+  &lt;li&gt;Is required to split the data itself rather than having &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MainScreen&lt;/code&gt; do this job&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Because of these factors, slots work best when in the following situations:&lt;/p&gt;
@@ -152,7 +234,7 @@
 
 &lt;p&gt;Thanks &lt;a href=&quot;https://twitter.com/adamwp&quot;&gt;Adam Powell&lt;/a&gt; for explaining the idea of slots and for reviewing this article.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 03 Dec 2021 20:00:00 +0100</pubDate>
+        <pubDate>Fri, 03 Dec 2021 20:00:00 -0600</pubDate>
         <link>https://kiranrao.in/blog/2021/12/03/jetpack-compose-slots/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2021/12/03/jetpack-compose-slots/</guid>
         
@@ -230,7 +312,7 @@
 
 &lt;p&gt;I’m going to state yet another unpopular opinion: Even these basics are not required anymore. If a candidate has experience with &lt;em&gt;any&lt;/em&gt; platform that has a lifecycle, they’re going to learn how his works. Even with the platform that they do have experience with, it is unlikely that they know about the lifecycle beyond the core inner loops.&lt;/p&gt;
 
-&lt;p&gt;For example, on Android I find the &lt;a href=&quot;https://developer.android.com/guide/fragments/lifecycle?hl=en&quot;&gt;Fragment lifecycle’s&lt;/a&gt; interaction with the Activity lifecycle very tricky. I can never remember whether &lt;code class=&quot;highlighter-rouge&quot;&gt;onCreate&lt;/code&gt; is called first or &lt;code class=&quot;highlighter-rouge&quot;&gt;onCreateView&lt;/code&gt;. For an Activity, there is no guarantee of the order of &lt;code class=&quot;highlighter-rouge&quot;&gt;onSaveInstanceState&lt;/code&gt; calls with respect to &lt;code class=&quot;highlighter-rouge&quot;&gt;onPause&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;onStop&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;For example, on Android I find the &lt;a href=&quot;https://developer.android.com/guide/fragments/lifecycle?hl=en&quot;&gt;Fragment lifecycle’s&lt;/a&gt; interaction with the Activity lifecycle very tricky. I can never remember whether &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onCreate&lt;/code&gt; is called first or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onCreateView&lt;/code&gt;. For an Activity, there is no guarantee of the order of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onSaveInstanceState&lt;/code&gt; calls with respect to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onPause&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onStop&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;As with the previous point, this can just be looked up. Just knowing that some lifecycle exists, and that it is one documentation link away, is sufficient.&lt;/p&gt;
 
@@ -323,7 +405,7 @@
 
 &lt;p&gt;Thanks to &lt;a href=&quot;https://twitter.com/mikewolfson&quot;&gt;Mike Wolfson (@mikewolfson)&lt;/a&gt; for reviewing this article.&lt;/p&gt;
 </description>
-        <pubDate>Sat, 14 Aug 2021 21:00:00 +0200</pubDate>
+        <pubDate>Sat, 14 Aug 2021 21:00:00 -0500</pubDate>
         <link>https://kiranrao.in/blog/2021/08/14/hiring-in-tech/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2021/08/14/hiring-in-tech/</guid>
         
@@ -438,7 +520,7 @@
 
 &lt;p&gt;Do you have any solutions to this conundrum? You can comment using disqus below, or &lt;a href=&quot;https://twitter.com/ki_run/status/1421842364109402117?s=20&quot;&gt;on twitter&lt;/a&gt; or &lt;a href=&quot;https://www.linkedin.com/posts/activity-6827609037450813440-wWp6&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Sun, 01 Aug 2021 16:00:00 +0200</pubDate>
+        <pubDate>Sun, 01 Aug 2021 16:00:00 -0500</pubDate>
         <link>https://kiranrao.in/blog/2021/08/01/digital-identity-conundrum/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2021/08/01/digital-identity-conundrum/</guid>
         
@@ -485,7 +567,7 @@
 
 &lt;p&gt;Writing is a great tool for problem-solving. Of course, it is not the only tool and is not applicable for all scenarios. For example, sometimes the huge level of detail could hide the problem and throw potential helpers off track. However when used in moderation, I find that it leads me to the solution without ever having to bother others.&lt;/p&gt;
 </description>
-        <pubDate>Sat, 31 Jul 2021 15:00:00 +0200</pubDate>
+        <pubDate>Sat, 31 Jul 2021 15:00:00 -0500</pubDate>
         <link>https://kiranrao.in/blog/2021/07/31/writing-as-problem-solving/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2021/07/31/writing-as-problem-solving/</guid>
         
@@ -582,7 +664,7 @@
 
 &lt;p&gt;Each of the mobile multiplatform frameworks have their use cases, and each have their sore weaknesses. Mobile cross-platform is still very much an unsolved problem.&lt;/p&gt;
 </description>
-        <pubDate>Sat, 24 Jul 2021 16:30:00 +0200</pubDate>
+        <pubDate>Sat, 24 Jul 2021 16:30:00 -0500</pubDate>
         <link>https://kiranrao.in/blog/2021/07/24/mobile-multiplatform/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2021/07/24/mobile-multiplatform/</guid>
         
@@ -681,7 +763,7 @@
 
 &lt;p&gt;At the risk of restating the obvious, &lt;strong&gt;advanced features are useless if the basic ones don’t work well&lt;/strong&gt;. Products ought to focus on the basic reason for their existence to work solidly before trying to add more. Otherwise it risks being perceived as gimmicky.&lt;/p&gt;
 </description>
-        <pubDate>Sun, 21 Mar 2021 16:30:00 +0100</pubDate>
+        <pubDate>Sun, 21 Mar 2021 16:30:00 -0500</pubDate>
         <link>https://kiranrao.in/blog/2021/03/21/basic-first/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2021/03/21/basic-first/</guid>
         
@@ -749,7 +831,7 @@
 
 &lt;p&gt;This is a post in my series related to digital privacy. You can read more posts in this series &lt;a href=&quot;/blog/tags/privacy&quot;&gt;here&lt;/a&gt;. For more advanced information and inspiration about digital privacy, you can visit the &lt;a href=&quot;https://privacytools.io/&quot;&gt;Privacy Tools&lt;/a&gt; page.&lt;/p&gt;
 </description>
-        <pubDate>Sat, 20 Mar 2021 17:30:00 +0100</pubDate>
+        <pubDate>Sat, 20 Mar 2021 17:30:00 -0500</pubDate>
         <link>https://kiranrao.in/blog/2021/03/20/facebook-privacy/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2021/03/20/facebook-privacy/</guid>
         
@@ -788,7 +870,7 @@
 
 &lt;p&gt;Even for businesses, there are privacy-friendly alternatives to traditional analytics engines. I want to end this post by advocating against analytics engine that invade your users’ privacy. We can do better and our users deserve better.&lt;/p&gt;
 </description>
-        <pubDate>Sat, 13 Mar 2021 18:15:00 +0100</pubDate>
+        <pubDate>Sat, 13 Mar 2021 18:15:00 -0600</pubDate>
         <link>https://kiranrao.in/blog/2021/03/13/privacy-friendly-analytics/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2021/03/13/privacy-friendly-analytics/</guid>
         
@@ -850,74 +932,9 @@
 &lt;p&gt;UI ≠ UX. In my limited experience, UI is given more importance than UX. In my opinion this is counter-productive in the long run, both for businesses and users.&lt;/p&gt;
 
 </description>
-        <pubDate>Sun, 20 Dec 2020 17:30:00 +0100</pubDate>
+        <pubDate>Sun, 20 Dec 2020 17:30:00 -0600</pubDate>
         <link>https://kiranrao.in/blog/2020/12/20/ui-not-ux/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2020/12/20/ui-not-ux/</guid>
-        
-        <category>obvious</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Tech as an Enhancer</title>
-        <description>&lt;p&gt;This is a non-programming post in the series I call “re-stating the obvious”. This series talks about topics that have been beaten to pulp already. I’m simply adding to the cacophony. You can find all posts in this series &lt;a href=&quot;/blog/tags/obvious&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;the-trigger-for-this-post&quot;&gt;The trigger for this post&lt;/h2&gt;
-
-&lt;p&gt;In November 2020, some Amazon Web Services servers suffered an outage that caused a domino effect across countless products and services which depend on AWS. Social media was quick to poke fun at the incident with an explosion of jokes and memes. This tweet is a summary of the mood of social media on that day:&lt;/p&gt;
-
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;I... can&amp;#39;t vacuum... because us-east-1 is down.&lt;/p&gt;&amp;mdash; Geoff Belknap (@geoffbelknap) &lt;a href=&quot;https://twitter.com/geoffbelknap/status/1331690657170157568?ref_src=twsrc%5Etfw&quot;&gt;November 25, 2020&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-
-&lt;h2 id=&quot;lessons-learnt&quot;&gt;Lessons learnt&lt;/h2&gt;
-
-&lt;p&gt;My take-away from this incident (and others before it) is&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Most products and services ought to dwell on the role of technology in the system. Does tech bring the most value as an &lt;em&gt;enhancer&lt;/em&gt; or as a &lt;em&gt;prerequisite&lt;/em&gt;? In other words, &lt;strong&gt;does the system degrade gracefully&lt;/strong&gt; in the absence of the very tech that differentiates it?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;(In this post, I use the term “tech” in a very loose sense)&lt;/p&gt;
-
-&lt;h3 id=&quot;examples&quot;&gt;Examples&lt;/h3&gt;
-
-&lt;p&gt;Let’s look at some (mostly hypothetical) examples. Since I spent a large portion of my career in two domains (IoT and automobile), some bias is bound to creep into the examples.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;It is awesome that my air-conditioner is connected to the internet. I can set the temperature on my way home so that the house is already comfortable when I reach there. But should it really &lt;em&gt;require&lt;/em&gt; the internet to function? Do I absolutely have to configure the WiFi settings &lt;em&gt;before&lt;/em&gt; using the air-conditioner?&lt;/li&gt;
-  &lt;li&gt;An internet-connected blood pressure monitor is a really good idea since it eliminates the manual data entry process and lets medical personnel have direct access to the necessary data. However, a blood pressure monitor that &lt;em&gt;refuses to function when a server is down&lt;/em&gt; is not very useful, is it?&lt;/li&gt;
-  &lt;li&gt;I can unlock my car with my phone? Amazing. Does it also have a good old key for backup? It would be awkward if my &lt;em&gt;phone is out of battery and I cannot even unlock the car&lt;/em&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;That last point seems far-fetched but it really isn’t. It is just one step away from this:&lt;/p&gt;
-
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Got in our &lt;a href=&quot;https://twitter.com/Zipcar?ref_src=twsrc%5Etfw&quot;&gt;@Zipcar&lt;/a&gt; we&amp;#39;ve been driving for 3 days. It doesn&amp;#39;t start. Call Zipcar and get told that the car can&amp;#39;t access the internet so it won&amp;#39;t start. The only option is to have a tow truck come and tow it to somewhere where it has internet.&lt;/p&gt;&amp;mdash; Keith Smiley (@SmileyKeith) &lt;a href=&quot;https://twitter.com/SmileyKeith/status/1078417333540990976?ref_src=twsrc%5Etfw&quot;&gt;December 27, 2018&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;I could go on with dozens of examples but I think I’ve illustrated my point.&lt;/p&gt;
-
-&lt;h3 id=&quot;offline-first&quot;&gt;Offline first&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://offlinefirst.org/&quot;&gt;“Offline-first”&lt;/a&gt; is often used to describe apps that function when the network is unavailable, but it is more than that. Offline-first apps also behave well in the face of a &lt;em&gt;poor network connection&lt;/em&gt;. As an end user, the experience when you have that feeble network is way worse than when you have no network at all.&lt;/p&gt;
-
-&lt;p&gt;This concept of offline-first can be extended to all things tech. In majority of the cases, solutions need to be designed&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;First&lt;/strong&gt; for the situation where the tech crutch on which the solution depends is unavailable for whatever reason&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Then&lt;/strong&gt; for the case where the tech is available but in a significantly reduced form&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Then and only then&lt;/strong&gt; for the case where the differentiating technology is healthy and functioning at its peak&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I do qualify all my opinions with “majority of” or “most of” because I’m pretty sure there are situations where this is not feasible. I know there must be some solutions out there that rely completely on the tech, where the solution ceases to exist without the tech.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;Tech is making its mark in unimaginable ways in unprecedented fields. It works really well when it enhances an existing system. It would be a shame to go overboard and make a system overly reliant on tech where there is no real need to.&lt;/p&gt;
-</description>
-        <pubDate>Fri, 18 Dec 2020 21:00:00 +0100</pubDate>
-        <link>https://kiranrao.in/blog/2020/12/18/tech-enhancer/</link>
-        <guid isPermaLink="true">https://kiranrao.in/blog/2020/12/18/tech-enhancer/</guid>
         
         <category>obvious</category>
         

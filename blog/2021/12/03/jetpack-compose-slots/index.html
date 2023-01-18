@@ -28,9 +28,12 @@
 
       
 
-      <!-- Begin Jekyll SEO tag v2.1.0 -->
-<title>Effectively using slots in Jetpack Compose - Curious Techizen</title>
+      <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Effectively using slots in Jetpack Compose | Curious Techizen</title>
+<meta name="generator" content="Jekyll v3.9.0" />
 <meta property="og:title" content="Effectively using slots in Jetpack Compose" />
+<meta name="author" content="Kiran Rao" />
+<meta property="og:locale" content="en" />
 <meta name="description" content="Using slots to avoid having to trickle parameters down the tree of Composables" />
 <meta property="og:description" content="Using slots to avoid having to trickle parameters down the tree of Composables" />
 <link rel="canonical" href="https://kiranrao.in/blog/2021/12/03/jetpack-compose-slots/" />
@@ -38,18 +41,14 @@
 <meta property="og:site_name" content="Curious Techizen" />
 <meta property="og:image" content="https://kiranrao.in/blog/assets/img/composable_with_slots.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-12-03T20:00:00+01:00" />
-<meta name="twitter:card" content="summary_large_image" />
+<meta property="article:published_time" content="2021-12-03T20:00:00-06:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:image" content="https://kiranrao.in/blog/assets/img/composable_with_slots.png" />
+<meta property="twitter:title" content="Effectively using slots in Jetpack Compose" />
 <meta name="twitter:site" content="@ki_run" />
-<meta name="twitter:creator" content="@{"name"=>"Kiran Rao", "url"=>"https://kiranrao.in"}" />
+<meta name="twitter:creator" content="@Kiran Rao" />
 <script type="application/ld+json">
-{"@context": "http://schema.org",
-"@type": "BlogPosting",
-"headline": "Effectively using slots in Jetpack Compose",
-"image": "https://kiranrao.in/blog/assets/img/composable_with_slots.png",
-"datePublished": "2021-12-03T20:00:00+01:00",
-"description": "Using slots to avoid having to trickle parameters down the tree of Composables",
-"url": "https://kiranrao.in/blog/2021/12/03/jetpack-compose-slots/"}</script>
+{"description":"Using slots to avoid having to trickle parameters down the tree of Composables","author":{"@type":"Person","name":"Kiran Rao"},"@type":"BlogPosting","url":"https://kiranrao.in/blog/2021/12/03/jetpack-compose-slots/","image":"https://kiranrao.in/blog/assets/img/composable_with_slots.png","headline":"Effectively using slots in Jetpack Compose","dateModified":"2021-12-03T20:00:00-06:00","datePublished":"2021-12-03T20:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://kiranrao.in/blog/2021/12/03/jetpack-compose-slots/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
       
@@ -109,7 +108,7 @@
   <article class="single-content" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="feat">
       <h5 class="page-date">
-        <time datetime="2021-12-03T20:00:00+01:00" itemprop="datePublished">
+        <time datetime="2021-12-03T20:00:00-06:00" itemprop="datePublished">
           03 December 2021
         </time>
       </h5>
@@ -134,39 +133,39 @@
 
 <p>Here is how one might implement it (<a href="https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/ui/components/MainScreen.kt#L14-L34">GitHub source</a>):</p>
 
-<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="n">@Composable</span>
-<span class="k">fun</span> <span class="nf">MainScreen</span><span class="p">(</span><span class="n">mainScreenModel</span><span class="p">:</span> <span class="n">MainScreenModel</span><span class="p">,</span> <span class="n">isWideScreen</span><span class="p">:</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="nd">@Composable</span>
+<span class="k">fun</span> <span class="nf">MainScreen</span><span class="p">(</span><span class="n">mainScreenModel</span><span class="p">:</span> <span class="nc">MainScreenModel</span><span class="p">,</span> <span class="n">isWideScreen</span><span class="p">:</span> <span class="nc">Boolean</span> <span class="p">=</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">isWideScreen</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">Row</span><span class="p">(</span><span class="n">Modifier</span><span class="p">.</span><span class="n">fillMaxHeight</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">Box</span><span class="p">(</span><span class="n">Modifier</span><span class="p">.</span><span class="n">weight</span><span class="p">(</span><span class="m">0.65f</span><span class="p">))</span> <span class="p">{</span>
-                <span class="n">BookList</span><span class="p">(</span>
+        <span class="nc">Row</span><span class="p">(</span><span class="nc">Modifier</span><span class="p">.</span><span class="nf">fillMaxHeight</span><span class="p">())</span> <span class="p">{</span>
+            <span class="nc">Box</span><span class="p">(</span><span class="nc">Modifier</span><span class="p">.</span><span class="nf">weight</span><span class="p">(</span><span class="mf">0.65f</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nc">BookList</span><span class="p">(</span>
                     <span class="n">books</span> <span class="p">=</span> <span class="n">mainScreenModel</span><span class="p">.</span><span class="n">books</span><span class="p">,</span>
                     <span class="n">onBookAdded</span> <span class="p">=</span> <span class="p">{}</span>
                 <span class="p">)</span>
             <span class="p">}</span>
-            <span class="n">Box</span><span class="p">(</span><span class="n">Modifier</span><span class="p">.</span><span class="n">weight</span><span class="p">(</span><span class="m">0.35f</span><span class="p">))</span> <span class="p">{</span>
-                <span class="n">ShoppingCart</span><span class="p">(</span><span class="n">shoppingCartModel</span> <span class="p">=</span> <span class="n">mainScreenModel</span><span class="p">.</span><span class="n">shoppingCartModel</span><span class="p">)</span>
+            <span class="nc">Box</span><span class="p">(</span><span class="nc">Modifier</span><span class="p">.</span><span class="nf">weight</span><span class="p">(</span><span class="mf">0.35f</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nc">ShoppingCart</span><span class="p">(</span><span class="n">shoppingCartModel</span> <span class="p">=</span> <span class="n">mainScreenModel</span><span class="p">.</span><span class="n">shoppingCartModel</span><span class="p">)</span>
             <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">BottomSheetScaffold</span><span class="p">(</span>
-            <span class="n">sheetContent</span> <span class="p">=</span> <span class="p">{</span> <span class="n">ShoppingCart</span><span class="p">(</span><span class="n">shoppingCartModel</span> <span class="p">=</span> <span class="n">mainScreenModel</span><span class="p">.</span><span class="n">shoppingCartModel</span><span class="p">)</span> <span class="p">}</span>
+        <span class="nc">BottomSheetScaffold</span><span class="p">(</span>
+            <span class="n">sheetContent</span> <span class="p">=</span> <span class="p">{</span> <span class="nc">ShoppingCart</span><span class="p">(</span><span class="n">shoppingCartModel</span> <span class="p">=</span> <span class="n">mainScreenModel</span><span class="p">.</span><span class="n">shoppingCartModel</span><span class="p">)</span> <span class="p">}</span>
         <span class="p">)</span> <span class="p">{</span>
-            <span class="n">BookList</span><span class="p">(</span><span class="n">books</span> <span class="p">=</span> <span class="n">mainScreenModel</span><span class="p">.</span><span class="n">books</span><span class="p">,</span> <span class="n">onBookAdded</span> <span class="p">=</span> <span class="p">{})</span>
+            <span class="nc">BookList</span><span class="p">(</span><span class="n">books</span> <span class="p">=</span> <span class="n">mainScreenModel</span><span class="p">.</span><span class="n">books</span><span class="p">,</span> <span class="n">onBookAdded</span> <span class="p">=</span> <span class="p">{})</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
-<p>The <code class="highlighter-rouge">MainScreen</code> composable receives the the <a href="https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/data/MainScreenModel.kt"><code class="highlighter-rouge">MainScreenModel</code></a> as a parameter, and it passes pieces of this data to child composables:</p>
+<p>The <code class="language-plaintext highlighter-rouge">MainScreen</code> composable receives the the <a href="https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/data/MainScreenModel.kt"><code class="language-plaintext highlighter-rouge">MainScreenModel</code></a> as a parameter, and it passes pieces of this data to child composables:</p>
 
 <ol>
-  <li>The <code class="highlighter-rouge">books</code> property, which is a <code class="highlighter-rouge">List&lt;BookModel&gt;</code>, is passed to the <code class="highlighter-rouge">BookList</code> composable</li>
-  <li>The <code class="highlighter-rouge">shoppingCartModel</code> property is passed to the <code class="highlighter-rouge">ShoppingCart</code> composable.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">books</code> property, which is a <code class="language-plaintext highlighter-rouge">List&lt;BookModel&gt;</code>, is passed to the <code class="language-plaintext highlighter-rouge">BookList</code> composable</li>
+  <li>The <code class="language-plaintext highlighter-rouge">shoppingCartModel</code> property is passed to the <code class="language-plaintext highlighter-rouge">ShoppingCart</code> composable.</li>
 </ol>
 
 <p>The <a href="https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/MainActivity.kt#L24">call site</a> is straightforward:</p>
 
-<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="n">MainScreen</span><span class="p">(</span><span class="n">mainScreenModel</span> <span class="p">=</span> <span class="n">sampleMainScreenModel</span><span class="p">)</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="nc">MainScreen</span><span class="p">(</span><span class="n">mainScreenModel</span> <span class="p">=</span> <span class="n">sampleMainScreenModel</span><span class="p">)</span></code></pre></figure>
 
 <p>In this simple example, it doesn’t look all that bad. However, it starts getting tedious when your MainScreen needs to pass that the same model (and callback lambdas) further down the tree.</p>
 
@@ -175,56 +174,56 @@
 <p>If a Composable accepts another Composable as a parameter, then that parameter is called a slot. Many core composables are designed this way:</p>
 
 <ul>
-  <li>All the basic layouts like <code class="highlighter-rouge">Row</code>, <code class="highlighter-rouge">Column</code> and <code class="highlighter-rouge">Box</code> accept a <code class="highlighter-rouge">content</code> parameter that is a Composable lambda.</li>
-  <li>Components like <code class="highlighter-rouge">Button</code> and <code class="highlighter-rouge">Card</code> do the same.</li>
-  <li>More advanced components like Scaffolds accept multiple composable lambdas for different sections of the scaffold. For example, <a href="https://cs.android.com/androidx/platform/tools/dokka-devsite-plugin/+/master:testData/compose/source/androidx/compose/material/BottomSheetScaffold.kt;l=259;drc=6fed3de7a56143de954d55e508a7449deb9af582"><code class="highlighter-rouge">BottomSheetScaffold</code></a> has five(!!) slots for the <code class="highlighter-rouge">sheetContent</code>, <code class="highlighter-rouge">drawerContent</code>, <code class="highlighter-rouge">snackbarHost</code>, <code class="highlighter-rouge">floatingActionButton</code> and the <code class="highlighter-rouge">content</code> itself.</li>
+  <li>All the basic layouts like <code class="language-plaintext highlighter-rouge">Row</code>, <code class="language-plaintext highlighter-rouge">Column</code> and <code class="language-plaintext highlighter-rouge">Box</code> accept a <code class="language-plaintext highlighter-rouge">content</code> parameter that is a Composable lambda.</li>
+  <li>Components like <code class="language-plaintext highlighter-rouge">Button</code> and <code class="language-plaintext highlighter-rouge">Card</code> do the same.</li>
+  <li>More advanced components like Scaffolds accept multiple composable lambdas for different sections of the scaffold. For example, <a href="https://cs.android.com/androidx/platform/tools/dokka-devsite-plugin/+/master:testData/compose/source/androidx/compose/material/BottomSheetScaffold.kt;l=259;drc=6fed3de7a56143de954d55e508a7449deb9af582"><code class="language-plaintext highlighter-rouge">BottomSheetScaffold</code></a> has five(!!) slots for the <code class="language-plaintext highlighter-rouge">sheetContent</code>, <code class="language-plaintext highlighter-rouge">drawerContent</code>, <code class="language-plaintext highlighter-rouge">snackbarHost</code>, <code class="language-plaintext highlighter-rouge">floatingActionButton</code> and the <code class="language-plaintext highlighter-rouge">content</code> itself.</li>
 </ul>
 
 <p>Let’s change our MainScreen composable to accept slots. Here’s the signature:</p>
 
-<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="n">@Composable</span>
+<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="nd">@Composable</span>
 <span class="k">fun</span> <span class="nf">MainScreen</span><span class="p">(</span>
-    <span class="n">shoppingCartContent</span><span class="p">:</span> <span class="n">@Composable</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
-    <span class="n">booksContent</span><span class="p">:</span> <span class="n">@Composable</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
-    <span class="n">isWideScreen</span><span class="p">:</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="k">false</span>
+    <span class="n">shoppingCartContent</span><span class="p">:</span> <span class="nd">@Composable</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">Unit</span><span class="p">,</span>
+    <span class="n">booksContent</span><span class="p">:</span> <span class="nd">@Composable</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">Unit</span><span class="p">,</span>
+    <span class="n">isWideScreen</span><span class="p">:</span> <span class="nc">Boolean</span> <span class="p">=</span> <span class="k">false</span>
 <span class="p">)</span></code></pre></figure>
 
 <p>What we’ve done here is to accept two Composables as parameters, one each for the shopping cart section and the books list section. Now the <a href="https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/ui/components/MainScreen.kt#L37-L57">implementation changes to this</a>:</p>
 
-<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="n">@Composable</span>
+<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="nd">@Composable</span>
 <span class="k">fun</span> <span class="nf">MainScreen</span><span class="p">(</span>
-    <span class="n">shoppingCartContent</span><span class="p">:</span> <span class="n">@Composable</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
-    <span class="n">booksContent</span><span class="p">:</span> <span class="n">@Composable</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
-    <span class="n">isWideScreen</span><span class="p">:</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="k">false</span>
+    <span class="n">shoppingCartContent</span><span class="p">:</span> <span class="nd">@Composable</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">Unit</span><span class="p">,</span>
+    <span class="n">booksContent</span><span class="p">:</span> <span class="nd">@Composable</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">Unit</span><span class="p">,</span>
+    <span class="n">isWideScreen</span><span class="p">:</span> <span class="nc">Boolean</span> <span class="p">=</span> <span class="k">false</span>
 <span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">isWideScreen</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">Row</span><span class="p">(</span><span class="n">Modifier</span><span class="p">.</span><span class="n">fillMaxHeight</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">Box</span><span class="p">(</span><span class="n">Modifier</span><span class="p">.</span><span class="n">weight</span><span class="p">(</span><span class="m">0.65f</span><span class="p">))</span> <span class="p">{</span>
-                <span class="n">booksContent</span><span class="p">()</span>
+        <span class="nc">Row</span><span class="p">(</span><span class="nc">Modifier</span><span class="p">.</span><span class="nf">fillMaxHeight</span><span class="p">())</span> <span class="p">{</span>
+            <span class="nc">Box</span><span class="p">(</span><span class="nc">Modifier</span><span class="p">.</span><span class="nf">weight</span><span class="p">(</span><span class="mf">0.65f</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nf">booksContent</span><span class="p">()</span>
             <span class="p">}</span>
-            <span class="n">Box</span><span class="p">(</span><span class="n">Modifier</span><span class="p">.</span><span class="n">weight</span><span class="p">(</span><span class="m">0.35f</span><span class="p">))</span> <span class="p">{</span>
-                <span class="n">shoppingCartContent</span><span class="p">()</span>
+            <span class="nc">Box</span><span class="p">(</span><span class="nc">Modifier</span><span class="p">.</span><span class="nf">weight</span><span class="p">(</span><span class="mf">0.35f</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nf">shoppingCartContent</span><span class="p">()</span>
             <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">BottomSheetScaffold</span><span class="p">(</span><span class="n">sheetContent</span> <span class="p">=</span> <span class="p">{</span> <span class="n">shoppingCartContent</span><span class="p">()</span> <span class="p">})</span> <span class="p">{</span>
-            <span class="n">booksContent</span><span class="p">()</span>
+        <span class="nc">BottomSheetScaffold</span><span class="p">(</span><span class="n">sheetContent</span> <span class="p">=</span> <span class="p">{</span> <span class="nf">shoppingCartContent</span><span class="p">()</span> <span class="p">})</span> <span class="p">{</span>
+            <span class="nf">booksContent</span><span class="p">()</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
-<p>Note that now the <code class="highlighter-rouge">MainScreen</code> composable does not pass along <em>any</em> data parameters at all. It now has the focused responsibility of dealing with the layout rather than also having to forward parameters. It only receives parameters that it uses directly (<code class="highlighter-rouge">isWideScreen</code>). The slots it receives are opaque to it and it does not need to know what parameters they need or what callback lambdas they offer.</p>
+<p>Note that now the <code class="language-plaintext highlighter-rouge">MainScreen</code> composable does not pass along <em>any</em> data parameters at all. It now has the focused responsibility of dealing with the layout rather than also having to forward parameters. It only receives parameters that it uses directly (<code class="language-plaintext highlighter-rouge">isWideScreen</code>). The slots it receives are opaque to it and it does not need to know what parameters they need or what callback lambdas they offer.</p>
 
-<p>Also note that if you change the signature of either <code class="highlighter-rouge">BookList</code> or <code class="highlighter-rouge">ShoppingCart</code> (add, remove, reorder parameters), <code class="highlighter-rouge">MainScreen</code> does not need to change at all.</p>
+<p>Also note that if you change the signature of either <code class="language-plaintext highlighter-rouge">BookList</code> or <code class="language-plaintext highlighter-rouge">ShoppingCart</code> (add, remove, reorder parameters), <code class="language-plaintext highlighter-rouge">MainScreen</code> does not need to change at all.</p>
 
 <p>Here’s what the <a href="https://github.com/curioustechizen/compose-slots-sample/blob/e4dc309521354d690aed63085b867615b7edc519/app/src/main/java/in/kiranrao/slotsdemo/SlotsActivity.kt#L27-L39">call site</a> looks like:</p>
 
-<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="n">MainScreen</span><span class="p">(</span>
+<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="nc">MainScreen</span><span class="p">(</span>
     <span class="n">shoppingCartContent</span> <span class="p">=</span> <span class="p">{</span>
-        <span class="n">ShoppingCart</span><span class="p">(</span><span class="n">shoppingCartModel</span> <span class="p">=</span> <span class="n">sampleMainScreenModel</span><span class="p">.</span><span class="n">shoppingCartModel</span><span class="p">)</span>
+        <span class="nc">ShoppingCart</span><span class="p">(</span><span class="n">shoppingCartModel</span> <span class="p">=</span> <span class="n">sampleMainScreenModel</span><span class="p">.</span><span class="n">shoppingCartModel</span><span class="p">)</span>
     <span class="p">},</span>
     <span class="n">booksContent</span> <span class="p">=</span> <span class="p">{</span>
-        <span class="n">BookList</span><span class="p">(</span>
+        <span class="nc">BookList</span><span class="p">(</span>
             <span class="n">books</span> <span class="p">=</span> <span class="n">sampleMainScreenModel</span><span class="p">.</span><span class="n">books</span><span class="p">,</span>
             <span class="n">onBookAdded</span> <span class="p">=</span> <span class="p">{}</span>
         <span class="p">)</span>
@@ -239,8 +238,8 @@
 <p>This pattern of using composable slots makes some trade-offs. So it is not the right choice for all situations. In particular, it means the caller of this composable</p>
 
 <ul>
-  <li>Is exposed to more knowledge of the inner workings of the composable. In this case, the caller previously did not know that <code class="highlighter-rouge">MainScreen</code> is split into two high-level sections but now it does.</li>
-  <li>Is required to split the data itself rather than having <code class="highlighter-rouge">MainScreen</code> do this job</li>
+  <li>Is exposed to more knowledge of the inner workings of the composable. In this case, the caller previously did not know that <code class="language-plaintext highlighter-rouge">MainScreen</code> is split into two high-level sections but now it does.</li>
+  <li>Is required to split the data itself rather than having <code class="language-plaintext highlighter-rouge">MainScreen</code> do this job</li>
 </ul>
 
 <p>Because of these factors, slots work best when in the following situations:</p>
@@ -278,6 +277,10 @@
     </div>
     
     <h6 class="back-to-top"><a href="#top">Back to Top</a></h6>
+    
+      <a rel="next" href="/blog/2023/01/17/framework-laptop-owner-review/" id="next">
+        <span class="nav-title nav-title-next">newer</span> &rarr;
+      </a>
     
     
       <a rel="prev" href="/blog/2021/08/14/hiring-in-tech/" id="prev">

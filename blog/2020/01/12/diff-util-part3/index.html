@@ -28,26 +28,25 @@
 
       
 
-      <!-- Begin Jekyll SEO tag v2.1.0 -->
-<title>Android DiffUtil Part 3: Custom animations - Curious Techizen</title>
+      <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Android DiffUtil Part 3: Custom animations | Curious Techizen</title>
+<meta name="generator" content="Jekyll v3.9.0" />
 <meta property="og:title" content="Android DiffUtil Part 3: Custom animations" />
+<meta name="author" content="Kiran Rao" />
+<meta property="og:locale" content="en" />
 <meta name="description" content="A 3 part series on Android’s DiffUtil; Part 3 implements a very custom circular animation by wrapping DiffUtil API" />
 <meta property="og:description" content="A 3 part series on Android’s DiffUtil; Part 3 implements a very custom circular animation by wrapping DiffUtil API" />
 <link rel="canonical" href="https://kiranrao.in/blog/2020/01/12/diff-util-part3/" />
 <meta property="og:url" content="https://kiranrao.in/blog/2020/01/12/diff-util-part3/" />
 <meta property="og:site_name" content="Curious Techizen" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-01-12T10:00:00+01:00" />
+<meta property="article:published_time" content="2020-01-12T10:00:00-06:00" />
 <meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Android DiffUtil Part 3: Custom animations" />
 <meta name="twitter:site" content="@ki_run" />
-<meta name="twitter:creator" content="@{"name"=>"Kiran Rao", "url"=>"https://kiranrao.in"}" />
+<meta name="twitter:creator" content="@Kiran Rao" />
 <script type="application/ld+json">
-{"@context": "http://schema.org",
-"@type": "BlogPosting",
-"headline": "Android DiffUtil Part 3: Custom animations",
-"datePublished": "2020-01-12T10:00:00+01:00",
-"description": "A 3 part series on Android’s DiffUtil; Part 3 implements a very custom circular animation by wrapping DiffUtil API",
-"url": "https://kiranrao.in/blog/2020/01/12/diff-util-part3/"}</script>
+{"description":"A 3 part series on Android’s DiffUtil; Part 3 implements a very custom circular animation by wrapping DiffUtil API","author":{"@type":"Person","name":"Kiran Rao"},"@type":"BlogPosting","url":"https://kiranrao.in/blog/2020/01/12/diff-util-part3/","headline":"Android DiffUtil Part 3: Custom animations","dateModified":"2020-01-12T10:00:00-06:00","datePublished":"2020-01-12T10:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://kiranrao.in/blog/2020/01/12/diff-util-part3/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
       
@@ -107,7 +106,7 @@
   <article class="single-content" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="feat">
       <h5 class="page-date">
-        <time datetime="2020-01-12T10:00:00+01:00" itemprop="datePublished">
+        <time datetime="2020-01-12T10:00:00-06:00" itemprop="datePublished">
           12 January 2020
         </time>
       </h5>
@@ -139,14 +138,14 @@
   <li>Each view can be “expanded” or not</li>
 </ul>
 
-<p>The data for the view is a <code class="highlighter-rouge">List&lt;CircleInfo&gt;</code> where <code class="highlighter-rouge">CircleInfo</code> is defined as follows:</p>
+<p>The data for the view is a <code class="language-plaintext highlighter-rouge">List&lt;CircleInfo&gt;</code> where <code class="language-plaintext highlighter-rouge">CircleInfo</code> is defined as follows:</p>
 
-<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="kd">data class</span> <span class="nc">CircleInfo</span><span class="p">(</span><span class="kd">val</span> <span class="py">color</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">expanded</span><span class="p">:</span> <span class="n">Boolean</span> <span class="p">=</span> <span class="k">false</span><span class="p">)</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="kd">data class</span> <span class="nc">CircleInfo</span><span class="p">(</span><span class="kd">val</span> <span class="py">color</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">expanded</span><span class="p">:</span> <span class="nc">Boolean</span> <span class="p">=</span> <span class="k">false</span><span class="p">)</span></code></pre></figure>
 
-<p>The “Toggle” button switches between two hard-coded lists. It submits the entire list to the <code class="highlighter-rouge">ColorCirclesView</code>, which in turn <a href="https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/app/src/main/java/in/kiranrao/diffutilsamples/ColorCirclesView.kt#L107">applies a diff</a> and runs some animations:</p>
+<p>The “Toggle” button switches between two hard-coded lists. It submits the entire list to the <code class="language-plaintext highlighter-rouge">ColorCirclesView</code>, which in turn <a href="https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/app/src/main/java/in/kiranrao/diffutilsamples/ColorCirclesView.kt#L107">applies a diff</a> and runs some animations:</p>
 
 <ul>
-  <li>If an item’s <code class="highlighter-rouge">expanded</code> property changed, then we animate the change in width and height of that view</li>
+  <li>If an item’s <code class="language-plaintext highlighter-rouge">expanded</code> property changed, then we animate the change in width and height of that view</li>
   <li>If an item was removed, then we shrink the view until it disappears, while simultaneously moving it to the center of the circle</li>
   <li>If an item was added, then we expand it from size 0 to its final size, while simultaneously moving it from the center of the circle to its final position along the circumference.</li>
   <li>For items that were present in both lists, but their positions in the list changed, we move the views along the circumference of the circle to arrive at the new positions. This animation “makes room” for items being inserted, and “fills the gap” created by disappearing items.</li>
@@ -160,11 +159,11 @@
   <li>Finally the insertion animations are run</li>
 </ol>
 
-<p>As you might have guessed, this example was carefully chosen to demonstrate the use of custom diffs. This example is not suitable for <code class="highlighter-rouge">RecyclerView</code></p>
+<p>As you might have guessed, this example was carefully chosen to demonstrate the use of custom diffs. This example is not suitable for <code class="language-plaintext highlighter-rouge">RecyclerView</code></p>
 
 <ul>
   <li>For one, there’s no straightforward way of arranging RV items along a circle</li>
-  <li>Even if you do find a circular <code class="highlighter-rouge">LayoutManager</code> for RV, you are unlikely to get it to work well with RV’s <code class="highlighter-rouge">ItemAnimator</code> framework (this framework, although very powerful and flexible, requires you to understand way too much of the RV internal workings)</li>
+  <li>Even if you do find a circular <code class="language-plaintext highlighter-rouge">LayoutManager</code> for RV, you are unlikely to get it to work well with RV’s <code class="language-plaintext highlighter-rouge">ItemAnimator</code> framework (this framework, although very powerful and flexible, requires you to understand way too much of the RV internal workings)</li>
   <li>In this specific example, there’s no recycling happening, so you don’t really need RV. There’s a fixed limit to the number of items (7) and they all fit on screen at once.</li>
 </ul>
 
@@ -176,22 +175,22 @@
 
 <h2 id="a-wrapper-for-diffutil">A wrapper for DiffUtil</h2>
 
-<p>In the previous posts, we discussed about wrapping Android’s DiffUtil in a collection-style API. It is necessary to do this for our sample. This is because of the order in which we want to run our animations: We want to run all removals together. The standard <code class="highlighter-rouge">ListUpdateCallback</code> has no way of telling us “here are all the items that were removed”.</p>
+<p>In the previous posts, we discussed about wrapping Android’s DiffUtil in a collection-style API. It is necessary to do this for our sample. This is because of the order in which we want to run our animations: We want to run all removals together. The standard <code class="language-plaintext highlighter-rouge">ListUpdateCallback</code> has no way of telling us “here are all the items that were removed”.</p>
 
-<p>So, we can start off by doing the obvious: maintain our own list of diff operations (change, remove etc) and keep adding to this list when our <code class="highlighter-rouge">ListUpdateCallback</code> is called. This is implemented <a href="https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/atomic-diff-util/src/main/java/in/kiranrao/atomicdiffutil/AtomicDiffCalculator.kt#L49-L67">here</a> and a snippet is like this</p>
+<p>So, we can start off by doing the obvious: maintain our own list of diff operations (change, remove etc) and keep adding to this list when our <code class="language-plaintext highlighter-rouge">ListUpdateCallback</code> is called. This is implemented <a href="https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/atomic-diff-util/src/main/java/in/kiranrao/atomicdiffutil/AtomicDiffCalculator.kt#L49-L67">here</a> and a snippet is like this</p>
 
-<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="k">internal</span> <span class="kd">val</span> <span class="py">diffOps</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="n">RawDiffOperation</span><span class="p">&gt;()</span>
-<span class="k">override</span> <span class="k">fun</span> <span class="nf">onChanged</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">Any</span><span class="p">?)</span> <span class="p">{</span>
-    <span class="n">diffOps</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">RawDiffOperation</span><span class="p">.</span><span class="n">Change</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">payload</span><span class="p">))</span>
+<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="k">internal</span> <span class="kd">val</span> <span class="py">diffOps</span> <span class="p">=</span> <span class="n">mutableListOf</span><span class="p">&lt;</span><span class="nc">RawDiffOperation</span><span class="p">&gt;()</span>
+<span class="k">override</span> <span class="k">fun</span> <span class="nf">onChanged</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="nc">Any</span><span class="p">?)</span> <span class="p">{</span>
+    <span class="n">diffOps</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="nc">RawDiffOperation</span><span class="p">.</span><span class="nc">Change</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">payload</span><span class="p">))</span>
 <span class="p">}</span>
-<span class="p">//</span> <span class="n">Other</span> <span class="n">overrides</span> <span class="n">follow</span></code></pre></figure>
+<span class="c1">// Other overrides follow</span></code></pre></figure>
 
-<p>And <code class="highlighter-rouge">RawDiffOperation</code> is <a href="https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/atomic-diff-util/src/main/java/in/kiranrao/atomicdiffutil/AtomicDiffResult.kt#L105-L109">defined as</a></p>
+<p>And <code class="language-plaintext highlighter-rouge">RawDiffOperation</code> is <a href="https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/atomic-diff-util/src/main/java/in/kiranrao/atomicdiffutil/AtomicDiffResult.kt#L105-L109">defined as</a></p>
 
 <figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="k">sealed</span> <span class="kd">class</span> <span class="nc">RawDiffOperation</span> <span class="p">{</span>
-    <span class="kd">data class</span> <span class="nc">Insert</span><span class="p">(</span><span class="kd">val</span> <span class="py">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">count</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">:</span> <span class="n">RawDiffOperation</span><span class="p">()</span>
-    <span class="kd">data class</span> <span class="nc">Change</span><span class="p">(</span><span class="kd">val</span> <span class="py">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">count</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">payload</span><span class="p">:</span> <span class="n">Any</span><span class="p">?)</span> <span class="p">:</span> <span class="n">RawDiffOperation</span><span class="p">()</span>
-    <span class="kd">data class</span> <span class="nc">Remove</span><span class="p">(</span><span class="kd">val</span> <span class="py">position</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">count</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">:</span> <span class="n">RawDiffOperation</span><span class="p">()</span>
+    <span class="kd">data class</span> <span class="nc">Insert</span><span class="p">(</span><span class="kd">val</span> <span class="py">position</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">count</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">RawDiffOperation</span><span class="p">()</span>
+    <span class="kd">data class</span> <span class="nc">Change</span><span class="p">(</span><span class="kd">val</span> <span class="py">position</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">count</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">payload</span><span class="p">:</span> <span class="nc">Any</span><span class="p">?)</span> <span class="p">:</span> <span class="nc">RawDiffOperation</span><span class="p">()</span>
+    <span class="kd">data class</span> <span class="nc">Remove</span><span class="p">(</span><span class="kd">val</span> <span class="py">position</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">count</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">RawDiffOperation</span><span class="p">()</span>
 <span class="p">}</span></code></pre></figure>
 
 <p>But we can do better. In our sample, we don’t actually care about the exact order in which the diff operations need to be applied. All we care about is the final set of changes, removals and additions. In other words, instead of</p>
@@ -208,28 +207,28 @@
 
 <h2 id="atomicdiffresult">AtomicDiffResult</h2>
 
-<p>So, we use a combination of the RawDiffOperations and DiffUtil’s position conversion methods (<code class="highlighter-rouge">convertNewPositionToOld()</code> and <code class="highlighter-rouge">convertOldPositionToNew()</code>) to expose an API like this:</p>
+<p>So, we use a combination of the RawDiffOperations and DiffUtil’s position conversion methods (<code class="language-plaintext highlighter-rouge">convertNewPositionToOld()</code> and <code class="language-plaintext highlighter-rouge">convertOldPositionToNew()</code>) to expose an API like this:</p>
 
-<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="k">sealed</span> <span class="kd">class</span> <span class="nc">ItemDiffRecord</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">{</span>
-    <span class="kd">data class</span> <span class="nc">Inserted</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="kd">val</span> <span class="py">item</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="kd">val</span> <span class="py">newPosition</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">:</span> <span class="n">ItemDiffRecord</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;()</span>
-    <span class="kd">data class</span> <span class="nc">Removed</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="kd">val</span> <span class="py">item</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="kd">val</span> <span class="py">oldPosition</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">:</span> <span class="n">ItemDiffRecord</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;()</span>
-    <span class="kd">data class</span> <span class="nc">Changed</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span>
-        <span class="kd">val</span> <span class="py">oldItem</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span>
-        <span class="kd">val</span> <span class="py">newItem</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span>
-        <span class="kd">val</span> <span class="py">oldPosition</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span>
-        <span class="kd">val</span> <span class="py">newPosition</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span>
-        <span class="kd">val</span> <span class="py">payload</span><span class="p">:</span> <span class="n">Any</span><span class="p">?</span>
-    <span class="p">)</span> <span class="p">:</span> <span class="n">ItemDiffRecord</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;()</span>
+<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="k">sealed</span> <span class="kd">class</span> <span class="nc">ItemDiffRecord</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="kd">data class</span> <span class="nc">Inserted</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;(</span><span class="kd">val</span> <span class="py">item</span><span class="p">:</span> <span class="nc">T</span><span class="p">,</span> <span class="kd">val</span> <span class="py">newPosition</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">ItemDiffRecord</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;()</span>
+    <span class="kd">data class</span> <span class="nc">Removed</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;(</span><span class="kd">val</span> <span class="py">item</span><span class="p">:</span> <span class="nc">T</span><span class="p">,</span> <span class="kd">val</span> <span class="py">oldPosition</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">ItemDiffRecord</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;()</span>
+    <span class="kd">data class</span> <span class="nc">Changed</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;(</span>
+        <span class="kd">val</span> <span class="py">oldItem</span><span class="p">:</span> <span class="nc">T</span><span class="p">,</span>
+        <span class="kd">val</span> <span class="py">newItem</span><span class="p">:</span> <span class="nc">T</span><span class="p">,</span>
+        <span class="kd">val</span> <span class="py">oldPosition</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span>
+        <span class="kd">val</span> <span class="py">newPosition</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span>
+        <span class="kd">val</span> <span class="py">payload</span><span class="p">:</span> <span class="nc">Any</span><span class="p">?</span>
+    <span class="p">)</span> <span class="p">:</span> <span class="nc">ItemDiffRecord</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;()</span>
 
-    <span class="kd">data class</span> <span class="nc">PositionChanged</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="kd">val</span> <span class="py">item</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="kd">val</span> <span class="py">oldPosition</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">newPosition</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">:</span>
-        <span class="n">ItemDiffRecord</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;()</span>
+    <span class="kd">data class</span> <span class="nc">PositionChanged</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;(</span><span class="kd">val</span> <span class="py">item</span><span class="p">:</span> <span class="nc">T</span><span class="p">,</span> <span class="kd">val</span> <span class="py">oldPosition</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">newPosition</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span>
+        <span class="nc">ItemDiffRecord</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;()</span>
 <span class="p">}</span>
 
-<span class="kd">class</span> <span class="nc">AtomicDiffResult</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">{</span>
-    <span class="kd">val</span> <span class="py">insertionRecords</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Inserted</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;</span>
-    <span class="kd">val</span> <span class="py">removalRecords</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Removed</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;</span>
-    <span class="kd">val</span> <span class="py">changeRecords</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">Changed</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;</span>
-    <span class="kd">val</span> <span class="py">positionChangeRecords</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">PositionChanged</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;</span>
+<span class="kd">class</span> <span class="nc">AtomicDiffResult</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">insertionRecords</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Inserted</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;&gt;</span>
+    <span class="kd">val</span> <span class="py">removalRecords</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Removed</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;&gt;</span>
+    <span class="kd">val</span> <span class="py">changeRecords</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Changed</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;&gt;</span>
+    <span class="kd">val</span> <span class="py">positionChangeRecords</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">PositionChanged</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;&gt;</span>
 <span class="p">}</span></code></pre></figure>
 
 <p>Note that this API gives us everything we need to perform our animations. It gives us the item itself in addition to positions. In case of item changes, it gives us both the old and new items. You can see the implementation of <a href="https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/atomic-diff-util/src/main/java/in/kiranrao/atomicdiffutil/AtomicDiffResult.kt#L8">AtomicDiffResult here</a>.</p>
@@ -248,24 +247,24 @@
 
 <p>This leads us to the following signature</p>
 
-<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="err">&lt;</span><span class="nf">T</span><span class="p">&gt;</span> <span class="n">calculateAtomicDiff</span><span class="p">(</span>
-    <span class="n">oldList</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;,</span> 
-    <span class="n">newList</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;,</span> 
-    <span class="n">itemCallback</span><span class="p">:</span> <span class="n">ItemCallback</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;):</span> <span class="n">AtomicDiffResult</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nf">calculateAtomicDiff</span><span class="p">(</span>
+    <span class="n">oldList</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;,</span> 
+    <span class="n">newList</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;,</span> 
+    <span class="n">itemCallback</span><span class="p">:</span> <span class="nc">ItemCallback</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;):</span> <span class="nc">AtomicDiffResult</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span></code></pre></figure>
 
 <p>The implementation of this function is <a href="https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/atomic-diff-util/src/main/java/in/kiranrao/atomicdiffutil/AtomicDiffCalculator.kt#L7-L18">here</a>. You can find the tests for this implementation <a href="https://github.com/curioustechizen/diffutil-custom-animations/blob/42be2a706721fcf40c6e426895d9ba8894025c5c/atomic-diff-util/src/test/java/in/kiranrao/atomicdiffutil/AtomicDiffUtilTest.kt">here</a>.</p>
 
 <h2 id="wrapping-up">Wrapping up</h2>
 
-<p>In this post, I explored one way to wrap DiffUtil’s <code class="highlighter-rouge">ListUpdateCallback</code> into a more ergonomic API. This is by no means the most generic way:</p>
+<p>In this post, I explored one way to wrap DiffUtil’s <code class="language-plaintext highlighter-rouge">ListUpdateCallback</code> into a more ergonomic API. This is by no means the most generic way:</p>
 
 <ul>
   <li>It does not handle moves</li>
   <li>It ignores the change payloads</li>
-  <li>In some cases you do really want access to the raw diff operations in the order they were performed (note that <code class="highlighter-rouge">AtomicDiffresult</code> does expose the underlying <code class="highlighter-rouge">List&lt;RawDiffOperation&gt;</code> for this purpose)</li>
+  <li>In some cases you do really want access to the raw diff operations in the order they were performed (note that <code class="language-plaintext highlighter-rouge">AtomicDiffresult</code> does expose the underlying <code class="language-plaintext highlighter-rouge">List&lt;RawDiffOperation&gt;</code> for this purpose)</li>
 </ul>
 
-<p>However, it does handle a lot of use cases where you might want to use <code class="highlighter-rouge">ListUpdateCallback</code>. The API style I proposed here is closest to Angular’s style.</p>
+<p>However, it does handle a lot of use cases where you might want to use <code class="language-plaintext highlighter-rouge">ListUpdateCallback</code>. The API style I proposed here is closest to Angular’s style.</p>
 
 <p>The most practical applications of wrapping DiffUtil are in situations where you have lists of data but you don’t want to use RecyclerView to display them. Examples include</p>
 

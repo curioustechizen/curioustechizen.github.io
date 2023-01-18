@@ -7,7 +7,7 @@ title: Tags
   {% if site.tags.size > 0 %}
   <div class="label">{{ page.title }}</div>
   <ul class="posts">
-    {% assign sorted_tags = (site.tags | sort:0) %}
+    {% assign sorted_tags = site.tags | sort %}
     {% for tag in sorted_tags %}
     {% assign tag_id = tag[0] %}
     {% if site.data.tags[tag_id] %}

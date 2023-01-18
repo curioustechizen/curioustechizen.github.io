@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js" prefix="og: http://ogp.me/ns#"> <!--<![endif]-->
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta http-equiv="content-language" content="en" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+      
+        <meta name="description" content="A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.">
+
+      
+
+      <title> Code Smells: Calling Life-Cycle Methods of Program Components Explicitly | Curious Techizen</title>
+      
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300,700italic|Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="/blog/css/main.css" />
+      <link href="https://kiranrao.in/blog/feed.xml" type="application/rss+xml" rel="alternate" title="RSS2.0">
+      <link rel="shortcut icon" href="/blog/favicon.ico">
+
+      
+        
+
+
+      
+
+      <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Code Smells: Calling Life-Cycle Methods of Program Components Explicitly | Curious Techizen</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Code Smells: Calling Life-Cycle Methods of Program Components Explicitly" />
+<meta name="author" content="Kiran Rao" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Here is some code I see that sets off alarm bells clanging in my head: Explicitly calling life-cycle methods of components that are outside your control. Since that sounds oh-so-generic, let me illustrate by way of example. Assume you are writing a Servlet and your implementation doesn&#39;t care whether the request was a POST or a GET (in the current RESTful world, this should never be the case, but let&#39;s keep that aside for the purposes of this post). So, the following would appear to be a reasonable implementation: public class MyServlet extends HttpServlet { protected void doGet(HttpServletRequest req, HttpServletResponse resp) { //Handle the request } protected void doPost(HttpServletRequest req, HttpServletResponse resp) { doGet(req, resp); //Just call doGet }} I would never do this though. This is because doGet, doPost and the other doXXX methods are life-cycle methods of the Servlet. I have no control over when and how the servlet engine calls them. I also have no control over what the engine does once these methods return. It is possible that the engine performs some house-keeping tasks once a doGet returns, and that action could be different from what is done once a doPost returns. It is really a simple matter of extracting the &quot;common functionality&quot; between such life cycle methods into a method and calling that method. public class MyServlet extends HttpServlet { protected void doGet(HttpServletRequest req, HttpServletResponse resp) { handleRequest(req, resp); } protected void doPost(HttpServletRequest req, HttpServletResponse resp) { handleRequest(req, resp); } /** * Method that extracts out the common functionality between GET and POST requests */ private void handleRequest(HttpServletRequest req, HttpServletResponse resp){ //Handle the request }} What if the life cycle methods are in an Interface? One opinion that came up in a discussion was that it is safe to call other life-cycle methods if they are in an interface as opposed to a class. Note that the above code sample extends javax.servlet.http.HttpServlet which is an abstract class as opposed to the base javax.servlet.Servlet which is an interface. This has come up specially while discussing callbacks. I disagree with this opinion since it assumes that any book-keeping has to be performed by the same (possibly abstract) class that denotes the life-cycle component. This is not true. Take an imaginary UI toolkit for example, which has a Pane as a UI element. Now, assume an interface for handling interaction callbacks: interface InteractionListener{ public void onClick(); public void onRightClick(); public void onLongClick(); public void onDoubleClick();} In this case again, assume that you want the same action to be performed on long-click and right-click. So, you might be tempted to do this: Pane pane = // ...pane.setInteractionListener(new InteractionListener(){ public void onClick(){ //Handle single-click } public void onRightClick(){ //Handle right-click } public void onLongClick(){ onRightClick(); } public void onDoubleClick(){ //Handle double-click }}); This is still wrong. Yes- InteractionListener is an interface and there is no way it can have a concrete method that might perform house-keeping tasks. However, you have no control over how the UI toolkit engine invokes the call-backs. You also have no control over what action the engine takes after your onXXXClick() methods return. The solution, again is exactly the same as before: extract the common code into a method which you then invoke from both onLongClick() and onRightClick(). Conclusion Avoid calling one component life-cycle method from another, when the component in question is outside your control. This could lead to unpredictable behavior. Simply refactor the common behavior into a method and call that method from both life-cycle call-backs. A few other instances where I have seen this sort of code: Android&#39;s SqliteOpenHelper. In the onUpgrade() method, you probably want to take a backup of data, drop the tables, add new columns, and then re-create the tables. The implementation often looks like this:public class MySqliteOpenHelper extends SqliteOpenHelper{ public void onCreate(SQLiteDatabase db){ //Use SQL CREATE TABLE statements to create the tables. } public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){ /* * 1. Take backup of data * 2. Drop tables * 3. Add columns * * And finally: */ onCreate(db); //This is not right. }}The right way to do this would be:public class CorrectSqliteOpenHelper extends SqliteOpenHelper{ public void onCreate(SQLiteDatabase db){ createDatabase(db); } public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){ /* * 1. Take backup of data * 2. Drop tables * 3. Add columns * * And finally: */ createDatabase(db); } private void createDatabase(SQLiteDatabase db){ //Use SQL CREATE TABLE statements to create the tables. }} I will re-visit this post and add more instances as and when I come across them." />
+<meta property="og:description" content="Here is some code I see that sets off alarm bells clanging in my head: Explicitly calling life-cycle methods of components that are outside your control. Since that sounds oh-so-generic, let me illustrate by way of example. Assume you are writing a Servlet and your implementation doesn&#39;t care whether the request was a POST or a GET (in the current RESTful world, this should never be the case, but let&#39;s keep that aside for the purposes of this post). So, the following would appear to be a reasonable implementation: public class MyServlet extends HttpServlet { protected void doGet(HttpServletRequest req, HttpServletResponse resp) { //Handle the request } protected void doPost(HttpServletRequest req, HttpServletResponse resp) { doGet(req, resp); //Just call doGet }} I would never do this though. This is because doGet, doPost and the other doXXX methods are life-cycle methods of the Servlet. I have no control over when and how the servlet engine calls them. I also have no control over what the engine does once these methods return. It is possible that the engine performs some house-keeping tasks once a doGet returns, and that action could be different from what is done once a doPost returns. It is really a simple matter of extracting the &quot;common functionality&quot; between such life cycle methods into a method and calling that method. public class MyServlet extends HttpServlet { protected void doGet(HttpServletRequest req, HttpServletResponse resp) { handleRequest(req, resp); } protected void doPost(HttpServletRequest req, HttpServletResponse resp) { handleRequest(req, resp); } /** * Method that extracts out the common functionality between GET and POST requests */ private void handleRequest(HttpServletRequest req, HttpServletResponse resp){ //Handle the request }} What if the life cycle methods are in an Interface? One opinion that came up in a discussion was that it is safe to call other life-cycle methods if they are in an interface as opposed to a class. Note that the above code sample extends javax.servlet.http.HttpServlet which is an abstract class as opposed to the base javax.servlet.Servlet which is an interface. This has come up specially while discussing callbacks. I disagree with this opinion since it assumes that any book-keeping has to be performed by the same (possibly abstract) class that denotes the life-cycle component. This is not true. Take an imaginary UI toolkit for example, which has a Pane as a UI element. Now, assume an interface for handling interaction callbacks: interface InteractionListener{ public void onClick(); public void onRightClick(); public void onLongClick(); public void onDoubleClick();} In this case again, assume that you want the same action to be performed on long-click and right-click. So, you might be tempted to do this: Pane pane = // ...pane.setInteractionListener(new InteractionListener(){ public void onClick(){ //Handle single-click } public void onRightClick(){ //Handle right-click } public void onLongClick(){ onRightClick(); } public void onDoubleClick(){ //Handle double-click }}); This is still wrong. Yes- InteractionListener is an interface and there is no way it can have a concrete method that might perform house-keeping tasks. However, you have no control over how the UI toolkit engine invokes the call-backs. You also have no control over what action the engine takes after your onXXXClick() methods return. The solution, again is exactly the same as before: extract the common code into a method which you then invoke from both onLongClick() and onRightClick(). Conclusion Avoid calling one component life-cycle method from another, when the component in question is outside your control. This could lead to unpredictable behavior. Simply refactor the common behavior into a method and call that method from both life-cycle call-backs. A few other instances where I have seen this sort of code: Android&#39;s SqliteOpenHelper. In the onUpgrade() method, you probably want to take a backup of data, drop the tables, add new columns, and then re-create the tables. The implementation often looks like this:public class MySqliteOpenHelper extends SqliteOpenHelper{ public void onCreate(SQLiteDatabase db){ //Use SQL CREATE TABLE statements to create the tables. } public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){ /* * 1. Take backup of data * 2. Drop tables * 3. Add columns * * And finally: */ onCreate(db); //This is not right. }}The right way to do this would be:public class CorrectSqliteOpenHelper extends SqliteOpenHelper{ public void onCreate(SQLiteDatabase db){ createDatabase(db); } public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){ /* * 1. Take backup of data * 2. Drop tables * 3. Add columns * * And finally: */ createDatabase(db); } private void createDatabase(SQLiteDatabase db){ //Use SQL CREATE TABLE statements to create the tables. }} I will re-visit this post and add more instances as and when I come across them." />
+<link rel="canonical" href="https://kiranrao.in/blog/2012/12/17/code-smells-calling-life-cycle-methods/" />
+<meta property="og:url" content="https://kiranrao.in/blog/2012/12/17/code-smells-calling-life-cycle-methods/" />
+<meta property="og:site_name" content="Curious Techizen" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2012-12-17T23:30:00-06:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Code Smells: Calling Life-Cycle Methods of Program Components Explicitly" />
+<meta name="twitter:site" content="@ki_run" />
+<meta name="twitter:creator" content="@Kiran Rao" />
+<script type="application/ld+json">
+{"description":"Here is some code I see that sets off alarm bells clanging in my head: Explicitly calling life-cycle methods of components that are outside your control. Since that sounds oh-so-generic, let me illustrate by way of example. Assume you are writing a Servlet and your implementation doesn&#39;t care whether the request was a POST or a GET (in the current RESTful world, this should never be the case, but let&#39;s keep that aside for the purposes of this post). So, the following would appear to be a reasonable implementation: public class MyServlet extends HttpServlet { protected void doGet(HttpServletRequest req, HttpServletResponse resp) { //Handle the request } protected void doPost(HttpServletRequest req, HttpServletResponse resp) { doGet(req, resp); //Just call doGet }} I would never do this though. This is because doGet, doPost and the other doXXX methods are life-cycle methods of the Servlet. I have no control over when and how the servlet engine calls them. I also have no control over what the engine does once these methods return. It is possible that the engine performs some house-keeping tasks once a doGet returns, and that action could be different from what is done once a doPost returns. It is really a simple matter of extracting the &quot;common functionality&quot; between such life cycle methods into a method and calling that method. public class MyServlet extends HttpServlet { protected void doGet(HttpServletRequest req, HttpServletResponse resp) { handleRequest(req, resp); } protected void doPost(HttpServletRequest req, HttpServletResponse resp) { handleRequest(req, resp); } /** * Method that extracts out the common functionality between GET and POST requests */ private void handleRequest(HttpServletRequest req, HttpServletResponse resp){ //Handle the request }} What if the life cycle methods are in an Interface? One opinion that came up in a discussion was that it is safe to call other life-cycle methods if they are in an interface as opposed to a class. Note that the above code sample extends javax.servlet.http.HttpServlet which is an abstract class as opposed to the base javax.servlet.Servlet which is an interface. This has come up specially while discussing callbacks. I disagree with this opinion since it assumes that any book-keeping has to be performed by the same (possibly abstract) class that denotes the life-cycle component. This is not true. Take an imaginary UI toolkit for example, which has a Pane as a UI element. Now, assume an interface for handling interaction callbacks: interface InteractionListener{ public void onClick(); public void onRightClick(); public void onLongClick(); public void onDoubleClick();} In this case again, assume that you want the same action to be performed on long-click and right-click. So, you might be tempted to do this: Pane pane = // ...pane.setInteractionListener(new InteractionListener(){ public void onClick(){ //Handle single-click } public void onRightClick(){ //Handle right-click } public void onLongClick(){ onRightClick(); } public void onDoubleClick(){ //Handle double-click }}); This is still wrong. Yes- InteractionListener is an interface and there is no way it can have a concrete method that might perform house-keeping tasks. However, you have no control over how the UI toolkit engine invokes the call-backs. You also have no control over what action the engine takes after your onXXXClick() methods return. The solution, again is exactly the same as before: extract the common code into a method which you then invoke from both onLongClick() and onRightClick(). Conclusion Avoid calling one component life-cycle method from another, when the component in question is outside your control. This could lead to unpredictable behavior. Simply refactor the common behavior into a method and call that method from both life-cycle call-backs. A few other instances where I have seen this sort of code: Android&#39;s SqliteOpenHelper. In the onUpgrade() method, you probably want to take a backup of data, drop the tables, add new columns, and then re-create the tables. The implementation often looks like this:public class MySqliteOpenHelper extends SqliteOpenHelper{ public void onCreate(SQLiteDatabase db){ //Use SQL CREATE TABLE statements to create the tables. } public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){ /* * 1. Take backup of data * 2. Drop tables * 3. Add columns * * And finally: */ onCreate(db); //This is not right. }}The right way to do this would be:public class CorrectSqliteOpenHelper extends SqliteOpenHelper{ public void onCreate(SQLiteDatabase db){ createDatabase(db); } public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){ /* * 1. Take backup of data * 2. Drop tables * 3. Add columns * * And finally: */ createDatabase(db); } private void createDatabase(SQLiteDatabase db){ //Use SQL CREATE TABLE statements to create the tables. }} I will re-visit this post and add more instances as and when I come across them.","author":{"@type":"Person","name":"Kiran Rao"},"@type":"BlogPosting","url":"https://kiranrao.in/blog/2012/12/17/code-smells-calling-life-cycle-methods/","headline":"Code Smells: Calling Life-Cycle Methods of Program Components Explicitly","dateModified":"2012-12-17T23:30:00-06:00","datePublished":"2012-12-17T23:30:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://kiranrao.in/blog/2012/12/17/code-smells-calling-life-cycle-methods/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+      
+      <script>if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"curioustechizen",utcoffset:"1"}))};sessionStorage.setItem("_swa","1");</script>
+      <meta name="google-site-verification" content="H8RGMD_f_siP2w-pSgSovLpeKIMac--hZGy47rZWoUM" />
+  </head>
+
+  <body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="off-canvas">
+      <figure class="avatar">
+        <img src="/blog/assets/img/avatar.jpg" alt="Picture" title="That's me, {"name"=>"Kiran Rao", "url"=>"https://kiranrao.in"}.">
+      </figure>
+      <div class="bio">
+          <h1>Hi, I'm {"name"=>"Kiran Rao", "url"=>"https://kiranrao.in"}.</h1>
+          <p>Android Developer. Tech enthusiast. Serial dabbler.</p>
+      </div>
+      <nav>
+        <h6>Follow me on</h6>
+        <ul>
+          
+          <li><a target="_blank" href="http://twitter.com/ki_run">Twitter</a></li>
+          
+          
+          <li><a target="_blank" href="https://github.com/curioustechizen">Github</a></li>
+          
+          
+          
+          
+          <li><a target="_blank" href="https://plus.google.com/116652261752707476836">Google+</a></li>
+          
+        </ul>
+      </nav>
+      <nav>
+        <h6>Link</h6>
+        <ul>
+          <li><a href="/blog/">Home</a></li>
+          <li><a href="/blog/tags/">Tags</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-wrapper">
+
+      <header>
+        <div class="h-wrap">
+          <h1 class="title"><a href="/blog/" title="Back to Homepage">Curious Techizen</a></h1>
+          <a class="menu-icon" title="Open Bio"><span class="lines"></span></a>
+        </div>
+      </header>
+
+      <main>
+        <section class="single-wrap">
+  <article class="single-content" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="feat">
+      <h5 class="page-date">
+        <time datetime="2012-12-17T23:30:00-06:00" itemprop="datePublished">
+          17 December 2012
+        </time>
+      </h5>
+    </div>
+    <h1 class="page-title" itemprop="name headline">Code Smells: Calling Life-Cycle Methods of Program Components Explicitly</h1>
+    <div itemprop="articleBody">
+      <p>Here is some code I see that sets off alarm bells clanging in my head: </p><blockquote><p>Explicitly calling life-cycle methods of components <strong>that are outside your control</strong>. </p></blockquote><p>Since that sounds oh-so-generic, let me illustrate by way of example.</p><p>Assume you are writing a <code>Servlet</code> and your implementation doesn't care whether the request was a POST or a GET (in the current RESTful world, this should never be the case, but let's keep that aside for the purposes of this post). So, the following would appear to be a reasonable implementation:</p><pre class="prettyprint lang-java prettyprinted" style=""><code>public class MyServlet extends HttpServlet {<br />    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {<br />        //Handle the request <br />    }<br /><br />    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {<br />        doGet(req, resp); //Just call doGet<br />    }<br />}<br /></code></pre><p>I would never do this though. This is because <code>doGet</code>, <code>doPost</code> and the other <code>doXXX</code> methods are life-cycle methods of the <code>Servlet</code>. I have no control over when and how the servlet engine calls them. I also have no control over what the engine does once these methods return. It is possible that the engine performs some house-keeping tasks once a <code>doGet</code> returns, and that action could be different from what is done once a <code>doPost</code> returns.</p><p>It is really a simple matter of extracting the "common functionality" between such life cycle methods into a method and calling that method.</p><pre class="prettyprint lang-java prettyprinted" style=""><code>public class MyServlet extends HttpServlet {<br />    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {<br />        handleRequest(req, resp);<br />    }<br /><br />    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {<br />        handleRequest(req, resp);<br />    }<br /><br />    /**<br />     * Method that extracts out the common functionality between GET and POST requests<br />     */<br />    private void handleRequest(HttpServletRequest req, HttpServletResponse resp){<br />        //Handle the request<br />    }<br />}<br /></code></pre><h4>What if the life cycle methods are in an Interface?</h4><p>One opinion that came up in a discussion was that it is safe to call other life-cycle methods if they are in an <code>interface</code> as opposed to a <code>class</code>. Note that the above code sample extends <code>javax.servlet.http.HttpServlet</code> which is an <code>abstract class</code> as opposed to the base <code>javax.servlet.Servlet</code> which is an <code>interface</code>. This has come up specially while discussing callbacks. </p><p>I disagree with this opinion since it assumes that any book-keeping has to be performed by the same  (possibly <code>abstract</code>) class that denotes the life-cycle component. This is not true. Take an imaginary UI toolkit for example, which has a <code>Pane</code> as a UI element. Now, assume an interface for handling interaction callbacks:</p><pre class="prettyprint lang-java prettyprinted" style=""><code>interface InteractionListener{<br />    public void onClick();<br />    public void onRightClick();<br />    public void onLongClick();<br />    public void onDoubleClick();<br />}<br /></code></pre><p>In this case again, assume that you want the same action to be performed on long-click and right-click. So, you might be tempted to do this:</p><pre class="prettyprint lang-java prettyprinted" style=""><code>Pane pane = // ...<br /><br />pane.setInteractionListener(new InteractionListener(){<br />        public void onClick(){<br />            //Handle single-click<br />        }<br /><br />        public void onRightClick(){<br />            //Handle right-click<br />        }<br /><br />        public void onLongClick(){<br />            onRightClick();<br />        }<br /><br />        public void onDoubleClick(){<br />            //Handle double-click<br />        }<br />});<br /></code></pre><p>This is <em>still</em> wrong. Yes- <code>InteractionListener</code> is an interface and there is no way it can have a concrete method that might perform house-keeping tasks. However, you have no control over how the UI toolkit engine invokes the call-backs. You also have no control over what action the engine takes <em>after</em> your <code>onXXXClick()</code> methods return. The solution, again is exactly the same as before: extract the common code into a method which you then invoke from both <code>onLongClick()</code> and <code>onRightClick()</code>.<br /></p><h4>Conclusion</h4><p>Avoid calling one component life-cycle method from another, when the component in question is outside your control. This could lead to unpredictable behavior. Simply refactor the common behavior into a method and call that method from both life-cycle call-backs.</p><p>A few other instances where I have seen this sort of code:</p><ul><li><p>Android's <a href="http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html"><code>SqliteOpenHelper</code></a>. In the <code>onUpgrade()</code> method, you probably want to take a backup of data, drop the tables, add new columns, and then re-create the tables. The implementation often looks like this:</p><pre class="prettyprint lang-java prettyprinted" style=""><code>public class MySqliteOpenHelper extends SqliteOpenHelper{<br />    public void onCreate(SQLiteDatabase db){<br />        //Use SQL CREATE TABLE statements to create the tables.<br />    }<br /><br />    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){<br />        /*<br />         * 1. Take backup of data<br />         * 2. Drop tables<br />         * 3. Add columns<br />         *<br />         * And finally:<br />         */<br />        onCreate(db); //This is not right.<br />    }<br />}<br /></code></pre><p>The right way to do this would be:</p><pre class="prettyprint lang-java prettyprinted" style=""><code>public class CorrectSqliteOpenHelper extends SqliteOpenHelper{<br />    public void onCreate(SQLiteDatabase db){<br />        createDatabase(db);<br />    }<br /><br />    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){<br />        /*<br />         * 1. Take backup of data<br />         * 2. Drop tables<br />         * 3. Add columns<br />         *<br />         * And finally:<br />         */<br />        createDatabase(db);<br />    }<br /><br />    private void createDatabase(SQLiteDatabase db){<br />         //Use SQL CREATE TABLE statements to create the tables.<br />    }<br />}<br /></code></pre></li></ul><p>I will re-visit this post and add more instances as and when I come across them.</p><script>prettyPrint()</script>
+    </div>
+    
+    <div class="page-tags">
+      <ul>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">java</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">life-cycle</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">callbacks</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">software-design</a>
+          
+        </li>
+        
+        <li>
+          
+          <a href="javascript:void(0);" class="disabled">programming</a>
+          
+        </li>
+        
+      </ul>
+    </div>
+    
+    <h6 class="back-to-top"><a href="#top">Back to Top</a></h6>
+    
+      <a rel="next" href="/blog/2013/01/05/extensibility-and-immutability-in-java/" id="next">
+        <span class="nav-title nav-title-next">newer</span> &rarr;
+      </a>
+    
+    
+      <a rel="prev" href="/blog/2012/12/03/android-application-level-pause-and/" id="prev">
+        &larr; <span class="nav-title nav-title-prev">older</span>
+      </a>
+    
+  </article>
+  
+</section>
+
+      </main>
+
+      <footer>
+        <medium><strong>Disclaimer:</strong> This is a personal blog. The opinions expressed here are my own and do not reflect those of my employer, relatives or any other person or entity.</medium>
+        <br><br>
+        <small>Powered by Jekyll - Theme: <a href="https://github.com/ogaclejapan/materi-for-jekyll">materi</a> - &copy; ogaclejapan</small>
+      </footer>
+
+    </div>
+    
+
+    <script src="/blog/js/main.js"></script>
+    
+    
+  </body>
+</html>

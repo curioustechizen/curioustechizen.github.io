@@ -48,3 +48,7 @@ hiring:
   name: Hiring
 jetpack-compose:
   name: Jetpack Compose
+sustainable:
+  name: Sustainable
+reviews:
+  name: Reviews
