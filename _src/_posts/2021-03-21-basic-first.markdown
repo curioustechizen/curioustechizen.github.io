@@ -2,7 +2,7 @@
 layout: post
 title:  "Basic before advanced"
 description: "Advanced features are useless if the basic ones don't work well"
-date: 2021-03-21 16:30
+date: 2021-03-21 16:30 +05:30
 comments: true
 tags: [obvious]
 ---

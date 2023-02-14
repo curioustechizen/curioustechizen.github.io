@@ -2,7 +2,7 @@
 layout: post
 title:  "What's the big difference? A deep dive into Android DiffUtil"
 description: "A 3 part series on Android's DiffUtil; Part 1 is about the API and how to use it"
-date: 2020-01-06 16:00
+date: 2020-01-06 16:00 +05:30
 comments: true
 tags: [android, diff]
 ---

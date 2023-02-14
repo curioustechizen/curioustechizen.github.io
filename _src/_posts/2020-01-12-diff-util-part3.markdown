@@ -2,7 +2,7 @@
 layout: post
 title:  "Android DiffUtil Part 3: Custom animations"
 description: "A 3 part series on Android's DiffUtil; Part 3 implements a very custom circular animation by wrapping DiffUtil API"
-date: 2020-01-12 10:00
+date: 2020-01-12 10:00 +05:30
 comments: true
 tags: [android, diff]
 ---

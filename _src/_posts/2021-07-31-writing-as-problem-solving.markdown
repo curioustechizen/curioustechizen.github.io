@@ -2,7 +2,7 @@
 layout: post
 title:  "Writing as a Problem Solving tool"
 description: "Self problem-solving technique involving describing the problem in as much detail as possible"
-date: 2021-07-31 15:00
+date: 2021-07-31 15:00 +05:30
 comments: true
 tags: [tipsntricks]
 ---

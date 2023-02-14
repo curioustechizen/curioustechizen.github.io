@@ -2,7 +2,7 @@
 layout: post
 title:  "Android DiffUtil Part 2: List Diffs on other platforms"
 description: "A 3 part series on Android's DiffUtil; Part 2 is a survey of similar APIs on Swift, iOS, Angular and Flutter"
-date: 2020-01-07 10:00
+date: 2020-01-07 10:00 +05:30
 comments: true
 tags: [android, diff]
 ---

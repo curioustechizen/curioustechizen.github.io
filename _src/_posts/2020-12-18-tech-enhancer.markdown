@@ -2,7 +2,7 @@
 layout: post
 title:  "Tech as an Enhancer"
 description: "Offline-first and other stories ... "
-date: 2020-12-18 21:00
+date: 2020-12-18 21:00 +05:30
 comments: true
 tags: [obvious]
 ---

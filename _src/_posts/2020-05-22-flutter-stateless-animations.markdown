@@ -2,7 +2,7 @@
 layout: post
 title:  "Stateless widget animations in Flutter"
 description: "Using Implicit animations in Flutter to animate stateless widgets"
-date: 2020-05-21 21:00
+date: 2020-05-21 21:00 +05:30
 comments: true
 tags: [flutter, animations]
 ---

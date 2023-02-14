@@ -2,7 +2,7 @@
 layout: post
 title:  "Moving to Counter for analytics"
 description: "Getting rid of cookie-based analytics to enhance privacy of my readers"
-date: 2021-03-13 18:15
+date: 2021-03-13 18:15 +05:30
 comments: true
 tags: [privacy]
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  "Mobile Multiplatform and Me"
 description: "My experiences with Kotlin Mobile Multiplatform, Flutter and ReactNative"
-date: 2021-07-24 16:30
+date: 2021-07-24 16:30 +05:30
 comments: true
 tags: [multiplatform, flutter, android, ios]
 ---

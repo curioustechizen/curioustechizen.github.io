@@ -2,7 +2,7 @@
 layout: post
 title:  "Falsehoods programmers believe about addresses"
 description: "Invalid assumptions that we make about addresses, that lead to poor UX"
-date: 2020-10-24 11:00
+date: 2020-10-24 11:00 +05:30
 comments: true
 tags: [falsehoods]
 ---

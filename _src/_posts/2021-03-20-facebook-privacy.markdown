@@ -2,7 +2,7 @@
 layout: post
 title:  "Facebook and Privacy"
 description: "How to use Facebook while not entirely giving up your privacy"
-date: 2021-03-20 17:30
+date: 2021-03-20 17:30 +05:30
 comments: true
 tags: [privacy]
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  "Hiring in Tech"
 description: "Learning ability above knowledge; and other tips for hiring programmers"
-date: 2021-08-14 21:00
+date: 2021-08-14 21:00 +05:30
 comments: true
 tags: [hiring]
 ---

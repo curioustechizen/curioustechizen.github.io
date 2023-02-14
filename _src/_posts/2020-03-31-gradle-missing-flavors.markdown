@@ -2,7 +2,7 @@
 layout: post
 title:  "Android Gradle: Lessons learnt using missingDimensionStrategy"
 description: "Advanced flavor configuration in Android Gradle, and the missingDimensionStrategy DSL"
-date: 2020-03-31 21:00
+date: 2020-03-31 21:00 +05:30
 comments: true
 tags: [android, gradle]
 ---

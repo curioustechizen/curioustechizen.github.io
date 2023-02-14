@@ -2,12 +2,12 @@
 layout: post
 title:  "Framework laptop: A game-changer in sustainable electronics"
 description: "An honest long-term usage review of the 1st gen Framework upgradable laptop"
-date: 2023-01-17 10:00
+date: 2023-01-17 10:00 +05:30
 comments: true
-tags: [sustainable, reviews]
+tags: [sustainable, reviews, positive-bytes]
 ---
 
-This post is the first in a series of businesses that are positive and sustainable. With this series, I want to show that it is possible for for-profit businesses to be ethical and sustainable.
+This post is the first in a series of businesses that are positive and sustainable. With this series, I want to show that it is possible for for-profit businesses to be ethical and sustainable. You can read all posts in this series [here](/blog/tags/positive-bytes).
 
 ## About Framework
 

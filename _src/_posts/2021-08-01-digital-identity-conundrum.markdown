@@ -2,7 +2,7 @@
 layout: post
 title:  "The Digital Identity Conundrum"
 description: "Advocating against using corporate-owned identities as our digital identities"
-date: 2021-08-01 16:00
+date: 2021-08-01 16:00 +05:30
 comments: true
 tags: [digitalidentity, bigtech]
 ---

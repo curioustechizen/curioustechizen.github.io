@@ -2,7 +2,7 @@
 layout: post
 title:  "UI ≠ UX"
 description: "A great user interface does not guarantee a great user experience, and vice versa "
-date: 2020-12-20 17:30
+date: 2020-12-20 17:30 +05:30
 comments: true
 tags: [obvious]
 ---

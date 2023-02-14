@@ -5,13 +5,13 @@
     <description>A place for discussing anything tech. Old and new. Experiences and Opinions. Questions and rants. Primarily programming-related, but not exclusively.</description>
     <link>https://kiranrao.in/blog/</link>
     <atom:link href="https://kiranrao.in/blog/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 18 Jan 2023 08:01:33 -0600</pubDate>
-    <lastBuildDate>Wed, 18 Jan 2023 08:01:33 -0600</lastBuildDate>
+    <pubDate>Tue, 14 Feb 2023 11:41:45 +0530</pubDate>
+    <lastBuildDate>Tue, 14 Feb 2023 11:41:45 +0530</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
         <title>Framework laptop: A game-changer in sustainable electronics</title>
-        <description>&lt;p&gt;This post is the first in a series of businesses that are positive and sustainable. With this series, I want to show that it is possible for for-profit businesses to be ethical and sustainable.&lt;/p&gt;
+        <description>&lt;p&gt;This post is the first in a series of businesses that are positive and sustainable. With this series, I want to show that it is possible for for-profit businesses to be ethical and sustainable. You can read all posts in this series &lt;a href=&quot;/blog/tags/positive-bytes&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;about-framework&quot;&gt;About Framework&lt;/h2&gt;
 
@@ -80,13 +80,15 @@
 
 &lt;p&gt;Beyond my personal experience, I have no doubt in my mind that Framework will prove to be a turning point in the sustainable electronics industry.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 17 Jan 2023 10:00:00 -0600</pubDate>
+        <pubDate>Tue, 17 Jan 2023 10:00:00 +0530</pubDate>
         <link>https://kiranrao.in/blog/2023/01/17/framework-laptop-owner-review/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2023/01/17/framework-laptop-owner-review/</guid>
         
         <category>sustainable</category>
         
         <category>reviews</category>
+        
+        <category>positive-bytes</category>
         
         
       </item>
@@ -234,7 +236,7 @@
 
 &lt;p&gt;Thanks &lt;a href=&quot;https://twitter.com/adamwp&quot;&gt;Adam Powell&lt;/a&gt; for explaining the idea of slots and for reviewing this article.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 03 Dec 2021 20:00:00 -0600</pubDate>
+        <pubDate>Fri, 03 Dec 2021 20:00:00 +0530</pubDate>
         <link>https://kiranrao.in/blog/2021/12/03/jetpack-compose-slots/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2021/12/03/jetpack-compose-slots/</guid>
         
@@ -405,7 +407,7 @@
 
 &lt;p&gt;Thanks to &lt;a href=&quot;https://twitter.com/mikewolfson&quot;&gt;Mike Wolfson (@mikewolfson)&lt;/a&gt; for reviewing this article.&lt;/p&gt;
 </description>
-        <pubDate>Sat, 14 Aug 2021 21:00:00 -0500</pubDate>
+        <pubDate>Sat, 14 Aug 2021 21:00:00 +0530</pubDate>
         <link>https://kiranrao.in/blog/2021/08/14/hiring-in-tech/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2021/08/14/hiring-in-tech/</guid>
         
@@ -520,7 +522,7 @@
 
 &lt;p&gt;Do you have any solutions to this conundrum? You can comment using disqus below, or &lt;a href=&quot;https://twitter.com/ki_run/status/1421842364109402117?s=20&quot;&gt;on twitter&lt;/a&gt; or &lt;a href=&quot;https://www.linkedin.com/posts/activity-6827609037450813440-wWp6&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Sun, 01 Aug 2021 16:00:00 -0500</pubDate>
+        <pubDate>Sun, 01 Aug 2021 16:00:00 +0530</pubDate>
         <link>https://kiranrao.in/blog/2021/08/01/digital-identity-conundrum/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2021/08/01/digital-identity-conundrum/</guid>
         
@@ -567,7 +569,7 @@
 
 &lt;p&gt;Writing is a great tool for problem-solving. Of course, it is not the only tool and is not applicable for all scenarios. For example, sometimes the huge level of detail could hide the problem and throw potential helpers off track. However when used in moderation, I find that it leads me to the solution without ever having to bother others.&lt;/p&gt;
 </description>
-        <pubDate>Sat, 31 Jul 2021 15:00:00 -0500</pubDate>
+        <pubDate>Sat, 31 Jul 2021 15:00:00 +0530</pubDate>
         <link>https://kiranrao.in/blog/2021/07/31/writing-as-problem-solving/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2021/07/31/writing-as-problem-solving/</guid>
         
@@ -664,7 +666,7 @@
 
 &lt;p&gt;Each of the mobile multiplatform frameworks have their use cases, and each have their sore weaknesses. Mobile cross-platform is still very much an unsolved problem.&lt;/p&gt;
 </description>
-        <pubDate>Sat, 24 Jul 2021 16:30:00 -0500</pubDate>
+        <pubDate>Sat, 24 Jul 2021 16:30:00 +0530</pubDate>
         <link>https://kiranrao.in/blog/2021/07/24/mobile-multiplatform/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2021/07/24/mobile-multiplatform/</guid>
         
@@ -763,7 +765,7 @@
 
 &lt;p&gt;At the risk of restating the obvious, &lt;strong&gt;advanced features are useless if the basic ones don’t work well&lt;/strong&gt;. Products ought to focus on the basic reason for their existence to work solidly before trying to add more. Otherwise it risks being perceived as gimmicky.&lt;/p&gt;
 </description>
-        <pubDate>Sun, 21 Mar 2021 16:30:00 -0500</pubDate>
+        <pubDate>Sun, 21 Mar 2021 16:30:00 +0530</pubDate>
         <link>https://kiranrao.in/blog/2021/03/21/basic-first/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2021/03/21/basic-first/</guid>
         
@@ -831,7 +833,7 @@
 
 &lt;p&gt;This is a post in my series related to digital privacy. You can read more posts in this series &lt;a href=&quot;/blog/tags/privacy&quot;&gt;here&lt;/a&gt;. For more advanced information and inspiration about digital privacy, you can visit the &lt;a href=&quot;https://privacytools.io/&quot;&gt;Privacy Tools&lt;/a&gt; page.&lt;/p&gt;
 </description>
-        <pubDate>Sat, 20 Mar 2021 17:30:00 -0500</pubDate>
+        <pubDate>Sat, 20 Mar 2021 17:30:00 +0530</pubDate>
         <link>https://kiranrao.in/blog/2021/03/20/facebook-privacy/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2021/03/20/facebook-privacy/</guid>
         
@@ -870,7 +872,7 @@
 
 &lt;p&gt;Even for businesses, there are privacy-friendly alternatives to traditional analytics engines. I want to end this post by advocating against analytics engine that invade your users’ privacy. We can do better and our users deserve better.&lt;/p&gt;
 </description>
-        <pubDate>Sat, 13 Mar 2021 18:15:00 -0600</pubDate>
+        <pubDate>Sat, 13 Mar 2021 18:15:00 +0530</pubDate>
         <link>https://kiranrao.in/blog/2021/03/13/privacy-friendly-analytics/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2021/03/13/privacy-friendly-analytics/</guid>
         
@@ -932,7 +934,7 @@
 &lt;p&gt;UI ≠ UX. In my limited experience, UI is given more importance than UX. In my opinion this is counter-productive in the long run, both for businesses and users.&lt;/p&gt;
 
 </description>
-        <pubDate>Sun, 20 Dec 2020 17:30:00 -0600</pubDate>
+        <pubDate>Sun, 20 Dec 2020 17:30:00 +0530</pubDate>
         <link>https://kiranrao.in/blog/2020/12/20/ui-not-ux/</link>
         <guid isPermaLink="true">https://kiranrao.in/blog/2020/12/20/ui-not-ux/</guid>
         

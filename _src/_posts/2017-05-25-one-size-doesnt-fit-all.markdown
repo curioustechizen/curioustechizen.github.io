@@ -2,7 +2,7 @@
 layout: post
 title:  "The Limits of One-size-fits-all"
 comments: true
-date: 2017-05-25 11:00
+date: 2017-05-25 11:00 +05:30
 tags: [next-billion, android-go]
 ---
 

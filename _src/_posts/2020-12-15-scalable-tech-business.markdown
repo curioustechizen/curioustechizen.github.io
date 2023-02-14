@@ -2,7 +2,7 @@
 layout: post
 title:  "Scalable tech ≠ scalable business"
 description: "A scalable tech stack is necessary but not sufficient for running a scalable business"
-date: 2020-12-15 19:00
+date: 2020-12-15 19:00 +05:30
 comments: true
 tags: [obvious]
 ---
