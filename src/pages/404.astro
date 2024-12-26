@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import Hero from '../components/Hero.astro';
+import siteConfig from '../data/site-config';
+---
+
+<BaseLayout description={siteConfig.description} image={siteConfig.image}>
+    <div class="mb-16 sm:mb-24">
+        <h2 class="mb-12 text-xl font-serif italic sm:mb-16 sm:text-2xl">Oops! That page does not exist.</h2>
+        <div class="mt-12 sm:mt-16">
+            <Button href="/">Take me home</Button>
+        </div>
+    </div>
+</BaseLayout>
