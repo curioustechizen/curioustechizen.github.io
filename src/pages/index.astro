@@ -20,10 +20,10 @@ const featuredPosts = posts.filter(({ data }) => data.isFeatured);
                 {featuredPosts.map((post) => (
                     <PostPreview post={post} class="mb-10 sm:mb-12" headingLevel="h3" />
                 ))}
-                <div class="mt-12 sm:mt-16">
-                    <Button href="/blog">View All Posts</Button>
-                </div>
             </div>
         )
     }
+    <div class="mt-12 sm:mt-16">
+        <Button href="/blog">View All Posts</Button>
+    </div>
 </BaseLayout>
