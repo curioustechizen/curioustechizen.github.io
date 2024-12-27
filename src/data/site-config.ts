@@ -71,7 +71,7 @@ const siteConfig: SiteConfig = {
     ],
     hero: {
         title: 'Kiran Rao',
-        text: "I'm **Kiran Rao**, Android and iOS developer, tech enthusiast and serial dabbler. See my open source work on <a href='https://github.com/curioustechizen'>GitHub</a>",
+        text: "I'm <a class=\"h-card\" href=\"https://kiranrao.in\"><b>Kiran Rao</b></a>, Android and iOS developer, tech enthusiast and serial dabbler. See my open source work on <a href='https://github.com/curioustechizen'>GitHub</a>",
     },
     postsPerPage: 10,
 };

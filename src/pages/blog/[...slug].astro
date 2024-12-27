@@ -29,9 +29,9 @@ const { Content } = await post.render();
 ---
 
 <BaseLayout title={seo?.title ?? title} description={seo?.description ?? excerpt} image={seo?.image} pageType="article" showHeader={false}>
-    <article class="mb-16 sm:mb-24">
+    <article class="h-entry mb-16 sm:mb-24">
         <header class="mb-8">
-            <h1 class="text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">{title}</h1>
+            <h1 class="p-name text-3xl leading-tight font-serif font-medium sm:text-5xl sm:leading-tight">{title}</h1>
             <div class="mt-4 text-sm">
                 <FormattedDate date={publishDate} />
                 {
@@ -47,7 +47,7 @@ const { Content } = await post.render();
             </div>
         </header>
         <div
-            class="max-w-none prose dark:prose-invert prose-dante sm:prose-lg prose-code:before:hidden prose-code:after:hidden prose-inline-code:p-[.2em_.4em] prose-inline-code:before:content-none prose-inline-code:after:content-none prose-inline-code:margin-0 prose-inline-code:text-[85%] prose-inline-code:whitespace-break-spaces prose-inline-code:rounded-md prose-inline-code:bg-muted prose-inline-code:text-inherit prose-inline-code:font-medium"
+            class="e-content max-w-none prose dark:prose-invert prose-dante sm:prose-lg prose-code:before:hidden prose-code:after:hidden prose-inline-code:p-[.2em_.4em] prose-inline-code:before:content-none prose-inline-code:after:content-none prose-inline-code:margin-0 prose-inline-code:text-[85%] prose-inline-code:whitespace-break-spaces prose-inline-code:rounded-md prose-inline-code:bg-muted prose-inline-code:text-inherit prose-inline-code:font-medium"
         >
             <Content />
         </div>
