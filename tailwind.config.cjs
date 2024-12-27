@@ -19,6 +19,9 @@ module.exports = {
             borderColor: {
                 main: 'rgb(var(--color-border-main) / <alpha-value>)'
             },
+            textDecorationColor: {
+                main: 'rgb(var(--color-bg-muted)'
+            },
             typography: (theme) => ({
                 dante: {
                     css: {
@@ -49,6 +52,7 @@ module.exports = {
                             textDecorationStyle: 'dashed',
                             textDecorationThickness: '1px',
                             textUnderlineOffset: '2px',
+                            textDecorationColor: theme('backgroundColor.muted / 100%'),
                             '&:hover': {
                                 textDecorationStyle: 'solid'
                             }
