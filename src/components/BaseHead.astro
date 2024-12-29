@@ -9,8 +9,9 @@ export type Props = {
     pageType?: 'website' | 'article';
 };
 
-const { description = '', image = siteConfig.image, pageType = 'website' } = Astro.props;
+const { image = siteConfig.image, pageType = 'website' } = Astro.props;
 const title = [Astro.props.title, siteConfig.title].filter(Boolean).join(' | ');
+const description = Astro.props.description || siteConfig.description
 const resolvedImage = image?.src
     ? {
           src: new URL(image.src, Astro.site).toString(),
