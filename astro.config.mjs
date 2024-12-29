@@ -22,6 +22,6 @@ export default defineConfig({
         })
     ],
     redirects: {
-        "/blog/tags/[slug]": "/tags/[slug]"
+        "/blog/tags/[slug]/[...page]": "/tags/[slug]/[...page]"
     }
 });
