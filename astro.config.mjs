@@ -20,5 +20,8 @@ export default defineConfig({
         tailwind({
             applyBaseStyles: false
         })
-    ]
+    ],
+    redirects: {
+        "/blog/tags/[...slug]": "/tags/[...slug]"
+    }
 });
