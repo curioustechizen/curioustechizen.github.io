@@ -89,3 +89,5 @@ That is the gist of the changes that I made. There are several other small chang
 ## In closing
 
 Migrating to Astro was way less involved than I had originally expected. I'm pretty happy with the way things have worked out so far. And I haven't even used any MDX/Markdoc features yet!
+
+You can comment on this post at [LinkedIn](https://www.linkedin.com/posts/activity-7295317113596964865-pEh2) or the [fediverse](https://androiddev.social/@kiranrao/113986300931765616).
