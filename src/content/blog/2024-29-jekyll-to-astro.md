@@ -3,6 +3,7 @@ title:  "Goodbye Jekyll, Hello Astro"
 description: "Why, What and How of the migration of my blog from Jekyll to Astro"
 publishDate: 2025-02-09
 comments: false
+image: /assets/img/jekyll-astro-blog-migration.png
 tags: [migration, publishing, jekyll, astro]
 slug: bye-jekyll-hello-astro
 ---
