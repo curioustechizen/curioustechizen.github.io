@@ -4,6 +4,10 @@ description: "SwiftUI: Limitations with stateless views when embedding a UIViewC
 publishDate: 2025-02-26
 comments: true
 tags: [swiftui, stateless]
+seo:
+  image:
+    src: '/blog/assets/img/stateless-swiftui-gotchas-code-snippet.png'
+    alt: 'Code snippet showing stateless SwiftUI views'
 slug: stateless-swiftui-gotchas
 ---
 
@@ -218,3 +222,5 @@ And with that, we have our state propagation working again:
 Using stateless components in SwiftUI is great - it makes reasoning about the state flow in your application much simpler since stateless components simply cannot mutate any state. However, when wrapping a declarative component inside a `UIViewControllerRepresentable`, you need to reach for the stateful APIs of SwiftUI.
 
 You can find the code for this post [here](https://gist.github.com/curioustechizen/4d191dcd4d633aac62419f756ff0f650). You can discuss this article on [Mastodon](https://androiddev.social/@kiranrao/114133644705964925) or on [LinkedIn](https://www.linkedin.com/posts/activity-7304733966371102720-sbaA).
+
+Note: The screenshot of the code snippet used in the `<meta>` tag of this post has been generated using [carbon](https://carbon.now.sh).

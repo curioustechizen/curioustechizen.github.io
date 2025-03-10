@@ -3,7 +3,11 @@ title:  "Goodbye Jekyll, Hello Astro"
 description: "Why, What and How of the migration of my blog from Jekyll to Astro"
 publishDate: 2025-02-09
 comments: false
-image: /assets/img/jekyll-astro-blog-migration.png
+seo:
+  image:
+    src: '/blog/assets/img/jekyll-astro-blog-migration.png'
+    alt: 'Code snippet showing how small the diff is between the post markdown files before and after migration'
+image: 
 tags: [migration, publishing, jekyll, astro]
 slug: bye-jekyll-hello-astro
 ---
