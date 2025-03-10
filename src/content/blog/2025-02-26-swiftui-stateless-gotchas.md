@@ -215,8 +215,6 @@ And with that, we have our state propagation working again:
 
 ## Conclusion
 
-Using stateless components in SwiftUI is great - it makes reasoning about the state flow in your application much simpler since stateless components simply cannot mutate any state.
+Using stateless components in SwiftUI is great - it makes reasoning about the state flow in your application much simpler since stateless components simply cannot mutate any state. However, when wrapping a declarative component inside a `UIViewControllerRepresentable`, you need to reach for the stateful APIs of SwiftUI.
 
-However, when wrapping a declarative component inside a UIViewControllerRepresentable, you need to reach for the stateful APIs of SwiftUI.
-
-You can find the code for this post [here](https://gist.github.com/curioustechizen/4d191dcd4d633aac62419f756ff0f650).
+You can find the code for this post [here](https://gist.github.com/curioustechizen/4d191dcd4d633aac62419f756ff0f650). You can discuss this article on [Mastodon](https://androiddev.social/@kiranrao/114133644705964925) or on [LinkedIn](https://www.linkedin.com/posts/activity-7304733966371102720-sbaA).
