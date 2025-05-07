@@ -258,7 +258,9 @@ To me, this is the abstraction done right. It is at the same level of abstractio
 ## Conclusion
 
 - Embrace SQL for data definition (creating tables and indices, migrations)
-- Embrace SQL for data manipulation
+- Embrace SQL for data manipulation (insert, query, update)
 - Use the features of your programming language to abstract over the query results
+
+You can comment on this post on the [fediverse](https://androiddev.social/@kiranrao/114466830026757040) or on [LinkedIn](https://www.linkedin.com/posts/activity-7325879000067645441-Z8rp).
 
 **Note:** The screenshot of the code snippet used in the `<meta>` tag of this post has been generated using [carbon](https://carbon.now.sh).
