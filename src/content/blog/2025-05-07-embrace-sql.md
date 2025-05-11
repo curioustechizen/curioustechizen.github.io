@@ -29,6 +29,7 @@ This opinion comes from my own experience using several ORMs over the years, inc
 - [JPA/Hibernate](https://hibernate.org/orm/) (Java, server, multiple databases)
 - [Room](https://developer.android.com/training/data-storage/room) (Java/Kotlin, Android, SQLite)
 - [SqlDelight](https://sqldelight.github.io/sqldelight/) (Kotlin, Android/iOS, SQLite)
+- [GRDB](https://github.com/groue/GRDB.swift) (Swift, iOS, SQLite)
 - [JOOQ](https://www.jooq.org/) (Java/Kotlin, server, Postgres)
 
 ## A performance degradation case study
@@ -91,6 +92,8 @@ var cyclingResults = dsl.select(ACTIVITY_LOG.DATA)
 
 ## ORMs and leaky abstractions
 
+Before looking into the specific details of ways in which abstractions can leak the underlying SQL, I want to acknowledge that almost every ORM offers an escape hatch to use raw SQL. I argue that this is a sign that SQL should not have been abstracted over in the first place.
+
 ### Querying using a programming language is a leaky abstraction
 
 Whenever I need to perform a non-trivial query in my applications, this is the path that I follow
@@ -107,6 +110,25 @@ In some ORMs/database libraries, the table definition is not done using SQL. Ins
 An example of this is Room, where the you define a class along with some annotations to define the table name, constraints like primary keys, column names and indices. You can see an example from the [Room documentation](https://developer.android.com/training/data-storage/room/defining-data#column-indexing).
 
 This works fine for simple cases but invariably the underlying SQL leaks when you go for slightly more complex cases involving indices nested inside JSON(B) fields, foreign keys etc.
+
+Another example of this is GDRB which provides a DSL for defining the schema. A similar schema also exists for defining migrations. You then define a struct that conforms to certain protocols to act as the strongly typed data type for inserting/querying the database. From the documentation:
+```swift
+try dbQueue.write { db in
+    try db.create(table: "player") { t in
+        t.primaryKey("id", .text)
+        t.column("name", .text).notNull()
+        t.column("score", .integer).notNull()
+    }
+}
+
+struct Player: Codable, FetchableRecord, PersistableRecord {
+    var id: String
+    var name: String
+    var score: Int
+}
+```
+
+This looks fine for simple cases, but once you need to have relationships, it leads to a steep increase in the number of concepts to know. Just look at the [documentation for associations](https://github.com/groue/GRDB.swift/blob/master/Documentation/AssociationsBasics.md). At some point you'll run into a `JOIN` query that cannot be represented using GRDB and you'll need to drop to SQL.
 
 ### If one of DDL and DML are in SQL, then the abstraction leaks
 
