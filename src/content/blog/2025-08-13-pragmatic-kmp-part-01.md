@@ -78,11 +78,13 @@ It goes without saying that not everything was pristine. The biggest problem we 
 We could have taken on a migration task to unify all of the data, but remember that the operative word in this entire post is **incremental**. Why would we do that when things are already working?
 
 This is a recurring theme throughout this series: Don't touch what already works. It might make your code look a little less pretty, but it is the most pragmatic approach.
+
 ----
 In this first post of this series, we looked at the least risk integration of KMP into our app. We shared the logic and data while we kept the UI platform-native.
 
 But what if you want to flip it around? What if you want to _share the UI_ while keeping the _data implementation separate_? Why would one even want to do that?
 
 We'll answer that in the next post in this series. Stay tuned!
+
 ----
 You can comment on this post on [LinkedIn](https://www.linkedin.com/posts/activity-7361394238397296640-rZZ_) or the [Fediverse](https://androiddev.social/@kiranrao/115021794164500442).
