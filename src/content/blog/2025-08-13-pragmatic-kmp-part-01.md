@@ -36,7 +36,7 @@ This was the perfect use case to implement using KMP because the self-contained 
 
 Here's a screenshot of the guide tab
 
-<img src="/blog/assets/img/somnox-guide-tab.png" alt="Screenshot of Somnox app guide tab" style="max-height: 555px; max-width: 270px;"/>
+<img src="/blog/assets/img/somnox-guide-tab.png" alt="Screenshot of Somnox app guide tab" style="max-height: 555px; max-width: 270px; display: block; margin: auto;"/>
 
 ### What was shared and what was not?
 
