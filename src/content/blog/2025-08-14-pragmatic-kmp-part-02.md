@@ -125,3 +125,6 @@ In this post, we saw how one can share UI using CMP and logic using KMP while re
 This is central to the incremental nature of KMP and is what makes it the most pragmatic cross-platform solution out there.
 
 In the next post, we will look at project structure and CI considerations when adopting KMP for existing mobile apps.
+
+----
+You can comment on this post on the [Fediverse](https://androiddev.social/@kiranrao/115031312273006169) or on [LinkedIn](https://www.linkedin.com/posts/activity-7362005076753764352-dwrU).
