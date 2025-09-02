@@ -15,7 +15,7 @@ seo:
 
 At [Somnox](https://somnox.com/), we've had native Android and iOS [apps in production](https://somnox.com/app/) since 2020. In 2023, we started using [Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform/) for new features. In this series of blog posts, we will look at how we achieved this in a _pragmatic_, _incremental_ manner. 
 
-This is the third post in this series. You can read all posts [here](/tags/pragmatic-incremental-kmp). The [first](http://kiranrao.in/blog/pragmatic-kmp-part-01) [two](http://kiranrao.in/blog/pragmatic-kmp-part-02) posts talked about sharing architectural layers. In this post, we'll look at using KMP with our existing repo structure and CI setup.
+This is the third post in this series. You can read all posts [here](/tags/pragmatic-incremental-kmp). The [first](http://kiranrao.in/blog/pragmatic-kmp-part-01) [two](http://kiranrao.in/blog/pragmatic-kmp-part-02) posts talked about sharing architectural layers. In this post, we'll look at using KMP with our existing repo structure and CI setup. There's very little _Kotlin_ itself in this episode!
 
 ## Existing structure
 
@@ -27,14 +27,20 @@ Each app also had its own CI configuration (to run per-PR tests, and to build re
 
 ## Enter Kotlin Multiplatform
 
-When we introduced KMP, we wanted to do it with the least possible friction to existing workflows. Remember, we were wetting out feet, so we did not want to make big changes like merging or splitting repos.
+For fresh KMP projects, there are a few common repository organization strategies:
+1. Have a single repo that contains the Android, iOS and shared code
+2. Maintain three repos, one each for the Android app, the iOS app and the shared KMP code
+
+When we introduced KMP, we wanted to do it with the least possible friction to existing workflows. Remember, we were wetting out feet, so we did not want to make big changes like merging or splitting repos. So neither of the above strategies were suitable for us.
 
 Our `SomnoxAndroidApp` already contained modules that were KMP-ready. Many of the modules could be made KMP-compatible just by changing the gradle plugin and modifying the directories a bit. For example we had some base architectural classes and utilities in our `:core` module which could be made multiplatform. We wanted to use these base classes from day 1 in our multiplatform code.
-> The first decision we took was to start off with having the exact same repos: `SomnoxAndroidApp` and `SomnoxIosApp`
+
+The first decision we took was to start off with having the exact same repos: `SomnoxAndroidApp` & `SomnoxIosApp`.
+> We decided to start off without any changes to the repository setup
 
 This had a few immediate consequences:
 1. We would write the shared KMP code in the `SomnoxAndroidApp` repository. That's where we'd place the `kmp_umbrella` module that would be the entry point for iOS into the Kotlin world.
-2. `SomnoxIosApp` would have to somehow depend on `SomnoxAndroidApp`. We chose checking out these repos as siblings in a folder. There are other options like git submodules, but we decided to make the bare minimum changes to get things rolling.
+2. `SomnoxIosApp` would have to somehow depend on `SomnoxAndroidApp`. We chose to check out these repos as siblings in a folder. There are other options like git submodules, but we decided to make the bare minimum changes to get things rolling.
 
 So, when we introduced KMP, we would check out our two repos side-by-side as follows
 ```bash
@@ -100,15 +106,15 @@ steps:
       ref: main
  ```
 
- This is sufficient for CI to be able to check out the iOS and Android repos as siblings, and build the iOS app with a dependency on the KMP code in the Android repo.
+ The rest of the build.yml file remained the same as before. This is sufficient for CI to be able to check out the iOS and Android repos as siblings, and build the iOS app with a dependency on the KMP code in the Android repo.
  
  **Note:** I've seen discussion about using Github Personal Access Tokens instead for this convoluted deploy key mechanism for checking out other private repos belonging to the same github org. I haven't had the chance to try that option.
 
  ## Merging into a "monorepo"
 
- The above arrangement of having sibling repos was beneficial for us during the "trial period". As you might imagine, it was not without serious pain-points though. Coordinating branches between the two separate repos was the biggest problem, and we knew it would become a blocker sooner or later.
+ The above arrangement of having sibling repos was beneficial for us during the "trial period". As you might imagine, it was not without serious pain-points though. Co-ordinating branches between the two separate repos was the biggest problem, and we knew it would become a blocker sooner or later.
 
- That is precisely why, once KMP as a technology had proven itself and we had decided to go all in on it, the first thing we did was to merge the two repos into one. Calling it a mono-repo is a bit pretentious (since it is just a merger of two repos), but the name has stuck, so here we are.
+ That is precisely why, once KMP as a technology had proven itself and we had decided to go all in on it, the first thing we did was to merge the two repos into one. Calling it a mono-repo is a bit pretentious (since it is just a merger of two repos), but the name has stuck, so I'm going to use that term for the rest of this series.
 
  [This blog post](https://jdriven.com/blog/2021/04/How-to-merge-multiple-git-repositories) was taken as a basis for merging the two existing repos into a third repo. We were able to retain
  - Commit histories for both original repos
@@ -117,12 +123,20 @@ steps:
 However we lost
 - Additional branches created in the individual repos
 
-Honesly, I was surprised that it was at all possible to merge two repos into one while maintaining the commit histories for both repos. Git is surprisingly flexible!
+Honestly, I was surprised that it was at all possible to merge two repos into one while maintaining the commit histories for both repos. Git is surprisingly flexible!
 
-After merging the repos, almost nothing changed in terms of configuration the build phase of the Xcode project did not change. The CI was only simplified (we could get rid of the deply key dance).
+After merging the repos, almost nothing changed in terms of configuration:
+- The build phase of the Xcode project did not change
+- The CI was only simplified (we could get rid of the deploy key dance)
 
-But it is even more than that: Our iOS and Android apps now evolve together. Feature additions happen on the same branch. So philosophically too, we are where we wanted to be with KMP.
+But a monorepo brings more advantages than that: Our iOS and Android apps now evolve together. Feature additions happen on the same branch. So philosophically too, we are where we wanted to be with KMP.
 
  ----
 
- We saw in this post that you can get started with KMP without disruptions to your existing Android and iOS app workflows. We saw that it enabled you to try out the technology without committing to it fully. We also saw how you can fully embrace the technology once your team is convinced. And we saw how to achieve all of this without much risk, while still reusing as much existing code and infrastucture as possible.
+ We saw in this post
+ 1. That you can get started with KMP without disruptions to your existing Android and iOS app workflows
+ 2. That it enables you to try out the technology without committing to it fully
+ 3. How you can embrace the technology once your team is convinced
+ 4. How to achieve all of this without much risk, while still reusing as much existing code and infrastucture as possible
+
+In the next post, we'll get back to code. We'll look at how we bridged the navigation gap between the two platforms.
