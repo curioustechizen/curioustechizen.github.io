@@ -17,7 +17,7 @@ At [Somnox](https://somnox.com/), we've had native Android and iOS [apps in prod
 
 This is the second post in this series. You can read all posts [here](/tags/pragmatic-incremental-kmp) (this is an ongoing series, so be sure to check back occasionally).
 
-In the first post, we saw how we introduced KMP to an existing Android and iOS codebase ny imlementing a self-contained tab, sharing everything except the UI. In this post, we will look at the opposite - a situation where we shared everything except some portions of the data layer.
+In the [first post](http://kiranrao.in/blog/pragmatic-kmp-part-01), we saw how we introduced KMP to an existing Android and iOS codebase by implementing a self-contained tab, sharing everything except the UI. In this post, we will look at the opposite - a situation where we shared everything except some portions of the data layer.
 
 ## Feature: Starting a Moment with the Somnox
 
