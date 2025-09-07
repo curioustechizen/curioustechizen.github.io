@@ -140,3 +140,7 @@ But a monorepo brings more advantages than that: Our iOS and Android apps now ev
  4. How to achieve all of this without much risk, while still reusing as much existing code and infrastucture as possible
 
 In the next post, we'll get back to code. We'll look at how we bridged the navigation gap between the two platforms.
+
+----
+
+**Edited to add:** You can comment on this post on [Mastodon](https://androiddev.social/@kiranrao/115135733022932428) or [LinkedIn](https://www.linkedin.com/posts/activity-7368983714925584384-jf9u).
