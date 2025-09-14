@@ -1,10 +1,14 @@
 ---
 title:  "Pragmatic KMP for Mobile at Somnox - Part 4"
 description: "Case study: Pragmatic, incremental adoption of KMP for mobile at Somnox. Part 4: Multiplatform screen navigation"
-publishDate: 2025-09-11
+publishDate: 2025-09-14
 comments: true
 tags: [kotlin-multiplatform, pragmatic-incremental-kmp]
 slug: pragmatic-kmp-part-04
+seo:
+  image:
+    src: '/blog/assets/img/pragmatic-kmp-part-04-flowstacks-snippet.png'
+    alt: 'Code snippet showing navigation on iOS implemented using FlowStacks library'
 ---
 
 ## Introduction
@@ -298,4 +302,6 @@ Let's recap what we saw in this episode
 3. You can navigate from a multiplatform screen to a platform native screen while still reusing existing patterns
 
 This flexibility was invaluable in our journey of integrating KMP into our codebase.
+
+From the next episode, we'll start looking into the truly platform-specific aspects like deep-linking, permissions, notifications.
 
